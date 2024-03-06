@@ -59,18 +59,20 @@
 |   stacks    | version |
 | :---------: | :-----: |
 |    Java     |   17    |
-| Spring Boot |         |
-|             |         |
-|             |         |
+| Spring Boot |  3.2.3  |
+|    MySQL    |         |
+|    Redis    |         |
+|     JPA     |  3.2.3  |
+|   junit5    |         |
 
 ### AI
 
 |  stacks  | version |
 | :------: | :-----: |
 |  Python  | 3.9.13  |
-| Pytorch  |         |
-|   YOLO   |         |
-| Fast API |         |
+| Fast API | 0.103.0 |
+| Pytorch  |  2.2.1  |
+|  YOLOv5  |         |
 
 ### CI/CD
 
