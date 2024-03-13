@@ -5,6 +5,7 @@ import Login from "../features/auth/login/Login";
 import MyInfo from "../features/auth/myInfo/MyInfo";
 import ExchangeList from "../features/chat/ExchangeList";
 import Modal from "../features/modal/Modal";
+import MyBar from '../features/myBar/myBar';
 
 function App() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -16,7 +17,9 @@ function App() {
     <Router>
       <div>
         <Navbar onLoginClick={() => setIsLoginModalOpen(true)}></Navbar>
-        <Routes></Routes>
+        <Routes>
+          <Route path="/myBar" element={<MyBar/>}></Route>
+        </Routes>
         {/* 조건부 렌더링 */}
         {isLoginModalOpen && (
           <Modal isOpen={isLoginModalOpen} onClose={handleCloseModal}>
