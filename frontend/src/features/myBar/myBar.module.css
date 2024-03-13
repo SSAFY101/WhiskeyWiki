@@ -1,0 +1,36 @@
+.myBar-background {
+  background-image: url("../../../public/images/locker.png");
+  background-size: cover;
+  margin: 0;
+  padding: 0;
+  width: 100%; /* 페이지 폭 전체로 설정 */
+  height: 100vh; /* 페이지 높이 전체로 설정 (뷰포트 높이만큼) */
+}
+
+.whiskey-image {
+  position: absolute; /* 배경 이미지와 겹치도록 설정 */
+  width: 80px;
+  height: auto; /* 이미지의 높이 자동 조정 */
+  cursor: pointer; /* 클릭 가능하도록 커서 스타일 변경 */
+}
+
+.whiskey-image-0 {
+  bottom: 28.3%; /* 아래쪽으로 정렬 */
+  left: 5%; /* 왼쪽으로 정렬 */
+  /* right: 0%; 오른쪽으로 정렬 */
+  width: 80px; /* 이미지의 너비 설정 */
+}
+
+.whiskey-image-1 {
+  bottom: 28.3%;
+  left: 30%;
+  /* right: 0%; */
+  width: 80px;
+}
+
+.whiskey-image-2 {
+  bottom: 27.9%;
+  /* left: 90%; */
+  right: 0%;
+  width: 70px;
+}
