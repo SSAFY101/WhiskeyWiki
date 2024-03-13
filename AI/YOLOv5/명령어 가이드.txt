@@ -1,0 +1,19 @@
+## 학습 명령어
+```
+python train.py --img 416 --batch 32 --epochs 20 --data TestDataset\data.yaml --cfg ./models/yolov5s.yaml --weights yolov5s.pt --name test_result
+```
+img 이미지 크기
+epochs 에폭
+data 데이터 yaml 파일
+cfg 모델 yaml 파일 
+weight 모델 pt 파일
+name 학습 결과 저장 폴더명(runs/train/name_number에 저장)
+
+## 객체 검출 명령어
+```
+python detect.py --weights .\runs\train\test_result2\weights\best.pt --img 416 --conf 0.5 --source C:\Users\SSAFY\Desktop\ML\yolo_practice\_TEST_
+```
+weight 사용할 모델 pt 파일
+img 이미지 크기
+conf 신뢰도(confidence) 임계값을 설정하는 매개변수
+source 이미지 경로
