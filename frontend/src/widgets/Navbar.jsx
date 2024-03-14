@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function Navbar({ onLoginClick }) {
+function Navbar({ onLoginClick, onSignupClick }) {
   console.log(typeof onLoginClick)
   return (
     <nav>
@@ -8,9 +8,7 @@ function Navbar({ onLoginClick }) {
 
       <ul>
         <li onClick={onLoginClick} style={{cursor:'pointer'}}>로그인</li>
-        <li>
-          <Link to="/myInfo">내 정보</Link>
-        </li>
+        <li onClick={onSignupClick} style={{cursor:'pointer'}}>회원가입</li>
         <li>
           <Link to="/exchangeList">거래 목록</Link>
         </li>
