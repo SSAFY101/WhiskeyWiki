@@ -4,6 +4,7 @@ import Navbar from "../widgets/Navbar";
 import Login from "../features/auth/login/Login";
 import Modal from "../features/modal/Modal";
 import MyBar from "../features/myBar/myBar";
+import ExchangeMap from "../features/exchangeMap/exchangeMap";
 import Signup from "../features/auth/signup/Signup";
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         ></Navbar>
         <Routes>
           <Route path="/myBar" element={<MyBar />}></Route>
+          <Route path="/exchangeMap" element={<ExchangeMap />}></Route>
         </Routes>
         {/* 조건부 렌더링 */}
         {isLoginModalOpen && (
