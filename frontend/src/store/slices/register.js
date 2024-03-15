@@ -18,7 +18,7 @@ const registerSlice = createSlice({
     pageThree: (state) => {
       state.page = 3;
     },
-    addNewWhiskey: (state, action) => {
+    setWhiskeyList: (state, action) => {
       state.whiskeyList = action.payload;
     },
   },

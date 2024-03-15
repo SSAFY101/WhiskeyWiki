@@ -1,0 +1,36 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.imgUpload {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 25rem;
+  height: 30rem;
+  border-radius: 20px;
+  background-color: white;
+}
+
+.imgUpload img {
+  width: 12rem;
+  background-color: white;
+}
+
+.preview img {
+  border-radius: 20px;
+  width: 25rem;
+}
+
+.detectButton {
+  border: none;
+  margin-top: 2rem;
+}
+
+.detectButton img {
+  width: 3rem;
+}

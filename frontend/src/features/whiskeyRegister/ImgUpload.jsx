@@ -1,8 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { registerAction } from "../../store/slices/register";
 import imageCompression from "browser-image-compression";
 import axios from "axios";
+
+import style from "./css/ImgUpload.module.css";
+import ImgUploadIcon from "./images/ImgUpload.png";
+import DetectIcon from "./images/Detect.png";
 
 const ImgUpload = () => {
   const dispatch = useDispatch();
@@ -14,6 +18,13 @@ const ImgUpload = () => {
     console.log(img);
   }, [img]);
 
+  // 파일 업로드 클릭
+  const imgInput = useRef();
+
+  const uploadClickHandler = () => {
+    imgInput.current.click();
+  };
+  // 이미지 업로드
   const imgInputClickHandler = async (e) => {
     const input = e.target.files[0];
 
@@ -37,7 +48,7 @@ const ImgUpload = () => {
     formData.append("file", img);
 
     const 테스트 = ["Absolut", "Jack-Daniels", "Jim-Beam"];
-    dispatch(registerAction.addNewWhiskey(테스트));
+    dispatch(registerAction.setWhiskeyList(테스트));
 
     // axios
     //   .post(`http://localhost:8000/detection/`, formData, {
@@ -49,26 +60,47 @@ const ImgUpload = () => {
     //     console.log("res : ", res);
     //     // 받은 배열 -> 칵테일 이름 배열 -> 리덕스
     //     // const cocktailNameList = res.data;
-    //     // dispatch(registerAction.addNewWhiskey(cocktailNameList));
+    //     // dispatch(registerAction.setWhiskeyList(cocktailNameList));
     //   })
     //   .catch((err) => {
     //     console.log("err : ", err);
     //   });
-  };
 
+    dispatch(registerAction.pageTwo());
+  };
+  // className={`${style.}`}
   return (
-    <div>
-      <input type="file" accept=".jpg, .png" onChange={imgInputClickHandler} />
-      <div style={{ display: "flex" }}>
-        <div>
-          <img src={preview} style={{ width: "20rem" }} />
+    <div className={`${style.container}`}>
+      {/* 업로드 */}
+      <input
+        type="file"
+        accept=".jpg, .png"
+        onChange={imgInputClickHandler}
+        ref={imgInput}
+        style={{ display: "none" }}
+      />
+
+      {/* 업로드 라벨 */}
+      {!preview && (
+        <label onClick={uploadClickHandler} className={`${style.imgUpload}`}>
+          <img src={ImgUploadIcon} />
+        </label>
+      )}
+      {!preview && <div>이미지를 업로드하시오^^</div>}
+
+      {/* 이미지 프리뷰 */}
+      {preview && (
+        <div className={`${style.preview}`}>
+          <img src={preview} />
         </div>
-        <div>화 살 표</div>
-        <div>
-          <img src={preview} style={{ width: "20rem" }} />
-        </div>
-      </div>
-      <button onClick={submitHandler}>AI 테스트</button>
+      )}
+
+      {/* 하단 버튼 */}
+      {preview && (
+        <button onClick={submitHandler} className={`${style.detectButton}`}>
+          <img src={DetectIcon} />
+        </button>
+      )}
     </div>
   );
 };

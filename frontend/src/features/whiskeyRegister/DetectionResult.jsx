@@ -5,10 +5,16 @@ import axios from "axios";
 import { registerAction } from "../../store/slices/register";
 import DectectResCard from "./component/DectectResCard";
 
+import style from "./css/DetectionResult.module.css";
+
 const DetectionResult = () => {
   const dispatch = useDispatch();
 
   const whiskeyList = useSelector((state) => state.register.whiskeyList);
+
+  const beforeClickHandler = () => {
+    dispatch(registerAction.pageOne());
+  };
 
   useEffect(() => {
     // 인식 위스키 정보
@@ -63,19 +69,32 @@ const DetectionResult = () => {
     //   .catch((err) => {
     //     console.log("My Bar 등록 ERROR : ", err);
     //   });
+
+    dispatch(registerAction.pageThree());
   };
 
   return (
-    <div>
-      <div style={{ display: "flex" }}>
+    <div className={`${style.container}`}>
+      <div className={`${style.cardList}`}>
         {테스트.map((whiskey) => (
-          <div style={{ marginRight: "1rem" }}>
+          <div className={`${style.card}`}>
             <DectectResCard key={whiskey.nameEn} {...whiskey} />
           </div>
         ))}
       </div>
-      <div>
-        <button onClick={mybarSaveHandler}>마이바에 저장</button>
+      <div className={`${style.buttonContainer}`}>
+        <button
+          onClick={beforeClickHandler}
+          className={`${style.returnButton}`}
+        >
+          뒤로가기
+        </button>
+        <button
+          onClick={mybarSaveHandler}
+          className={`${style.mybarSaveButton}`}
+        >
+          마이바에 저장
+        </button>
       </div>
     </div>
   );

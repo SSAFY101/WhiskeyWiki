@@ -1,0 +1,67 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+.cardList {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+.card {
+  margin-right: 3rem;
+}
+
+.cardContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.cardImg {
+  width: 15rem;
+  margin-bottom: 1rem;
+  border-radius: 20px;
+}
+
+.goMyBarButton {
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 0.5rem;
+}
+
+.nameEn {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+.detailButton {
+  cursor: pointer;
+  padding: 0.3rem 0.6rem;
+  border: none;
+  border-radius: 20px;
+  background-color: gray;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.temp {
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  border: none;
+  font-size: 1rem;
+  padding: 0.5rem;
+}

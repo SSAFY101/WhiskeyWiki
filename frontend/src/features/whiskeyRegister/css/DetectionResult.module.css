@@ -1,0 +1,113 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.cardList {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+.card {
+  margin-right: 3rem;
+  width: 20rem;
+  height: 30rem;
+  border-radius: 20px;
+  background-color: rgb(255, 255, 255);
+}
+
+.cardContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  border-radius: 20px;
+  background-color: white;
+}
+
+.cardImg {
+  width: 15rem;
+  margin-bottom: 0.5rem;
+}
+
+.cardNameEn {
+  color: black;
+  background-color: white;
+  font-size: 1.6rem;
+  margin-bottom: 0.3rem;
+}
+
+.cardNameKr {
+  color: black;
+  background-color: white;
+  font-size: 1.2rem;
+  margin-bottom: 0.8rem;
+}
+
+.cardToggleSummery {
+  cursor: pointer;
+  color: rgb(226, 202, 62);
+  background-color: white;
+  margin-bottom: 1rem;
+}
+
+.summery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: black;
+  background-color: white;
+}
+
+.summeryContent {
+  color: rgb(75, 75, 75);
+  background-color: rgb(240, 240, 240);
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.have {
+  color: rgb(153, 153, 153);
+  background-color: white;
+  margin-top: 1rem;
+}
+
+.checkBox {
+  background-color: white;
+  margin-top: 1rem;
+}
+
+.checkBox input[type="checkbox"] {
+  cursor: pointer;
+  -ms-transform: scale(1.7); /* IE */
+  -moz-transform: scale(1.7); /* FF */
+  -webkit-transform: scale(1.7); /* Safari and Chrome */
+  -o-transform: scale(1.7); /* Opera */
+  padding: 10px;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: space-around;
+}
+
+.returnButton {
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  border: none;
+  font-size: 1rem;
+  padding: 0.5rem;
+}
+
+.mybarSaveButton {
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 0.5rem;
+}

@@ -6,6 +6,8 @@ import Modal from "../features/modal/Modal";
 import MyBar from "../features/myBar/myBar";
 import ExchangeMap from "../features/exchangeMap/exchangeMap";
 import Signup from "../features/auth/signup/Signup";
+import WhiskeyRegister from "../features/whiskeyRegister/index";
+
 
 function App() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -25,6 +27,7 @@ function App() {
         <Routes>
           <Route path="/myBar" element={<MyBar />}></Route>
           <Route path="/exchangeMap" element={<ExchangeMap />}></Route>
+          <Route path="/register" element={<WhiskeyRegister />} />
         </Routes>
         {/* 조건부 렌더링 */}
         {isLoginModalOpen && (
