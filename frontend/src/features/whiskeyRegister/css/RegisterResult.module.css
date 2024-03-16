@@ -31,6 +31,31 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 1rem 0rem;
+  border-radius: 20px;
+}
+
+.cardContainer:hover {
+  cursor: pointer;
+  background-color: #262626;
+}
+
+.cardContainer:hover img {
+  cursor: pointer;
+  background-color: #262626;
+}
+
+.cardContainer:hover .nameEn {
+  cursor: pointer;
+  background-color: #262626;
+  color: #f3f3f3;
+}
+
+.cardContainer:hover .detail {
+  cursor: pointer;
+  background-color: #262626;
+  color: rgb(181, 181, 181);
+  visibility: visible;
 }
 
 .cardImg {
@@ -73,12 +98,7 @@
   margin-bottom: 2rem;
 }
 
-.detailButton {
-  cursor: pointer;
-  border-radius: 10px;
-  color: #eaeaea;
-  background-color: rgb(61, 61, 61);
-  padding: 0.4rem 0.8rem;
-  border: none;
+.detail {
+  visibility: hidden;
   font-size: 1rem;
 }

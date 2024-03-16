@@ -10,14 +10,12 @@ const RegistResCard = ({ nameEn }) => {
     console.log("상세 보기 이동 버튼 클릭");
     // 라우터 추가
   };
-  // className={`${style.}`}
+
   return (
-    <div className={`${style.cardContainer}`}>
+    <div className={`${style.cardContainer}`} onClick={detailClickHandler}>
       <img src={imgUrl} className={`${style.cardImg}`} />
       <div className={`${style.nameEn}`}>{nameEn}</div>
-      <button onClick={detailClickHandler} className={`${style.detailButton}`}>
-        상세 정보
-      </button>
+      <div className={`${style.detail}`}>상세 정보</div>
     </div>
   );
 };
