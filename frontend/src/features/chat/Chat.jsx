@@ -6,7 +6,9 @@ import backIcon from "./images/before.png";
 import moreIcon from "./images/openModal.png";
 
 const Chat = () => {
-  // className={`${style.}`}
+  const yourId = 1; // Temp
+  const myId = 2; // Temp
+
   return (
     <div className={`${style.container}`}>
       <div className={`${style.top}`}>
@@ -22,8 +24,11 @@ const Chat = () => {
       </div>
       <hr className={style.line} />
       <div className={`${style.content}`}>
-        <WhiskeyList />
-        <div className={`${style.whiskeyList}`}></div>
+        <div className={`${style.whiskeyList}`}>
+          <WhiskeyList userId={yourId} />
+          <WhiskeyList userId={myId} />
+        </div>
+        <div className={`${style.line2}`}></div>
         <MessageList />
       </div>
     </div>
