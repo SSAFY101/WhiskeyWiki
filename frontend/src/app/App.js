@@ -8,6 +8,7 @@ import ExchangeMap from "../features/exchangeMap/exchangeMap";
 import Signup from "../features/auth/signup/Signup";
 import WhiskeyRegister from "../features/whiskeyRegister/index";
 
+import style from "./App.module.css";
 
 function App() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);

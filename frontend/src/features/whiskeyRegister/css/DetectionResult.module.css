@@ -3,29 +3,40 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 5rem;
+}
+
+.cardListContainer {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.cardListMoveButton {
+  cursor: pointer;
+  width: 5rem;
+  height: 5rem;
 }
 
 .cardList {
   display: flex;
-  justify-content: center;
-  margin-bottom: 3rem;
+  width: 70%;
 }
 
 .card {
-  margin-right: 3rem;
-  width: 20rem;
+  width: 18rem;
   height: 30rem;
-  border-radius: 20px;
-  background-color: rgb(255, 255, 255);
+  margin: 0rem 3.5em;
 }
 
 .cardContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1.5rem;
+  padding: 3rem 0rem;
   border-radius: 20px;
-  background-color: white;
+  border: solid 3px;
 }
 
 .cardImg {
@@ -34,23 +45,30 @@
 }
 
 .cardNameEn {
-  color: black;
-  background-color: white;
-  font-size: 1.6rem;
+  font-size: 2rem;
   margin-bottom: 0.3rem;
+  color: #f3f3f3;
 }
 
 .cardNameKr {
-  color: black;
-  background-color: white;
-  font-size: 1.2rem;
-  margin-bottom: 0.8rem;
+  font-size: 1.3rem;
+  color: #a6a6a6;
 }
 
-.cardToggleSummery {
+.whiskeyCount {
+  font-size: 1.5rem;
+  color: #d3d3d3;
+  margin-bottom: 1rem;
+}
+
+.whiskeyCount span {
+  font-size: 2rem;
+  color: #eeb233;
+}
+
+/* .cardToggleSummery {
   cursor: pointer;
   color: rgb(226, 202, 62);
-  background-color: white;
   margin-bottom: 1rem;
 }
 
@@ -59,55 +77,41 @@
   flex-direction: column;
   align-items: center;
   color: black;
-  background-color: white;
 }
 
 .summeryContent {
-  color: rgb(75, 75, 75);
-  background-color: rgb(240, 240, 240);
   border-radius: 10px;
   padding: 1rem;
   margin-bottom: 1rem;
-}
+} */
 
 .have {
-  color: rgb(153, 153, 153);
-  background-color: white;
+  color: #767676;
   margin-top: 1rem;
+  font-size: 1.2rem;
 }
 
 .checkBox {
-  background-color: white;
   margin-top: 1rem;
 }
 
 .checkBox input[type="checkbox"] {
   cursor: pointer;
-  -ms-transform: scale(1.7); /* IE */
-  -moz-transform: scale(1.7); /* FF */
-  -webkit-transform: scale(1.7); /* Safari and Chrome */
-  -o-transform: scale(1.7); /* Opera */
+  -ms-transform: scale(1.8); /* IE */
+  -moz-transform: scale(1.8); /* FF */
+  -webkit-transform: scale(1.8); /* Safari and Chrome */
+  -o-transform: scale(1.8); /* Opera */
   padding: 10px;
-}
-
-.buttonContainer {
-  display: flex;
-  justify-content: space-around;
-}
-
-.returnButton {
-  color: rgb(255, 255, 255);
-  cursor: pointer;
-  border: none;
-  font-size: 1rem;
-  padding: 0.5rem;
+  accent-color: #eeb233;
 }
 
 .mybarSaveButton {
-  color: rgb(255, 255, 255);
   cursor: pointer;
   border: none;
-  font-size: 1.2rem;
+  border-radius: 5px;
+  font-size: 1.3rem;
   font-weight: bold;
-  padding: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  color: #1c1c1c;
+  background-color: #eeb233;
 }
