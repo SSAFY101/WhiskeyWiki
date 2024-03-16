@@ -1,19 +1,23 @@
-import Absolut from "../../../assets/whiskey/Absolut.jpg";
-import JackDaniels from "../../../assets/whiskey/Jack-Daniels.jpg";
-import JimBeam from "../../../assets/whiskey/Jim-Beam.jpg";
-
 const WhiskeyImages = [
   {
     nameEn: "Absolut",
-    imgUrl: Absolut,
+    imgUrl: require("../../../assets/whiskey/Absolut.png"),
   },
   {
     nameEn: "Jack-Daniels",
-    imgUrl: JackDaniels,
+    imgUrl: require("../../../assets/whiskey/Jack-Daniels.png"),
   },
   {
     nameEn: "Jim-Beam",
-    imgUrl: JimBeam,
+    imgUrl: require("../../../assets/whiskey/Jim-Beam.png"),
+  },
+  {
+    nameEn: "Jagermeister",
+    imgUrl: require("../../../assets/whiskey/Jagermeister.png"),
+  },
+  {
+    nameEn: "Johnie-Walker",
+    imgUrl: require("../../../assets/whiskey/Johnie-Walker.png"),
   },
 ];
 

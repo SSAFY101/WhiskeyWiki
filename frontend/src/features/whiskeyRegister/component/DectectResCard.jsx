@@ -13,49 +13,58 @@ const DectectResCard = ({ nameKr, nameEn, summery, isOwn }) => {
   const imgUrl = Whiskey.imgUrl;
 
   // 더보기 토글
-  const [toggle, setToggle] = useState(false);
+  // const [toggle, setToggle] = useState(false);
 
-  const toggleHandler = () => {
-    setToggle(!toggle);
-  };
+  // const toggleHandler = () => {
+  //   setToggle(!toggle);
+  // };
 
-  // 보유 중인 경우 처리
-  const WhiskeyList = useSelector((state) => state.register.WhiskeyList);
+  const WhiskeyList = useSelector((state) => state.register.whiskeyList);
 
   useEffect(() => {
-    if (isOwn && WhiskeyList) {
+    if (!WhiskeyList) {
+      return;
+    }
+    // 보유한 위스키 : 위스키 리스트(리덕스)에서 삭제
+    if (isOwn) {
+      console.log(nameEn);
+      setChecked(false);
       const newWhiskeyList = WhiskeyList.filter((item) => item !== nameEn);
       dispatch(registerAction.setWhiskeyList(newWhiskeyList));
+    }
+    // 위스키 리스트에 없는 위스키 : 체크 해제
+    else if (!WhiskeyList.includes(nameEn)) {
+      setChecked(false);
     }
   }, []);
 
   // 체크박스
   const [checked, setChecked] = useState(true);
 
-  useEffect(() => {
-    console.log(nameEn, " ", checked); // test
-
-    if (WhiskeyList) {
-      // 체크
-      if (checked) {
-        const newWhiskeyList = WhiskeyList.filter((item) => item !== nameEn);
-        dispatch(registerAction.setWhiskeyList(newWhiskeyList));
-      }
-      // 체크 해제
-      else {
-        const newWhiskeyList = [...WhiskeyList, nameEn];
-        dispatch(registerAction.setWhiskeyList(newWhiskeyList));
-      }
+  const checkClickHandler = () => {
+    if (checked) {
+      // 제외
+      const newWhiskeyList = WhiskeyList.filter((item) => item !== nameEn);
+      dispatch(registerAction.setWhiskeyList(newWhiskeyList));
+    } else {
+      // 추가
+      const newWhiskeyList = [...WhiskeyList, nameEn];
+      dispatch(registerAction.setWhiskeyList(newWhiskeyList));
     }
-  }, [checked]);
+    setChecked(!checked);
+  };
 
   return (
-    <div className={`${style.cardContainer}`}>
+    <div
+      className={`${style.cardContainer}`}
+      style={{ borderColor: checked ? "#eeb233" : "#767676" }}
+    >
       <img src={imgUrl} className={`${style.cardImg}`} />
 
       <div className={`${style.cardNameEn}`}>{nameEn}</div>
       <div className={`${style.cardNameKr}`}>{nameKr}</div>
-      {!toggle && (
+
+      {/* {!toggle && (
         <div onClick={toggleHandler} className={`${style.cardToggleSummery}`}>
           설명 보기
         </div>
@@ -67,14 +76,14 @@ const DectectResCard = ({ nameKr, nameEn, summery, isOwn }) => {
             닫기
           </div>
         </div>
-      )}
+      )} */}
       {isOwn && <div className={`${style.have}`}>보유중</div>}
       {!isOwn && (
         <label className={`${style.checkBox}`}>
           <input
             type="checkbox"
             checked={checked}
-            onChange={({ target: { checked } }) => setChecked(checked)}
+            onChange={checkClickHandler}
           />
         </label>
       )}
