@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./myBar.module.css";
+import "./MyBar.module.css";
 import Modal from "../modal/Modal";
 import MyBarDetail from "./MyBarDetail";
 

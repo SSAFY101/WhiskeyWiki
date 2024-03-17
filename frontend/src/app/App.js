@@ -3,7 +3,7 @@ import { useState } from "react";
 import Navbar from "../widgets/Navbar";
 import Login from "../features/auth/login/Login";
 import Modal from "../features/modal/Modal";
-import MyBar from "../features/myBar/myBar";
+import MyBar from "../features/myBar/MyBar";
 import ExchangeMap from "../features/exchangeMap/exchangeMap";
 import Signup from "../features/auth/signup/Signup";
 import WhiskeyRegister from "../features/whiskeyRegister/index";
