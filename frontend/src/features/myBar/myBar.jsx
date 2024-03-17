@@ -1,7 +1,16 @@
 import React, { useState } from "react";
 import "./myBar.module.css";
+import Modal from "../modal/Modal"
+import MyBarDetail from "./MyBarDetail";
 
 function MyBar() {
+
+  //모달 제어
+  const [isDetailModalOpen, setIsDetailModalOpen] = useState(false)
+  const handleCloseModal = () => {
+    setIsDetailModalOpen(false);
+  }
+  
   const MyBarBackground = {
     backgroundImage: `url("/images/locker.png")`,
     backgroundSize: "cover",
@@ -63,9 +72,15 @@ function MyBar() {
           src={path}
           alt=""
           style={whiskeyStyles[index]}
-          onClick={clickWhiskeys[index]}
+          onClick={() => setIsDetailModalOpen(true)}
         />
       ))}
+      {/* 조건부 렌더링 */}
+      {isDetailModalOpen && (
+        <Modal isOpen={isDetailModalOpen} onClose={handleCloseModal}>
+          <MyBarDetail />
+        </Modal>
+      )}
     </div>
   );
 
