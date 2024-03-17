@@ -1,0 +1,22 @@
+* {
+  cursor: default;
+  color: #f3f3f3;
+  background-color: #1c1c1c;
+  font-family: "NanumMyeongjo-Bold";
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-use-select: none;
+  user-select: none;
+}
+
+.draggable {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-use-select: text;
+  user-select: text;
+}
+
+@font-face {
+  font-family: "NanumMyeongjo-Bold";
+  src: url("../assets/font/NanumMyeongjo-Bold.ttf");
+}
