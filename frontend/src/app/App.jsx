@@ -12,13 +12,9 @@ import ExchangeMap from "../features/exchangeMap/exchangeMap";
 import Signup from "../features/auth/signup/Signup";
 // 위스키 등록
 import WhiskeyRegister from "../features/whiskeyRegister/index";
-// 지도
-import ExchangeMap from "../features/exchangeMap/exchangeMap";
 // 채팅
 import ChatList from "../features/chat/ChatList";
 import Chat from "../features/chat/Chat";
-// 마이바
-import MyBar from "../features/myBar/myBar";
 //위스키 정보
 import WhiskeyInfo from '../features/whiskeyInfo/WhiskeyInfo'
 
