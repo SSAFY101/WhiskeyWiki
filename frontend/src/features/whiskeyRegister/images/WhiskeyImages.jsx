@@ -1,3 +1,4 @@
+
 const WhiskeyImages = [
   {
     nameEn: "Absolut",
@@ -20,5 +21,6 @@ const WhiskeyImages = [
     imgUrl: require("../../../assets/whiskey/Johnie-Walker.png"),
   },
 ];
+
 
 export { WhiskeyImages };
