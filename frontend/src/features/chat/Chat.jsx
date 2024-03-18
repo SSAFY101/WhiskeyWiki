@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import style from "./css/Chat.module.css";
 
 import MessageList from "./MessageList";
@@ -12,7 +14,9 @@ const Chat = () => {
   return (
     <div className={`${style.container}`}>
       <div className={`${style.top}`}>
-        <img src={backIcon} />
+        <Link to="/chat">
+          <img src={backIcon} />
+        </Link>
         <div className={`${style.nickName}`}>닉네임</div>
         <div className={`${style.status}`}>
           <select>
