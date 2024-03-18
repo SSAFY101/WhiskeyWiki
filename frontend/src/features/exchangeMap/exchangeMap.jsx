@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import style from "./ExchangeMap.module.css";
 
 // (문제) 스크립트로 kakao maps api를 가져오면, window전역 객체에 들어가게 된다.
 // (해결) 함수형 컴포넌트에 인지시키고, window에서 kakao 객체를 뽑아서 사용
@@ -87,14 +88,16 @@ function Map() {
   }, []);
 
   return (
-    <div
-      id="map"
-      style={{
-        width: "500px",
-        height: "400px",
-        border: "1px solid black",
-      }}
-    ></div>
+    <div className={`${style.map}`}>
+      <div
+        id="map"
+        style={{
+          width: "500px",
+          height: "400px",
+          border: "1px solid black",
+        }}
+      ></div>
+    </div>
   );
 }
 
