@@ -23,4 +23,4 @@ const WhiskeyImages = [
 ];
 
 
-// export { WhiskeyImages };
+export { WhiskeyImages };
