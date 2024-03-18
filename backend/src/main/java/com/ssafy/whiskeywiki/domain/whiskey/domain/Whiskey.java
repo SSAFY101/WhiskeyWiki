@@ -1,4 +1,4 @@
-package com.ssafy.whiskeywiki.domain.whiskey.dto;
+package com.ssafy.whiskeywiki.domain.whiskey.domain;
 
 import com.ssafy.whiskeywiki.domain.review.domain.Review;
 import jakarta.persistence.*;
