@@ -1,8 +1,14 @@
 .container {
+  background-color: transparent !important;
+  background: none !important;
   display: flex;
   justify-content: space-between;
-  margin: 2rem 5rem 7rem 5rem;
+  margin: 2rem 5rem 6rem 5rem;
   font-size: 1.2rem;
+}
+
+.container * {
+  background-color: transparent !important;
 }
 
 .logo {
@@ -10,14 +16,22 @@
 }
 
 .menu {
+  background-color: transparent !important;
   display: flex;
   justify-content: space-around;
+  /* 임시 */
+  margin-left: 10rem;
 }
 
 .menu * {
   cursor: pointer;
+  background-color: transparent !important;
   text-decoration-line: none;
   margin: 0rem 3rem;
+}
+
+.menu *:hover {
+  color: #eeb233;
 }
 
 .user {
