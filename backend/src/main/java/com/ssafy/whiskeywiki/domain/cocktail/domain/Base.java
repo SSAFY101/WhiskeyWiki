@@ -19,8 +19,10 @@ public class Base {
     private int id;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cocktail_id")
     private Cocktail cocktail;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "whiskey_id")
     private Whiskey whiskey;
 }

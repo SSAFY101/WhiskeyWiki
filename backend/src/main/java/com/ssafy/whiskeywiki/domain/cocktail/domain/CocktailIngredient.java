@@ -18,8 +18,10 @@ public class CocktailIngredient {
     private int id;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cocktail_id")
     private Cocktail cocktail;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ingrdient_id")
     private Ingredient ingredient;
 }
