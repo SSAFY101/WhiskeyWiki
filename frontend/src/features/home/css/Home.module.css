@@ -19,8 +19,8 @@
 }
 
 .title {
-  background-color: transparent;
   position: fixed;
+  background-color: transparent;
   top: 40%;
   left: 30%;
   color: #ececec;

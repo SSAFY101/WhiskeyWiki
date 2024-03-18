@@ -18,7 +18,7 @@ import Chat from "../features/chat/Chat";
 //위스키 정보
 import WhiskeyInfo from "../features/whiskeyInfo/WhiskeyInfo";
 
-import style from "./App.css";
+import style from "./App.module.css";
 
 const App = () => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -33,9 +33,10 @@ const App = () => {
     <Router>
       <div>
         <Navbar
+          className={`${style.navbar}`}
           onLoginClick={() => setIsLoginModalOpen(true)}
           onSignupClick={() => setIsSignupModalOpen(true)}
-        ></Navbar>
+        />
         <Routes>
           {/* 메인페이지 */}
           <Route path="/" element={<Home />} />

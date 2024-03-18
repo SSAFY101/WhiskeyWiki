@@ -12,7 +12,6 @@ const Home = () => {
     >
       <span className={`${style.layer}`} />
       <div className={`${style.title}`}>Welcome to Whiskey Wiki</div>
-      <Link to="/chat">채팅 리스트 (임시 링크)</Link>
     </div>
   );
 };
