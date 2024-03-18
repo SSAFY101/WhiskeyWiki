@@ -1,5 +1,4 @@
 import SearchBar from "../../widgets/Searchbar";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Infocard from "./InfoCard";
 import WhiskeySorter from "./WhiskeySorter";
 import style from "./WhiskeyInfo.module.css";
@@ -11,7 +10,7 @@ function WhiskeyInfo() {
       <h1>위스키 목록</h1>
       <SearchBar />
       <div>
-        <WhiskeySorter/>
+        <WhiskeySorter />
         <div className={style.cardContainer}>
           <Infocard></Infocard>
         </div>
