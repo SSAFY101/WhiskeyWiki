@@ -6,17 +6,17 @@ import Home from "../features/home/index";
 import Navbar from "../widgets/Navbar";
 // 유저 관리
 import Login from "../features/auth/login/Login";
-import Signup from "../features/auth/signup/Signup";
 import Modal from "../features/modal/Modal";
+import MyBar from "../features/myBar/MyBar";
+import ExchangeMap from "../features/exchangeMap/ExchangeMap";
+import Signup from "../features/auth/signup/Signup";
 // 위스키 등록
 import WhiskeyRegister from "../features/whiskeyRegister/index";
-// 지도
-import ExchangeMap from "../features/exchangeMap/exchangeMap";
 // 채팅
 import ChatList from "../features/chat/ChatList";
 import Chat from "../features/chat/Chat";
-// 마이바
-import MyBar from "../features/myBar/myBar";
+//위스키 정보
+import WhiskeyInfo from "../features/whiskeyInfo/WhiskeyInfo";
 
 import style from "./App.css";
 
@@ -49,6 +49,8 @@ const App = () => {
           <Route path="/chat/:id" element={<Chat />} />
           {/* 마이바 */}
           <Route path="/myBar" element={<MyBar />} />
+          {/* 위스키 정보 */}
+          <Route path="/whiskeyInfo" element={<WhiskeyInfo />}></Route>
         </Routes>
         {/* 조건부 렌더링 */}
         {isLoginModalOpen && (

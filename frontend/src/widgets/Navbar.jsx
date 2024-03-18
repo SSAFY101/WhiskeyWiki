@@ -13,7 +13,7 @@ function Navbar({ onLoginClick, onSignupClick }) {
       </Link>
       {/* 메뉴 */}
       <div className={`${style.menu}`}>
-        <div>Information</div>
+        <Link to="/whiskeyInfo">Information</Link>
         <Link to="/register">AI</Link>
         <Link to="/exchangeList">Explore</Link>
         <div>My Bar</div>

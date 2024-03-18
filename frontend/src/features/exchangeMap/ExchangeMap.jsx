@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import style from "./ExchangeMap.module.css";
 
 // (문제) 스크립트로 kakao maps api를 가져오면, window전역 객체에 들어가게 된다.
 // (해결) 함수형 컴포넌트에 인지시키고, window에서 kakao 객체를 뽑아서 사용
@@ -87,14 +88,16 @@ function Map() {
   }, []);
 
   return (
-    <div
-      id="map"
-      style={{
-        width: "500px",
-        height: "400px",
-        border: "1px solid black",
-      }}
-    ></div>
+    <div className={`${style.map}`}>
+      <div
+        id="map"
+        style={{
+          width: "500px",
+          height: "400px",
+          border: "1px solid black",
+        }}
+      ></div>
+    </div>
   );
 }
 
@@ -143,68 +146,3 @@ export default Map;
 // };
 
 // export default TheaterLocation;
-
-// ---------------------------------------------------------------------------------
-// ---------------------------------------------------------------------------------
-// ---------------------------------------------------------------------------------
-
-// import React, { useEffect, useRef, useState } from "react";
-
-// function KakaoMap() {
-//   const containerRef = useRef(null);
-//   const [map, setMap] = useState(null);
-//   const API_KEY = "b17c4e53f55672ce6e6b6644da6ecc84";
-
-//   // 카카오맵 초기화 함수
-//   const initializeMap = () => {
-//     // const container = document.getElementById("map");
-//     const container = containerRef.current;
-
-//     // 컨테이너 DOM 요소가 아직 로드되지 않았다면 초기화를 지연합니다.
-//     if (!container) {
-//       console.error("Map container not found");
-//       //   setTimeout(initializeMap, 100);
-//       return;
-//     }
-
-//     // 지도 옵션을 설정합니다.
-//     const options = {
-//       center: new window.kakao.maps.LatLng(36.3550659, 127.2983779), // 초기 중심 좌표
-//       level: 3, // 초기 줌 레벨
-//     };
-
-//     // 컨테이너 DOM 요소에 지도를 생성합니다.
-//     const map = new window.kakao.maps.Map(container, options);
-//     setMap(map);
-//   };
-
-//   useEffect(() => {
-//     const script = document.createElement("script");
-//     script.type = "text/javascript";
-//     script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${API_KEY}&libraries=services,clusterer,drawing&autoload=false`;
-//     script.async = true;
-
-//     script.onload = () => {
-//       window.kakao.maps.load(() => {
-//         initializeMap();
-//         // const placesService = new window.kakao.maps.services.Places();
-//       });
-//     };
-
-//     document.body.appendChild(script);
-
-//     return () => {
-//       document.body.removeChild(script);
-//     };
-//   }, []);
-
-//   return (
-//     <div
-//       id="map"
-//       ref={containerRef}
-//       style={{ width: "500px", height: "400px", border: "1px solid black" }}
-//     />
-//   );
-// }
-
-// export default KakaoMap;

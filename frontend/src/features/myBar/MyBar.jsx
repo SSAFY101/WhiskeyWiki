@@ -1,7 +1,16 @@
 import React, { useState } from "react";
-import "./myBar.module.css";
+import "./MyBar.module.css";
+import Modal from "../modal/Modal";
+import MyBarDetail from "./MyBarDetail";
 
 function MyBar() {
+  //모달 제어
+  const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
+  const handleCloseModal = () => {
+    setIsDetailModalOpen(false);
+  };
+
+  //MyBar 배경 설정
   const MyBarBackground = {
     backgroundImage: `url("/images/locker.png")`,
     backgroundSize: "cover",
@@ -11,6 +20,7 @@ function MyBar() {
     height: "100vh", // 페이지 높이 전체로 설정 (뷰포트 높이만큼)
   };
 
+  // 위스키 이미지 조정
   const whiskeyStyles = [
     {
       position: "absolute", // 배경 이미지와 겹치도록 설정
@@ -63,9 +73,16 @@ function MyBar() {
           src={path}
           alt=""
           style={whiskeyStyles[index]}
-          onClick={clickWhiskeys[index]}
+          // onClick={clickWhiskeys[index]}
+          onClick={() => setIsDetailModalOpen(true)}
         />
       ))}
+      {/* 조건부 렌더링 */}
+      {isDetailModalOpen && (
+        <Modal isOpen={isDetailModalOpen} onClose={handleCloseModal}>
+          <MyBarDetail />
+        </Modal>
+      )}
     </div>
   );
 
