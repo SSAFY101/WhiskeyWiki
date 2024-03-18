@@ -5,8 +5,6 @@ import imageCompression from "browser-image-compression";
 import axios from "axios";
 
 import style from "./css/ImgUpload.module.css";
-import ImgUploadIcon from "./images/ImgUpload.png";
-import DetectIcon from "./images/Detect.png";
 
 const ImgUpload = () => {
   const dispatch = useDispatch();
@@ -47,7 +45,13 @@ const ImgUpload = () => {
     const formData = new FormData();
     formData.append("file", img);
 
-    const 테스트 = ["Absolut", "Jack-Daniels", "Jim-Beam"];
+    const 테스트 = [
+      "Absolut",
+      "Jack-Daniels",
+      "Jim-Beam",
+      "Jagermeister",
+      "Johnie-Walker",
+    ];
     dispatch(registerAction.setWhiskeyList(테스트));
 
     // axios
@@ -57,48 +61,60 @@ const ImgUpload = () => {
     //     },
     //   })
     //   .then((res) => {
-    //     console.log("res : ", res);
+    //     console.log("Object Detection : ", res);
     //     // 받은 배열 -> 칵테일 이름 배열 -> 리덕스
-    //     // const cocktailNameList = res.data;
-    //     // dispatch(registerAction.setWhiskeyList(cocktailNameList));
+
+    //     const data = res.data.data;
+    //     const whiskeyNameList = [];
+
+    //     data.forEach((item) => {
+    //       whiskeyNameList.push(item.class_name);
+    //     });
+
+    //     dispatch(registerAction.setWhiskeyList(whiskeyNameList));
     //   })
     //   .catch((err) => {
-    //     console.log("err : ", err);
+    //     console.log("Object Detection ERROR : ", err);
     //   });
 
     dispatch(registerAction.pageTwo());
   };
-  // className={`${style.}`}
+
   return (
     <div className={`${style.container}`}>
-      {/* 업로드 */}
-      <input
-        type="file"
-        accept=".jpg, .png"
-        onChange={imgInputClickHandler}
-        ref={imgInput}
-        style={{ display: "none" }}
-      />
-
-      {/* 업로드 라벨 */}
-      {!preview && (
-        <label onClick={uploadClickHandler} className={`${style.imgUpload}`}>
-          <img src={ImgUploadIcon} />
-        </label>
-      )}
-      {!preview && <div>이미지를 업로드하시오^^</div>}
-
-      {/* 이미지 프리뷰 */}
-      {preview && (
-        <div className={`${style.preview}`}>
-          <img src={preview} />
+      <div className={`${style.top}`}>
+        <div className={`${style.textContainer}`}>
+          <div>이미지를 업로드해서</div>
+          <div>위스키 이름을 알아보세요.</div>
         </div>
-      )}
 
+        {/* 업로드 */}
+        <input
+          type="file"
+          accept=".jpg, .png"
+          onChange={imgInputClickHandler}
+          ref={imgInput}
+          style={{ display: "none" }}
+        />
+
+        {/* 업로드 라벨 */}
+        {!preview && (
+          <label onClick={uploadClickHandler} className={`${style.imgUpload}`}>
+            <div>이미지 업로드</div>
+          </label>
+        )}
+
+        {/* 이미지 프리뷰 */}
+        {preview && (
+          <div onClick={uploadClickHandler} className={`${style.preview}`}>
+            <img src={preview} />
+          </div>
+        )}
+      </div>
       {/* 하단 버튼 */}
       {preview && (
         <button onClick={submitHandler} className={`${style.detectButton}`}>
-          <img src={DetectIcon} />
+          AI 인식하기
         </button>
       )}
     </div>

@@ -1,0 +1,47 @@
+.container {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.messageList {
+  display: flex;
+  flex-direction: column;
+}
+
+.messageCreate {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  bottom: 0.4rem;
+}
+
+.newMessage {
+  display: flex;
+  align-items: center;
+  background-color: #4f4f4f;
+  border-radius: 30px;
+  padding: 0.7rem 1.5rem;
+  width: 70%;
+}
+
+.messageCreate textarea {
+  overflow: hidden;
+  resize: none;
+  border: none;
+  background-color: #4f4f4f;
+  width: 100%;
+  height: 1.3rem;
+  font-size: 1.3rem;
+}
+
+.messageCreate textarea:focus {
+  outline: none;
+}
+
+.messageCreate img {
+  cursor: pointer;
+  width: 3rem;
+  height: 3rem;
+}

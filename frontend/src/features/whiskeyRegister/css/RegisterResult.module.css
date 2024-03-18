@@ -3,22 +3,27 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 5rem;
 }
 
 .title {
-  font-size: 2rem;
-  font-weight: bold;
+  color: #efefef;
+  font-size: 3rem;
   margin-bottom: 2rem;
 }
 
 .cardList {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   margin-bottom: 3rem;
 }
 
+.whiskeyGroup {
+  display: flex;
+}
+
 .card {
-  margin-right: 3rem;
+  margin: 1rem 1.5rem;
 }
 
 .cardContainer {
@@ -26,6 +31,31 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 1rem 0rem;
+  border-radius: 20px;
+}
+
+.cardContainer:hover {
+  cursor: pointer;
+  background-color: #262626;
+}
+
+.cardContainer:hover img {
+  cursor: pointer;
+  background-color: #262626;
+}
+
+.cardContainer:hover .nameEn {
+  cursor: pointer;
+  background-color: #262626;
+  color: #f3f3f3;
+}
+
+.cardContainer:hover .detail {
+  cursor: pointer;
+  background-color: #262626;
+  color: rgb(181, 181, 181);
+  visibility: visible;
 }
 
 .cardImg {
@@ -35,33 +65,40 @@
 }
 
 .goMyBarButton {
-  color: rgb(255, 255, 255);
+  color: #1c1c1c;
+  background-color: #eeb233;
   cursor: pointer;
   border: none;
-  font-size: 1.5rem;
+  border-radius: 5px;
+  font-size: 1.3rem;
   font-weight: bold;
-  padding: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  margin-bottom: 3rem;
 }
 
 .nameEn {
-  font-size: 1.4rem;
-  margin-bottom: 1rem;
+  color: #a6a6a6;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
-.detailButton {
-  cursor: pointer;
-  padding: 0.3rem 0.6rem;
-  border: none;
+.detailContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: solid 3px #3f3f3f;
   border-radius: 20px;
-  background-color: gray;
-  font-size: 1.2rem;
-  font-weight: bold;
+  padding: 2rem 5rem;
 }
 
-.temp {
-  color: rgb(255, 255, 255);
-  cursor: pointer;
-  border: none;
+.detailTitle {
+  color: #b5b5b5;
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+}
+
+.detail {
+  visibility: hidden;
   font-size: 1rem;
-  padding: 0.5rem;
 }
