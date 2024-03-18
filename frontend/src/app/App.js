@@ -6,8 +6,10 @@ import Home from "../features/home/index";
 import Navbar from "../widgets/Navbar";
 // 유저 관리
 import Login from "../features/auth/login/Login";
-import Signup from "../features/auth/signup/Signup";
 import Modal from "../features/modal/Modal";
+import MyBar from "../features/myBar/MyBar";
+import ExchangeMap from "../features/exchangeMap/exchangeMap";
+import Signup from "../features/auth/signup/Signup";
 // 위스키 등록
 import WhiskeyRegister from "../features/whiskeyRegister/index";
 // 지도
