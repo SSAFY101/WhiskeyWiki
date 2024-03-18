@@ -1,0 +1,95 @@
+.container {
+  display: flex;
+}
+
+.container * {
+  text-decoration-line: none;
+}
+
+.sideMenu {
+  width: 15%;
+  padding: 3rem;
+}
+
+.myPage {
+  color: #bcbcbc;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.menu {
+  margin-top: 2rem;
+}
+
+.menu * {
+  cursor: pointer;
+  color: #bcbcbc;
+  font-size: 1.3rem;
+  margin-top: 1.5rem;
+}
+.menu *:hover {
+  color: #eeb233;
+}
+
+.chatListContainer {
+  background-color: #3a3a3a;
+  width: 55%;
+  padding: 1rem 2rem 1rem 2rem;
+  border-radius: 10px;
+}
+
+.chatListContainer * {
+  background-color: #3a3a3a;
+}
+
+.chatContainer {
+  cursor: pointer;
+  display: flex;
+  padding: 2rem 1rem;
+  margin: 1rem 0rem;
+}
+
+.chatContainer * {
+  cursor: pointer;
+}
+
+.chatContainer:hover {
+  background-color: #323232;
+  border-radius: 10px;
+}
+
+.chatContainer:hover .pairId {
+  background-color: #323232;
+}
+
+.chatContainer:hover .lastMessagae {
+  background-color: #323232;
+}
+
+.tradeStatus {
+  background-color: #bab9b7;
+  color: #1c1c1c;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  padding: 0.4rem 1rem;
+  margin-right: 3rem;
+}
+
+.pairId {
+  color: #e3e3e3;
+  width: 15%;
+  font-size: 1.5rem;
+  margin-right: 3rem;
+}
+
+.lastMessagae {
+  color: #a5a5a5;
+  font-size: 1.3rem;
+}
+
+.line {
+  border: none;
+  background-color: #605d5d;
+  height: 2px;
+  margin: 0rem 0rem 0rem 0rem;
+}

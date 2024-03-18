@@ -8,8 +8,8 @@ import backIcon from "./images/before.png";
 import moreIcon from "./images/openModal.png";
 
 const Chat = () => {
-  const yourId = 1; // Temp
-  const myId = 2; // Temp
+  const pairId = 1; // Temp
+  const userId = 0; // Temp
 
   return (
     <div className={`${style.container}`}>
@@ -29,8 +29,8 @@ const Chat = () => {
       <hr className={style.line} />
       <div className={`${style.content}`}>
         <div className={`${style.whiskeyList}`}>
-          <WhiskeyList userId={yourId} />
-          <WhiskeyList userId={myId} />
+          <WhiskeyList userId={pairId} />
+          <WhiskeyList userId={userId} />
         </div>
         <div className={`${style.line2}`}></div>
         <MessageList />
