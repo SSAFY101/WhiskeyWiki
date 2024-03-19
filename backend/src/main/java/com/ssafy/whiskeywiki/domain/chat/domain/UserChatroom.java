@@ -31,4 +31,7 @@ public class UserChatroom {
 
     @OneToMany(mappedBy = "userChatroom")
     private List<Chat> chatList = new ArrayList<>();
+
+    @Builder.Default
+    private boolean tradeIntention = false;
 }

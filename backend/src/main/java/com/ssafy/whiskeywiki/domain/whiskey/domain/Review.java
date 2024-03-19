@@ -2,11 +2,13 @@ package com.ssafy.whiskeywiki.domain.whiskey.domain;
 
 import com.ssafy.whiskeywiki.domain.user.domain.User;
 import com.ssafy.whiskeywiki.domain.whiskey.domain.Whiskey;
+import com.ssafy.whiskeywiki.global.util.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
 
@@ -15,7 +17,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 @Entity
-public class Review {
+public class Review extends BaseTimeEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "review_id")
     private Long id;
@@ -32,8 +34,6 @@ public class Review {
     private StarRating reviewRating;
 
     private String content;
-
-    private LocalDateTime createdTime;
 
     @Builder
     Review(Whiskey whiskey, User user, StarRating reviewRating, String content) {
