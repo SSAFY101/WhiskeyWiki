@@ -1,0 +1,8 @@
+.iconContainer *{
+  display: inline;
+  margin: 0;
+}
+
+.iconWrapper{
+margin-right: 10px;
+}

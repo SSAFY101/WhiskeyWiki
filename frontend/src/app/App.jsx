@@ -17,6 +17,7 @@ import ChatList from "../features/chat/ChatList";
 import Chat from "../features/chat/Chat";
 //위스키 정보
 import WhiskeyInfo from '../features/whiskeyInfo/WhiskeyInfo'
+import WhiskeyDetail from "../features/whiskeyInfo/WhiskeyDetail";
 
 import style from "./App.css";
 
@@ -50,7 +51,9 @@ const App = () => {
           {/* 마이바 */}
           <Route path="/myBar" element={<MyBar />} />
           {/* 위스키 정보 */}
-          <Route path="/whiskeyInfo" element={<WhiskeyInfo/>}></Route>
+          <Route path="/whiskeyInfo" element={<WhiskeyInfo />}></Route>
+          {/* 위스키 디테일 */}
+          <Route path="/WhiskeyDetail" element={ <WhiskeyDetail/>}></Route>
         </Routes>
         {/* 조건부 렌더링 */}
         {isLoginModalOpen && (
