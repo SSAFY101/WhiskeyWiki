@@ -1,10 +1,17 @@
 import { Link } from "react-router-dom";
 
+import style from "./css/Home.module.css";
+
+import HomeImg1 from "./images/Home1.jpg";
+
 const Home = () => {
   return (
-    <div>
-      <div>Home</div>
-      <Link to="/chat">채팅 리스트 (테스트)</Link>
+    <div
+      className={`${style.container}`}
+      style={{ backgroundImage: `url(${HomeImg1})` }}
+    >
+      <span className={`${style.layer}`} />
+      <div className={`${style.title}`}>Welcome to Whiskey Wiki</div>
     </div>
   );
 };
