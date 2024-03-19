@@ -14,28 +14,14 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Entity
-public class Cocktail {
+public class Ingredient {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "cocktail_id")
+    @Column(name = "ingredient_id")
     private int id;
 
-    private String reciepe;
-
-    private String cocktailName;
-
-    private String detail;
+    private String name;
 
     //연관관계
-
-    //1.칵테일 재료와 일대다 매핑
-    @OneToMany(mappedBy = "cocktail")
+    @OneToMany(mappedBy = "ingredient")
     private List<CocktailIngredient> cocktailIngredientList = new ArrayList<>();
-
-    //2. 기주와 일대다 매핑
-    @OneToMany(mappedBy = "cocktail")
-    private List<Base> baseList = new ArrayList<>();
-
-    //3, 즐겨찾기와 일대다 매핑
-    @OneToMany(mappedBy = "cocktail")
-    private List<Favorite> favoriteList = new ArrayList<>();
 }

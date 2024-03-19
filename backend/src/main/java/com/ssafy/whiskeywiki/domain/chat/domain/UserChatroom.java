@@ -6,34 +6,29 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedDate;
 
-import java.time.LocalDateTime;
+import java.util.*;
 
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "chats")
+@Table(name = "user_chatrooms")
 @Getter
-public class Chat {
+public class UserChatroom {
 
     @Id @GeneratedValue
-    @Column(name = "chat_id")
+    @Column(name = "user_chatroom_id")
     private int id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_chatroom_id")
-    private UserChatroom userChatroom;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
     private User user;
 
-    private boolean read;
-    private boolean chatVisible;
-    private String message;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "chatroom_id")
+    private Chatroom chatroom;
 
-    @CreatedDate
-    private LocalDateTime dateTime;
+    @OneToMany(mappedBy = "userChatroom")
+    private List<Chat> chatList = new ArrayList<>();
 }
