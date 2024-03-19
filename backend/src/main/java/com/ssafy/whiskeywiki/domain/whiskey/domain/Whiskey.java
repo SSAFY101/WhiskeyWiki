@@ -1,6 +1,6 @@
-package com.ssafy.whiskeywiki.domain.whiskey.dto;
+package com.ssafy.whiskeywiki.domain.whiskey.domain;
 
-import com.ssafy.whiskeywiki.domain.review.domain.Review;
+import com.ssafy.whiskeywiki.domain.whiskey.domain.Review;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -38,13 +38,13 @@ public class Whiskey {
     @Builder.Default
     private List<Base> baseList = new ArrayList<>();
 
-    //2. 위스키와 리뷰는 일대다 관계
-    @OneToMany(mappedBy = "whiskey")
+    //2. 위스키와 리뷰는 일대다 관계, 위스키가 삭제되면 리뷰도 삭제
+    @OneToMany(mappedBy = "whiskey", cascade = CascadeType.ALL)
     @Builder.Default
     private List<Review> reviewList = new ArrayList<>();
 
-    //3. 위스키와 위스키보유는 일대다 관계
-    @OneToMany(mappedBy = "whiskey")
+    //3. 위스키와 위스키보유는 일대다 관계, 위스키가 삭제되면 위스키 보유도 삭제
+    @OneToMany(mappedBy = "whiskey", cascade = CascadeType.ALL)
     @Builder.Default
     private List<OwnWhiskey> ownWhiskeyList = new ArrayList<>();
 }
