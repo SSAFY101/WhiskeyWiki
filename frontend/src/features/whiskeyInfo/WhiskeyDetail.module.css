@@ -1,0 +1,36 @@
+.outerContainer{
+  display:flex;
+  justify-content: center;
+}
+
+.outerContainer *
+{
+  background-color: #555555;
+}
+
+.innerContainer{
+  /* margin:20%; */
+  height: 100%;
+  width: 80%;
+}
+
+.innerContainer img{
+  width: 10%;
+  height: 10%;
+  /* margin-right:50px; */
+
+}
+.infoArea{
+  margin-top: 30px;
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.textArea *{
+  margin-left: 50px;
+  margin-top: 0;
+  margin-bottom: 20px;
+  width:300px;
+}
+
