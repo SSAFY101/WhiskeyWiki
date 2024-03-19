@@ -1,5 +1,11 @@
 package com.ssafy.whiskeywiki.domain.user.domain;
 
+import com.ssafy.whiskeywiki.domain.chat.domain.Chat;
+import com.ssafy.whiskeywiki.domain.chat.domain.UserChatroom;
+import com.ssafy.whiskeywiki.domain.cocktail.domain.Favorite;
+import com.ssafy.whiskeywiki.domain.trade.domain.TradeStatus;
+import com.ssafy.whiskeywiki.domain.whiskey.domain.OwnWhiskey;
+import com.ssafy.whiskeywiki.domain.whiskey.domain.Review;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -64,7 +70,7 @@ public class User {
     //5. 유저 채팅방(User_ChatRooms)과 일대다
     @OneToMany(mappedBy = "user")
     @Builder.Default
-    private List<userChatRooms> userChatRoomsList = new ArrayList<>();
+    private List<UserChatroom> userChatRoomsList = new ArrayList<>();
 
     //6. 거래상태와 일대다
     @OneToMany(mappedBy = "user")

@@ -1,6 +1,7 @@
 package com.ssafy.whiskeywiki.global.util;
 
 import lombok.Builder;
+import org.springframework.http.ResponseEntity;
 
 import java.util.Date;
 import java.util.UUID;
@@ -15,3 +16,4 @@ public class CommonResponse {
     private String message;
     private Object data;
 }
+
