@@ -14,7 +14,7 @@ function WhiskeyInfo() {
       <h1>위스키 목록</h1>
       <SearchBar />
       <div>
-        <WhiskeySorter/>
+        <WhiskeySorter />
         <div className={style.cardContainer}>
           <Infocard onClick={goToDetail} />
         </div>

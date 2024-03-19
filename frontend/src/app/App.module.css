@@ -9,6 +9,10 @@
   user-select: none;
 }
 
+.navbar {
+  background-color: transparent !important;
+}
+
 .draggable {
   -webkit-user-select: text;
   -moz-user-select: text;

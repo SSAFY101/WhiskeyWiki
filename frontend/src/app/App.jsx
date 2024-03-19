@@ -8,7 +8,7 @@ import Navbar from "../widgets/Navbar";
 import Login from "../features/auth/login/Login";
 import Modal from "../features/modal/Modal";
 import MyBar from "../features/myBar/MyBar";
-import ExchangeMap from "../features/exchangeMap/exchangeMap";
+import ExchangeMap from "../features/exchangeMap/ExchangeMap";
 import Signup from "../features/auth/signup/Signup";
 // 위스키 등록
 import WhiskeyRegister from "../features/whiskeyRegister/index";
@@ -19,7 +19,7 @@ import Chat from "../features/chat/Chat";
 import WhiskeyInfo from '../features/whiskeyInfo/WhiskeyInfo'
 import WhiskeyDetail from "../features/whiskeyInfo/WhiskeyDetail";
 
-import style from "./App.css";
+import style from "./App.module.css";
 
 const App = () => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -34,9 +34,10 @@ const App = () => {
     <Router>
       <div>
         <Navbar
+          className={`${style.navbar}`}
           onLoginClick={() => setIsLoginModalOpen(true)}
           onSignupClick={() => setIsSignupModalOpen(true)}
-        ></Navbar>
+        />
         <Routes>
           {/* 메인페이지 */}
           <Route path="/" element={<Home />} />
