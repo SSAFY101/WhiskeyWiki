@@ -13,14 +13,14 @@ function Map() {
   // const [selectedMarker, setSelectedMarker] = useState(-1);
 
   useEffect(() => {
-    const mapContaine = document.getElementById("map"); //지도를 담을 영역의 DOM 레퍼런스
+    const mapContainer = document.getElementById("map"); //지도를 담을 영역의 DOM 레퍼런스
     const options = {
       center: new kakao.maps.LatLng(36.3550659, 127.2983779), //지도의 중심좌표
       level: 3, // 지도의 확대 레벨
     };
 
     // 1. 지도 생성 및 객체 리턴
-    const map = new kakao.maps.Map(mapContaine, options);
+    const map = new kakao.maps.Map(mapContainer, options);
 
     // 2. 지도 이동시키는 함수
     function setCenter() {
@@ -130,6 +130,52 @@ function Map() {
         // 마커 위에 인포윈도우를 표시
         infowindow.open(map, marker);
       });
+    }
+
+    // 7. 현재 위치 표시
+    // 7-1. HTML5의 geolocation으로 사용할 수 있는지 확인
+    if (navigator.geolocation) {
+      // GeoLocation을 이용해서 접속 위치 얻어오기
+      navigator.geolocation.getCurrentPosition(function (position) {
+        const lat = position.coords.latitude; // 위도
+        const lon = position.coords.longitude; // 경도
+
+        const locPosition = new kakao.maps.LatLng(lat, lon); // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성
+        const message = '<div style="padding:5px;">현재 위치입니다.</div>'; // 인포윈도우에 표시될 내용
+
+        currentMarker(locPosition, message); // 마커와 인포윈도우 표시
+      });
+    } else {
+      // HTML5의 GeoLocation을 사용할 수 없을때, 마커 표시 위치와 인포윈도우 내용을 설정
+      // (추후에 사용자가 등록한 주소로 변경 예정)
+      const locPosition = new kakao.maps.LatLng(36.3550659, 127.2983779);
+      const message = "사용자가 등록한 주소입니다.";
+
+      currentMarker(locPosition, message);
+    }
+
+    // 7-2. 지도에 현재 위치에 대한 마커 & 인포윈도우를 표시하는 함수
+    function currentMarker(locPosition, message) {
+      // 마커 생성
+      const marker = new kakao.maps.Marker({
+        map: map,
+        position: locPosition,
+      });
+
+      const iwContent = message; // 인포윈도우에 표시할 내용
+      const iwRemoveable = true;
+
+      // 인포윈도우 생성
+      const infowindow = new kakao.maps.InfoWindow({
+        content: iwContent,
+        removable: iwRemoveable,
+      });
+
+      // 인포윈도우를 마커위에 표시
+      infowindow.open(map, marker);
+
+      // 지도 중심좌표를 접속위치로 변경
+      map.setCenter(locPosition);
     }
   }, []);
 
