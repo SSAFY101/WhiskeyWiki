@@ -29,9 +29,19 @@ public class Review {
     private User user;
 
     //enum type
-//    private ReviewRating startRating;
+    private StarRating reviewRating;
 
     private String content;
 
     private LocalDateTime createdTime;
+
+    @Builder
+    Review(Whiskey whiskey, User user, StarRating reviewRating, String content) {
+        this.whiskey = whiskey;
+        this.user = user;
+        this.reviewRating = reviewRating;
+        this.content = content;
+
+        whiskey.getReviewList().add(this);
+    }
 }
