@@ -43,5 +43,4 @@ public class Whiskey {
     @OneToMany(mappedBy = "whiskey", cascade = CascadeType.ALL)
     @Builder.Default
     private List<Review> reviewList = new ArrayList<>();
-
 }
