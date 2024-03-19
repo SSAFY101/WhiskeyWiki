@@ -1,4 +1,4 @@
-package com.ssafy.whiskeywiki.domain.review.domain;
+package com.ssafy.whiskeywiki.domain.whiskey.domain;
 
 import com.ssafy.whiskeywiki.domain.user.domain.User;
 import com.ssafy.whiskeywiki.domain.whiskey.domain.Whiskey;
@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 public class Review {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "review_id")
-    private int id;
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "whiskey_id")

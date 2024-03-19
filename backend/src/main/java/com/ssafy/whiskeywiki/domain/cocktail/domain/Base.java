@@ -25,4 +25,5 @@ public class Base {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "whiskey_id")
     private Whiskey whiskey;
+
 }
