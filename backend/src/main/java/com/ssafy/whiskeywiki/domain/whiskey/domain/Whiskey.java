@@ -33,13 +33,6 @@ public class Whiskey {
 
     private String detail;
 
-    //연관관계
-    //1. 위스키와 기주는 일대다 관계
-    @OneToMany(mappedBy = "whiskey")
-    @Builder.Default
-    private List<Base> baseList = new ArrayList<>();
-
-    //2. 위스키와 리뷰는 일대다 관계, 위스키가 삭제되면 리뷰도 삭제
     @OneToMany(mappedBy = "whiskey", cascade = CascadeType.ALL)
     @Builder.Default
     private List<Review> reviewList = new ArrayList<>();
