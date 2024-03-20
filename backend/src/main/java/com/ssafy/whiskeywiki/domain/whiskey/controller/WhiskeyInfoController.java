@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/whiskeyinfo")
+@RequestMapping("/whiskeyinfo")
 public class WhiskeyInfoController {
 
     private final WhiskeyInfoService whiskeyInfoService;
