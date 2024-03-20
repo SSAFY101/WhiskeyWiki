@@ -75,7 +75,7 @@ const MessageList = () => {
   // 소켓 : connect
   const connect = () => {
     client.current = new StompJs.Client({
-      brokerURL: "ws://lcoalhost:8080/ws",
+      brokerURL: "ws://localhost:8080/ws",
       // connectHeaders: {
       //   accessToken: "토큰",
       // },
