@@ -12,7 +12,7 @@ const Home = () => {
 
   const wheelHandler = (e) => {
     e.preventDefault();
-
+    const { deltaY } = e;
     const container = sectionRef.current;
     const delta = e.deltaY;
 
@@ -31,16 +31,16 @@ const Home = () => {
       onWheel={wheelHandler}
       ref={sectionRef}
     >
-      <div className={style.section}>
+      <div>
         <Section1 />
       </div>
-      <div className={style.section}>
+      <div>
         <Section2 />
       </div>
-      <div className={style.section}>
+      <div>
         <Section3 />
       </div>
-      <div className={style.section}>
+      <div>
         <Section4 />
       </div>
     </div>

@@ -9,9 +9,11 @@ const Section1 = () => {
       className={style.section}
       style={{ backgroundImage: `url(${HomeImg1})` }}
     >
-      <Navbar className={`${style.navbar}`} />
-      {/* <span className={`${style.layer}`} /> */}
+      <div className={style.navbar}>
+        <Navbar />
+      </div>
       <div className={`${style.title}`}>Welcome to Whiskey Wiki</div>
+      <div className={`${style.layer}`} />
     </div>
   );
 };

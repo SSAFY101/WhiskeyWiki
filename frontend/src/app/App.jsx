@@ -35,13 +35,11 @@ const App = () => {
   return (
     <Router>
       <div>
-        {window.location.pathname === "/" && (
-          <Navbar
-            className={`${style.navbar}`}
-            onLoginClick={() => setIsLoginModalOpen(true)}
-            onSignupClick={() => setIsSignupModalOpen(true)}
-          />
-        )}
+        <Navbar
+          className={`${style.navbar}`}
+          onLoginClick={() => setIsLoginModalOpen(true)}
+          onSignupClick={() => setIsSignupModalOpen(true)}
+        />
         <Routes>
           {/* 메인페이지 */}
           <Route path="/" element={<Home />} />
