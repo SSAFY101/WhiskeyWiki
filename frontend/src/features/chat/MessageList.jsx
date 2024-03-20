@@ -9,17 +9,10 @@ import style from "./css/MessageList.module.css";
 import sendIcon from "./images/sendMessage.png";
 
 const MessageList = () => {
-  const [messageList, setMessageList] = useState([]);
-  const [newMessage, setNewMessage] = useState("");
-  const client = useRef({});
-
-  const id = 1; // 테스트
-  const pairId = 0; // 테스트
-
-  const 테스트 = [
+  const [messageList, setMessageList] = useState([
     {
-      id: 0,
-      isMyMessage: false,
+      id: 0, // message Id
+      isMyMessage: false, // 내꺼 남의꺼
       content: "ㅎㅇ",
       time: "오전 10:03",
     },
@@ -47,7 +40,13 @@ const MessageList = () => {
       content: "헤에에에에",
       time: "오전 10:05",
     },
-  ];
+  ]);
+
+  const [newMessage, setNewMessage] = useState("");
+  const client = useRef({});
+
+  const roomId = 0; // 테스트
+  const pairId = 0; // 테스트
 
   useEffect(() => {
     // 채팅방 메세지 리스트 불러오기
@@ -76,10 +75,10 @@ const MessageList = () => {
   // 소켓 : connect
   const connect = () => {
     client.current = new StompJs.Client({
-      brokerURL: "wss://url",
-      connectHeaders: {
-        accessToken: "토큰",
-      },
+      brokerURL: "ws://lcoalhost:8080/ws",
+      // connectHeaders: {
+      //   accessToken: "토큰",
+      // },
       debug: (str) => {
         console.log("debug : ", str); // 테스트
       },
@@ -90,9 +89,9 @@ const MessageList = () => {
       onStompError: (frame) => {
         console.log("소켓 연결 실패");
       },
-      reconnectDelay: 3000,
-      heartbeatIncoming: 2000,
-      heartbeatOutgoing: 2000,
+      reconnectDelay: 5000,
+      heartbeatIncoming: 4000,
+      heartbeatOutgoing: 4000,
     });
     client.current.activate();
   };
@@ -104,7 +103,7 @@ const MessageList = () => {
 
   // 소켓 : subscribe
   const subscribe = () => {
-    client.current.subscribe("/sub/chat/" + id, (data) => {
+    client.current.subscribe("/sub/chatroom/" + roomId, (data) => {
       const res = JSON.parse(data.body);
 
       console.log("subscribe res", res); // 테스트
@@ -118,9 +117,11 @@ const MessageList = () => {
     if (!client.current.connected) return; // 소켓 연결이 안 된 경우
 
     client.current.publish({
-      destination: "/pub/chat",
+      destination: "/pub/chatroom",
       body: JSON.stringify({
-        id: "뭐 보내야 하지",
+        // type: "",
+        roomId: "0",
+        sender: "테서터",
         chat: msg,
       }),
     });
@@ -138,8 +139,16 @@ const MessageList = () => {
     if (newMessage.length === 0) return; // 메세지 길이가 0인 경우
 
     console.log("메세지 보내기", newMessage); // 테스트
-
-    publish(newMessage);
+    setMessageList((messageList) => [
+      ...messageList,
+      {
+        id: 4,
+        isMyMessage: true,
+        content: newMessage,
+        time: "오전 10:05",
+      },
+    ]);
+    // publish(newMessage);
     setNewMessage("");
   };
 
@@ -147,7 +156,7 @@ const MessageList = () => {
     <div className={`${style.container}`}>
       {/* 메세지 리스트 */}
       <div className={`${style.messageList}`}>
-        {테스트.map((msg) => (
+        {messageList.map((msg) => (
           <Message key={msg.id} {...msg}></Message>
         ))}
       </div>
