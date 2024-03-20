@@ -1,90 +1,182 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import style from "./ExchangeMap.module.css";
 
 // (문제) 스크립트로 kakao maps api를 가져오면, window전역 객체에 들어가게 된다.
-// (해결) 함수형 컴포넌트에 인지시키고, window에서 kakao 객체를 뽑아서 사용
+// (해결) 함수형 컴포넌트에 인지시키고, window에서 kakao 객체를 뽑아서 사용 / window.kakao.~ 처럼 inline으로 사용하는 것도 방법!
 const { kakao } = window;
 
 function Map() {
+  // 인포윈도우 관련 변수 (아래 코드 존재)
+  // const [iwRemoveable, setIwRemoveable] = useState(true);
+
+  // 클릭한 마커를 담을 변수
+  // const [selectedMarker, setSelectedMarker] = useState(-1);
+
   useEffect(() => {
-    const mapContaine = document.getElementById("map"); //지도를 담을 영역의 DOM 레퍼런스
+    const mapContainer = document.getElementById("map"); //지도를 담을 영역의 DOM 레퍼런스
     const options = {
       center: new kakao.maps.LatLng(36.3550659, 127.2983779), //지도의 중심좌표
       level: 3, // 지도의 확대 레벨
     };
 
     // 1. 지도 생성 및 객체 리턴
-    const map = new kakao.maps.Map(mapContaine, options);
+    const map = new kakao.maps.Map(mapContainer, options);
 
-    // 2. 지도 이동시키기
+    // 2. 지도 이동시키는 함수
     function setCenter() {
-      // 이동할 위도 경도 위치를 생성합니다
-      const moveLatLon = new kakao.maps.LatLng(33.452613, 126.570888);
-      // 지도 중심을 이동 시킵니다
-      map.setCenter(moveLatLon);
+      const moveLatLon = new kakao.maps.LatLng(36.3550659, 127.2983779); // 이동할 위도 경도 위치 생성
+      map.setCenter(moveLatLon); // 지도 중심 이동
     }
 
-    // 3. 다른 이미지로 마커 생성하기
-    const imageSrc =
-        "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png", // 마커이미지의 주소입니다
-      imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
-      imageOption = { offset: new kakao.maps.Point(27, 69) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-
-    // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
-    const markerImage = new kakao.maps.MarkerImage(
-        imageSrc,
-        imageSize,
-        imageOption
-      ),
-      markerPosition = new kakao.maps.LatLng(36.3550659, 127.2983779); // 마커가 표시될 위치입니다
-
-    // 마커를 생성합니다
-    const marker = new kakao.maps.Marker({
-      position: markerPosition,
-      image: markerImage, // 마커이미지 설정
-      clickable: true, // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
-    });
-
-    // 마커가 지도 위에 표시되도록 설정합니다
-    marker.setMap(map);
-
-    // 4. 클릭 이벤트 등록
-    // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
-    const iwContent = '<div style="padding:5px;">Whiskey Wiki</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-      iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
-
-    // 인포윈도우를 생성합니다
-    const infowindow = new kakao.maps.InfoWindow({
-      content: iwContent,
-      removable: iwRemoveable,
-    });
-
-    // 마커에 클릭이벤트를 등록합니다
-    kakao.maps.event.addListener(marker, "click", function () {
-      // 마커 위에 인포윈도우를 표시합니다
-      infowindow.open(map, marker);
-    });
-
-    // 5. 여러개 마커 표시하기
-    // 마커를 표시할 위치와 title 객체 배열입니다
+    // 3. 여러개 마커 표시 - 마커를 표시할 위치(배열)
     const positions = [
       {
-        title: "카카오",
-        latlng: new kakao.maps.LatLng(33.450705, 126.570677),
+        // id: 0, // user_id 번호 사용하기
+        content:
+          '<div style="padding:5px; text-align: center;">' +
+          "Jieun's My Bar" +
+          "<br>" +
+          ' <a href="https://galvanized-citron-903.notion.site/SSAFY-10-PJT-B101-1e8733a173fe4f3eae707f444d1d5940?pvs=4" style="color:black" target="_blank">' +
+          "   이동" +
+          " </a>" +
+          "</div>",
+        latlng: new kakao.maps.LatLng(36.3550659, 127.2983779),
       },
       {
-        title: "생태연못",
-        latlng: new kakao.maps.LatLng(33.450936, 126.569477),
+        // id: 1,
+        content:
+          '<div style="padding:5px; text-align: center;">' +
+          "주차장1's My Bar" +
+          "<br>" +
+          ' <a href="https://galvanized-citron-903.notion.site/SSAFY-10-PJT-B101-1e8733a173fe4f3eae707f444d1d5940?pvs=4" style="color:black" target="_blank">' +
+          "   이동" +
+          " </a>" +
+          "</div>",
+        latlng: new kakao.maps.LatLng(36.355838, 127.299748),
       },
       {
-        title: "텃밭",
-        latlng: new kakao.maps.LatLng(33.450879, 126.56994),
-      },
-      {
-        title: "근린공원",
-        latlng: new kakao.maps.LatLng(33.451393, 126.570738),
+        // id: 2,
+        content:
+          '<div style="padding:5px; text-align: center;">' +
+          "주차장2's My Bar" +
+          "<br>" +
+          ' <a href="https://galvanized-citron-903.notion.site/SSAFY-10-PJT-B101-1e8733a173fe4f3eae707f444d1d5940?pvs=4" style="color:black" target="_blank">' +
+          "   이동" +
+          " </a>" +
+          "</div>",
+        latlng: new kakao.maps.LatLng(36.354696, 127.300253),
       },
     ];
+
+    // 4. 다른 이미지로 마커 생성
+    const imageSrc =
+        "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png", // 마커이미지의 주소
+      imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기
+      imageOption = { offset: new kakao.maps.Point(27, 69) }; // 마커이미지 옵션 : 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정
+
+    // 마커의 이미지정보를 가지고 있는 마커이미지 생성
+    const markerImage = new kakao.maps.MarkerImage(
+      imageSrc,
+      imageSize,
+      imageOption
+    );
+
+    // // 인포윈도우를 표시하는 클로저를 만드는 함수입니다
+    // function makeOverListener(map, marker, infowindow) {
+    //   return function () {
+    //     infowindow.open(map, marker);
+    //   };
+    // }
+
+    // // 인포윈도우를 닫는 클로저를 만드는 함수입니다
+    // function makeOutListener(infowindow) {
+    //   return function () {
+    //     infowindow.close();
+    //   };
+    // }
+
+    // 5. 마커 및 인포윈도우 생성
+    for (let i = 0; i < positions.length; i++) {
+      // 마커 생성
+      const marker = new kakao.maps.Marker({
+        // id,
+        map: map, // 마커를 표시할 지도
+        position: positions[i].latlng, // 마커의 위치
+        image: markerImage, // 마커이미지
+        clickable: true, // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정
+      });
+      // 마커에 고유 아이디 지정
+      marker.id = i;
+
+      // // 인포윈도우 끄는 버튼 (X 버튼)
+      const iwRemoveable = true;
+      // 마커에 표시할 인포윈도우 생성
+      const infowindow = new kakao.maps.InfoWindow({
+        content: positions[i].content, // 인포윈도우에 표시할 내용
+        removable: iwRemoveable, // 인포윈도우 끄는 버튼 넣기
+      });
+      // 인포윈도우에 고유 아이디 지정
+      infowindow.id = i;
+
+      // 6. 마커 클릭 이벤트 등록
+      kakao.maps.event.addListener(marker, "click", function () {
+        // // 다른 마커가 이미 클릭되어 있으면, 기존의 인포윈도우 닫기 (후순위로..)
+        // console.log(infowindow);
+        // if (infowindow.id === i) {
+        //   console.log("if문 실행 된다!");
+        //   infowindow.close();
+        // }
+
+        // 마커 위에 인포윈도우를 표시
+        infowindow.open(map, marker);
+      });
+    }
+
+    // 7. 현재 위치 표시
+    // 7-1. HTML5의 geolocation으로 사용할 수 있는지 확인
+    if (navigator.geolocation) {
+      // GeoLocation을 이용해서 접속 위치 얻어오기
+      navigator.geolocation.getCurrentPosition(function (position) {
+        const lat = position.coords.latitude; // 위도
+        const lon = position.coords.longitude; // 경도
+
+        const locPosition = new kakao.maps.LatLng(lat, lon); // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성
+        const message = '<div style="padding:5px;">현재 위치입니다.</div>'; // 인포윈도우에 표시될 내용
+
+        currentMarker(locPosition, message); // 마커와 인포윈도우 표시
+      });
+    } else {
+      // HTML5의 GeoLocation을 사용할 수 없을때, 마커 표시 위치와 인포윈도우 내용을 설정
+      // (추후에 사용자가 등록한 주소로 변경 예정)
+      const locPosition = new kakao.maps.LatLng(36.3550659, 127.2983779);
+      const message = "사용자가 등록한 주소입니다.";
+
+      currentMarker(locPosition, message);
+    }
+
+    // 7-2. 지도에 현재 위치에 대한 마커 & 인포윈도우를 표시하는 함수
+    function currentMarker(locPosition, message) {
+      // 마커 생성
+      const marker = new kakao.maps.Marker({
+        map: map,
+        position: locPosition,
+      });
+
+      const iwContent = message; // 인포윈도우에 표시할 내용
+      const iwRemoveable = true;
+
+      // 인포윈도우 생성
+      const infowindow = new kakao.maps.InfoWindow({
+        content: iwContent,
+        removable: iwRemoveable,
+      });
+
+      // 인포윈도우를 마커위에 표시
+      infowindow.open(map, marker);
+
+      // 지도 중심좌표를 접속위치로 변경
+      map.setCenter(locPosition);
+    }
   }, []);
 
   return (

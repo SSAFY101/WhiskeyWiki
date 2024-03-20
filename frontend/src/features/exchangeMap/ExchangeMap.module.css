@@ -1,3 +1,4 @@
 .map * {
   background: none;
+  color: black; /* 지도 안 글씨 색 */
 }
