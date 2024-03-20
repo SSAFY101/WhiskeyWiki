@@ -1,1 +1,19 @@
-spring.application.name=whiskeywiki
+server:
+  servlet:
+    context-path: /api
+  port: 5000
+
+
+# DB와 secret key 세팅 값
+spring:
+  profiles:
+    include: local
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+

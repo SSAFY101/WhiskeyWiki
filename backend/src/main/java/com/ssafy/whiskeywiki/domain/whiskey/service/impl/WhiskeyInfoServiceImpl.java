@@ -1,4 +1,8 @@
 package com.ssafy.whiskeywiki.domain.whiskey.service.impl;
 
-public class WhiskeyInfoServiceImpl {
+import com.ssafy.whiskeywiki.domain.whiskey.service.WhiskeyInfoService;
+import org.springframework.stereotype.Service;
+
+@Service
+public class WhiskeyInfoServiceImpl implements WhiskeyInfoService {
 }

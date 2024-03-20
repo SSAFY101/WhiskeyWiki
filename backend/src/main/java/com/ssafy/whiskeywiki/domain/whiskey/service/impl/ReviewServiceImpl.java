@@ -1,4 +1,10 @@
 package com.ssafy.whiskeywiki.domain.whiskey.service.impl;
 
-public class ReviewServiceImpl {
+
+import com.ssafy.whiskeywiki.domain.whiskey.service.ReviewService;
+import org.springframework.stereotype.Service;
+
+@Service
+public class ReviewServiceImpl implements ReviewService {
+
 }
