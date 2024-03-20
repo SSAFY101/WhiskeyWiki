@@ -16,7 +16,7 @@ import WhiskeyRegister from "../features/whiskeyRegister/index";
 import ChatList from "../features/chat/ChatList";
 import Chat from "../features/chat/Chat";
 //위스키 정보
-import WhiskeyInfo from '../features/whiskeyInfo/WhiskeyInfo'
+import WhiskeyInfo from "../features/whiskeyInfo/WhiskeyInfo";
 import WhiskeyDetail from "../features/whiskeyInfo/WhiskeyDetail";
 
 import style from "./App.module.css";
@@ -33,11 +33,13 @@ const App = () => {
   return (
     <Router>
       <div>
-        <Navbar
-          className={`${style.navbar}`}
-          onLoginClick={() => setIsLoginModalOpen(true)}
-          onSignupClick={() => setIsSignupModalOpen(true)}
-        />
+        {window.location.pathname === "/" && (
+          <Navbar
+            className={`${style.navbar}`}
+            onLoginClick={() => setIsLoginModalOpen(true)}
+            onSignupClick={() => setIsSignupModalOpen(true)}
+          />
+        )}
         <Routes>
           {/* 메인페이지 */}
           <Route path="/" element={<Home />} />
@@ -54,7 +56,7 @@ const App = () => {
           {/* 위스키 정보 */}
           <Route path="/whiskeyInfo" element={<WhiskeyInfo />}></Route>
           {/* 위스키 디테일 */}
-          <Route path="/WhiskeyDetail" element={ <WhiskeyDetail/>}></Route>
+          <Route path="/WhiskeyDetail" element={<WhiskeyDetail />}></Route>
         </Routes>
         {/* 조건부 렌더링 */}
         {isLoginModalOpen && (

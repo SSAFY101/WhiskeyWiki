@@ -9,6 +9,10 @@
   user-select: none;
 }
 
+body {
+  margin: 0;
+}
+
 .navbar {
   background-color: transparent !important;
 }
