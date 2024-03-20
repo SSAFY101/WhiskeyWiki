@@ -20,8 +20,9 @@
   overflow-y: hidden;
 }
 
-.whiskeyList::-webkit-scrollbar {
-  width: 7px;
+/* .whiskeyList::-webkit-scrollbar {
+  width: 0.8rem;
+  height: 0.8rem;
 }
 
 .whiskeyList::-webkit-scrollbar-track {
@@ -31,7 +32,8 @@
 .whiskeyList::-webkit-scrollbar-thumb {
   background-color: #808080;
   border-radius: 20px;
-}
+} */
+
 .whiskeyList::-webkit-scrollbar-button {
   display: none;
 }
