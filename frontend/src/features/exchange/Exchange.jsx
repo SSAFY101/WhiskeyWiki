@@ -6,8 +6,14 @@ function Exchange() {
   return (
     <>
       <h1>Exchange</h1>
-      <ExchangeSorter />
-      <ExchangeMap />
+      <div className="container">
+        <div>
+          <ExchangeSorter />
+        </div>
+        <div>
+          <ExchangeMap />
+        </div>
+      </div>
     </>
   );
 }
