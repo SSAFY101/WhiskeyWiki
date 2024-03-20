@@ -15,8 +15,8 @@ function Navbar({ onLoginClick, onSignupClick }) {
       <div className={`${style.menu}`}>
         <Link to="/whiskeyInfo">Information</Link>
         <Link to="/register">AI</Link>
-        <Link to="/exchangeList">Explore</Link>
-        <div>My Bar</div>
+        <Link to="/exchange">Exchange</Link>
+        <Link to="/myBar">My Bar</Link>
       </div>
       {/* 유저 관리 */}
       <div className={`${style.user}`}>

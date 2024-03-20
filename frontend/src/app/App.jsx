@@ -6,10 +6,12 @@ import Home from "../features/home/index";
 import Navbar from "../widgets/Navbar";
 // 유저 관리
 import Login from "../features/auth/login/Login";
-import Modal from "../features/modal/Modal";
-import MyBar from "../features/myBar/MyBar";
-import ExchangeMap from "../features/exchangeMap/ExchangeMap";
 import Signup from "../features/auth/signup/Signup";
+import Modal from "../features/modal/Modal";
+// 마이 바
+import MyBar from "../features/myBar/MyBar";
+// 지도
+import Exchange from "../features/exchange/Exchange";
 // 위스키 등록
 import WhiskeyRegister from "../features/whiskeyRegister/index";
 // 채팅
@@ -47,7 +49,7 @@ const App = () => {
           {/* 위스키 등록 */}
           <Route path="/register" element={<WhiskeyRegister />} />
           {/* 지도 */}
-          <Route path="/exchangeMap" element={<ExchangeMap />} />
+          <Route path="/exchange" element={<Exchange />} />
           {/* 채팅 */}
           <Route path="/chat" element={<ChatList />} />
           <Route path="/chat/:id" element={<Chat />} />
