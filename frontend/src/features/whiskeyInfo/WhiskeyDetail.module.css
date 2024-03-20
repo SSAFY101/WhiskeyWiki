@@ -1,6 +1,7 @@
 .outerContainer{
   display:flex;
   justify-content: center;
+  flex-direction: column;
 }
 
 .outerContainer *
@@ -34,3 +35,7 @@
   width:300px;
 }
 
+.statisticsContainer{
+  background-color: transparent;
+
+}
