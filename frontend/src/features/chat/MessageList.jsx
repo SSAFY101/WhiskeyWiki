@@ -139,16 +139,16 @@ const MessageList = () => {
     if (newMessage.length === 0) return; // 메세지 길이가 0인 경우
 
     console.log("메세지 보내기", newMessage); // 테스트
-    setMessageList((messageList) => [
-      ...messageList,
-      {
-        id: 4,
-        isMyMessage: true,
-        content: newMessage,
-        time: "오전 10:05",
-      },
-    ]);
-    // publish(newMessage);
+    // setMessageList((messageList) => [
+    //   ...messageList,
+    //   {
+    //     id: 4,
+    //     isMyMessage: true,
+    //     content: newMessage,
+    //     time: "오전 10:05",
+    //   },
+    // ]);
+    publish(newMessage);
     setNewMessage("");
   };
 
