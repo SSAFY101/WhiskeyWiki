@@ -6,8 +6,8 @@ import style from "./ExchangeMap.module.css";
 const { kakao } = window;
 
 function Map() {
-  // 인포윈도우 관련 변수 (아래 코드 존재)
-  // const [iwRemoveable, setIwRemoveable] = useState(true);
+  // 인포윈도우를 담을 변수
+  const infowindowList = [];
 
   // 클릭한 마커를 담을 변수
   // const [selectedMarker, setSelectedMarker] = useState(-1);
@@ -81,20 +81,6 @@ function Map() {
       imageOption
     );
 
-    // // 인포윈도우를 표시하는 클로저를 만드는 함수입니다
-    // function makeOverListener(map, marker, infowindow) {
-    //   return function () {
-    //     infowindow.open(map, marker);
-    //   };
-    // }
-
-    // // 인포윈도우를 닫는 클로저를 만드는 함수입니다
-    // function makeOutListener(infowindow) {
-    //   return function () {
-    //     infowindow.close();
-    //   };
-    // }
-
     // 5. 마커 및 인포윈도우 생성
     for (let i = 0; i < positions.length; i++) {
       // 마커 생성
@@ -105,28 +91,23 @@ function Map() {
         image: markerImage, // 마커이미지
         clickable: true, // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정
       });
-      // 마커에 고유 아이디 지정
-      marker.id = i;
 
-      // // 인포윈도우 끄는 버튼 (X 버튼)
+      // 인포윈도우 끄는 버튼 (X 버튼)
       const iwRemoveable = true;
       // 마커에 표시할 인포윈도우 생성
       const infowindow = new kakao.maps.InfoWindow({
         content: positions[i].content, // 인포윈도우에 표시할 내용
         removable: iwRemoveable, // 인포윈도우 끄는 버튼 넣기
       });
-      // 인포윈도우에 고유 아이디 지정
-      infowindow.id = i;
+      // 인포윈도우 리스트에 담기
+      infowindowList[i] = infowindow;
 
       // 6. 마커 클릭 이벤트 등록
       kakao.maps.event.addListener(marker, "click", function () {
-        // // 다른 마커가 이미 클릭되어 있으면, 기존의 인포윈도우 닫기 (후순위로..)
-        // console.log(infowindow);
-        // if (infowindow.id === i) {
-        //   console.log("if문 실행 된다!");
-        //   infowindow.close();
-        // }
-
+        // 기존의 인포윈도우 모두 닫기
+        for (let i = 0; i < infowindowList.length; i++) {
+          infowindowList[i].close();
+        }
         // 마커 위에 인포윈도우를 표시
         infowindow.open(map, marker);
       });
