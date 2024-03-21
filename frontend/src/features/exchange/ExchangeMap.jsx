@@ -165,7 +165,7 @@ function Map() {
       <div
         id="map"
         style={{
-          width: "500px",
+          width: "700px",
           height: "400px",
           border: "1px solid black",
         }}
