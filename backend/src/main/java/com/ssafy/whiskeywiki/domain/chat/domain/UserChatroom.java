@@ -26,7 +26,7 @@ public class UserChatroom {
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "chatroom_id")
+    @JoinColumn(name = "chatroom_id")
     private Chatroom chatroom;
 
     @OneToMany(mappedBy = "userChatroom", cascade = CascadeType.REMOVE)

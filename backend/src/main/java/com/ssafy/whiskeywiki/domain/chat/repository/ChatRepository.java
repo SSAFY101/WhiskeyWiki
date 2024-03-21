@@ -1,4 +1,14 @@
 package com.ssafy.whiskeywiki.domain.chat.repository;
 
-public interface ChatRepository {
+import com.ssafy.whiskeywiki.domain.chat.domain.Chat;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.*;
+
+@Repository
+public interface ChatRepository extends JpaRepository<Chat, Integer> {
+
+    Optional<Chat> findById(int id);
+    List<Chat> findAllByUserChatroomAnd
 }
