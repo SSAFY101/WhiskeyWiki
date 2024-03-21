@@ -25,7 +25,7 @@ function Statistics() {
       progress: 0.9,
       color: "#42CBDD",
     },
-    { svg: Forties, colorSvg: FortiesColor, progress: 1, color: "#6765D6" },
+    { svg: Forties, colorSvg: FortiesColor, progress: 0.1, color: "#6765D6" },
     { svg: Fifties, colorSvg: FiftiesColor, progress: 0.8, color: "#B456E1" },
   ];
 
