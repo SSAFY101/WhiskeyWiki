@@ -44,19 +44,18 @@ const App = () => {
           {/* 메인페이지 */}
           <Route path="/" element={<Home />} />
           {/* 위스키 정보 */}
+          <Route path="/whiskeyInfo" element={<WhiskeyInfo />}></Route>
+          {/* 위스키 디테일 */}
+          <Route path="/WhiskeyDetail" element={<WhiskeyDetail />}></Route>
           {/* 위스키 등록 */}
           <Route path="/register" element={<WhiskeyRegister />} />
           {/* 지도 */}
           <Route path="/exchange" element={<Exchange />} />
           {/* 채팅 */}
           <Route path="/chat" element={<ChatList />} />
-          <Route path="/chat/:id" element={<Chat />} />
+          <Route path="/chatRoom" element={<Chat />} />
           {/* 마이바 */}
           <Route path="/myBar" element={<MyBar />} />
-          {/* 위스키 정보 */}
-          <Route path="/whiskeyInfo" element={<WhiskeyInfo />}></Route>
-          {/* 위스키 디테일 */}
-          <Route path="/WhiskeyDetail" element={<WhiskeyDetail />}></Route>
         </Routes>
         {/* 조건부 렌더링 */}
         {isLoginModalOpen && (
