@@ -13,13 +13,14 @@ function Map() {
   // const [selectedMarker, setSelectedMarker] = useState(-1);
 
   useEffect(() => {
-    const mapContainer = document.getElementById("map"); //지도를 담을 영역의 DOM 레퍼런스
+    // 1. 지도 생성 및 객체 리턴
+    const mapContainer = document.getElementById("map"); // 지도를 담을 영역의 DOM 레퍼런스
+
     const options = {
-      center: new kakao.maps.LatLng(36.3550659, 127.2983779), //지도의 중심좌표
+      center: new kakao.maps.LatLng(36.3550659, 127.2983779), // 지도의 중심좌표 (추후 사용자의 주소로 변경 예정)
       level: 3, // 지도의 확대 레벨
     };
 
-    // 1. 지도 생성 및 객체 리턴
     const map = new kakao.maps.Map(mapContainer, options);
 
     // 2. 지도 이동시키는 함수
@@ -69,10 +70,9 @@ function Map() {
     ];
 
     // 4. 다른 이미지로 마커 생성
-    const imageSrc =
-        "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png", // 마커이미지의 주소
-      imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기
-      imageOption = { offset: new kakao.maps.Point(27, 69) }; // 마커이미지 옵션 : 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정
+    const imageSrc = "https://cdn-icons-png.flaticon.com/512/6508/6508614.png", // 마커이미지의 주소 (url로 입력하면 커스텀 가능)
+      imageSize = new kakao.maps.Size(63, 65), // 마커이미지의 크기
+      imageOption = { offset: new kakao.maps.Point(30, 72) }; // 마커이미지 옵션 : 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정
 
     // 마커의 이미지정보를 가지고 있는 마커이미지 생성
     const markerImage = new kakao.maps.MarkerImage(
