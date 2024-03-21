@@ -5,9 +5,11 @@ import style from "./Exchange.module.css";
 function Exchange() {
   return (
     <>
-      <h1>Exchange</h1>
-      <div className="container">
-        <div>
+      <div className={`${style.head}`}>
+        <h1>N개의 마이바를 찾았습니다</h1>
+      </div>
+      <div className={`${style.container}`}>
+        <div className={`${style.sorter}`}>
           <ExchangeSorter />
         </div>
         <div>
