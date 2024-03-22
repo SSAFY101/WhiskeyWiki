@@ -1,8 +1,10 @@
 package com.ssafy.whiskeywiki.domain.chat.service;
 
 import com.ssafy.whiskeywiki.domain.chat.domain.Chat;
+import com.ssafy.whiskeywiki.domain.chat.domain.UserChatroom;
 import com.ssafy.whiskeywiki.domain.chat.dto.ChatDTO;
 import com.ssafy.whiskeywiki.domain.chat.repository.ChatRepository;
+import com.ssafy.whiskeywiki.domain.user.domain.User;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,15 +17,21 @@ import java.util.*;
 @Transactional
 @RequiredArgsConstructor
 public class ChatService {
-    ChatRepository chatRepository;
+    private final ChatRepository chatRepository;
 
-    public void saveChat(ChatDTO.ChatRequest chatRequest) {
-        chatRepository.save(Chat.builder()
-                        .userChatroom(chatRequest.getChatroomId())
-                        .user(chatRequest.getUserId())
+    public int saveChat(ChatDTO.ChatRequest chatRequest) {
+
+        System.out.println("chat room id: " + chatRequest.getChatroomId());
+//        System.out.println("user id: " + chatRequest.getUserId());
+
+        Chat chat = chatRepository.save(Chat.builder()
+                        .userChatroom(UserChatroom.builder().id(chatRequest.getChatroomId()).build())
+                        .user(User.builder().id(chatRequest.getUserId()).build())
                         .message(chatRequest.getContent())
                         .dateTime(LocalDateTime.now())
                         .build());
+
+        return chat.getId();
     }
 
     public List<ChatDTO.ChatResponse> getChatList() {
