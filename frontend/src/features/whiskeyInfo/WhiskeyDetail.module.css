@@ -1,26 +1,22 @@
 .outerContainer{
+  /* width: 1000px; */
   display:flex;
-  justify-content: center;
   flex-direction: column;
+  align-items: center;
 }
 
 .outerContainer *
 {
-  background-color: #555555;
+  /* background-color: #2E2E2E; */
 }
 
 .innerContainer{
-  /* margin:20%; */
-  height: 100%;
+  background-color: #2E2E2E;
   width: 80%;
+  height: 2000px;
 }
 
-.innerContainer img{
-  width: 10%;
-  height: 10%;
-  /* margin-right:50px; */
 
-}
 .infoArea{
   margin-top: 30px;
   display:flex;
@@ -28,6 +24,9 @@
   justify-content: center;
 }
 
+.infoArea img{
+  width: 10%;
+}
 .textArea *{
   margin-left: 50px;
   margin-top: 0;
