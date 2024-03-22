@@ -25,9 +25,9 @@ public class Chat {
     @JoinColumn(name = "user_chatroom_id")
     private UserChatroom userChatroom;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "user_id")
-//    private User user;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 
 //    private boolean read;
 //    private boolean chatVisible;

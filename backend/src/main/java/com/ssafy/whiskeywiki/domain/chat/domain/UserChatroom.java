@@ -29,6 +29,6 @@ public class UserChatroom {
 //    @JoinColumn(name = "chatroom_id")
     private Chatroom chatroom;
 
-    @OneToMany(mappedBy = "userChatroom")
-    private List<Chat> chatList = new ArrayList<>();
+//    @OneToMany(mappedBy = "userChatroom")
+//    private List<Chat> chatList = new ArrayList<>();
 }
