@@ -1,0 +1,12 @@
+.starContainer {
+  font-size: 40px; /* 별 크기 */
+  cursor: pointer;
+  border: none;
+}
+.on {
+  color: #ffc107; /* 채워진 별 색상 */
+}
+
+.off {
+  color: #787B7B; /* 빈 별 색상 */
+}
