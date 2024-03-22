@@ -1,7 +1,22 @@
 import React, { useState } from "react";
-import "./MyBar.module.css";
 import Modal from "../modal/Modal";
 import MyBarDetail from "./MyBarDetail";
+import style from "./MyBar.module.css";
+
+// 위스키 선반 이미지 불러오기
+import WhiskeyBar from "../../assets/whiskey/MyBar_WhiskeyBar.png";
+
+// 위스키 이미지 불러오기
+import Whiskey1 from "../../assets/whiskey/Absolut.png";
+import Whiskey2 from "../../assets/whiskey/Ballantines.png";
+import Whiskey3 from "../../assets/whiskey/JackDaniels.png";
+import Whiskey4 from "../../assets/whiskey/Jagermeister.png";
+import Whiskey5 from "../../assets/whiskey/JimBeam.png";
+import Whiskey6 from "../../assets/whiskey/JohnnieWalker.png";
+import Whiskey7 from "../../assets/whiskey/Absolut.png";
+import Whiskey8 from "../../assets/whiskey/Ballantines.png";
+import Whiskey9 from "../../assets/whiskey/JackDaniels.png";
+import Whiskey10 from "../../assets/whiskey/Jagermeister.png";
 
 function MyBar() {
   //모달 제어
@@ -10,52 +25,45 @@ function MyBar() {
     setIsDetailModalOpen(false);
   };
 
-  //MyBar 배경 설정
-  const MyBarBackground = {
-    backgroundImage: `url("/images/locker.png")`,
-    backgroundSize: "cover",
-    margin: 0,
-    padding: 0,
-    width: "100%", // 페이지 폭 전체로 설정
-    height: "100vh", // 페이지 높이 전체로 설정 (뷰포트 높이만큼)
-  };
+  // 선반 이미지
+  const ShelfImage = WhiskeyBar;
 
-  // 위스키 이미지 조정
-  const whiskeyStyles = [
-    {
-      position: "absolute", // 배경 이미지와 겹치도록 설정
-      bottom: "28.3%", // 아래쪽으로 정렬
-      left: "5%", // 왼쪽으로 정렬
-      // right: '0%', // 오른쪽으로 정렬
-      width: "80px", // 이미지의 너비 설정
-      height: "auto", // 이미지의 높이 자동 조정
-      cursor: "pointer", // 클릭 가능하도록 커서 스타일 변경
-    },
-    {
-      position: "absolute",
-      bottom: "28.3%",
-      left: "30%",
-      // right: '50%',
-      width: "80px",
-      height: "auto",
-      cursor: "pointer",
-    },
-    {
-      position: "absolute",
-      bottom: "27.9%",
-      // left: '90%',
-      right: "0%",
-      width: "70px",
-      height: "auto",
-      cursor: "pointer",
-    },
+  // 위스키 이미지
+  const WhiskeyImages1 = [
+    Whiskey1,
+    Whiskey2,
+    Whiskey3,
+    Whiskey4,
+    Whiskey5,
+    Whiskey6,
+    Whiskey7,
+    Whiskey8,
+    Whiskey9,
+    Whiskey10,
   ];
-
-  // 위스키 이미지 경로
-  const WhiskeyImages = [
-    "/images/whiskey/JimBeam.png",
-    "/images/whiskey/Ballantines.png",
-    "/images/whiskey/JohnnieWalker.png",
+  const WhiskeyImages2 = [
+    Whiskey1,
+    Whiskey2,
+    Whiskey3,
+    Whiskey4,
+    Whiskey5,
+    Whiskey6,
+    Whiskey7,
+    Whiskey8,
+    Whiskey9,
+    Whiskey10,
+  ];
+  const WhiskeyImages3 = [
+    Whiskey6,
+    Whiskey1,
+    Whiskey2,
+    Whiskey3,
+    Whiskey4,
+    Whiskey5,
+    Whiskey7,
+    Whiskey8,
+    Whiskey9,
+    Whiskey10,
   ];
 
   // 위스키 이미지 클릭 이벤트 핸들러 함수들
@@ -63,43 +71,83 @@ function MyBar() {
     () => console.log("Whiskey 클릭 이벤트 발생 1"),
     () => console.log("Whiskey 클릭 이벤트 발생 2"),
     () => console.log("Whiskey 클릭 이벤트 발생 3"),
+    () => console.log("Whiskey 클릭 이벤트 발생 4"),
+    () => console.log("Whiskey 클릭 이벤트 발생 5"),
+    () => console.log("Whiskey 클릭 이벤트 발생 6"),
+    () => console.log("Whiskey 클릭 이벤트 발생 7"),
+    () => console.log("Whiskey 클릭 이벤트 발생 8"),
+    () => console.log("Whiskey 클릭 이벤트 발생 9"),
+    () => console.log("Whiskey 클릭 이벤트 발생 10"),
   ];
 
   return (
-    <div style={MyBarBackground}>
-      {WhiskeyImages.map((path, index) => (
+    <div className={style.background}>
+      {/* 위스키 선반 */}
+      <div>
         <img
-          key={index}
-          src={path}
+          src={ShelfImage}
           alt=""
-          style={whiskeyStyles[index]}
-          // onClick={clickWhiskeys[index]}
-          onClick={() => setIsDetailModalOpen(true)}
+          className={`${style.shelf} ${style.shelf1}`}
         />
-      ))}
-      {/* 조건부 렌더링 */}
-      {isDetailModalOpen && (
-        <Modal isOpen={isDetailModalOpen} onClose={handleCloseModal}>
-          <MyBarDetail />
-        </Modal>
-      )}
+        <img
+          src={ShelfImage}
+          alt=""
+          className={`${style.shelf} ${style.shelf2}`}
+        />
+        <img
+          src={ShelfImage}
+          alt=""
+          className={`${style.shelf} ${style.shelf3}`}
+        />
+      </div>
+      {/* 개별 위스키 */}
+      <div className={style.container}>
+        {/* 위스키 1세트 - whiskey1 */}
+        {WhiskeyImages1.map((path, index) => (
+          <img
+            key={index}
+            src={path}
+            alt=""
+            className={`${style.whiskey} ${style.whiskey1} ${
+              style[`position${index + 1}`]
+            }`}
+            // onClick={clickWhiskeys[index]}
+            onClick={() => setIsDetailModalOpen(true)}
+          />
+        ))}
+        {/* 위스키 2세트 - whiskey2 */}
+        {WhiskeyImages2.map((path, index) => (
+          <img
+            key={index}
+            src={path}
+            alt=""
+            className={`${style.whiskey} ${style.whiskey2} ${
+              style[`position${index + 1}`]
+            }`}
+            onClick={() => setIsDetailModalOpen(true)}
+          />
+        ))}
+        {/* 위스키 3세트 - whiskey3 */}
+        {WhiskeyImages3.map((path, index) => (
+          <img
+            key={index}
+            src={path}
+            alt=""
+            className={`${style.whiskey} ${style.whiskey3} ${
+              style[`position${index + 1}`]
+            }`}
+            onClick={() => setIsDetailModalOpen(true)}
+          />
+        ))}
+        {/* 조건부 렌더링 */}
+        {isDetailModalOpen && (
+          <Modal isOpen={isDetailModalOpen} onClose={handleCloseModal}>
+            <MyBarDetail />
+          </Modal>
+        )}
+      </div>
     </div>
   );
-
-  // return (
-  //   <div className="myBar-background">
-  //     {WhiskeyImages.map((path, index) => (
-  //       <img
-  //         key={index}
-  //         src={path}
-  //         alt=""
-  //         className="whiskey-image"
-  //         // className={`whiskey-image whiskey-image-${index}`}
-  //         onClick={clickWhiskeys[index]}
-  //       />
-  //     ))}
-  //   </div>
-  // );
 }
 
 export default MyBar;
