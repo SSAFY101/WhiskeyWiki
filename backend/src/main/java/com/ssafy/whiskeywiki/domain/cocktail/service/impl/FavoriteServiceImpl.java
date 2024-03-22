@@ -23,7 +23,7 @@ public class FavoriteServiceImpl implements FavoriteService {
     public void addFavorite(int userId, int cocktailId) {
         Optional<User> user = userRepository.findById(userId);
         if(user.isPresent()){
-            Cocktail cocktail = cocktailRepository.findByCocktailId(cocktailId);
+            Cocktail cocktail = cocktailRepository.getById(cocktailId);
             Favorite favorite = Favorite.builder()
                 //.get하면 optional에서 객체로
                 .user(user.get())
@@ -40,7 +40,7 @@ public class FavoriteServiceImpl implements FavoriteService {
     public void deleteFavorite(int userId, int cocktailId) {
         Optional<User> user = userRepository.findById(userId);
         if(user.isPresent()){
-            Cocktail cocktail = cocktailRepository.findByCocktailId(cocktailId);
+            Cocktail cocktail = cocktailRepository.getById(cocktailId);
             Favorite favorite = Favorite.builder()
                 .user(user.get())
                 .cocktail(cocktail)

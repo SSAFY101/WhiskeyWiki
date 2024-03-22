@@ -1,7 +1,7 @@
 package com.ssafy.whiskeywiki.domain.cocktail.repository;
 
 import com.ssafy.whiskeywiki.domain.cocktail.domain.Favorite;
-import com.ssafy.whiskeywiki.domain.cocktail.dto.CocktailDTO.FavoriteData;
+import com.ssafy.whiskeywiki.domain.cocktail.dto.FavoriteDTO.FavoriteData;
 import com.ssafy.whiskeywiki.domain.user.domain.User;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
