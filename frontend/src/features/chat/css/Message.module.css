@@ -4,15 +4,17 @@
 
 .myMessage {
   display: flex;
+  justify-content: right;
   align-items: end;
-  float: right;
+  /* float: right; */
   margin: 1rem;
 }
 
 .yourMessage {
   display: flex;
+  justify-content: left;
   align-items: end;
-  float: left;
+  /* float: left; */
   margin: 1rem;
 }
 
@@ -20,6 +22,7 @@
   padding: 0.6rem 1.2rem;
   border-radius: 30px;
   font-size: 1.2rem;
+  max-width: 60%;
 }
 
 .myMessage .content {

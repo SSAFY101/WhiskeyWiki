@@ -7,7 +7,7 @@ import Section4 from "./Section4";
 
 const Home = () => {
   const containerRef = useRef();
-  const sectionRefs = [useRef(), useRef(), useRef(), useRef()]; // 각 섹션의 ref를 배열로 가집니다.
+  const sectionRefs = [useRef(), useRef(), useRef(), useRef()];
 
   useEffect(() => {
     window.addEventListener(

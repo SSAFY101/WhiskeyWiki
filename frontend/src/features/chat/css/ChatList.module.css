@@ -27,6 +27,7 @@
   font-size: 1.3rem;
   margin-top: 1.5rem;
 }
+
 .menu *:hover {
   color: #eeb233;
 }
@@ -45,39 +46,67 @@
 .chatContainer {
   cursor: pointer;
   display: flex;
-  padding: 2rem 1rem;
-  margin: 1rem 0rem;
+  align-items: center;
+  /* padding: 2rem 1rem; */
 }
 
-.chatContainer * {
+.contentContainer * {
   cursor: pointer;
 }
 
-.chatContainer:hover {
+.contentContainer {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  width: 80%;
+  height: 5rem;
+  margin: 1rem 0rem;
+}
+
+.contentContainer:hover {
   background-color: #323232;
   border-radius: 10px;
 }
 
-.chatContainer:hover .pairId {
-  background-color: #323232;
-}
-
-.chatContainer:hover .lastMessagae {
+.contentContainer:hover * {
   background-color: #323232;
 }
 
 .tradeStatus {
-  background-color: #bab9b7;
-  color: #1c1c1c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 6rem;
+  height: 1.5rem;
+  margin: 0rem 2rem;
+}
+
+.tradeStatus * {
+  background-color: transparent;
+}
+
+.statusContainer {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
   border-radius: 5px;
-  font-size: 1.1rem;
-  padding: 0.4rem 1rem;
-  margin-right: 3rem;
+  padding: 0.4rem 0.7rem;
+  font-size: 1.2rem;
+}
+
+.statusContainer * {
+  cursor: pointer;
 }
 
 .pairId {
   color: #e3e3e3;
-  width: 15%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20%;
   font-size: 1.5rem;
   margin-right: 3rem;
 }

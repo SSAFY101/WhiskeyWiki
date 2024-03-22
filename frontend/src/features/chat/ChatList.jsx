@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-import Chat from "./Chat";
+import Status from "./component/Status";
 
 import style from "./css/ChatList.module.css";
 
@@ -14,30 +14,44 @@ const ChatList = () => {
   useEffect(() => {
     setChatList([
       {
-        id: 0,
-        pairId: "주정뱅이",
-        lastMessagae: "헤에에에에",
-        tradeStatus: "거래중",
+        chatRoomId: 0,
+        pair: "주정뱅이",
+        lastMassage: "헤에에에에",
+        userStatus: true,
+        pairStatus: true,
       },
       {
-        id: 1,
-        pairId: "김싸피",
-        lastMessagae: "ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ",
-        tradeStatus: "",
+        chatRoomId: 1,
+        pair: "김싸피",
+        lastMassage: "ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ",
+        userStatus: true,
+        pairStatus: false,
+      },
+      {
+        chatRoomId: 2,
+        pair: "헤에",
+        lastMassage: "안녕하세요",
+        userStatus: false,
+        pairStatus: true,
+      },
+      {
+        chatRoomId: 3,
+        pair: "Hehehe",
+        lastMassage: "헤헤ㅎㅎ",
+        userStatus: false,
+        pairStatus: false,
       },
     ]);
-    // 채팅방 리스트 요청
+    // 채팅방 리스트 요청 / userId : 임시
     axios
-      .get("요청 주소", userId, {
+      .get("/trade/rooms", userId, {
         headers: {
           accessToken: "토큰",
         },
       })
       .then((res) => {
-        console.log("채팅방 리스트", res);
-
-        const data = res.data.data;
-
+        console.log("채팅방 리스트", res); // 테스트
+        const data = res.data.data.chatRoomList;
         setChatList(data);
       })
       .catch((err) => {
@@ -47,6 +61,7 @@ const ChatList = () => {
 
   return (
     <div className={`${style.container}`}>
+      {/* 마이페이지 사이드 메뉴 */}
       <div className={`${style.sideMenu}`}>
         <div className={`${style.myPage}`}>마이페이지</div>
         <hr className={style.line} />
@@ -55,20 +70,24 @@ const ChatList = () => {
           <div>채팅 목록</div>
         </div>
       </div>
+      {/* 채팅 리스트 */}
       <div className={`${style.chatListContainer}`}>
         {chatList.map((chat) => (
-          <Link to={`/chat/${chat.id}`}>
+          <Link to={`/chatRoom`} state={{ chatRoomId: chat.chatRoomId }}>
             <div className={`${style.chatContainer}`}>
-              <div
-                className={`${style.tradeStatus}`}
-                style={{
-                  visibility: chat.tradeStatus === "거래중" ? "" : "hidden",
-                }}
-              >
-                거래중
+              <div className={`${style.tradeStatus}`}>
+                <Status
+                  userStatus={chat.userStatus}
+                  pairStatus={chat.pairStatus}
+                  canHover={false}
+                />
               </div>
-              <div className={`${style.pairId}`}>{chat.pairId}</div>
-              <div className={`${style.lastMessagae}`}>{chat.lastMessagae}</div>
+              <div className={`${style.contentContainer}`}>
+                <div className={`${style.pairId}`}>{chat.pair}</div>
+                <div className={`${style.lastMessagae}`}>
+                  {chat.lastMassage}
+                </div>
+              </div>
             </div>
             <hr className={style.line} />
           </Link>
