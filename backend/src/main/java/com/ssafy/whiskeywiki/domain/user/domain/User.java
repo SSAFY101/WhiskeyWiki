@@ -2,7 +2,7 @@ package com.ssafy.whiskeywiki.domain.user.domain;
 
 import com.ssafy.whiskeywiki.domain.chat.domain.UserChatroom;
 import com.ssafy.whiskeywiki.domain.cocktail.domain.Favorite;
-import com.ssafy.whiskeywiki.domain.trade.domain.TradeStatus;
+//import com.ssafy.whiskeywiki.domain.trade.domain.TradeStatus;
 import com.ssafy.whiskeywiki.domain.mybar.domain.OwnWhiskey;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -60,9 +60,9 @@ public class User {
     @Builder.Default
     private List<UserChatroom> userChatRoomList = new ArrayList<>();
 
-    //6. 거래상태와 일대다
-    @OneToMany(mappedBy = "user")
-    @Builder.Default
-    private List<TradeStatus> tradeStatusList = new ArrayList<>();
+//    //6. 거래상태와 일대다
+//    @OneToMany(mappedBy = "user")
+//    @Builder.Default
+//    private List<TradeStatus> tradeStatusList = new ArrayList<>();
 
 }

@@ -5,8 +5,13 @@ spring:
     username: admin
     password:
     driver-class-name: org.h2.Driver
-
+  sql:
+    init:
+      mode: always
   h2:
     console:
       path: /h2console
       enabled: true
+  jpa:
+    hibernate:
+      ddl-auto: create

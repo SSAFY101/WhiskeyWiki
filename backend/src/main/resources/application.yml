@@ -9,11 +9,11 @@ spring:
   profiles:
     include: local
 
+
   jpa:
-    hibernate:
-      ddl-auto: create
     properties:
       hibernate:
         show_sql: true
         format_sql: true
-
+    defer-datasource-initialization: true
+#    database-platform: org.hibernate.dialect.H2Dialect
