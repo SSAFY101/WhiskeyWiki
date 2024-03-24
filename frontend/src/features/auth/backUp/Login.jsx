@@ -1,6 +1,6 @@
 import { useState } from "react";
-import IdInput from '../components/IdInput'
-import PasswordInput from "../components/PasswordInput";
+import IdInput from "./backUp/IdInput";
+import PasswordInput from "./backUp/PasswordInput";
 
 function Login() {
   const [userId, setUserId] = useState("");
