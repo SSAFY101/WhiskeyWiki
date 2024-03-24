@@ -25,6 +25,11 @@ function MyBar() {
     setIsDetailModalOpen(false);
   };
 
+  // 뒤로가기 버튼
+  const handleGoBack = () => {
+    window.history.back();
+  };
+
   // 선반 이미지
   const ShelfImage = WhiskeyBar;
 
@@ -81,7 +86,9 @@ function MyBar() {
   ];
 
   return (
-    <div className={style.background}>
+    <div className={style.background} onClick={handleGoBack}>
+      {/* 뒤로가기 버튼 */}
+      <button className={`${style.backButton}`}> &lt; 뒤로가기</button>
       {/* 위스키 선반 */}
       <div>
         <img
