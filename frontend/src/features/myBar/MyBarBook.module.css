@@ -1,0 +1,40 @@
+/* 모달 전체 CSS */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: -1;
+}
+
+/* 배경 */
+.background {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+
+  background: none;
+  background-image: url("../../assets/whiskey/MyBar_BookOpen.jpg");
+  background-size: cover;
+  background-position: center; /* 배경 이미지 가운데 정렬 */
+  background-repeat: no-repeat; /* 배경 이미지 반복X */
+
+  margin: 0;
+  padding: 0;
+  top: 8%;
+  left: 15%;
+  width: 70%;
+  height: 84%;
+}
+
+/* 칵테일 레시피 즐겨찾기 내용 */
+.recipe {
+  background: none;
+  /* background-color: rgb(227, 227, 202); */
+  text-align: center;
+  position: absolute;
+
+  width: 70%;
+  height: 75%;
+}
