@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import Modal from "../modal/Modal";
 import MyBarDetail from "./MyBarDetail";
+import MyBarBook from "./MyBarBook";
 import style from "./MyBar.module.css";
 
 // 위스키 선반 이미지 불러오기
-import WhiskeyBar from "../../assets/whiskey/MyBar_WhiskeyBar.png";
+import ShelfImage from "../../assets/whiskey/MyBar_WhiskeyBar.png";
+
+// 레시피 즐겨찾기 이미지 불러오기
+import BookImage from "../../assets/whiskey/MyBar_Book.jpg";
 
 // 위스키 이미지 불러오기
 import Whiskey1 from "../../assets/whiskey/Absolut.png";
@@ -19,19 +23,22 @@ import Whiskey9 from "../../assets/whiskey/JackDaniels.png";
 import Whiskey10 from "../../assets/whiskey/Jagermeister.png";
 
 function MyBar() {
-  //모달 제어
+  // 모달 제어 - 1. 위스키 상세 모달
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
-  const handleCloseModal = () => {
+  const handleDetailCloseModal = () => {
     setIsDetailModalOpen(false);
+  };
+
+  // 모달 제어 - 2. 칵테일 레시피 즐겨찾기(Book) 모달
+  const [isBookModalOpen, setIsBookModalOpen] = useState(false);
+  const handleBookCloseModal = () => {
+    setIsBookModalOpen(false);
   };
 
   // 뒤로가기 버튼
   const handleGoBack = () => {
     window.history.back();
   };
-
-  // 선반 이미지
-  const ShelfImage = WhiskeyBar;
 
   // 위스키 이미지
   const WhiskeyImages1 = [
@@ -86,9 +93,12 @@ function MyBar() {
   ];
 
   return (
-    <div className={style.background} onClick={handleGoBack}>
+    <div className={style.background}>
       {/* 뒤로가기 버튼 */}
-      <button className={`${style.backButton}`}> &lt; 뒤로가기</button>
+      <button className={`${style.backButton}`} onClick={handleGoBack}>
+        &lt; 뒤로가기
+      </button>
+
       {/* 위스키 선반 */}
       <div>
         <img
@@ -107,6 +117,15 @@ function MyBar() {
           className={`${style.shelf} ${style.shelf3}`}
         />
       </div>
+
+      {/* 칵테일 레시피 즐겨찾기(book) */}
+      <img
+        src={BookImage}
+        alt=""
+        className={`${style.book}`}
+        onClick={() => setIsBookModalOpen(true)}
+      />
+
       {/* 개별 위스키 */}
       <div className={style.container}>
         {/* 위스키 1세트 - whiskey1 */}
@@ -148,8 +167,13 @@ function MyBar() {
         ))}
         {/* 조건부 렌더링 */}
         {isDetailModalOpen && (
-          <Modal isOpen={isDetailModalOpen} onClose={handleCloseModal}>
+          <Modal isOpen={isDetailModalOpen} onClose={handleDetailCloseModal}>
             <MyBarDetail />
+          </Modal>
+        )}
+        {isBookModalOpen && (
+          <Modal isOpen={isBookModalOpen} onClose={handleBookCloseModal}>
+            <MyBarBook />
           </Modal>
         )}
       </div>

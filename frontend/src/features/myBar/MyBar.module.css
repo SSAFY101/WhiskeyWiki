@@ -6,7 +6,7 @@
 
 /* 배경 */
 .background {
-  background-image: url("../../assets/whiskey/wall.jpg");
+  background-image: url("../../assets/whiskey/MyBar_Wall.jpg");
   background-size: cover;
   margin: 0;
   padding: 0;
@@ -34,21 +34,35 @@
 .shelf {
   background: none;
   position: absolute;
-  width: calc(60% + 50px);
   height: 45px;
   margin: 0;
 }
 .shelf1 {
   bottom: 65%;
   left: 0%;
+  width: calc(60% + 50px);
 }
 .shelf2 {
   bottom: 33%;
   right: 0%;
+  width: calc(70% + 50px);
 }
 .shelf3 {
   bottom: 1%;
   left: 13%;
+  width: calc(60% + 50px);
+}
+
+/* 칵테일 레시피 즐겨찾기 (book) */
+.book {
+  background: none;
+  position: absolute;
+  width: 120px;
+  height: auto;
+  cursor: pointer;
+  bottom: 37%;
+  right: 5%;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* 그림자 효과를 추가합니다. */
 }
 
 /* 위스키 */
@@ -112,43 +126,43 @@
 
 /* 위스키 2세트 - whiskey2 */
 .whiskey2:nth-child(11) {
-  right: 50%;
+  right: 60%;
 }
 
 .whiskey2:nth-child(12) {
-  right: 45%;
+  right: 55%;
 }
 
 .whiskey2:nth-child(13) {
-  right: 40%;
+  right: 50%;
 }
 
 .whiskey2:nth-child(14) {
-  right: 35%;
+  right: 45%;
 }
 
 .whiskey2:nth-child(15) {
-  right: 30%;
+  right: 40%;
 }
 
 .whiskey2:nth-child(16) {
-  right: 25%;
+  right: 35%;
 }
 
 .whiskey2:nth-child(17) {
-  right: 20%;
+  right: 30%;
 }
 
 .whiskey2:nth-child(18) {
-  right: 15%;
+  right: 25%;
 }
 
 .whiskey2:nth-child(19) {
-  right: 10%;
+  right: 20%;
 }
 
 .whiskey2:nth-child(20) {
-  right: 5%;
+  right: 15%;
 }
 
 /* 위스키 3세트 - whiskey3 */
