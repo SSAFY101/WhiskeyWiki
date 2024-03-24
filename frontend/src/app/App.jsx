@@ -21,6 +21,7 @@ import WhiskeyInfo from "../features/whiskeyInfo/WhiskeyInfo";
 import WhiskeyDetail from "../features/whiskeyInfo/WhiskeyDetail";
 
 import style from "./App.module.css";
+import TokenCheck from "../features/auth/TokenCheck";
 
 const App = () => {
   // const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -33,6 +34,7 @@ const App = () => {
 
   return (
     <Router>
+      <TokenCheck />
       <div>
         <Navbar
           className={`${style.navbar}`}

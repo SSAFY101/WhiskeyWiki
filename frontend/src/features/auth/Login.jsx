@@ -1,7 +1,8 @@
 import { useState } from "react";
-import IdInput from "./backUp/IdInput";
-import PasswordInput from "./backUp/PasswordInput";
+import { Link } from "react-router-dom";
 import LoginButton from "./components/LoginButton";
+
+import style from "./css/auth.module.css";
 
 function Login() {
   const [userId, setUserId] = useState("");
@@ -13,11 +14,23 @@ function Login() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <button type="submit">
-        <LoginButton />
-      </button>
-    </form>
+    <div className={`${style.loginContainer}`}>
+      <div className={`${style.loginTitle}`}>로그인</div>
+      <form onSubmit={handleSubmit} className={`${style.login}`}>
+        <input placeholder="아이디" />
+        <input placeholder="비밀번호" type="password" />
+        <button type="submit">
+          <LoginButton />
+        </button>
+      </form>
+
+      <div className={`${style.signUpContainer}`}>
+        <div>아직 회원이 아니신가요?</div>
+        <div className={`${style.signUpRedirect}`}>
+          <Link to="/">회원가입</Link>
+        </div>
+      </div>
+    </div>
   );
 }
 
