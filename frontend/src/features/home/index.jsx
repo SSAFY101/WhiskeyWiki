@@ -10,7 +10,8 @@ const Home = () => {
   const sectionRefs = [useRef(), useRef(), useRef(), useRef()];
 
   useEffect(() => {
-    window.addEventListener(
+    const mainPage = document.getElementById("mainPage");
+    mainPage.addEventListener(
       "wheel",
       function (e) {
         e.preventDefault();
@@ -19,7 +20,7 @@ const Home = () => {
     );
 
     return () => {
-      window.removeEventListener("wheel", function (e) {
+      mainPage.removeEventListener("wheel", function (e) {
         e.preventDefault();
       });
     };
@@ -60,6 +61,7 @@ const Home = () => {
 
   return (
     <div
+      id="mainPage"
       ref={containerRef}
       className={`${style.container}`}
       onWheel={wheelHandler}

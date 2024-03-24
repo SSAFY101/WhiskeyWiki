@@ -5,9 +5,8 @@ import { useState } from "react";
 import Home from "../features/home/index";
 import Navbar from "../widgets/Navbar";
 // 유저 관리
-import Login from "../features/auth/login/Login";
-import Signup from "../features/auth/signup/Signup";
-import Modal from "../features/modal/Modal";
+import Login from "../features/auth/Login";
+// import Modal from "../features/modal/Modal";
 // 마이 바
 import MyBar from "../features/myBar/MyBar";
 // 지도
@@ -22,27 +21,31 @@ import WhiskeyInfo from "../features/whiskeyInfo/WhiskeyInfo";
 import WhiskeyDetail from "../features/whiskeyInfo/WhiskeyDetail";
 
 import style from "./App.module.css";
+import TokenCheck from "../features/auth/TokenCheck";
 
 const App = () => {
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
-  //모달 닫는 함수
-  const handleCloseModal = () => {
-    setIsLoginModalOpen(false);
-    setIsSignupModalOpen(false);
-  };
+  // const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  // const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
+  // //모달 닫는 함수
+  // const handleCloseModal = () => {
+  //   setIsLoginModalOpen(false);
+  //   setIsSignupModalOpen(false);
+  // };
 
   return (
     <Router>
+      <TokenCheck />
       <div>
         <Navbar
           className={`${style.navbar}`}
-          onLoginClick={() => setIsLoginModalOpen(true)}
-          onSignupClick={() => setIsSignupModalOpen(true)}
+          // onLoginClick={() => setIsLoginModalOpen(true)}
+          // onSignupClick={() => setIsSignupModalOpen(true)}
         />
         <Routes>
           {/* 메인페이지 */}
           <Route path="/" element={<Home />} />
+          {/* 유저 */}
+          <Route path="/login" element={<Login />} />
           {/* 위스키 정보 */}
           <Route path="/whiskeyInfo" element={<WhiskeyInfo />}></Route>
           {/* 위스키 디테일 */}
@@ -58,7 +61,7 @@ const App = () => {
           <Route path="/myBar" element={<MyBar />} />
         </Routes>
         {/* 조건부 렌더링 */}
-        {isLoginModalOpen && (
+        {/* {isLoginModalOpen && (
           <Modal isOpen={isLoginModalOpen} onClose={handleCloseModal}>
             <Login />
           </Modal>
@@ -67,7 +70,7 @@ const App = () => {
           <Modal isOpen={isSignupModalOpen} onClose={handleCloseModal}>
             <Signup />
           </Modal>
-        )}
+        )} */}
       </div>
     </Router>
   );

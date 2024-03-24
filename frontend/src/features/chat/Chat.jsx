@@ -61,7 +61,7 @@ const Chat = () => {
         headers: {
           accessToken: "토큰",
         },
-        body: {
+        params: {
           userId,
           chatRoomId,
         },

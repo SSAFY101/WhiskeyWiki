@@ -5,22 +5,22 @@ import MyBarBook from "./MyBarBook";
 import style from "./MyBar.module.css";
 
 // 위스키 선반 이미지 불러오기
-import ShelfImage from "../../assets/whiskey/MyBar_WhiskeyBar.png";
+import ShelfImage from "../../assets/images/whiskey/MyBar_WhiskeyBar.png";
 
 // 레시피 즐겨찾기 이미지 불러오기
-import BookImage from "../../assets/whiskey/MyBar_Book.jpg";
+import BookImage from "../../assets/images/whiskey/MyBar_Book.jpg";
 
 // 위스키 이미지 불러오기
-import Whiskey1 from "../../assets/whiskey/Absolut.png";
-import Whiskey2 from "../../assets/whiskey/Ballantines.png";
-import Whiskey3 from "../../assets/whiskey/JackDaniels.png";
-import Whiskey4 from "../../assets/whiskey/Jagermeister.png";
-import Whiskey5 from "../../assets/whiskey/JimBeam.png";
-import Whiskey6 from "../../assets/whiskey/JohnnieWalker.png";
-import Whiskey7 from "../../assets/whiskey/Absolut.png";
-import Whiskey8 from "../../assets/whiskey/Ballantines.png";
-import Whiskey9 from "../../assets/whiskey/JackDaniels.png";
-import Whiskey10 from "../../assets/whiskey/Jagermeister.png";
+import Whiskey1 from "../../assets/images/whiskey/Absolut.png";
+import Whiskey2 from "../../assets/images/whiskey/Ballantines.png";
+import Whiskey3 from "../../assets/images/whiskey/JackDaniels.png";
+import Whiskey4 from "../../assets/images/whiskey/Jagermeister.png";
+import Whiskey5 from "../../assets/images/whiskey/JimBeam.png";
+import Whiskey6 from "../../assets/images/whiskey/JohnnieWalker.png";
+import Whiskey7 from "../../assets/images/whiskey/Absolut.png";
+import Whiskey8 from "../../assets/images/whiskey/Ballantines.png";
+import Whiskey9 from "../../assets/images/whiskey/JackDaniels.png";
+import Whiskey10 from "../../assets/images/whiskey/Jagermeister.png";
 
 function MyBar() {
   // 모달 제어 - 1. 위스키 상세 모달

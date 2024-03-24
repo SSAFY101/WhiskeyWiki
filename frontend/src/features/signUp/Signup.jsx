@@ -15,7 +15,7 @@ function Signup() {
       case 2:
         return <SignupStep2 onNext={nextStep} />;
       default:
-        return<SignupStep1/>
+        return <SignupStep1 />;
     }
   };
 
@@ -23,8 +23,8 @@ function Signup() {
     <div>
       <h1>회원가입 페이지</h1>
       {/* ()로 결과물 출력 */}
-      {renderStep()} 
+      {renderStep()}
     </div>
-  )
+  );
 }
 export default Signup;

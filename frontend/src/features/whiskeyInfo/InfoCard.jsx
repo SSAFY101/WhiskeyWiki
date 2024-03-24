@@ -1,5 +1,5 @@
 import style from "./InfoCard.module.css";
-import ballantinesImage from "../../assets/whiskey/Ballantines.png";
+import ballantinesImage from "../../assets/images/whiskey/Ballantines.png";
 function Infocard({ onClick }) {
   return (
     <div className={style.outerCard} onClick={onClick}>
@@ -9,9 +9,7 @@ function Infocard({ onClick }) {
         <h2>앱솔루트</h2>
         <h3>40도</h3>
         <h3>3만원대</h3>
-        <div className={style.rating}>
-          {'★★★★★' }
-        </div>
+        <div className={style.rating}>{"★★★★★"}</div>
       </div>
     </div>
   );

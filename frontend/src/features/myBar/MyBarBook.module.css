@@ -15,7 +15,7 @@
   position: fixed;
 
   background: none;
-  background-image: url("../../assets/whiskey/MyBar_BookOpen.jpg");
+  background-image: url("../../assets/images/whiskey/MyBar_BookOpen.jpg");
   background-size: cover;
   background-position: center; /* 배경 이미지 가운데 정렬 */
   background-repeat: no-repeat; /* 배경 이미지 반복X */
