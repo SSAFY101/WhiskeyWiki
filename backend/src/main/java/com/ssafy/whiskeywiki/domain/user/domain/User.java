@@ -80,8 +80,11 @@ public class User {
     private List<UserChatroom> userChatRoomsList = new ArrayList<>();
 
     //6. 거래상태와 일대다
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "resUser")
     @Builder.Default
     private List<TradeStatus> tradeStatusList = new ArrayList<>();
 
+    public void updateRefreshToken(String RefreshToken) {
+        this.refreshToken = refreshToken;
+    }
 }
