@@ -43,5 +43,5 @@ values (1,1), (2,2), (3,1), (4,3), (5,2);
 INSERT INTO favorite(user_id, cocktail_id)
 values (1,1),(1,2),(1,4),(2,3),(2,4),(3,5);
 
--- INSERT INTO review(whiskey_id, user_id, review_rating, content)
--- values (3,1,5,'너무 맛있어요'), (3,2,4,'역시 짐빔이 짱이지'), (3,3,5,'짐빔 칵테일이 진짜 맛있지');
+INSERT INTO review(whiskey_id, user_id, review_rating, content, created_date)
+values (3,1,'Five', '너무 맛있어요','2024-03-20 13:01:46.925709'), (3,2,'Five','역시 짐빔이 짱이지', '2024-03-22 13:01:46.925709'), (3,3,'Five' ,'짐빔 칵테일이 진짜 맛있지', '2024-02-15 13:01:46.925709');
