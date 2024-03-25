@@ -1,22 +1,24 @@
 package com.ssafy.whiskeywiki.domain.user.controller;
 
+import com.ssafy.whiskeywiki.domain.user.domain.User;
 import com.ssafy.whiskeywiki.domain.user.dto.UserDTO;
 import com.ssafy.whiskeywiki.domain.user.provider.JwtProvider;
+import com.ssafy.whiskeywiki.domain.user.repository.UserRepository;
 import com.ssafy.whiskeywiki.domain.user.service.UserService;
 import com.ssafy.whiskeywiki.global.util.CommonResponse;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.web.server.Cookie;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class UserController {
 
     private final UserService userService;
+    private final UserRepository userRepository;
     private final JwtProvider jwtProvider;
 
     @PostMapping("/register")
@@ -61,22 +64,11 @@ public class UserController {
         HttpHeaders headers = new HttpHeaders();
         headers.set("Access-Token", getToken.getAccessToken());
 
-//        // Refresh-Token을 쿠키에 설정
-//        ResponseCookie refreshCookie = ResponseCookie.from("Refresh-Token", getToken.getRefreshToken())
-//                .httpOnly(true) // JavaScript를 통한 접근 방지
-//                .secure(true) // HTTPS 통신에서만 쿠키 전송
-//                .path("/") // 쿠키가 전송될 경로
-//                // 필요에 따라 maxAge, domain 등의 추가 설정 가능
-//                .build();
-//
-//        // Set-Cookie 헤더에 추가
-//        headers.add(HttpHeaders.SET_COOKIE, refreshCookie.toString());
-
-        ResponseCookie refreshTokenCookie = ResponseCookie.from("RefreshToken", getToken.getRefreshToken())
+        ResponseCookie refreshTokenCookie = ResponseCookie.from("Refresh-Token", getToken.getRefreshToken())
                                                     .httpOnly(true)
                                                     .secure(true)
                                                     .path("/")
-                                                    .maxAge(60 * 60 * 24 * 2)
+                                                    .maxAge(0)
                                                     .build();
 
         headers.set(HttpHeaders.SET_COOKIE, refreshTokenCookie.toString());
@@ -87,15 +79,12 @@ public class UserController {
                 .body(response);
     }
 
-    @GetMapping("/token")
-    public ResponseEntity<?> token(@RequestBody UserDTO.LoginResponse loginResponse) {
+    @PostMapping("/token")
+    public ResponseEntity<?> token(@RequestHeader("Access-Token") String accessToken, @RequestBody UserDTO.LoginResponse loginResponse) {
 
-        Claims atClaims = jwtProvider.getClaims(loginResponse.getAccessToken());
-        System.out.println("acess token ..." + atClaims.getSubject());
+        Claims claims = jwtProvider.getClaims(accessToken);
+        System.out.println("acess token ..." + claims.getSubject());
 
-        Claims rtClaims = jwtProvider.getClaims(loginResponse.getRefreshToken());
-        System.out.println("refresh token ..." + rtClaims.getSubject());
-
-        return ResponseEntity.ok().body(rtClaims.getSubject());
+        return ResponseEntity.ok().body(claims.getSubject());
     }
 }
