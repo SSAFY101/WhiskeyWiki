@@ -1,5 +1,13 @@
-.progressBarContainer{
+.outerContainer{
   display: flex;
+  justify-content: center;
+  /* flex-direction; */
+
+}
+
+.progressBarContainer{
+  display: inline-flex;
+  flex-direction: row;
   background-color: transparent;
 }
 .progressBarWrapper{

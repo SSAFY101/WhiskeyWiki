@@ -33,19 +33,30 @@
 
 .status {
   display: flex;
+  justify-content: space-around;
   align-items: center;
+  width: 13%;
 }
 
-.status select {
+.status * {
+  background-color: transparent;
+}
+
+.status img {
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-left: 1rem;
+}
+
+/* .status select {
   font-size: 1.2rem;
   padding: 0.5rem 2rem 0.5rem 2rem;
   color: #cfcfcf;
   border: solid 2px #3f3f3f;
   border-radius: 5px;
-  -webkit-appearance: none; /* chrome */
-  -moz-appearance: none; /* firefox*/
+  -webkit-appearance: none;
+  -moz-appearance: none;
   appearance: none;
-  /* background: url("../images/before.png") no-repeat 97% 50%/15px auto; */
 }
 
 .status select:hover {
@@ -60,7 +71,7 @@
 
 .status select::-ms-expand {
   display: none;
-}
+} */
 
 /* 내용 */
 .content {

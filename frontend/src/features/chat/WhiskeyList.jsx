@@ -1,16 +1,20 @@
+import { useEffect, useState } from "react";
 import Whiskey from "./component/Whiskey";
 
 import style from "./css/WhiskeyList.module.css";
 
 const WhiskeyList = ({ userId }) => {
-  // userId가 가진 위스키 불러오기
-  const 테스트 = [
+  const [whiskeyList, setWhiskeyList] = useState([
     { nameEn: "Absolut", nameKr: "앱솔루트" },
     { nameEn: "Jim-Beam", nameKr: "짐빔" },
     { nameEn: "Jack-Daniels", nameKr: "잭다니엘" },
     { nameEn: "Jagermeister", nameKr: "예거마이스터" },
     { nameEn: "Johnie-Walker", nameKr: "조니워커" },
-  ];
+  ]);
+
+  useEffect(() => {
+    // 위스키 목록 호출
+  }, []);
 
   return (
     <div className={`${style.container}`}>
@@ -18,7 +22,7 @@ const WhiskeyList = ({ userId }) => {
         <span>{userId}</span>님의 술
       </div>
       <div className={`${style.whiskeyList}`}>
-        {테스트.map((whiskey) => (
+        {whiskeyList.map((whiskey) => (
           <Whiskey key={whiskey.nameEn} {...whiskey} />
         ))}
       </div>

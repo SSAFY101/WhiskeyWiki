@@ -1,8 +1,8 @@
 import { useState } from "react";
-import IdInput from "../../components/IdInput"
-import PasswordInput from "../../components/PasswordInput";
+import IdInput from "../../auth/backUp/IdInput";
+import PasswordInput from "../../auth/backUp/PasswordInput";
 
-const SignupStep1 = ({onNext}) => {
+const SignupStep1 = ({ onNext }) => {
   const [userId, setUserId] = useState("");
   const [userPassword, setUserPassword] = useState("");
   return (
@@ -14,4 +14,4 @@ const SignupStep1 = ({onNext}) => {
   );
 };
 
-export default SignupStep1
+export default SignupStep1;

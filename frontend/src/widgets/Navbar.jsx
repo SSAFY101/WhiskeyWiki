@@ -2,9 +2,7 @@ import { Link } from "react-router-dom";
 
 import style from "./Navbar.module.css";
 
-function Navbar({ onLoginClick, onSignupClick }) {
-  console.log(typeof onLoginClick);
-
+function Navbar() {
   return (
     <div className={`${style.container}`}>
       {/* 로고 */}
@@ -18,14 +16,18 @@ function Navbar({ onLoginClick, onSignupClick }) {
         <Link to="/exchange">Exchange</Link>
         <Link to="/myBar">My Bar</Link>
       </div>
-      {/* 유저 관리 */}
+      {/* 유저 */}
       <div className={`${style.user}`}>
-        <div onClick={onLoginClick} style={{ cursor: "pointer" }}>
+        <Link to="/login">Login</Link>
+        <Link to="/myPage">
+          <img src="" />
+        </Link>
+        {/* <div onClick={onLoginClick} style={{ cursor: "pointer" }}>
           Login
         </div>
         <div onClick={onSignupClick} style={{ cursor: "pointer" }}>
           Sign Up
-        </div>
+        </div> */}
       </div>
       {/* <ul className={`${style.menu}`}>
         <li onClick={onLoginClick} style={{ cursor: "pointer" }}>

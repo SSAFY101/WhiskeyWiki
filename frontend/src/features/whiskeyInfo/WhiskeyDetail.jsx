@@ -1,14 +1,18 @@
+import { useState } from "react";
 import style from "./WhiskeyDetail.module.css";
-import img from "../../assets/whiskey/Ballantines.png";
+import img from "../../assets/images/whiskey/Ballantines.png";
 import IconContainer from "./components/IconContainer";
 import Statistics from "./components/Statistics";
+import ReviewList from "./components/ReviewList";
+import CreateReview from "./components/CreateReview";
 
 function WhiskeyDetail() {
   return (
     // <div>
     //  <Statistics/>
     // </div>
-    <div className={style.outerContainer}>
+    <div>
+      <div className={style.outerContainer}>
         <div className={style.innerContainer}>
           <div className={style.infoArea}>
             <img src={img} alt="" />
@@ -23,9 +27,10 @@ function WhiskeyDetail() {
               <div className={style.statisticsContainer}></div>
             </div>
           </div>
+          <Statistics />
+          <ReviewList />
         </div>
-      
-      <Statistics />
+      </div>
     </div>
   );
 }

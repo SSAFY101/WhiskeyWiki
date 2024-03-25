@@ -8,62 +8,23 @@ import style from "./css/MessageList.module.css";
 
 import sendIcon from "./images/sendMessage.png";
 
-const MessageList = () => {
-  const [messageList, setMessageList] = useState([
-    {
-      id: 0, // message Id
-      isMyMessage: false, // 내꺼 남의꺼
-      content: "ㅎㅇ",
-      time: "오전 10:03",
-    },
-    {
-      id: 1,
-      isMyMessage: false,
-      content: "잭다니엘 내놔",
-      time: "오전 10:03",
-    },
-    {
-      id: 2,
-      isMyMessage: true,
-      content: "헤에",
-      time: "오전 10:04",
-    },
-    {
-      id: 3,
-      isMyMessage: false,
-      content: "잭다니엘 내놔",
-      time: "오전 10:05",
-    },
-    {
-      id: 4,
-      isMyMessage: true,
-      content: "헤에에에에",
-      time: "오전 10:05",
-    },
-  ]);
-
-  const [newMessage, setNewMessage] = useState("");
+const MessageList = ({ messageListProp }) => {
+  const messageListRef = useRef();
+  const messageListEndRef = useRef();
   const client = useRef({});
 
-  const roomId = 0; // 테스트
-  const pairId = 0; // 테스트
+  const [messageList, setMessageList] = useState([]);
+  const [newMessage, setNewMessage] = useState("");
+
+  const chatRoomId = 0; // 테스트
+  const userId = 0; // 테스트
+
+  console.log("prop", messageListProp);
+  console.log(messageList);
 
   useEffect(() => {
-    // 채팅방 메세지 리스트 불러오기
-    // axios
-    //   .get(`http://localhost:8000/trade/room`, pairId, {
-    //     headers: {
-    //       accessToken: "토큰",
-    //     },
-    //   })
-    //   .then((res) => {
-    //     console.log("채팅방 메세지 리스트 불러오기", res);
-    //     const data = res.data.data;
-    //     setMessageList(data);
-    //   })
-    //   .catch((err) => {
-    //     console.log("채팅방 메세지 리스트 불러오기 ERR", err);
-    //   });
+    // 받아온 메세지 리스트
+    setMessageList(messageListProp);
 
     // 소켓 연결
     connect();
@@ -72,22 +33,26 @@ const MessageList = () => {
     return () => disconnect();
   }, []);
 
+  useEffect(() => {
+    messageListEndRef.current.scrollIntoView({ behavior: "smooth" });
+  }, [messageList]);
+
   // 소켓 : connect
   const connect = () => {
     client.current = new StompJs.Client({
       brokerURL: "ws://localhost:8080/ws",
-      // connectHeaders: {
-      //   accessToken: "토큰",
-      // },
+      connectHeaders: {
+        accessToken: "토큰",
+      },
       debug: (str) => {
         console.log("debug : ", str); // 테스트
       },
       onConnect: (frame) => {
-        console.log("소켓 연결 성공");
+        console.log("소켓 연결 성공", frame);
         subscribe();
       },
       onStompError: (frame) => {
-        console.log("소켓 연결 실패");
+        console.log("소켓 연결 실패", frame);
       },
       reconnectDelay: 5000,
       heartbeatIncoming: 4000,
@@ -103,7 +68,7 @@ const MessageList = () => {
 
   // 소켓 : subscribe
   const subscribe = () => {
-    client.current.subscribe("/sub/chatroom/" + roomId, (data) => {
+    client.current.subscribe("/sub/chatroom/" + chatRoomId, (data) => {
       const res = JSON.parse(data.body);
 
       console.log("subscribe res", res); // 테스트
@@ -120,7 +85,7 @@ const MessageList = () => {
       destination: "/pub/chatroom",
       body: JSON.stringify({
         // type: "",
-        roomId: "0",
+        chatRoomId: "0",
         sender: "테서터",
         chat: msg,
       }),
@@ -139,26 +104,36 @@ const MessageList = () => {
     if (newMessage.length === 0) return; // 메세지 길이가 0인 경우
 
     console.log("메세지 보내기", newMessage); // 테스트
-    // setMessageList((messageList) => [
-    //   ...messageList,
-    //   {
-    //     id: 4,
-    //     isMyMessage: true,
-    //     content: newMessage,
-    //     time: "오전 10:05",
-    //   },
-    // ]);
-    publish(newMessage);
+
+    setMessageList((messageList) => [
+      ...messageList,
+      {
+        id: 5,
+        myMessage: true,
+        content: newMessage,
+        dateTime: new Date(),
+      },
+    ]);
+
+    // publish(newMessage);
     setNewMessage("");
+  };
+
+  // 엔터키 입력
+  const enterPressHandler = (e) => {
+    if (e.key === "Enter") {
+      messageSendHandler(e);
+    }
   };
 
   return (
     <div className={`${style.container}`}>
       {/* 메세지 리스트 */}
-      <div className={`${style.messageList}`}>
+      <div className={`${style.messageList}`} ref={messageListRef}>
         {messageList.map((msg) => (
-          <Message key={msg.id} {...msg}></Message>
+          <Message key={msg.chatId} {...msg}></Message>
         ))}
+        <div ref={messageListEndRef}></div>
       </div>
       {/* 메세지 작성 */}
       <div className={`${style.messageCreate}`}>
@@ -166,6 +141,7 @@ const MessageList = () => {
           <textarea
             value={newMessage}
             onChange={messageChangeHandler}
+            onKeyPress={enterPressHandler}
             placeholder="메세지 보내기"
             spellCheck="false"
             maxLength="200"
