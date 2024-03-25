@@ -1,0 +1,40 @@
+.outerContainer{
+  /* width: 1000px; */
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.outerContainer *
+{
+  /* background-color: #2E2E2E; */
+}
+
+.innerContainer{
+  background-color: #2E2E2E;
+  width: 80%;
+  height: 2000px;
+}
+
+
+.infoArea{
+  margin-top: 30px;
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.infoArea img{
+  width: 10%;
+}
+.textArea *{
+  margin-left: 50px;
+  margin-top: 0;
+  margin-bottom: 20px;
+  width:300px;
+}
+
+.statisticsContainer{
+  background-color: transparent;
+
+}

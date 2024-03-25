@@ -1,0 +1,40 @@
+.ReviewContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
+
+.ReviewBox{
+  display: flex;
+  flex-direction: column;
+  background-color: #454545;
+  height: 150px;
+  width: 800px;
+  font-size: 20px;
+  border: 2px solid #787B7B;
+  border-radius: 10px;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.ReviewBox *{
+  background-color: #454545;
+  display: inline;
+}
+
+.rating{
+  color:#ffcc00;
+  font-size: 20px;
+}
+
+.PersonalInfo *{
+  display: inline-flex;
+  margin-left: 5px;
+
+}
+.ageIcon {
+  width: 20px;
+  height: auto; /* 높이를 자동으로 조절하여 비율을 유지 */
+  object-fit: contain; /* 비율을 유지하면서 이미지를 채움 */
+}

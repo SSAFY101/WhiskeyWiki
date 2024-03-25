@@ -1,0 +1,117 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5rem;
+}
+
+.cardListContainer {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.cardListMoveButton {
+  cursor: pointer;
+  width: 5rem;
+  height: 5rem;
+}
+
+.cardList {
+  display: flex;
+  width: 70%;
+}
+
+.card {
+  width: 18rem;
+  height: 30rem;
+  margin: 0rem 3.5em;
+}
+
+.cardContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem 0rem;
+  border-radius: 20px;
+  border: solid 3px;
+}
+
+.cardImg {
+  width: 15rem;
+  margin-bottom: 0.5rem;
+}
+
+.cardNameEn {
+  font-size: 2rem;
+  margin-bottom: 0.3rem;
+  color: #f3f3f3;
+}
+
+.cardNameKr {
+  font-size: 1.3rem;
+  color: #a6a6a6;
+}
+
+.whiskeyCount {
+  font-size: 1.5rem;
+  color: #d3d3d3;
+  margin-bottom: 1rem;
+}
+
+.whiskeyCount span {
+  font-size: 2rem;
+  color: #eeb233;
+}
+
+/* .cardToggleSummery {
+  cursor: pointer;
+  color: rgb(226, 202, 62);
+  margin-bottom: 1rem;
+}
+
+.summery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: black;
+}
+
+.summeryContent {
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+} */
+
+.have {
+  color: #767676;
+  margin-top: 1rem;
+  font-size: 1.2rem;
+}
+
+.checkBox {
+  margin-top: 1rem;
+}
+
+.checkBox input[type="checkbox"] {
+  cursor: pointer;
+  -ms-transform: scale(1.8); /* IE */
+  -moz-transform: scale(1.8); /* FF */
+  -webkit-transform: scale(1.8); /* Safari and Chrome */
+  -o-transform: scale(1.8); /* Opera */
+  padding: 10px;
+  accent-color: #eeb233;
+}
+
+.mybarSaveButton {
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  padding: 0.8rem 1.5rem;
+  color: #1c1c1c;
+  background-color: #eeb233;
+}
