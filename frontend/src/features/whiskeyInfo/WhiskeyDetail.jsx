@@ -4,7 +4,7 @@ import img from "../../assets/images/whiskey/Ballantines.png";
 import IconContainer from "./components/IconContainer";
 import Statistics from "./components/Statistics";
 import ReviewList from "./components/ReviewList";
-import CreateReview from "./components/CreateReview";
+import CocktailRecipe from "./components/CocktailRecipe";
 
 function WhiskeyDetail() {
   return (
@@ -28,6 +28,9 @@ function WhiskeyDetail() {
             </div>
           </div>
           <Statistics />
+          <p className={style.titleWithLines}>recipe</p>
+          <CocktailRecipe />
+          <p className={style.titleWithLines}>review</p>
           <ReviewList />
         </div>
       </div>
