@@ -36,4 +36,13 @@ public class MapDTO {
         private BigDecimal latitude;
         private BigDecimal longitude;
     }
+
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Data
+    public static class OwnWhiskeyStatus{
+        private String whiskeyNameKr;
+        private Boolean isEmpty;
+    }
 }
