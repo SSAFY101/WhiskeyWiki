@@ -1,0 +1,76 @@
+.outerContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #2e2e2e;  
+}
+
+.bubble{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width:60%;
+  height: 100%;
+  position: relative;
+  background: #EEEEEE;
+  border-radius: 20px;  text-align: center;
+}
+
+.bubble::after{
+  content: ''; /* 삼각형 모양을 만들기 위해 가상 요소 생성*/
+  position: absolute;
+  bottom: -50px; /* 말풍선 밑부분에서 얼마나 떨어지게 할 것인가 */
+  left: 10%; /* 말풍선 중앙에 꼬리가 오도록 설정 */
+  width: 0;
+  height:0;
+  border-right: solid 50px transparent;
+  border-top: solid 50px  #EEEEEE;
+  border-bottom: 0;
+}
+
+.bubble *{
+  background-color: #EEEEEE;
+  color: #2E2E2E;
+  border-radius: 20px;
+}
+
+.infoArea{
+  display:flex;
+  justify-content: space-around;
+  font-size:20px;
+  /* width:500px; */
+}
+
+.textArea{
+  width:300px;
+}
+.imageArea img{
+  height: 70%
+
+}
+.recommendAgain{
+  background-color:#ffc107;
+  color:#2E2E2E;
+  font-size: 25px;
+  height: 60px;
+  width: 200px;
+  border-radius: 10px;
+}
+
+.titleWithLines{
+  font-size: 25px;
+  text-align: center;
+  display: flex;
+}
+
+
+.titleWithLines::before,
+.titleWithLines::after{
+  content:'';
+  flex:1;
+  height: 1px;
+  background: #DDDDDD; /*선 색깔*/
+  /* 위, 오른쪽, 아래, 왼쪽 (시계방향) */
+  margin: 10px 20px 0 20px;
+}
+

@@ -57,11 +57,11 @@ function Statistics() {
   return (
     <div className={style.outerContainer}>
       <div className={style.innerContainer}>
-        <h1>성별 선호도</h1>
+        <p className={style.title}>성별 선호도</p>
         {/* 성별 */}
         <div className={style.progressBarContainer}>
           {genderData.map((item, index) => (
-            <div key={index}>
+            <div key={index} className={style.iconAndProgress }>
               <img
                 src={
                   item.progress === highestProgressGender
@@ -80,10 +80,10 @@ function Statistics() {
         </div>
       </div>
       <div className={style.innerContainer}>
-        <h1>연령대별 선호도</h1>
+        <p className={style.title}>연령대별 선호도</p>
         <div className={style.progressBarContainer}>
           {ageData.map((item, index) => (
-            <div key={index} className={style.progressBarWrapper}>
+            <div key={index} className={style.iconAndProgress}>
               <img
                 src={
                   item.progress === highestProgressAge
