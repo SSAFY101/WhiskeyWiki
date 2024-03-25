@@ -67,6 +67,8 @@ const Chat = () => {
         },
       })
       .then((res) => {
+        // 토큰 받는 경우 (만료)
+        // 만료 안되서 요청만 수락된 경우
         console.log("채팅방 메세지 리스트 불러오기", res); // 테스트
         const chatList = res.data.data.chatList;
         const pairId = res.data.data.pairId;
