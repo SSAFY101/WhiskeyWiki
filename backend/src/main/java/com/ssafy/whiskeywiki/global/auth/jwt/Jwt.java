@@ -1,4 +1,4 @@
-package com.ssafy.whiskeywiki.global.config.jwt;
+package com.ssafy.whiskeywiki.global.auth.jwt;
 
 import lombok.Builder;
 import lombok.Getter;

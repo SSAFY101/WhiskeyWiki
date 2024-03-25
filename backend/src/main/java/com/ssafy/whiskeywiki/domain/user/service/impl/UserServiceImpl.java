@@ -4,19 +4,22 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssafy.whiskeywiki.domain.user.domain.User;
 import com.ssafy.whiskeywiki.domain.user.dto.UserDTO;
-import com.ssafy.whiskeywiki.domain.user.provider.JwtProvider;
+import com.ssafy.whiskeywiki.global.auth.provider.JwtProvider;
 import com.ssafy.whiskeywiki.domain.user.repository.UserRepository;
 import com.ssafy.whiskeywiki.domain.user.service.UserService;
-import com.ssafy.whiskeywiki.global.auth.AuthenticateUser;
+import com.ssafy.whiskeywiki.global.auth.dto.AuthenticateUser;
 //import com.ssafy.whiskeywiki.global.auth.Filter.VerifyUserFilter;
-import com.ssafy.whiskeywiki.global.config.jwt.Jwt;
+import com.ssafy.whiskeywiki.global.auth.jwt.Jwt;
+import io.jsonwebtoken.Claims;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.Optional;
 
+@Slf4j
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -37,21 +40,20 @@ public class UserServiceImpl implements UserService {
         Optional<User> optionalUser = userRepository.findByLoginIdAndPassword(loginRequest.getLoginId(), loginRequest.getPassword());
         try {
             if (optionalUser.isPresent()) {
-                System.out.println("service impl init ?");
+                log.info("service impl init ?");
                 User user = optionalUser.get();
                 Map<String, Object> claims = new HashMap<>();
 
                 AuthenticateUser authenticateUser = new AuthenticateUser(user.getLoginId());
                 String authenticateUserJson = objectMapper.writeValueAsString(authenticateUser);
-//                claims.put(VerifyUserFilter.AUTHENTICATE_USER, authenticateUserJson);
                 claims.put(user.getLoginId(), authenticateUserJson);
 
-                Jwt jwt = jwtProvider.createJwt(claims, loginRequest.getLoginId());
-                System.out.println("refresh token : " + jwt.getRefreshToken());
+                Jwt jwt = jwtProvider.createJwt(claims, user.getLoginId());
+                log.info("refresh token : " + jwt.getRefreshToken());
                 user.updateRefreshToken(jwt.getRefreshToken());
                 userRepository.save(user);
 
-                System.out.println("service impl out ?");
+                log.info("service impl out ?");
                 return UserDTO.LoginResponse.builder()
                         .accessToken(jwt.getAccessToken())
                         .refreshToken(jwt.getRefreshToken())
@@ -72,15 +74,22 @@ public class UserServiceImpl implements UserService {
     @Override
     public Jwt refreshToken(String refreshToken) {  // 리프레시 토큰 기반 JWT 생성 로직
         try {
-            jwtProvider.getClaims(refreshToken);
+            Claims jwtClaims = jwtProvider.getClaims(refreshToken);
+            Date expiration = jwtClaims.getExpiration();
+            if (expiration.before(new Date())) {
+                return null;
+            }
+
             Optional<User> optionalUser = userRepository.findByRefreshToken(refreshToken);
             if (optionalUser.isPresent()) { // 리프레시 토큰 유효성 체크
                 User user = optionalUser.get();
                 Map<String, Object> claims = new HashMap<>();
 
+
+
                 AuthenticateUser authenticateUser = new AuthenticateUser(user.getLoginId());
                 String authenticateUserJson = objectMapper.writeValueAsString(authenticateUser);
-//                claims.put(VerifyUserFilter.AUTHENTICATE_USER, authenticateUserJson);
+
                 claims.put(user.getLoginId(), authenticateUserJson);
 
                 Jwt jwt = jwtProvider.createJwt(claims, user.getLoginId());
@@ -89,7 +98,7 @@ public class UserServiceImpl implements UserService {
                 return jwt;
             }
             return null;
-        } catch (JsonProcessingException e){
+        } catch (Exception e){
             return null;
         }
     }
