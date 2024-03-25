@@ -39,9 +39,11 @@ public class User {
 
     private String refreshToken;
 
+    @Column(precision = 13, scale = 10)
     private BigDecimal latitude;
 
-    private BigDecimal longtitude;
+    @Column(precision = 13, scale = 10)
+    private BigDecimal longitude;
 
     //연관관계 매핑//
 
