@@ -1,4 +1,4 @@
-package com.ssafy.whiskeywiki.domain.user.provider;
+package com.ssafy.whiskeywiki.global.auth.provider;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.security.Key;
 
-import com.ssafy.whiskeywiki.global.config.jwt.Jwt;
+import com.ssafy.whiskeywiki.global.auth.jwt.Jwt;
 
 import java.util.*;
 
@@ -53,7 +53,7 @@ public class JwtProvider {
     }
 
     public Date getExpireDateForRefreshToken() {
-        long expireTimeMills = 1000 * 60 * 60 * 24 * 60;
+        long expireTimeMills = 1000 * 60 * 60 * 24 * 7;
         return new Date(System.currentTimeMillis() + expireTimeMills);
     }
 }

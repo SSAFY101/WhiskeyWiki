@@ -84,7 +84,7 @@ public class User {
     @Builder.Default
     private List<TradeStatus> tradeStatusList = new ArrayList<>();
 
-    public void updateRefreshToken(String RefreshToken) {
+    public void updateRefreshToken(String refreshToken) {
         this.refreshToken = refreshToken;
     }
 }
