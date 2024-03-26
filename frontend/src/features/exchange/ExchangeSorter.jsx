@@ -1,29 +1,33 @@
-import { useCallback, useState } from "react";
+import { useCallback, useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { exchangeAction } from "../../store/slices/exchange";
 
 // 위스키 목록 (테스트용)
-const WhiskeyList = [
-  "앱솔루트",
-  "잭다니엘",
-  "짐빔",
-  "예거마이스터",
-  "조니워커",
-];
+const WhiskeyList = ["앱솔루트", "짐빔", "잭다니엘"];
 
 function Sorter() {
-  const [checkedList, setCheckedList] = useState([]); // 체크된 항목 목록
+  const [checkedWhiskeyList, setCheckedWhiskeyList] = useState([]); // 체크된 항목 목록
   const [isChecked, setIsChecked] = useState(false); // 선택 여부
+
+  // 4. Redux 활용 => checkedWhiskeyList 내용을 다른 컴포넌트에 넘겨주기
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(exchangeAction.setCheckedWhiskeyList(checkedWhiskeyList));
+  }, [checkedWhiskeyList]);
 
   // 1-2. 체크된 항목을 핸들링하는 함수
   const checkedwhiskeyHandler = (value, isChecked) => {
-    // 체크박스 체크가 true이면, => 이전의 checkedList 배열에 새로운 value 추가해서 업데이트
+    // 체크박스 체크가 true이면, => 이전의 checkedWhiskeyList 배열에 새로운 value 추가해서 업데이트
     if (isChecked) {
-      setCheckedList((prev) => [...prev, value]);
+      setCheckedWhiskeyList((prev) => [...prev, value]);
       return;
     }
-    // 체크박스 체크가 false && checkedList에 value가 포함되어 있으면,
-    // => checkedList에서 해당 value를 제외한 새로운 배열로 업데이트
-    if (!isChecked && checkedList.includes(value)) {
-      setCheckedList(checkedList.filter((whiskey) => whiskey !== value));
+    // 체크박스 체크가 false && checkedWhiskeyList에 value가 포함되어 있으면,
+    // => checkedWhiskeyList에서 해당 value를 제외한 새로운 배열로 업데이트
+    if (!isChecked && checkedWhiskeyList.includes(value)) {
+      setCheckedWhiskeyList(
+        checkedWhiskeyList.filter((whiskey) => whiskey !== value)
+      );
       return;
     }
 
@@ -36,7 +40,7 @@ function Sorter() {
     // setIsChecked(!isChecked); // isChecked 상태를 토글해서 체크박스의 전체 선택 여부 업데이트
     checkedwhiskeyHandler(value, e.target.checked); // 함수 호출 => 체크된 항목 처리
 
-    if (checkedList.length === WhiskeyList.length + 1) {
+    if (checkedWhiskeyList.length === WhiskeyList.length + 1) {
       setIsChecked(true); // 모든 항목이 선택되었으면 전체 선택 체크박스를 체크 상태로 설정
     } else {
       setIsChecked(false); // 그렇지 않으면 전체 선택 체크박스를 체크 해제 상태로 설정
@@ -50,11 +54,11 @@ function Sorter() {
     // 전체 선택
     if (!isChecked) {
       const allChecked = WhiskeyList.slice(); // 현재 위스키 리스트를 복제하여 새 배열 생성
-      setCheckedList(allChecked); // 모든 위스키를 선택 상태로 설정
+      setCheckedWhiskeyList(allChecked); // 모든 위스키를 선택 상태로 설정
       setIsChecked(true); // 전체 선택 체크박스의 상태를 true로 설정
     } else {
       // 모든 위스키 선택 해제
-      setCheckedList([]);
+      setCheckedWhiskeyList([]);
       setIsChecked(false); // 전체 선택 체크박스의 상태를 false로 설정
     }
   };
@@ -64,10 +68,15 @@ function Sorter() {
     (e) => {
       e.preventDefault(); // click하는 순간, 새로고침 X (이벤트의 기본 동작 방지)
 
-      console.log("checkedList:", checkedList); // checkedList 배열 출력
+      console.log("checkedWhiskeyList:", checkedWhiskeyList); // checkedWhiskeyList 배열 출력
     },
-    [checkedList] // 의존성 배열에 checkedList를 지정 => checkedList가 변경될 때마다 함수 재성생
+    [checkedWhiskeyList] // 의존성 배열에 checkedWhiskeyList를 지정 => checkedWhiskeyList가 변경될 때마다 함수 재성생
   );
+
+  // 컴포넌트가 처음 렌더링될 때, 전체 선택 (checkAllHandler를 호출)
+  useEffect(() => {
+    checkAllHandler();
+  }, []);
 
   return (
     <>
@@ -96,7 +105,7 @@ function Sorter() {
               <input
                 type="checkbox"
                 id={whiskey}
-                checked={checkedList.includes(whiskey)}
+                checked={checkedWhiskeyList.includes(whiskey)}
                 onChange={(e) => checkHandler(e, whiskey)}
               />
               {/* 라벨 요소 렌더링 => 체크박스 옆에 항목 이름 표시 */}
