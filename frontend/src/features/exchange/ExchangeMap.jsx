@@ -1,23 +1,77 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import style from "./ExchangeMap.module.css";
+import axios from "axios";
 
 // (문제) 스크립트로 kakao maps api를 가져오면, window전역 객체에 들어가게 된다.
 // (해결) 함수형 컴포넌트에 인지시키고, window에서 kakao 객체를 뽑아서 사용 / window.kakao.~ 처럼 inline으로 사용하는 것도 방법!
 const { kakao } = window;
 
 function Map() {
-  // 인포윈도우를 담을 변수
-  const infowindowList = [];
+  const infowindowList = []; // 인포윈도우를 담을 변수
+  const [mybarList, setMybarList] = useState([]); // API Response 담을 변수 (빈 배열)
 
-  // 클릭한 마커를 담을 변수
-  // const [selectedMarker, setSelectedMarker] = useState(-1);
+  // 8. Redux 활용 => checkedWhiskeyList 를 받아오기
+  const checkedWhiskeyList = useSelector(
+    (state) => state.exchange.checkedWhiskeyList
+  );
 
   useEffect(() => {
+    // console.log("useEffect 1 시작");
+    // console.log(checkedWhiskeyList); // Redux 작동 test
+
+    // 9. 백에 axios 요청
+    // GET 요청: 다른 유저의 My Bar 리스트 조회 (검색 조건에 따라)
+    // axios({
+    //   method: "get",
+    //   url: "api/map/search-condition",
+    //   params: {
+    //     checkedWhiskeyList,
+    //   },
+    // })
+    //   .then((res) => {
+    //     console.log("인식 위스키 정보 : ", res.data);
+    //     const data = res.data.data;
+    //     setMybarList(data);
+    //   })
+    //   .catch((err) => {
+    //     console.log("다른 유저의 My Bar 리스트 정보 ERROR :", err);
+    //   });
+
+    // axios 요청으로 받아 온 결과 (예시)
+    setMybarList([
+      {
+        userId: 123,
+        nickname: "Jieun",
+        latitude: 36.355065,
+        longitude: 127.298377,
+      },
+      {
+        userId: 456,
+        nickname: "주차장1",
+        latitude: 36.355838,
+        longitude: 127.299748,
+      },
+      {
+        userId: 789,
+        nickname: "주차장2",
+        latitude: 36.354696,
+        longitude: 127.300253,
+      },
+    ]);
+
+    // console.log("useEffect 1 끝");
+  }, []);
+
+  useEffect(() => {
+    // console.log("useEffect 2 시작");
+    // console.log(mybarList); // mybarList 확인
+
     // 1. 지도 생성 및 객체 리턴
     const mapContainer = document.getElementById("map"); // 지도를 담을 영역의 DOM 레퍼런스
 
     const options = {
-      center: new kakao.maps.LatLng(36.3550659, 127.2983779), // 지도의 중심좌표 (추후 사용자의 주소로 변경 예정)
+      center: new kakao.maps.LatLng(36.355065, 127.298377), // 지도의 중심좌표 (추후 사용자의 주소로 변경 예정)
       level: 3, // 지도의 확대 레벨
     };
 
@@ -25,49 +79,19 @@ function Map() {
 
     // 2. 지도 이동시키는 함수
     function setCenter() {
-      const moveLatLon = new kakao.maps.LatLng(36.3550659, 127.2983779); // 이동할 위도 경도 위치 생성
+      const moveLatLon = new kakao.maps.LatLng(36.355065, 127.298377); // 이동할 위도 경도 위치 생성
       map.setCenter(moveLatLon); // 지도 중심 이동
     }
 
     // 3. 여러개 마커 표시 - 마커를 표시할 위치(배열)
-    const positions = [
-      {
-        // id: 0, // user_id 번호 사용하기
-        content:
-          '<div style="padding:5px; text-align: center;">' +
-          "Jieun's My Bar" +
-          "<br>" +
-          ' <a href="https://galvanized-citron-903.notion.site/SSAFY-10-PJT-B101-1e8733a173fe4f3eae707f444d1d5940?pvs=4" style="color:black" target="_blank">' +
-          "   이동" +
-          " </a>" +
-          "</div>",
-        latlng: new kakao.maps.LatLng(36.3550659, 127.2983779),
-      },
-      {
-        // id: 1,
-        content:
-          '<div style="padding:5px; text-align: center;">' +
-          "주차장1's My Bar" +
-          "<br>" +
-          ' <a href="https://galvanized-citron-903.notion.site/SSAFY-10-PJT-B101-1e8733a173fe4f3eae707f444d1d5940?pvs=4" style="color:black" target="_blank">' +
-          "   이동" +
-          " </a>" +
-          "</div>",
-        latlng: new kakao.maps.LatLng(36.355838, 127.299748),
-      },
-      {
-        // id: 2,
-        content:
-          '<div style="padding:5px; text-align: center;">' +
-          "주차장2's My Bar" +
-          "<br>" +
-          ' <a href="https://galvanized-citron-903.notion.site/SSAFY-10-PJT-B101-1e8733a173fe4f3eae707f444d1d5940?pvs=4" style="color:black" target="_blank">' +
-          "   이동" +
-          " </a>" +
-          "</div>",
-        latlng: new kakao.maps.LatLng(36.354696, 127.300253),
-      },
-    ];
+    const positions = mybarList.map((bar) => ({
+      content:
+        '<div style="padding:5px; text-align: center;">' +
+        `${bar.nickname}'s My Bar` +
+        "<br>" +
+        "</div>",
+      latlng: new kakao.maps.LatLng(bar.latitude, bar.longitude),
+    }));
 
     // 4. 다른 이미지로 마커 생성
     const imageSrc = "https://cdn-icons-png.flaticon.com/512/6508/6508614.png", // 마커이미지의 주소 (url로 입력하면 커스텀 가능)
@@ -158,7 +182,9 @@ function Map() {
       // 지도 중심좌표를 접속위치로 변경
       map.setCenter(locPosition);
     }
-  }, []);
+
+    // console.log("useEffect 2 끝");
+  }, [mybarList]);
 
   return (
     <div className={`${style.map}`}>
