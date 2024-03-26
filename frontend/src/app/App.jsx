@@ -6,7 +6,7 @@ import Home from "../features/home/index";
 import Navbar from "../widgets/Navbar";
 // 유저 관리
 import Login from "../features/auth/Login";
-// import Modal from "../features/modal/Modal";
+import Modal from "../features/modal/Modal";
 // 마이 바
 import MyBar from "../features/myBar/MyBar";
 // 지도
@@ -19,9 +19,12 @@ import Chat from "../features/chat/Chat";
 //위스키 정보
 import WhiskeyInfo from "../features/whiskeyInfo/WhiskeyInfo";
 import WhiskeyDetail from "../features/whiskeyInfo/WhiskeyDetail";
-
+//마이페이지
+import MyPageModal from "../features/myPage/MyPageModal";
+import MyPage from "../features/myPage/MyPage";
 import style from "./App.module.css";
 import TokenCheck from "../features/auth/TokenCheck";
+// import { Modal } from "react-native-web";
 
 const App = () => {
   // const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -31,6 +34,11 @@ const App = () => {
   //   setIsLoginModalOpen(false);
   //   setIsSignupModalOpen(false);
   // };
+  const [isMyPageModalOpen, setIsMyPageModalOpen] = useState(false);
+  // 모달 닫는 함수
+  const handleCloseModal = () => {
+    setIsMyPageModalOpen(false);
+  };
 
   return (
     <Router>
@@ -40,6 +48,10 @@ const App = () => {
           className={`${style.navbar}`}
           // onLoginClick={() => setIsLoginModalOpen(true)}
           // onSignupClick={() => setIsSignupModalOpen(true)}
+          onUserIconClick={() => {
+            setIsMyPageModalOpen(true);
+            console.log("마이페이지모달 열림");
+          }}
         />
         <Routes>
           {/* 메인페이지 */}
@@ -59,6 +71,8 @@ const App = () => {
           <Route path="/chatRoom" element={<Chat />} />
           {/* 마이바 */}
           <Route path="/myBar" element={<MyBar />} />
+          {/* 마이페이지 */}
+          <Route path="/myPage" element={<MyPage />}/>
         </Routes>
         {/* 조건부 렌더링 */}
         {/* {isLoginModalOpen && (
@@ -71,6 +85,11 @@ const App = () => {
             <Signup />
           </Modal>
         )} */}
+        {isMyPageModalOpen && (
+          <Modal isOpen={isMyPageModalOpen} onClose={handleCloseModal}>
+            <MyPageModal onClose={handleCloseModal} />
+          </Modal>
+        )}
       </div>
     </Router>
   );

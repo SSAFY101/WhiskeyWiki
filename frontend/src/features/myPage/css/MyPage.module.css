@@ -1,0 +1,36 @@
+.outerContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.innerContainer{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.link{
+  /* 링크 밑줄 지우기 */
+  text-decoration: none;
+}
+
+.box{
+  display: flex;
+  width: 300px;
+  height: 250px;
+  border-radius: 20px;
+  background-color: #3A3A3A;
+  font-size:30px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  /* 부드러운 전환효과 */
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.box:hover{
+  background-color: #ffc107;
+  color: #2E2E2E;
+
+}
