@@ -2,6 +2,7 @@ package com.ssafy.whiskeywiki.domain.map.controller;
 
 import com.ssafy.whiskeywiki.domain.map.dto.MapDTO;
 import com.ssafy.whiskeywiki.domain.map.service.MapService;
+import com.ssafy.whiskeywiki.domain.user.service.UserService;
 import com.ssafy.whiskeywiki.global.util.CommonResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,10 +16,12 @@ import java.util.List;
 @RequestMapping("/map")
 public class MapController {
     private final MapService mapService;
+    private final UserService userService;
 
     @GetMapping("/location")
-    public ResponseEntity<CommonResponse> getUserLocation(int userId){
-        //추후에 헤더에서 유저의 정보를 빼낼 예정
+    public ResponseEntity<CommonResponse> getUserLocation(@RequestHeader(name= "Access-Token")String accessToken){
+
+        int userId = userService.getUserIdByAccessToken(accessToken);
         MapDTO.ResponseUserLocation userLocation = mapService.getUserLocation(userId);
 
         return new ResponseEntity<>(CommonResponse.builder()
