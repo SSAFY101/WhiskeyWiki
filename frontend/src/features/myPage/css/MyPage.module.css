@@ -32,11 +32,11 @@
 }
 
 .box:hover{
-  background-color: #ffc107;
+  background-color: #EEB233;
   color: #2E2E2E;
 }
 
 .highlight{
-  color: #ffc107;
+  color: #EEB233;
   font-size: 40px;
 }
