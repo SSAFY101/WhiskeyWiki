@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
 import style from "./css/MyPage.module.css";
+const userData = {
+  nickname: "헤에",
+}
 function MyPage() {
   return (
     <div className={style.outerContainer}>
-      <p>헤에 님, 안녕하세요</p>
+      <p><span className={style.highlight}>{userData.nickname}</span> 님, 안녕하세요.</p>
       <div className={style.innerContainer}>
         <Link to="/chat" className={style.link}>
           <div className={style.box}>채팅 목록</div>
