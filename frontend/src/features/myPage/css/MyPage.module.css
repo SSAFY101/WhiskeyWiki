@@ -1,4 +1,5 @@
 .outerContainer{
+  font-size: 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -25,6 +26,7 @@
   text-align: center;
   justify-content: center;
   align-items: center;
+  margin: 30px 30px 0 30px;
   /* 부드러운 전환효과 */
   transition: background-color 0.3s, color 0.3s;
 }
@@ -34,3 +36,7 @@
   color: #2E2E2E;
 }
 
+.highlight{
+  color: #ffc107;
+  font-size: 40px;
+}
