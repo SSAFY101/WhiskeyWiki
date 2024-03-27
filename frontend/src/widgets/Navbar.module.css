@@ -40,3 +40,7 @@
 .user * {
   margin-left: 3rem;
 }
+
+.myPage {
+  cursor: pointer;
+}
