@@ -70,7 +70,6 @@ function ReviewList() {
   };
   return (
     <div className={style.ReviewContainer}>
-      <h1>리뷰</h1>
       {userData.map((item, index) => (
         <div key={index} className={style.ReviewBox}>
           <div className={style.PersonalInfo}>
@@ -84,7 +83,7 @@ function ReviewList() {
           <p>{item.content}</p>
         </div>
       ))}
-      <button onClick={()=>setIsReviewModalOpen(true) }>리뷰 작성</button>
+      <button className={style.CreateReviewButton} onClick={()=>setIsReviewModalOpen(true) }>리뷰 작성</button>
       {/* 조건부 렌더링 */}
       {isReviewModalOpen && (
         <Modal isOpen={isReviewModalOpen} onClose={handleCloseModal}>

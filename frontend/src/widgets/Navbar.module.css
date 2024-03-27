@@ -49,3 +49,7 @@
 .user img {
   width: 1.6rem;
 }
+
+.myPage {
+  cursor: pointer;
+}

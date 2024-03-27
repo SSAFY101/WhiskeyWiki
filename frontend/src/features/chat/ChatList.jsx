@@ -66,7 +66,7 @@ const ChatList = () => {
         <div className={`${style.myPage}`}>마이페이지</div>
         <hr className={style.line} />
         <div className={`${style.menu}`}>
-          <Link to="/">내 정보</Link>
+          <Link to="/userInfo">내 정보</Link>
           <div>채팅 목록</div>
         </div>
       </div>

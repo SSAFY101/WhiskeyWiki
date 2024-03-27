@@ -1,8 +1,12 @@
 .outerContainer{
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   /* flex-direction; */
+  background-color: #2e2e2e;
+}
 
+.outerContainer *{
+  background: none;
 }
 
 .progressBarContainer{
@@ -10,6 +14,27 @@
   flex-direction: row;
   background-color: transparent;
 }
-.progressBarWrapper{
 
+.innerContainer{
+  text-align: center;
+}
+
+.innerContainer img{
+  width: 50%;
+}
+
+.iconAndProgress{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 10px;
+}
+
+.iconAndProgress *{
+  margin-bottom: 10px;
+}
+
+.title{
+  color: #DCDCDC;
+  font-size: 25px;
 }

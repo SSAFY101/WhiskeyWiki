@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 import axios from "axios";
-
 import style from "./Navbar.module.css";
+import UserIcon from "../assets/icon/UserIcon.svg";
 
 import myPageIcon from "../assets/images/nav/myPage.png";
 import myPageHoverIcon from "../assets/images/nav/myPage_hover.png";
 
-function Navbar() {
+function Navbar({ onUserIconClick }) {
   const nickName = localStorage.getItem("nickName");
 
   const logoutTest = (e) => {
@@ -75,6 +75,12 @@ function Navbar() {
           <Link to="/exchangeList">거래 목록</Link>
         </li>
       </ul> */}
+
+      <img
+        src={UserIcon}
+        onClick={onUserIconClick}
+        className={`${style.myPage}`}
+      />
     </div>
   );
 }
