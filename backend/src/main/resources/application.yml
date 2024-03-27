@@ -1,0 +1,19 @@
+server:
+  servlet:
+    context-path: /api
+  port: 5000
+
+
+# DB와 secret key 세팅 값
+spring:
+  profiles:
+    include: local
+
+
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+    defer-datasource-initialization: true
+#    database-platform: org.hibernate.dialect.H2Dialect
