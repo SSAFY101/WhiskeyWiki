@@ -8,4 +8,5 @@ public interface UserService {
     public UserDTO.LoginServiceToController login(UserDTO.LoginRequest loginRequest);
     public void updateRefreshToken(String userId, String refreshToken);
     public Jwt refreshToken(String refreshToken);
+    int getUserIdByAccessToken(String accessToken);
 }
