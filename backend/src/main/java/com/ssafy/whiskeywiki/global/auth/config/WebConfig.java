@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @RequiredArgsConstructor
@@ -15,6 +17,7 @@ public class WebConfig {
 
     private final JwtProvider jwtProvider;
     private final UserRepository userRepository;
+
 
     @Bean
     public FilterRegistrationBean verifyUserFilter() {
@@ -26,3 +29,4 @@ public class WebConfig {
         return filterRegistrationBean;
     }
 }
+

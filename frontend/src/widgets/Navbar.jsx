@@ -1,14 +1,41 @@
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 import style from "./Navbar.module.css";
 
+import myPageIcon from "../assets/images/nav/myPage.png";
+import myPageHoverIcon from "../assets/images/nav/myPage_hover.png";
+
 function Navbar() {
+  const nickName = localStorage.getItem("nickName");
+
+  const logoutTest = (e) => {
+    e.preventDefault();
+    if (window.confirm("로그아웃 하시겠습니까?")) {
+      localStorage.removeItem("nickName");
+      window.location.reload();
+      // axios
+      //   .post("http://localhost:5050/api/auth/login")
+      //   .then((res) => {
+      //     console.log("로그아웃", res); // test
+      //     localStorage.removeItem("nickName");
+
+      //     axios.defaults.headers.common["Authorization"] = null;
+
+      //     console.log(axios.defaults.headers.common.Authorization); // test
+      //   })
+      //   .catch((err) => {
+      //     console.log("로그아웃 실패", err);
+      //   });
+    }
+  };
+
   return (
     <div className={`${style.container}`}>
       {/* 로고 */}
-      <Link to="/">
-        <div className={`${style.logo}`}>Logo</div>
-      </Link>
+      <div className={`${style.logo}`}>
+        <Link to="/">WW</Link>
+      </div>
       {/* 메뉴 */}
       <div className={`${style.menu}`}>
         <Link to="/whiskeyInfo">Information</Link>
@@ -18,10 +45,13 @@ function Navbar() {
       </div>
       {/* 유저 */}
       <div className={`${style.user}`}>
-        <Link to="/login">Login</Link>
-        <Link to="/myPage">
-          <img src="" />
-        </Link>
+        {!nickName && <Link to="/login">Login</Link>}
+        {nickName && (
+          <Link to="/myPage">
+            <img src={myPageIcon} onClick={logoutTest} />
+          </Link>
+        )}
+
         {/* <div onClick={onLoginClick} style={{ cursor: "pointer" }}>
           Login
         </div>

@@ -1,12 +1,13 @@
 package com.ssafy.whiskeywiki.domain.user.dto;
 
 import com.ssafy.whiskeywiki.domain.user.domain.User;
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
 public class UserDTO {
 
     @Getter
+    @AllArgsConstructor
+    @NoArgsConstructor
     @Builder
     public static class LoginRequest {
         private String loginId;
@@ -14,6 +15,8 @@ public class UserDTO {
     }
 
     @Getter
+    @AllArgsConstructor
+    @NoArgsConstructor
     @Builder
     public static class LoginResponse {
         private String accessToken;

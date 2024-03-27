@@ -3,6 +3,7 @@
   background-color: transparent;
   display: flex;
   justify-content: space-around;
+  align-items: center;
   padding: 2rem 0rem 6rem 0rem;
   font-size: 1.2rem;
 }
@@ -11,8 +12,10 @@
   background-color: transparent;
 }
 
-.logo {
+.logo * {
   cursor: pointer;
+  text-decoration-line: none;
+  font-size: 1.5rem;
 }
 
 .menu {
@@ -38,5 +41,11 @@
 }
 
 .user * {
+  cursor: pointer;
   margin-left: 3rem;
+  text-decoration-line: none;
+}
+
+.user img {
+  width: 1.6rem;
 }

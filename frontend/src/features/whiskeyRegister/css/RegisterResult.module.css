@@ -31,7 +31,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 1rem 0rem;
+  padding: 1rem 3rem;
   border-radius: 20px;
 }
 
@@ -59,7 +59,7 @@
 }
 
 .cardImg {
-  width: 15rem;
+  height: 15rem;
   margin-bottom: 1rem;
   border-radius: 20px;
 }

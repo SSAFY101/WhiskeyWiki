@@ -1,10 +1,15 @@
 import axios from "axios";
 
-axios.defaults.headers.post["Content-Type"] = "application/json";
+// axios.defaults.headers.post["Content-Type"] = "application/json";
 
 const instance = axios.create({
   baseURL: "",
   timeout: 5000,
+  headers: {
+    post: {
+      "Content-Type": "application/json",
+    },
+  },
 });
 
 instance.interceptors.response.use(
@@ -15,7 +20,7 @@ instance.interceptors.response.use(
     if (error.response.status == 401) {
       getNewToken();
 
-      const response = await axios.request(config);
+      const response = await axios.request(error.config);
       return response;
     }
     return Promise.reject(error);

@@ -5,15 +5,16 @@ import { registerAction } from "../../store/slices/register";
 import RegistResCard from "./component/RegistResCard";
 
 import style from "./css/RegisterResult.module.css";
+import { useNavigate } from "react-router-dom";
 
 const RegisterResult = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const whiskeyList = useSelector((state) => state.register.whiskeyList);
 
   const goMyBarHandler = () => {
-    console.log("마이바 이동 버튼 클릭");
-    // 라우트 추가
+    navigate("/myBar");
   };
 
   const devidedList = [];
