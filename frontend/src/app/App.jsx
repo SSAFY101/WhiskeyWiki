@@ -22,6 +22,8 @@ import WhiskeyDetail from "../features/whiskeyInfo/WhiskeyDetail";
 //마이페이지
 import MyPageModal from "../features/myPage/MyPageModal";
 import MyPage from "../features/myPage/MyPage";
+import UserInfo from "../features/myPage/UserInfo";
+
 import style from "./App.module.css";
 import TokenCheck from "../features/auth/TokenCheck";
 // import { Modal } from "react-native-web";
@@ -72,7 +74,9 @@ const App = () => {
           {/* 마이바 */}
           <Route path="/myBar" element={<MyBar />} />
           {/* 마이페이지 */}
-          <Route path="/myPage" element={<MyPage />}/>
+          <Route path="/myPage" element={<MyPage />} />
+          {/* 회원정보 */}
+          <Route path="/userInfo" element={<UserInfo/>}/>
         </Routes>
         {/* 조건부 렌더링 */}
         {/* {isLoginModalOpen && (

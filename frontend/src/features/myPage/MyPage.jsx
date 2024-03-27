@@ -8,7 +8,7 @@ function MyPage() {
         <Link to="/chat" className={style.link}>
           <div className={style.box}>채팅 목록</div>
         </Link>
-        <Link>
+        <Link to="/userInfo" className={style.link}>
           <div className={style.box}>회원 정보 수정</div>
         </Link>
         <Link to="/myBar" className={style.link}>
