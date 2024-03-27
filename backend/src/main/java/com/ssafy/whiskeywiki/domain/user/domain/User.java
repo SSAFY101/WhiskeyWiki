@@ -29,15 +29,20 @@ public class User {
 
     private String password;
 
-    private String nickname;
+    @Builder.Default
+    private String nickname = "";
 
-    private String address;
+    @Builder.Default
+    private String address = "";
 
-    private String gender;
+    @Builder.Default
+    private String gender = "";
 
-    private int age;
+    @Builder.Default
+    private int age = 0;
 
-    private String refreshToken;
+    @Builder.Default
+    private String refreshToken = "";
 
     @Column(precision = 13, scale = 10)
     private BigDecimal latitude;
@@ -67,4 +72,7 @@ public class User {
 //    @Builder.Default
 //    private List<TradeStatus> tradeStatusList = new ArrayList<>();
 
+    public void updateRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
+    }
 }
