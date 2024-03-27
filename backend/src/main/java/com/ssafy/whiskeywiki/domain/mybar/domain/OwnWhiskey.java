@@ -29,4 +29,12 @@ public class OwnWhiskey {
 
     @Builder.Default
     private boolean isEmpty = false;
+
+    //status 상태 변경
+    public void updateStatus(){
+        this.isEmpty = !this.isEmpty;
+    }
+
+
+
 }
