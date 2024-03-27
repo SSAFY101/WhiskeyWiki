@@ -6,7 +6,7 @@ import com.ssafy.whiskeywiki.global.auth.jwt.Jwt;
 
 public interface UserService {
     public UserDTO.RegisterResponse registerUser(UserDTO.RegisterRequest registerRequest);
-    public UserDTO.LoginResponse login(UserDTO.LoginRequest loginRequest);
+    public UserDTO.LoginServiceToController login(UserDTO.LoginRequest loginRequest);
     public void updateRefreshToken(String userId, String refreshToken);
     public Jwt refreshToken(String refreshToken);
 }

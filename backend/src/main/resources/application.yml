@@ -27,3 +27,11 @@ spring:
 
   main:
     allow-bean-definition-overriding: false
+  data:
+    redis:
+      lettuce:
+        cluster:
+          refresh:
+            adaptive: true
+      host: localhost
+      port: 6379
