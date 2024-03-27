@@ -12,21 +12,26 @@ function Navbar() {
   const logoutTest = (e) => {
     e.preventDefault();
     if (window.confirm("로그아웃 하시겠습니까?")) {
-      localStorage.removeItem("nickName");
-      window.location.reload();
-      // axios
-      //   .post("http://localhost:5050/api/auth/login")
-      //   .then((res) => {
-      //     console.log("로그아웃", res); // test
-      //     localStorage.removeItem("nickName");
+      console.log(axios.defaults.headers.common["Access-Token"]); // test
 
-      //     axios.defaults.headers.common["Authorization"] = null;
+      // localStorage.removeItem("nickName");
+      // window.location.reload();
 
-      //     console.log(axios.defaults.headers.common.Authorization); // test
-      //   })
-      //   .catch((err) => {
-      //     console.log("로그아웃 실패", err);
-      //   });
+      axios
+        .post("http://localhost:5050/api/auth/login")
+        .then((res) => {
+          console.log("로그아웃", res); // test
+          localStorage.removeItem("nickName");
+
+          axios.defaults.headers.common["Access-Token"] = null;
+
+          console.log(axios.defaults.headers.common["Access-Token"]); // test
+
+          // window.location.reload();
+        })
+        .catch((err) => {
+          console.log("로그아웃 실패", err);
+        });
     }
   };
 

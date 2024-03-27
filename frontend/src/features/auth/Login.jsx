@@ -45,11 +45,12 @@ function Login() {
         console.log("refreshToken", refreshToken); // test
 
         axios.defaults.headers.post["Content-Type"] = "application/json";
-        axios.defaults.headers.common[
-          "Authorization"
-        ] = `Bearer ${accessToken}`;
 
-        console.log(axios.defaults.headers.common.Authorization); // test
+        localStorage.setItem("test", refreshToken);
+
+        axios.defaults.headers.common["Access-Token"] = `${accessToken}`;
+
+        console.log(axios.defaults.headers.common["Access-Token"]); // test
 
         navigate("/");
       })
@@ -86,7 +87,7 @@ function Login() {
         <div className={`${style.signUpContainer}`}>
           <div>아직 회원이 아니신가요?</div>
           <div className={`${style.signUpRedirect}`}>
-            <Link to="/">회원가입</Link>
+            <Link to="/signUp">회원가입</Link>
           </div>
         </div>
       </div>

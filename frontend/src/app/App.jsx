@@ -6,6 +6,7 @@ import Home from "../features/home/index";
 import Navbar from "../widgets/Navbar";
 // 유저 관리
 import Login from "../features/auth/Login";
+import SignUp from "../features/signUp/Signup";
 // import Modal from "../features/modal/Modal";
 // 마이 바
 import MyBar from "../features/myBar/MyBar";
@@ -46,6 +47,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           {/* 유저 */}
           <Route path="/login" element={<Login />} />
+          <Route path="/signUp" element={<SignUp />} />
           {/* 위스키 정보 */}
           <Route path="/whiskeyInfo" element={<WhiskeyInfo />}></Route>
           {/* 위스키 디테일 */}
