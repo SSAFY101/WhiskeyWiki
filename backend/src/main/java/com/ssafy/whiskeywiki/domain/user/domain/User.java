@@ -31,19 +31,26 @@ public class User {
 
     private String password;
 
-    private String nickname;
+    @Builder.Default
+    private String nickname = "";
 
-    private String address;
+    @Builder.Default
+    private String address = "";
 
-    private String gender;
+    @Builder.Default
+    private String gender = "";
 
-    private int age;
+    @Builder.Default
+    private int age = 0;
 
-    private String refreshToken;
+    @Builder.Default
+    private String refreshToken = "";
 
-    private BigDecimal latitude;
+    @Builder.Default
+    private BigDecimal latitude = BigDecimal.ZERO;
 
-    private BigDecimal longtitude;
+    @Builder.Default
+    private BigDecimal longtitude = BigDecimal.ZERO;
 
     //연관관계 매핑//
 
@@ -73,8 +80,11 @@ public class User {
     private List<UserChatroom> userChatRoomsList = new ArrayList<>();
 
     //6. 거래상태와 일대다
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "resUser")
     @Builder.Default
     private List<TradeStatus> tradeStatusList = new ArrayList<>();
 
+    public void updateRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
+    }
 }
