@@ -30,5 +30,6 @@ public class UserChatroom {
     private Chatroom chatroom;
 
     @OneToMany(mappedBy = "userChatroom")
+    @Builder.Default
     private List<Chat> chatList = new ArrayList<>();
 }

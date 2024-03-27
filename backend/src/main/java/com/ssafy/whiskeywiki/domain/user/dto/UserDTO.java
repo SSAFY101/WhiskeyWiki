@@ -16,8 +16,15 @@ public class UserDTO {
     @Getter
     @Builder
     public static class LoginResponse {
+        private String nickName;
+    }
+
+    @Getter
+    @Builder
+    public static class LoginServiceToController {
         private String accessToken;
         private String refreshToken;
+        private String nickName;
     }
 
     @Getter

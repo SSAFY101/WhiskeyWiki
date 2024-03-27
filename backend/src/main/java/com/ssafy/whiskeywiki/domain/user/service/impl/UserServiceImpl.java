@@ -1,15 +1,15 @@
 package com.ssafy.whiskeywiki.domain.user.service.impl;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssafy.whiskeywiki.domain.user.domain.User;
 import com.ssafy.whiskeywiki.domain.user.dto.UserDTO;
+import com.ssafy.whiskeywiki.global.auth.jwt.RedisRefreshToken;
 import com.ssafy.whiskeywiki.global.auth.provider.JwtProvider;
 import com.ssafy.whiskeywiki.domain.user.repository.UserRepository;
 import com.ssafy.whiskeywiki.domain.user.service.UserService;
 import com.ssafy.whiskeywiki.global.auth.dto.AuthenticateUser;
-//import com.ssafy.whiskeywiki.global.auth.Filter.VerifyUserFilter;
 import com.ssafy.whiskeywiki.global.auth.jwt.Jwt;
+import com.ssafy.whiskeywiki.global.auth.repository.RedisRefreshTokenRepository;
 import io.jsonwebtoken.Claims;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +26,7 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final RedisRefreshTokenRepository redisRefreshTokenRepository;
     private final JwtProvider jwtProvider;
     private final ObjectMapper objectMapper;
 
@@ -36,11 +37,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO.LoginResponse login(UserDTO.LoginRequest loginRequest) {
+    public UserDTO.LoginServiceToController login(UserDTO.LoginRequest loginRequest) {
         Optional<User> optionalUser = userRepository.findByLoginIdAndPassword(loginRequest.getLoginId(), loginRequest.getPassword());
         try {
             if (optionalUser.isPresent()) {
-                log.info("service impl init ?");
+                System.out.println("user exist ...");
                 User user = optionalUser.get();
                 Map<String, Object> claims = new HashMap<>();
 
@@ -49,14 +50,16 @@ public class UserServiceImpl implements UserService {
                 claims.put(user.getLoginId(), authenticateUserJson);
 
                 Jwt jwt = jwtProvider.createJwt(claims, user.getLoginId());
-                log.info("refresh token : " + jwt.getRefreshToken());
-                user.updateRefreshToken(jwt.getRefreshToken());
-                userRepository.save(user);
+                saveRefreshToken(jwt, user.getLoginId());
+//                log.info("refresh token : " + jwt.getRefreshToken());
+//                user.updateRefreshToken(jwt.getRefreshToken());
+//                userRepository.save(user);
 
-                log.info("service impl out ?");
-                return UserDTO.LoginResponse.builder()
+                System.out.println("jwt exist ..?" + jwt.getRefreshToken());
+                return UserDTO.LoginServiceToController.builder()
                         .accessToken(jwt.getAccessToken())
                         .refreshToken(jwt.getRefreshToken())
+                        .nickName(user.getNickname())
                         .build();
             }
             return null;
@@ -75,17 +78,17 @@ public class UserServiceImpl implements UserService {
     public Jwt refreshToken(String refreshToken) {  // 리프레시 토큰 기반 JWT 생성 로직
         try {
             Claims jwtClaims = jwtProvider.getClaims(refreshToken);
+
+            // 리프레시 토큰 만료기간 확인
             Date expiration = jwtClaims.getExpiration();
             if (expiration.before(new Date())) {
                 return null;
             }
 
-            Optional<User> optionalUser = userRepository.findByRefreshToken(refreshToken);
+            Optional<User> optionalUser = userRepository.findByLoginId(jwtClaims.getSubject());
             if (optionalUser.isPresent()) { // 리프레시 토큰 유효성 체크
                 User user = optionalUser.get();
                 Map<String, Object> claims = new HashMap<>();
-
-
 
                 AuthenticateUser authenticateUser = new AuthenticateUser(user.getLoginId());
                 String authenticateUserJson = objectMapper.writeValueAsString(authenticateUser);
@@ -93,7 +96,7 @@ public class UserServiceImpl implements UserService {
                 claims.put(user.getLoginId(), authenticateUserJson);
 
                 Jwt jwt = jwtProvider.createJwt(claims, user.getLoginId());
-                updateRefreshToken(user.getLoginId(), user.getRefreshToken());
+                updateRefreshToken(user.getLoginId(), jwt.getRefreshToken());
 
                 return jwt;
             }
@@ -101,5 +104,29 @@ public class UserServiceImpl implements UserService {
         } catch (Exception e){
             return null;
         }
+    }
+
+//    private void tokenValidCheck(String refreshToken) throws Exception {
+//        try {
+//            Claims claims = jwtProvider.getClaims(refreshToken);
+//
+//            // 만료기간 확인
+//            if (claims.getExpiration().before(new Date())) {
+//                throw new Exception();
+//            }
+//
+//            // get user with refresh token & setting access token, refresh token
+//            Optional<User> optionalUser = userRepository.findByRefreshToken(refreshToken);
+//            if (optionalUser.isPresent()) {
+//                User user = optionalUser.get();
+//
+//
+//            }
+//        }
+//    }
+
+    private void saveRefreshToken(Jwt jwt, String loginId) {
+        RedisRefreshToken redisRefreshToken = new RedisRefreshToken(jwt.getRefreshToken(), jwt.getAccessToken(), loginId);
+        redisRefreshTokenRepository.save(redisRefreshToken);
     }
 }
