@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-
 import style from "./Navbar.module.css";
+import UserIcon from "../assets/icon/UserIcon.svg";
 
-function Navbar() {
+function Navbar({ onUserIconClick }) {
   return (
     <div className={`${style.container}`}>
       {/* 로고 */}
@@ -19,9 +19,6 @@ function Navbar() {
       {/* 유저 */}
       <div className={`${style.user}`}>
         <Link to="/login">Login</Link>
-        <Link to="/myPage">
-          <img src="" />
-        </Link>
         {/* <div onClick={onLoginClick} style={{ cursor: "pointer" }}>
           Login
         </div>
@@ -40,6 +37,12 @@ function Navbar() {
           <Link to="/exchangeList">거래 목록</Link>
         </li>
       </ul> */}
+
+      <img
+        src={UserIcon}
+        onClick={onUserIconClick}
+        className={`${style.myPage}`}
+      />
     </div>
   );
 }
