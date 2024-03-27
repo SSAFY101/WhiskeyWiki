@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import style from "./ExchangeMap.module.css";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 // (문제) 스크립트로 kakao maps api를 가져오면, window전역 객체에 들어가게 된다.
@@ -83,12 +84,27 @@ function Map() {
       map.setCenter(moveLatLon); // 지도 중심 이동
     }
 
+    // 10. 마커 클릭 시, 다른 유저의 My bar로 이동하는 함수 [10-방법1) button 사용 관련] => a태그로 코드 변경해서, 주석 처리!
+    // function goToBar(userId) {
+    //   console.log(userId);
+    // }
+    // window.goToBar = goToBar; // window.goToBar에 goToBar 함수 할당: window 객체에 goToBar 함수를 할당하여 전역 범위에서 이 함수에 접근할 수 있도록 만듦.
+
     // 3. 여러개 마커 표시 - 마커를 표시할 위치(배열)
     const positions = mybarList.map((bar) => ({
       content:
         '<div style="padding:5px; text-align: center;">' +
         `${bar.nickname}'s My Bar` +
         "<br>" +
+        // 10.-방법1) button 사용
+        // `<button onclick=goToBar(${bar.userId})>` +
+        // "이동" +
+        // "</button>" +
+
+        // 10.-방법2) a태그 사용
+        `<a href="/mybar/${bar.userId}" style="color:black" target="_blank">` +
+        "이동" +
+        "</a>" +
         "</div>",
       latlng: new kakao.maps.LatLng(bar.latitude, bar.longitude),
     }));
