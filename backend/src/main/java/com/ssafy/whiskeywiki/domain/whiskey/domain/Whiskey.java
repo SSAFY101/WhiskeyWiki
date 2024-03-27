@@ -1,5 +1,6 @@
 package com.ssafy.whiskeywiki.domain.whiskey.domain;
 
+import com.ssafy.whiskeywiki.domain.cocktail.domain.Base;
 import com.ssafy.whiskeywiki.domain.review.domain.Review;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
