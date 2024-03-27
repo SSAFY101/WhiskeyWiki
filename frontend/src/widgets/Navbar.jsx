@@ -14,8 +14,8 @@ function Navbar({ onUserIconClick }) {
     if (window.confirm("로그아웃 하시겠습니까?")) {
       console.log(axios.defaults.headers.common["Access-Token"]); // test
 
-      // localStorage.removeItem("nickName");
-      // window.location.reload();
+      localStorage.removeItem("nickName");
+      window.location.reload();
 
       axios
         .post("http://localhost:5050/api/auth/login")
@@ -76,11 +76,11 @@ function Navbar({ onUserIconClick }) {
         </li>
       </ul> */}
 
-      <img
+      {/* <img
         src={UserIcon}
         onClick={onUserIconClick}
         className={`${style.myPage}`}
-      />
+      /> */}
     </div>
   );
 }
