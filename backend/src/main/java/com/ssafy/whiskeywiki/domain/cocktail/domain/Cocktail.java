@@ -29,13 +29,11 @@ public class Cocktail {
 
     //1.칵테일 재료와 일대다 매핑
     @OneToMany(mappedBy = "cocktail")
+    @Builder.Default
     private List<CocktailIngredient> cocktailIngredientList = new ArrayList<>();
 
     //2. 기주와 일대다 매핑
     @OneToMany(mappedBy = "cocktail")
+    @Builder.Default
     private List<Base> baseList = new ArrayList<>();
-
-    //3, 즐겨찾기와 일대다 매핑
-    @OneToMany(mappedBy = "cocktail")
-    private List<Favorite> favoriteList = new ArrayList<>();
 }

@@ -26,9 +26,12 @@ public class UserChatroom {
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "chatroom_id")
+//    @JoinColumn(name = "chatroom_id")
     private Chatroom chatroom;
 
-    @OneToMany(mappedBy = "userChatroom")
-    private List<Chat> chatList = new ArrayList<>();
+//    @OneToMany(mappedBy = "userChatroom")
+//    private List<Chat> chatList = new ArrayList<>();
+
+    @Builder.Default
+    private boolean tradeIntention = false;
 }
