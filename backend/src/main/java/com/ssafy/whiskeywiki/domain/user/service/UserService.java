@@ -1,5 +1,12 @@
 package com.ssafy.whiskeywiki.domain.user.service;
 
-public interface UserService {
+import com.ssafy.whiskeywiki.domain.user.dto.UserDTO;
+import com.ssafy.whiskeywiki.global.auth.jwt.Jwt;
 
+
+public interface UserService {
+    public UserDTO.RegisterResponse registerUser(UserDTO.RegisterRequest registerRequest);
+    public UserDTO.LoginServiceToController login(UserDTO.LoginRequest loginRequest);
+    public void updateRefreshToken(String userId, String refreshToken);
+    public Jwt refreshToken(String refreshToken);
 }

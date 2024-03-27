@@ -40,7 +40,7 @@
 }
 
 .cardImg {
-  width: 15rem;
+  height: 15rem;
   margin-bottom: 0.5rem;
 }
 
@@ -114,4 +114,15 @@
   padding: 0.8rem 1.5rem;
   color: #1c1c1c;
   background-color: #eeb233;
+}
+
+.mybarSaveButtonDisabled {
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  padding: 0.8rem 1.5rem;
+  color: #1c1c1c;
+  background-color: #a1a1a1;
 }

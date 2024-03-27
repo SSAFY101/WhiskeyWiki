@@ -1,9 +1,7 @@
 import { useEffect } from "react";
 
 const TokenCheck = () => {
-  useEffect(() => {
-    const accessToken = "";
-  }, []);
+  useEffect(() => {}, []);
   return null;
 };
 

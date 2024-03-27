@@ -1,29 +1,48 @@
-import { useState } from "react";
-import SignupStep1 from "./components/SignupStep1";
-import SignupStep2 from "./components/SignupStep2";
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { signupAction } from "../../store/slices/signup";
+
+import style from "./css/Signup.module.css";
+
+import Step1 from "./components/Step1";
+import Step2 from "./components/Step2";
+import Step3 from "./components/Step3";
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
-  //스텝 설정
-  const [step, setStep] = useState(1);
-  //다음 단계로 넘어가는 함수
-  const nextStep = () => setStep(step + 1);
-  //현재 스탭에따라 렌더링할 컴포넌트 결정
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const page = useSelector((state) => state.signup.page);
+
+  useEffect(() => {
+    dispatch(signupAction.pageOne());
+  }, []);
+
   const renderStep = () => {
-    switch (step) {
+    switch (page) {
       case 1:
-        return <SignupStep1 onNext={nextStep} />;
+        return <Step1 />;
       case 2:
-        return <SignupStep2 onNext={nextStep} />;
+        return <Step2 />;
+      case 3:
+        return <Step3 />;
       default:
-        return <SignupStep1 />;
+        return <Step1 />;
     }
   };
 
+  const navigateBack = () => {
+    navigate("/");
+  };
+
   return (
-    <div>
-      <h1>회원가입 페이지</h1>
-      {/* ()로 결과물 출력 */}
-      {renderStep()}
+    <div className={`${style.container}`}>
+      <button onClick={navigateBack}>뒤로</button>
+      <div className={`${style.signupContainer}`}>
+        <div className={`${style.title}`}>회원가입</div>
+        {renderStep()}
+      </div>
     </div>
   );
 }
