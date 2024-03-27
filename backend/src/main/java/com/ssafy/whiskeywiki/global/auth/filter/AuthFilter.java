@@ -47,11 +47,10 @@ public class AuthFilter extends OncePerRequestFilter {
                 throw new Exception();
             }
 
+            // 유요한 토큰인지 확인
             String loginId = claims.getSubject();
             Optional<User> optionalUser = userRepository.findByLoginId(loginId);
-            if (optionalUser.isPresent()) {
-                log.info("user is present ....");
-            } else {
+            if (optionalUser.isEmpty()) {
                 log.info("user is not present ....");
                 throw new Exception();
             }
