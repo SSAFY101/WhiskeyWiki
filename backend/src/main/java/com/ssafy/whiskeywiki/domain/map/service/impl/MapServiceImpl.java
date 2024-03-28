@@ -50,7 +50,7 @@ public class MapServiceImpl implements MapService {
 
             for(OwnWhiskey ownWhiskey : ownWhiskeyList){
                 //빈병이 아닌 보유하고 있는 위스키에 대해서만 진행
-                if(!ownWhiskey.isEmpty()){
+                if(!ownWhiskey.getIsEmpty()){
                     int userId = ownWhiskey.getUser().getId();
                     if(!userIdList.contains(userId)){
                         userIdList.add(userId);
