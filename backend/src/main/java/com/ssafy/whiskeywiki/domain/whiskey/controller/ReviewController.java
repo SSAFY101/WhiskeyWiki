@@ -1,5 +1,6 @@
 package com.ssafy.whiskeywiki.domain.whiskey.controller;
 
+import com.ssafy.whiskeywiki.domain.user.service.UserService;
 import com.ssafy.whiskeywiki.domain.whiskey.domain.Review;
 import com.ssafy.whiskeywiki.domain.whiskey.domain.Whiskey;
 import com.ssafy.whiskeywiki.domain.whiskey.dto.ReviewDTO;
@@ -20,6 +21,7 @@ import java.util.Optional;
 public class ReviewController {
 
     private final ReviewService reviewService;
+    private final UserService userService;
 
     //위스키 id로 해당 위스키에 대한 리뷰 리스트 가져오기
     @GetMapping("/{whiskeyId}")
@@ -34,7 +36,6 @@ public class ReviewController {
                     .build(), HttpStatus.OK);
         }
         else{
-            System.out.println("xxxxxxx");
             return new ResponseEntity<>(CommonResponse.builder()
                     .status(HttpStatus.NO_CONTENT.value())
                     .message("해당 위스키에 대한 리뷰가 없습니다")
@@ -46,8 +47,9 @@ public class ReviewController {
 
     //위스키 리뷰 작성
     @PostMapping("/register")
-    public ResponseEntity<CommonResponse> addReview(@RequestBody ReviewDTO.ReviewRequest reviewRequest, int userId){
-        //나중에 헤더에서 userId 가져올거임.
+    public ResponseEntity<CommonResponse> addReview(@RequestHeader(name = "Authorization") String accessToken ,@RequestBody ReviewDTO.ReviewRequest reviewRequest){
+        int userId = userService.getUserIdByAccessToken(accessToken);
+
         reviewService.addReview(reviewRequest, userId);
 
         return new ResponseEntity<>(CommonResponse.builder()
@@ -56,4 +58,5 @@ public class ReviewController {
                 .data(reviewRequest)
                 .build(), HttpStatus.CREATED);
     }
+
 }
