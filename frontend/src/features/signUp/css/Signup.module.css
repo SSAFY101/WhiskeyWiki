@@ -111,3 +111,11 @@
   width: 30rem;
   margin: 2rem 0rem;
 }
+
+.genderChoice {
+  cursor: pointer;
+  margin: 0rem 1rem;
+  padding: 0.7rem 3rem;
+  border-radius: 30px;
+  font-size: 1.3rem;
+}

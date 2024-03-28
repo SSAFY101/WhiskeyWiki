@@ -15,24 +15,47 @@ const Step2 = () => {
   const dispatch = useDispatch();
 
   const [nickname, setNickname] = useState("");
+  const [gender, setGender] = useState("");
 
   const [checkNickname, setCheckNickname] = useState(false);
-  const [checkPw, setCheckPw] = useState(false);
-  const [checkPwSame, setCheckPwSame] = useState(false);
+
+  const regex = /[^ㄱ-ㅎㅏ-ㅣ가-힣a-zA-Z]+$/;
 
   // 입력
   const changeNickname = (e) => {
-    setNickname(e.target.value);
+    const value = e.target.value.replace(regex, "");
+    console.log(value);
+    setNickname(value);
   };
 
   // 조건
+  const checkValid = () => {
+    // 닉네임 중복 검사
+  };
+
   useEffect(() => {
-    if (nickname.length > 1) {
+    const isKorean = /^[가-힣]+$/;
+    const isEnglish = /^[a-zA-Z]+$/;
+
+    // 한글 닉네임
+    if (nickname.length > 1 && isKorean.test(nickname)) {
+      setCheckNickname(true);
+      // 영어 닉네임
+    } else if (nickname.length > 3 && isEnglish.test(nickname)) {
       setCheckNickname(true);
     } else {
       setCheckNickname(false);
     }
   }, [nickname]);
+
+  // 성별 선택
+  const setGenderMale = () => {
+    setGender("남성");
+  };
+
+  const setGenderFemale = () => {
+    setGender("여성");
+  };
 
   // 다음으로 버튼 클릭
   const clickNextButton = () => {
@@ -50,6 +73,7 @@ const Step2 = () => {
           onChange={changeNickname}
           spellCheck="false"
           maxLength="12"
+          onBlur={checkValid}
           style={{
             border:
               nickname.length === 0
@@ -68,16 +92,62 @@ const Step2 = () => {
         />
       </div>
 
+      {/* 생년월일 */}
       <div className={`${style.inputContainer}`}>
         <img src={icon2} />
-        <input placeholder="생년월일" />
-        <img src={warningIcon} />
+        <input placeholder="생년월일" disabled />
+        <img
+          src={warningIcon}
+          style={{
+            visibility: "hidden",
+          }}
+        />
       </div>
 
+      {/* 성별 */}
       <div className={`${style.inputContainer}`}>
         <img src={icon3} />
-        <input placeholder="성별" />
-        <img src={warningIcon} />
+        <div
+          className={`${style.genderChoice}`}
+          onClick={setGenderMale}
+          style={{
+            color:
+              gender === ""
+                ? "#828282"
+                : gender === "남성"
+                ? "#262626"
+                : "#828282",
+            backgroundColor:
+              gender === ""
+                ? "#343434"
+                : gender === "남성"
+                ? "#28B280"
+                : "#343434",
+          }}
+        >
+          남자
+        </div>
+        <div
+          className={`${style.genderChoice}`}
+          onClick={setGenderFemale}
+          style={{
+            marginRight: "4rem",
+            color:
+              gender === ""
+                ? "#828282"
+                : gender === "여성"
+                ? "#262626"
+                : "#828282",
+            backgroundColor:
+              gender === ""
+                ? "#343434"
+                : gender === "여성"
+                ? "#28B280"
+                : "#343434",
+          }}
+        >
+          여자
+        </div>
       </div>
 
       <img src={line} className={`${style.line}`} />
