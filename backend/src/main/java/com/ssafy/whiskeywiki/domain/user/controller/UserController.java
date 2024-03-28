@@ -38,7 +38,7 @@ public class UserController {
     @GetMapping("/whiskey")
     public ResponseEntity<?> taste() {
         System.out.println("whiskey taste init ....");
-        return ResponseEntity.ok().body("");
+        return ResponseEntity.ok().body("asdf");
     }
 
     @GetMapping("/cocktail/taste")

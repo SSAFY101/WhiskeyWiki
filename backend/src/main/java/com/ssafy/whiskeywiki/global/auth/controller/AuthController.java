@@ -1,16 +1,16 @@
 package com.ssafy.whiskeywiki.global.auth.controller;
 
+import com.ssafy.whiskeywiki.domain.user.domain.User;
 import com.ssafy.whiskeywiki.domain.user.dto.UserDTO;
+import com.ssafy.whiskeywiki.domain.user.repository.UserRepository;
 import com.ssafy.whiskeywiki.domain.user.service.UserService;
 import com.ssafy.whiskeywiki.global.auth.jwt.Jwt;
-import com.ssafy.whiskeywiki.global.auth.jwt.RedisRefreshToken;
 import com.ssafy.whiskeywiki.global.auth.repository.RedisRefreshTokenRepository;
 import com.ssafy.whiskeywiki.global.util.CommonResponse;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -22,9 +22,29 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @RequestMapping("/auth")
 public class AuthController {
+    private final UserRepository userRepository;
     private final UserService userService;
 //    private final UserRepository userRepository;
     private final RedisRefreshTokenRepository redisRefreshTokenRepository;
+
+    @GetMapping("/id")
+    private ResponseEntity<?> checkId(@RequestBody String loginId) {
+
+        Optional<User> optionalUser = userRepository.findByLoginId(loginId);
+        if (optionalUser.isPresent()) {
+            CommonResponse<Boolean> response = CommonResponse.<Boolean>builder()
+                    .status(HttpStatus.OK.value())
+                    .message("login success")
+                    .data(true).build();
+
+            return ResponseEntity.ok()
+                    .body(response);
+        }
+        return ResponseEntity.ok().body(CommonResponse.<String>builder().build());
+    }
+
+//    @PostMapping("/signup")
+//    private ResponseEntity<> signup(@RequestBody UserDTO)
 
     @PostMapping("/login")
     private ResponseEntity<?> login(@RequestBody UserDTO.LoginRequest request) {
