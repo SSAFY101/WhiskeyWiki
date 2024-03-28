@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ReactComponent as SearchIcon } from '../assets/icon/Search.svg';
 import style from './Searchbar.module.css'
-function SearchBar(onSearch) {
+function SearchBar({ onSearch }) {
   const [query, setQuery] = useState("");
 
   // 사용자가 폼을 제출할 때
