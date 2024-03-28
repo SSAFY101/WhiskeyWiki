@@ -33,7 +33,7 @@ function WhiskeyInfo() {
   const whiskeys = [
     {
       nameKr: "앱솔루트",
-      nameEn: "Absolut",
+      nameEn: "Absolute",
       taste: "위스키 맛",
       abv: "40도",
       price: 10000,
@@ -41,7 +41,7 @@ function WhiskeyInfo() {
     },
     {
       nameKr: "짐빔",
-      nameEn: "Bsolut",
+      nameEn: "Jim_Beam",
       taste: "위스키 맛2",
       abv: "402도",
       price: 100002,
@@ -49,7 +49,7 @@ function WhiskeyInfo() {
     },
     {
       nameKr: "야호",
-      nameEn: "Csolut",
+      nameEn: "Kahlua",
       taste: "위스키 맛2",
       abv: "5000도",
       price: 200000002,
@@ -57,7 +57,7 @@ function WhiskeyInfo() {
     },
     {
       nameKr: "다른이름",
-      nameEn: "Dsolut",
+      nameEn: "Malibu",
       taste: "위스키 맛2",
       abv: "5000도",
       price: 200000002,
