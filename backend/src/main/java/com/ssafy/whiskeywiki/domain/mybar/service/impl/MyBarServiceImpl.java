@@ -34,7 +34,7 @@ public class MyBarServiceImpl implements MyBarService{
 
         List<OwnWhiskeyDTO.WhiskeyStatus> whiskeyStatusList = new ArrayList<>();
         for(OwnWhiskey o : ownWhiskeyList){
-            OwnWhiskeyDTO.WhiskeyStatus whiskeyStatus = new OwnWhiskeyDTO.WhiskeyStatus(o.getUser().getId(), o.getWhiskey().getWhiskeyNameKr(), o.isEmpty());
+            OwnWhiskeyDTO.WhiskeyStatus whiskeyStatus = new OwnWhiskeyDTO.WhiskeyStatus(o.getUser().getId(), o.getWhiskey().getWhiskeyNameKr(), o.getIsEmpty());
             whiskeyStatusList.add(whiskeyStatus);
         }
 
@@ -59,7 +59,7 @@ public class MyBarServiceImpl implements MyBarService{
 
             for(OwnWhiskey ownWhiskey : ownWhiskeyList){
                 MapDTO.OwnWhiskeyStatus info = new MapDTO.OwnWhiskeyStatus();
-                info.setIsEmpty(ownWhiskey.isEmpty());
+                info.setIsEmpty(ownWhiskey.getIsEmpty());
                 info.setWhiskeyNameKr(ownWhiskey.getWhiskey().getWhiskeyNameKr());
 
                 result.add(info);
