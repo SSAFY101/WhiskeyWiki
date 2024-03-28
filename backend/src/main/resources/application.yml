@@ -7,7 +7,7 @@ server:
 # DB와 secret key 세팅 값
 spring:
   profiles:
-    include: local
+    include: dev
 
 
   jpa:

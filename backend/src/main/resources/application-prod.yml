@@ -1,15 +1,15 @@
 # DB 설정
 spring:
   datasource:
-    url: jdbc:h2:tcp://localhost/~/whiskeywiki
-    username: admin
-    password:
-    driver-class-name: org.h2.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://whiskeywiki.shop:3306/whiskeywikiDB?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: root
+    password: b101
 
-  h2:
-    console:
-      path: /h2console
-      enabled: true
+  sql:
+    init:
+      mode: always
+
   jpa:
     hibernate:
       ddl-auto: none
