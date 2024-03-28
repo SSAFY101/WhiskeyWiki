@@ -50,7 +50,7 @@ public class MapServiceImpl implements MapService {
 
             for(OwnWhiskey ownWhiskey : ownWhiskeyList){
                 //빈병이 아닌 보유하고 있는 위스키에 대해서만 진행
-                if(!ownWhiskey.isEmpty()){
+                if(!ownWhiskey.getIsEmpty()){
                     int userId = ownWhiskey.getUser().getId();
                     if(!userIdList.contains(userId)){
                         userIdList.add(userId);
@@ -70,26 +70,6 @@ public class MapServiceImpl implements MapService {
             }
 
         }
-        return result;
-    }
-
-    @Override
-    public List<MapDTO.OwnWhiskeyStatus> lookAnotherMyBar(int userId) {
-        Optional<User> user = userRepository.findById(userId);
-        List<MapDTO.OwnWhiskeyStatus> result = new ArrayList<>();
-
-        if(user.isPresent()){
-            List<OwnWhiskey> ownWhiskeyList = ownWhiskeyRepository.findByUser(user.get());
-
-            for(OwnWhiskey ownWhiskey : ownWhiskeyList){
-                MapDTO.OwnWhiskeyStatus info = new MapDTO.OwnWhiskeyStatus();
-                info.setIsEmpty(ownWhiskey.isEmpty());
-                info.setWhiskeyNameKr(ownWhiskey.getWhiskey().getWhiskeyNameKr());
-
-                result.add(info);
-            }
-        }
-
         return result;
     }
 }

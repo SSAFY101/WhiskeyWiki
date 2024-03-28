@@ -1,6 +1,5 @@
 package com.ssafy.whiskeywiki.domain.cocktail.controller;
 
-import com.oracle.svm.core.annotate.Delete;
 import com.ssafy.whiskeywiki.domain.cocktail.dto.FavoriteDTO;
 import com.ssafy.whiskeywiki.domain.cocktail.service.FavoriteService;
 import com.ssafy.whiskeywiki.domain.user.service.UserService;

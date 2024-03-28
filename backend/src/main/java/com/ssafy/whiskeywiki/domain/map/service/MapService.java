@@ -11,6 +11,4 @@ public interface MapService {
 
     //String 리스트로 위스키 검색 조건이 들어오면, 해당 위스키를 가진 유저의 아이디,닉네임,위도,경도를 반환한다.
     List<MapDTO.ResponseAnotherMyBar> userList(List<String> condition);
-
-    List<MapDTO.OwnWhiskeyStatus> lookAnotherMyBar(int userId);
 }

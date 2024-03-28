@@ -1,13 +1,21 @@
 server:
   servlet:
     context-path: /api
-  port: 5000
+  port: 8080
 
 
 # DB와 secret key 세팅 값
 spring:
   profiles:
-    include: local
+    active: prd
+---
+spring:
+  profiles:
+    active: dev
+---
+spring:
+  profiles:
+    active: local
 
 
   jpa:

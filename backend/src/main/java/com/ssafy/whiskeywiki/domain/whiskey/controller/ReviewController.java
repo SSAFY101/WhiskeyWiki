@@ -36,7 +36,6 @@ public class ReviewController {
                     .build(), HttpStatus.OK);
         }
         else{
-            System.out.println("xxxxxxx");
             return new ResponseEntity<>(CommonResponse.builder()
                     .status(HttpStatus.NO_CONTENT.value())
                     .message("해당 위스키에 대한 리뷰가 없습니다")
@@ -59,4 +58,5 @@ public class ReviewController {
                 .data(reviewRequest)
                 .build(), HttpStatus.CREATED);
     }
+
 }

@@ -40,15 +40,4 @@ public class MapController {
                 .data(resultList)
                 .build(), HttpStatus.OK);
     }
-
-    @GetMapping("/{userId}")
-    public ResponseEntity<CommonResponse> lookAnotherMyBar(@PathVariable int userId){
-        List<MapDTO.OwnWhiskeyStatus> resultList = mapService.lookAnotherMyBar(userId);
-
-        return new ResponseEntity<>(CommonResponse.builder()
-                .status(HttpStatus.OK.value())
-                .message("다른 유저 My bar 조회 성공")
-                .data(resultList)
-                .build(), HttpStatus.OK);
-    }
 }
