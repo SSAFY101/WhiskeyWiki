@@ -50,7 +50,7 @@ function Login() {
         instance.defaults.headers.common["Authorization"] = `${accessToken}`;
         instance.defaults.headers.post["Content-Type"] = "application/json";
 
-        navigate("/");
+        // navigate("/");
       })
 
       .catch((err) => {
