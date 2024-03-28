@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { signupAction } from "../../../store/slices/signup";
+import { useDaumPostcodePopup } from "react-daum-postcode";
 
 import style from "../css/Signup.module.css";
 
@@ -13,47 +14,43 @@ import warningIcon from "../images/warning.png";
 const Step3 = () => {
   const dispatch = useDispatch();
 
-  const [nickname, setNickname] = useState("");
+  const [zipCode, setZipCode] = useState("");
+  const [address, setAddress] = useState("");
 
-  const [checkNickname, setCheckNickname] = useState(false);
-  const [checkPw, setCheckPw] = useState(false);
+  const postSodeUrl =
+    "//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js";
+  const open = useDaumPostcodePopup(postSodeUrl);
+
+  const searchAddress = () => {
+    open({ onComplete: completeAddreses });
+  };
+
+  const completeAddreses = (data) => {
+    // 우편번호 저장
+    setZipCode(data.zonecode);
+    // 주소 저장
+    setAddress(data.roadAddress);
+  };
 
   const clickSignup = () => {};
 
   return (
-    <div className={`${style.step1Container}`}>
+    <div className={`${style.step3Container}`}>
       <img src={progressIcon} className={`${style.progressImg}`} />
       <div className={`${style.inputContainer}`}>
         <img src={icon1} />
         <input
           className={`${style.addressInput}`}
+          value={zipCode}
           placeholder="우편번호"
-          value={nickname}
-          spellCheck="false"
-          maxLength="12"
-          style={{
-            border:
-              nickname.length === 0
-                ? ""
-                : checkNickname
-                ? "solid 2px #28B280"
-                : "solid 2px #FF3D3D",
-          }}
+          disabled
         />
-        <button>검색</button>
-        <img
-          src={warningIcon}
-          style={{
-            visibility:
-              nickname.length === 0 ? "hidden" : checkNickname ? "hidden" : "",
-          }}
-        />
+        <button onClick={searchAddress}>검색</button>
       </div>
 
       <div className={`${style.inputContainer}`}>
         <img src={icon2} />
-        <input placeholder="주소" />
-        <img src={warningIcon} />
+        <input placeholder="주소" value={address} disabled />
       </div>
 
       <img src={line} className={`${style.line}`} />
