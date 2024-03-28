@@ -40,6 +40,7 @@ function MyBar() {
   return (
     <div className={style.background}>
       {/* 뒤로가기 버튼 */}
+      {/* 로그인한 유저 === Mybar페이지의 주인 => 뒤로가기 버튼 등장 */}
       <button className={`${style.backButton}`} onClick={handleGoBack}>
         &lt; 뒤로가기
       </button>

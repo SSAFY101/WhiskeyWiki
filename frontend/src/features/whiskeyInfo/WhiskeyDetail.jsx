@@ -1,6 +1,6 @@
 import { useState } from "react";
 import style from "./WhiskeyDetail.module.css";
-import img from "../../assets/images/whiskey/Ballantines.png";
+import img from "../../assets/images/whiskey/Ballantines_Finest.png"
 import IconContainer from "./components/IconContainer";
 import Statistics from "./components/Statistics";
 import ReviewList from "./components/ReviewList";

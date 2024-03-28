@@ -1,10 +1,10 @@
 import style from "./InfoCard.module.css";
-import ballantinesImage from "../../assets/images/whiskey/Ballantines.png";
+import ballantinesImage from "../../assets/images/whiskey/Ballantines_Finest.png";
 function Infocard({ nameKr, nameEn, taste, abv, price, rating, onClick }) {
   const ratingStars = "★".repeat(rating) + "☆".repeat(5 - rating);
   console.log(nameKr, nameEn, taste, abv, price, rating);
   return (
-    <div>
+    <div className={style.container}>
       <div className={style.outerCard} onClick={onClick}>
         <img src={ballantinesImage} alt="" />
         <div className={style.infoArea}>
