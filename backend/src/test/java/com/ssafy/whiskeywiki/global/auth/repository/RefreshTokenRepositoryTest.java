@@ -45,7 +45,6 @@ class RefreshTokenRepositoryTest {
             RedisRefreshToken redisRefreshToken = optionalRedisRefreshToken.get();
             System.out.println(redisRefreshToken.getAccessToken());
             System.out.println(redisRefreshToken.getRefreshToken());
-            System.out.println(redisRefreshToken.getLoginId());
         }
     }
 }
