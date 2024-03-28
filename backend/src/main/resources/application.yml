@@ -1,1 +1,37 @@
-spring.application.name=whiskeywiki
+server:
+  servlet:
+    context-path: /api
+  port: 5050
+
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:tcp://localhost/~/whiskey
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        #        format_sql: true
+    defer-datasource-initialization: true
+
+  h2:
+    console:
+      enabled: true
+  sql:
+    init:
+      mode: always
+
+  main:
+    allow-bean-definition-overriding: false
+  data:
+    redis:
+      lettuce:
+        cluster:
+          refresh:
+            adaptive: true
+      host: localhost
+      port: 6379

@@ -22,7 +22,7 @@ public class UserChatroom {
     private int id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_chatroom_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -30,5 +30,6 @@ public class UserChatroom {
     private Chatroom chatroom;
 
     @OneToMany(mappedBy = "userChatroom")
+    @Builder.Default
     private List<Chat> chatList = new ArrayList<>();
 }

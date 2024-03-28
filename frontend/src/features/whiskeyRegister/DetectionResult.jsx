@@ -8,10 +8,13 @@ import DectectResCard from "./component/DectectResCard";
 import style from "./css/DetectionResult.module.css";
 import beforeIcon from "./images/before.png";
 import nextIcon from "./images/next.png";
+import { useNavigate } from "react-router-dom";
 
 const DetectionResult = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
+  const nickName = localStorage.getItem("nickName");
   const whiskeyList = useSelector((state) => state.register.whiskeyList);
 
   const [whiskeyInfoList, setWhiskeyList] = useState([]);
@@ -88,6 +91,13 @@ const DetectionResult = () => {
   // 마이바에 위스키 저장
 
   const mybarSaveHandler = () => {
+    if (!nickName) {
+      if (window.confirm("로그인 필요합니다. 로그인하시겠습니까?")) {
+        navigate("/login");
+      }
+      return;
+    }
+
     if (whiskeyList.length === 0) {
       alert("아무것도 안 넣으셔?");
       return;
@@ -140,7 +150,12 @@ const DetectionResult = () => {
         <span>{whiskeyList.length}</span>개 선택
       </div>
 
-      <button onClick={mybarSaveHandler} className={`${style.mybarSaveButton}`}>
+      <button
+        onClick={mybarSaveHandler}
+        className={`${
+          nickName ? style.mybarSaveButton : style.mybarSaveButtonDisabled
+        }`}
+      >
         마이바에 넣기
       </button>
     </div>
