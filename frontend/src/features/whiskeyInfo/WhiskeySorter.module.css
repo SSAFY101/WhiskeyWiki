@@ -1,0 +1,12 @@
+.outerContainer{
+  width:300px;
+  margin: 0 0 0 50px;
+  font-size: 30px;
+}
+
+.selector{
+font-size : 20px;
+}
+option :hover{
+  background-color: red;
+}
