@@ -26,7 +26,7 @@ function MyBar() {
     // API test 코드
     setWhiskeyStatusList([
       // {
-      // case 1. 위스키 없음
+      // // case 1. 위스키 없음
       //   whiskeyId: 1,
       //   isEmpty: false,
       // },
@@ -42,7 +42,7 @@ function MyBar() {
       },
     ]);
   }, []);
-  console.log(whiskeyStatusList);
+  // console.log(whiskeyStatusList);
 
   // 모달 제어 - 1. 위스키 상세 모달
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
@@ -133,12 +133,17 @@ function MyBar() {
             onClick={() => handleWhiskeyClick(whiskey)}
           />
         ))}
+
         {/* 모달 조건부 렌더링 - 1. 위스키 상세 모달 */}
         {isDetailModalOpen && (
           <Modal isOpen={isDetailModalOpen} onClose={handleDetailCloseModal}>
             {/* 선택된 위스키 아이디를 모달에 전달 */}
             {selectedWhiskey && (
-              <MyBarDetail whiskeyId={selectedWhiskey.whiskeyId} />
+              <MyBarDetail
+                whiskeyId={selectedWhiskey.whiskeyId}
+                whiskeyNameKr={selectedWhiskey.whiskeyNameKr}
+                whiskeyNameEn={selectedWhiskey.whiskeyNameEn}
+              />
             )}
           </Modal>
         )}

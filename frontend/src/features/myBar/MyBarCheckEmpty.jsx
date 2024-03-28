@@ -1,14 +1,25 @@
-function MyBarCheckEmpty() {
+function MyBarCheckEmpty({ whiskeyId, whiskeyNameKr, whiskeyNameEn }) {
   const checkEmpty = () => {
     console.log("check Empty");
-    // 빈병 표시하는 코드 작성하기 (ex.이미지의 투명도를 50%로 바꾸는 코드)
-    // const whiskeyImage = document.getElementById("whiskeyImage");
-    // whiskeyImage.style.opacity = 0.5;
-    // 닫기 버튼과 동일한 기능을 하는 (이전 페이지로 돌아가는) 코드 작성 예정
+    // POST 요청: 위스키 보유 상태 관리 (보유/빈병 변경)
+    // axios({
+    //   method: "post",
+    //   url: "api/mybar/status/{whiskeyId}",
+    // })
+    //   .then((res) => {
+    //     console.log("위스키 상태 변경 성공 : ", res.data);
+    //   })
+    //   .catch((err) => {
+    //     console.log("위스키 상태 변경 ERROR :", err);
+    //   });
   };
   return (
     <>
-      <p>"위스키 이름"을(를) 빈 병으로 표시하시겠습니까?</p>
+      {/* <p>{whiskeyId}</p> */}
+      <p>
+        {whiskeyNameKr}({whiskeyNameEn})
+      </p>
+      <p>빈 병으로 변경할까요?</p>
       <button onClick={checkEmpty}>확인</button>
     </>
   );
