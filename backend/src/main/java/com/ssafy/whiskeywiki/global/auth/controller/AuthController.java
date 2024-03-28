@@ -3,13 +3,19 @@ package com.ssafy.whiskeywiki.global.auth.controller;
 import com.ssafy.whiskeywiki.domain.user.dto.UserDTO;
 import com.ssafy.whiskeywiki.domain.user.service.UserService;
 import com.ssafy.whiskeywiki.global.auth.jwt.Jwt;
+import com.ssafy.whiskeywiki.global.auth.jwt.RedisRefreshToken;
 import com.ssafy.whiskeywiki.global.auth.repository.RedisRefreshTokenRepository;
 import com.ssafy.whiskeywiki.global.util.CommonResponse;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @Slf4j
 @Controller
@@ -32,6 +38,11 @@ public class AuthController {
 
         if (jwtAndNickName == null)
             return ResponseEntity.ok().body("login fail");
+
+        String nickName = jwtAndNickName.getNickName();
+        log.info("nickname(= {})", nickName);
+        redisRefreshTokenRepository.findByNickName(nickName)
+                .ifPresent(redisRefreshTokenRepository::delete);
 
         UserDTO.LoginResponse loginResponse = UserDTO.LoginResponse.builder().nickName(jwtAndNickName.getNickName()).build();
         CommonResponse<UserDTO.LoginResponse> response = CommonResponse.<UserDTO.LoginResponse>builder()
@@ -62,7 +73,7 @@ public class AuthController {
     }
 
     @PostMapping("/logout")
-    public ResponseEntity<?> logout(@RequestHeader(name = "Authorization") String accessToken) {
+    public ResponseEntity<?> logout(@RequestHeader(name = "Authorization") String authToken) {
 
         // delete refresh token in mysql
 //        Optional<User> optionalUser = userRepository.findByRefreshToken(refreshToken);
@@ -71,6 +82,8 @@ public class AuthController {
 //            user.updateRefreshToken(null);
 //            userRepository.save(user);
 //        }
+
+        String accessToken = authToAccessToken(authToken);
 
         // delete refresh token in redis
         redisRefreshTokenRepository.findByAccessToken(accessToken)
@@ -86,16 +99,36 @@ public class AuthController {
     }
 
     @PostMapping("/refresh")
-    public ResponseEntity<Jwt> tokenRefresh(@RequestHeader(name = "Refresh-Token") String refreshToken) {
-        log.info("init ...");
+    public ResponseEntity<Jwt> tokenRefresh(/*@RequestHeader(name = "Refresh-Token") String refreshToken*/
+    HttpServletRequest request) {
+
+        String refreshToken = "";
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if ("Refresh-Token".equals(cookie.getName())) {
+                    refreshToken = cookie.getValue();
+                    log.info("refresh token(= {})", refreshToken);
+
+
+                }
+            }
+        }
+        if (refreshToken != null) {
+            log.info("refresh token is not null");
+            redisRefreshTokenRepository.findByRefreshToken(refreshToken)
+                    .ifPresent(redisRefreshTokenRepository::delete);
+        }
+
+
         Jwt jwt = userService.refreshToken(refreshToken);
         if (jwt == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
 
+
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.set("Access-Token", jwt.getAccessToken());
-        httpHeaders.set("Refresh-Token", jwt.getRefreshToken());
+        httpHeaders.set("authorization", "bearer " + jwt.getAccessToken());
 
         ResponseCookie responseCookie = ResponseCookie.from("Refresh-Token", jwt.getRefreshToken())
                                                         .httpOnly(true)
@@ -109,5 +142,9 @@ public class AuthController {
         return ResponseEntity.ok()
                 .headers(httpHeaders)
                 .body(jwt);
+    }
+
+    private static String authToAccessToken(String authorization) {
+        return authorization.substring(7);
     }
 }
