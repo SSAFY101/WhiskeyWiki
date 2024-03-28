@@ -10,6 +10,7 @@ import SignUp from "../features/signUp/Signup";
 import Modal from "../features/modal/Modal";
 // 마이 바
 import MyBar from "../features/myBar/MyBar";
+import MyBarOther from "../features/myBar/MyBarOther";
 // 지도
 import Exchange from "../features/exchange/Exchange";
 // 위스키 등록
@@ -75,6 +76,7 @@ const App = () => {
           <Route path="/chatRoom" element={<Chat />} />
           {/* 마이바 */}
           <Route path="/myBar" element={<MyBar />} />
+          <Route path="/myBar/123" element={<MyBarOther />} />
           {/* 마이페이지 */}
           <Route path="/myPage" element={<MyPage />} />
           {/* 회원정보 */}
