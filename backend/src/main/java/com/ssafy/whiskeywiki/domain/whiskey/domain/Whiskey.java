@@ -1,6 +1,7 @@
 package com.ssafy.whiskeywiki.domain.whiskey.domain;
 
-import com.ssafy.whiskeywiki.domain.review.domain.Review;
+import com.ssafy.whiskeywiki.domain.cocktail.domain.Base;
+import com.ssafy.whiskeywiki.domain.whiskey.domain.Review;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,19 +33,7 @@ public class Whiskey {
 
     private String detail;
 
-    //연관관계
-    //1. 위스키와 기주는 일대다 관계
-    @OneToMany(mappedBy = "whiskey")
-    @Builder.Default
-    private List<Base> baseList = new ArrayList<>();
-
-    //2. 위스키와 리뷰는 일대다 관계
-    @OneToMany(mappedBy = "whiskey")
+    @OneToMany(mappedBy = "whiskey", cascade = CascadeType.ALL)
     @Builder.Default
     private List<Review> reviewList = new ArrayList<>();
-
-    //3. 위스키와 위스키보유는 일대다 관계
-    @OneToMany(mappedBy = "whiskey")
-    @Builder.Default
-    private List<OwnWhiskey> ownWhiskeyList = new ArrayList<>();
 }

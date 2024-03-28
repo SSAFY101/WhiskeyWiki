@@ -25,4 +25,12 @@ public class Base {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "whiskey_id")
     private Whiskey whiskey;
+
+    @Builder
+    Base(Cocktail cocktail, Whiskey whiskey){
+        this.cocktail = cocktail;
+        this.whiskey = whiskey;
+
+        cocktail.getBaseList().add(this);
+    }
 }
