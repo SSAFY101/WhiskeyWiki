@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/auth")
-@CrossOrigin(origins = "*", allowedHeaders = "*", exposedHeaders = "Authorization, Set-Cookie")
+@CrossOrigin(origins = "*", allowedHeaders = "*", exposedHeaders = "Authorization")
 public class AuthController {
     private final UserService userService;
 //    private final UserRepository userRepository;

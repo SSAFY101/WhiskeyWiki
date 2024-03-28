@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { signupAction } from "../../../store/slices/signup";
+import axios from "axios";
 
 import style from "../css/Signup.module.css";
 
@@ -40,6 +41,16 @@ const Step1 = () => {
   // 조건
   const checkValid = () => {
     // 아이디 중복 검사
+    axios
+      .post("/api/users/valid/id", {
+        loginId: userId,
+      })
+      .then((res) => {
+        console.log("아이디 중복 검사", res);
+      })
+      .catch((err) => {
+        console.log("아이디 중복 검사 실패", err);
+      });
   };
 
   useEffect(() => {

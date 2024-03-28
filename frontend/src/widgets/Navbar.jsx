@@ -1,27 +1,32 @@
 import { Link } from "react-router-dom";
-import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { userAction } from "../store/slices/user";
+
+import instance from "../features/auth/axiosInterceptor";
+
 import style from "./Navbar.module.css";
 import UserIcon from "../assets/icon/UserIcon.svg";
-
 import myPageIcon from "../assets/images/nav/myPage.png";
 import myPageHoverIcon from "../assets/images/nav/myPage_hover.png";
 
 function Navbar({ onUserIconClick }) {
-  const nickName = localStorage.getItem("nickName");
+  const dispatch = useDispatch();
+  const nickName = useSelector((state) => state.user.nickName);
 
   const logoutTest = (e) => {
     e.preventDefault();
+
     if (window.confirm("로그아웃 하시겠습니까?")) {
-      axios
+      instance
         .post("http://localhost:5000/api/auth/logout")
         .then((res) => {
-          // console.log("로그아웃", res);
+          console.log("로그아웃", res);
 
           // 닉네임 삭제
-          localStorage.removeItem("nickName");
+          dispatch(userAction.setNickname(null));
 
-          // axiois 기본 설정 제거
-          axios.defaults.headers.common["Authorization"] = null;
+          // axiois 설정 제거
+          instance.defaults.headers.common["Authorization"] = null;
         })
         .catch((err) => {
           console.log("로그아웃 실패", err);

@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { signupAction } from "../../../store/slices/signup";
+import axios from "axios";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
 
 import style from "../css/Signup.module.css";
 
@@ -31,6 +34,16 @@ const Step2 = () => {
   // 조건
   const checkValid = () => {
     // 닉네임 중복 검사
+    axios
+      .post("/api/users/valid/nickname", {
+        nickName: nickname,
+      })
+      .then((res) => {
+        console.log("닉네임 중복 검사", res);
+      })
+      .catch((err) => {
+        console.log("닉네임 중복 검사 실패", err);
+      });
   };
 
   useEffect(() => {
@@ -152,15 +165,17 @@ const Step2 = () => {
 
       <img src={line} className={`${style.line}`} />
 
-      <button
-        className={`${style.nextButton}`}
-        style={{ backgroundColor: "#EEB233", color: "#1C1C1C" }}
-        onClick={clickNextButton}
-      >
-        다음으로
-      </button>
+      {checkNickname && (
+        <button
+          className={`${style.nextButton}`}
+          style={{ backgroundColor: "#EEB233", color: "#1C1C1C" }}
+          onClick={clickNextButton}
+        >
+          다음으로
+        </button>
+      )}
 
-      {/* {(checkNickname && checkPw && checkPwSame) || (
+      {checkNickname || (
         <button
           className={`${style.nextButton}`}
           style={{
@@ -171,7 +186,7 @@ const Step2 = () => {
         >
           다음으로
         </button>
-      )} */}
+      )}
     </div>
   );
 };
