@@ -3,7 +3,6 @@ server:
     context-path: /api
   port: 8080
 
-
 # DB와 secret key 세팅 값
 spring:
   profiles:
@@ -17,11 +16,28 @@ spring:
   profiles:
     active: local
 
-
   jpa:
     properties:
       hibernate:
         show_sql: true
         format_sql: true
     defer-datasource-initialization: true
+
+  h2:
+    console:
+      enabled: true
+  sql:
+    init:
+      mode: always
+
+  main:
+    allow-bean-definition-overriding: false
+  data:
+    redis:
+      lettuce:
+        cluster:
+          refresh:
+            adaptive: true
+      host: whiskeywiki.shop
+      port: 6380
 #    database-platform: org.hibernate.dialect.H2Dialect

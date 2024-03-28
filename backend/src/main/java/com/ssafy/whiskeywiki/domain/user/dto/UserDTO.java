@@ -1,10 +1,28 @@
 package com.ssafy.whiskeywiki.domain.user.dto;
 
 import com.ssafy.whiskeywiki.domain.user.domain.User;
+import jakarta.persistence.Column;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.math.BigDecimal;
+
 public class UserDTO {
+
+    @Getter
+    @Builder
+    public static class SignupRequest {
+        private String loginId;
+        private String password;
+        private String nickName;
+        private String address;
+        private String gender;
+        private int age;
+        @Column(precision = 13, scale = 10)
+        private BigDecimal latitude;
+        @Column(precision = 13, scale = 10)
+        private BigDecimal longitude;
+    }
 
     @Getter
     @Builder
@@ -16,8 +34,15 @@ public class UserDTO {
     @Getter
     @Builder
     public static class LoginResponse {
+        private String nickName;
+    }
+
+    @Getter
+    @Builder
+    public static class LoginServiceToController {
         private String accessToken;
         private String refreshToken;
+        private String nickName;
     }
 
     @Getter
