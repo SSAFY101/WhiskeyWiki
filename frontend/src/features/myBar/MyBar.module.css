@@ -67,7 +67,11 @@
 
 /* 위스키 보유 관련 */
 .whiskeyNone {
-  opacity: 0; /* 투명도를 30%로 설정합니다. */
+  opacity: 0; /* 투명도를 0%로 설정합니다. */
+}
+
+.whiskeyFull {
+  opacity: 1; /* 투명도를 100%로 설정합니다. */
 }
 
 .whiskeyEmpty {

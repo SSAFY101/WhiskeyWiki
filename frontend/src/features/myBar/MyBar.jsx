@@ -18,6 +18,13 @@ function MyBar() {
     setIsBookModalOpen(false);
   };
 
+  // 개별 위스키 클릭 함수
+  const [selectedWhiskey, setSelectedWhiskey] = useState(null);
+  const handleWhiskeyClick = (whiskey) => {
+    setSelectedWhiskey(whiskey);
+    setIsDetailModalOpen(true);
+  };
+
   // 뒤로가기 버튼
   const handleGoBack = () => {
     window.history.back();
@@ -71,22 +78,27 @@ function MyBar() {
         {/* 위스키 이미지 */}
         {WhiskeyImages.map((whiskey, index) => (
           <img
-            key={index}
+            // key={index}
+            key={whiskey.whiskeyId}
             src={whiskey.imgUrl}
             alt=""
             className={`${style.whiskey} ${
               style[`whiskey${Math.floor(index / 10) + 1}`]
             } ${style[`position${(index % 10) + 1}`]}`}
             // onClick={clickWhiskeys[index]}
-            onClick={() => setIsDetailModalOpen(true)}
+            onClick={() => handleWhiskeyClick(whiskey)}
           />
         ))}
-        {/* 모달 조건부 렌더링 */}
+        {/* 모달 조건부 렌더링 - 1. 위스키 상세 모달 */}
         {isDetailModalOpen && (
           <Modal isOpen={isDetailModalOpen} onClose={handleDetailCloseModal}>
-            <MyBarDetail />
+            {/* 선택된 위스키 아이디를 모달에 전달 */}
+            {selectedWhiskey && (
+              <MyBarDetail whiskeyId={selectedWhiskey.whiskeyId} />
+            )}
           </Modal>
         )}
+        {/* 모달 조건부 렌더링 - 2. 칵테일 레시피 즐겨찾기(Book) 모달 */}
         {isBookModalOpen && (
           <Modal isOpen={isBookModalOpen} onClose={handleBookCloseModal}>
             <MyBarBook />
