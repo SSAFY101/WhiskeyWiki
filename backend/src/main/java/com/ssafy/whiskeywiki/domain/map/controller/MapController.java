@@ -19,8 +19,7 @@ public class MapController {
     private final UserService userService;
 
     @GetMapping("/location")
-    public ResponseEntity<CommonResponse> getUserLocation(@RequestHeader(name= "Access-Token")String accessToken){
-
+    public ResponseEntity<CommonResponse> getUserLocation(@RequestHeader(name = "Authorization") String accessToken){
         int userId = userService.getUserIdByAccessToken(accessToken);
         MapDTO.ResponseUserLocation userLocation = mapService.getUserLocation(userId);
 

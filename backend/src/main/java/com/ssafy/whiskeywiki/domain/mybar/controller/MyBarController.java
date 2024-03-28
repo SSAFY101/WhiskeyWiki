@@ -27,7 +27,7 @@ public class MyBarController {
 
 //    //즐겨찾기한 칵테일 목록 확인
 //    @GetMapping("/favorite/list")
-//    public ResponseEntity<CommonResponse> getFavoriteList(@RequestHeader(name = "Access-Token") String accessToken) {
+//    public ResponseEntity<CommonResponse> getFavoriteList(@RequestHeader(name = "Authorization") String accessToken) {
 //        int userId = userService.getUserIdByAccessToken(accessToken);
 //        List<FavoriteDTO.FavoriteData> favoriteDataList = myBarService.userFavoriteList(userId);
 //
@@ -40,7 +40,7 @@ public class MyBarController {
 //    }
 
     @GetMapping("/ownstatus/list")
-    public ResponseEntity<CommonResponse> getOwnWhiskeyList(@RequestHeader(name = "Access-Token")String accessToken){
+    public ResponseEntity<CommonResponse> getOwnWhiskeyList(@RequestHeader(name = "Authorization")String accessToken){
         int userId = userService.getUserIdByAccessToken(accessToken);
 
         List<OwnWhiskeyDTO.WhiskeyStatus> resultList = myBarService.userOwnWhiskeyList(userId);
