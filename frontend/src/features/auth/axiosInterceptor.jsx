@@ -1,7 +1,5 @@
 import axios from "axios";
 
-// axios.defaults.headers.post["Content-Type"] = "application/json";
-
 const instance = axios.create({
   baseURL: "",
   timeout: 5000,
