@@ -17,7 +17,7 @@ import java.util.*;
 @Getter
 public class UserChatroom {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_chatroom_id")
     private int id;
 

@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @Getter
 public class Chat {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "chat_id")
     private int id;
 
@@ -30,7 +30,7 @@ public class Chat {
     @JoinColumn(name = "user_id")
     private User user;
 
-    private boolean read;
+    private Boolean isRead;
     private boolean chatVisible;
     private String message;
 
