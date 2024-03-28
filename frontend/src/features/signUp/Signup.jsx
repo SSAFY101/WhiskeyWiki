@@ -16,7 +16,7 @@ function Signup() {
   const page = useSelector((state) => state.signup.page);
 
   useEffect(() => {
-    dispatch(signupAction.pageOne());
+    dispatch(signupAction.pageThree());
   }, []);
 
   const renderStep = () => {
