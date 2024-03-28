@@ -72,24 +72,4 @@ public class MapServiceImpl implements MapService {
         }
         return result;
     }
-
-    @Override
-    public List<MapDTO.OwnWhiskeyStatus> lookAnotherMyBar(int userId) {
-        Optional<User> user = userRepository.findById(userId);
-        List<MapDTO.OwnWhiskeyStatus> result = new ArrayList<>();
-
-        if(user.isPresent()){
-            List<OwnWhiskey> ownWhiskeyList = ownWhiskeyRepository.findByUser(user.get());
-
-            for(OwnWhiskey ownWhiskey : ownWhiskeyList){
-                MapDTO.OwnWhiskeyStatus info = new MapDTO.OwnWhiskeyStatus();
-                info.setIsEmpty(ownWhiskey.isEmpty());
-                info.setWhiskeyNameKr(ownWhiskey.getWhiskey().getWhiskeyNameKr());
-
-                result.add(info);
-            }
-        }
-
-        return result;
-    }
 }
