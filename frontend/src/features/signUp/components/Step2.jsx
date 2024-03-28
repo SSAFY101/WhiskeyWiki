@@ -79,17 +79,18 @@ const Step2 = () => {
         <input placeholder="성별" />
         <img src={warningIcon} />
       </div>
+
       <img src={line} className={`${style.line}`} />
-      {checkNickname && checkPw && checkPwSame && (
-        <button
-          className={`${style.nextButton}`}
-          style={{ backgroundColor: "#EEB233", color: "#1C1C1C" }}
-          onClick={clickNextButton}
-        >
-          다음으로
-        </button>
-      )}
-      {(checkNickname && checkPw && checkPwSame) || (
+
+      <button
+        className={`${style.nextButton}`}
+        style={{ backgroundColor: "#EEB233", color: "#1C1C1C" }}
+        onClick={clickNextButton}
+      >
+        다음으로
+      </button>
+
+      {/* {(checkNickname && checkPw && checkPwSame) || (
         <button
           className={`${style.nextButton}`}
           style={{
@@ -100,7 +101,7 @@ const Step2 = () => {
         >
           다음으로
         </button>
-      )}
+      )} */}
     </div>
   );
 };

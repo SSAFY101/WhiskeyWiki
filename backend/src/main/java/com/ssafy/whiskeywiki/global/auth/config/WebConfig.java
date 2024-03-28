@@ -13,11 +13,19 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @RequiredArgsConstructor
-public class WebConfig {
+public class WebConfig implements WebMvcConfigurer{
 
     private final JwtProvider jwtProvider;
     private final UserRepository userRepository;
 
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins("*")
+                .allowedMethods("*")
+                .allowedHeaders("*")
+                .allowedOriginPatterns("*");
+    }
 
     @Bean
     public FilterRegistrationBean verifyUserFilter() {

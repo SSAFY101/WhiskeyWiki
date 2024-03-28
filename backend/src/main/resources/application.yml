@@ -1,21 +1,18 @@
 server:
   servlet:
     context-path: /api
-  port: 5050
+  port: 5000
 
+# DB와 secret key 세팅 값
 spring:
-  datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:tcp://localhost/~/whiskey
-    username: sa
-    password:
+  profiles:
+    include: local
+
   jpa:
-    hibernate:
-      ddl-auto: update
     properties:
       hibernate:
         show_sql: true
-        #        format_sql: true
+        format_sql: true
     defer-datasource-initialization: true
 
   h2:
@@ -33,5 +30,6 @@ spring:
         cluster:
           refresh:
             adaptive: true
-      host: localhost
-      port: 6379
+      host: whiskeywiki.shop
+      port: 6380
+#    database-platform: org.hibernate.dialect.H2Dialect
