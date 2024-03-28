@@ -22,9 +22,13 @@ const Step1 = () => {
   const [checkPw, setCheckPw] = useState(false);
   const [checkPwSame, setCheckPwSame] = useState(false);
 
+  const regex = /[^a-zA-Z0-9]+$/;
+
   // 입력
   const changeUserId = (e) => {
-    setUserId(e.target.value);
+    const value = e.target.value.replace(regex, "");
+    console.log(value);
+    setUserId(value);
   };
   const changePassword = (e) => {
     setUserPassword(e.target.value);
@@ -34,6 +38,10 @@ const Step1 = () => {
   };
 
   // 조건
+  const checkValid = () => {
+    // 아이디 중복 검사
+  };
+
   useEffect(() => {
     if (userId.length > 3) {
       // 아이디 중복 체크 api 필요
@@ -76,6 +84,7 @@ const Step1 = () => {
           onChange={changeUserId}
           spellCheck="false"
           maxLength="12"
+          onBlur={checkValid}
           style={{
             border:
               userId.length === 0
