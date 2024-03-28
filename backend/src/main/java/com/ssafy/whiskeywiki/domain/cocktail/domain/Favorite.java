@@ -24,4 +24,12 @@ public class Favorite {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cocktail_id")
     private Cocktail cocktail;
+
+    @Builder
+    Favorite(Cocktail cocktail, User user){
+        this.cocktail = cocktail;
+        this.user = user;
+
+        user.getFavoriteList().add(this);
+    }
 }

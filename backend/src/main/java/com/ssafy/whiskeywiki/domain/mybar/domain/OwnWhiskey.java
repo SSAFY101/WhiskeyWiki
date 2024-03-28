@@ -1,6 +1,7 @@
-package com.ssafy.whiskeywiki.domain.whiskey.domain;
+package com.ssafy.whiskeywiki.domain.mybar.domain;
 
 import com.ssafy.whiskeywiki.domain.user.domain.User;
+import com.ssafy.whiskeywiki.domain.whiskey.domain.Whiskey;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,5 +27,6 @@ public class OwnWhiskey {
     @JoinColumn(name = "whiskey_id")
     private Whiskey whiskey;
 
-    private boolean isEmpty;
+    @Builder.Default
+    private boolean isEmpty = false;
 }

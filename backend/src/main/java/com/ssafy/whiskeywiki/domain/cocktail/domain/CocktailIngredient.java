@@ -22,6 +22,14 @@ public class CocktailIngredient {
     private Cocktail cocktail;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ingrdient_id")
+    @JoinColumn(name = "ingredient_id")
     private Ingredient ingredient;
+
+    @Builder
+    CocktailIngredient(Cocktail cocktail, Ingredient ingredient){
+        this.cocktail = cocktail;
+        this.ingredient = ingredient;
+
+        cocktail.getCocktailIngredientList().add(this);
+    }
 }

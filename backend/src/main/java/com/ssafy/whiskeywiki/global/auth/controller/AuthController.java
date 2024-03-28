@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/auth")
-@CrossOrigin(origins = "*", allowedHeaders = "*", exposedHeaders = "Access-Token, Refresh-Token")
+@CrossOrigin(origins = "*", allowedHeaders = "*", exposedHeaders = "Authorization, Set-Cookie")
 public class AuthController {
     private final UserService userService;
 //    private final UserRepository userRepository;
@@ -42,8 +42,9 @@ public class AuthController {
 
         // HTTP 헤더 설정 (access token, refresh token)
         HttpHeaders headers = new HttpHeaders();
-        headers.set("Access-Token", jwtAndNickName.getAccessToken());
-        headers.set("Refresh-Token", jwtAndNickName.getRefreshToken());
+//        headers.set("Access-Token", jwtAndNickName.getAccessToken());
+//        headers.set("Refresh-Token", jwtAndNickName.getRefreshToken());
+        headers.set("Authorization", "Bearer " + jwtAndNickName.getAccessToken());
 
         // COOKIE 설정 (refresh token)
         ResponseCookie refreshTokenCookie = ResponseCookie.from("Refresh-Token", jwtAndNickName.getRefreshToken())
@@ -61,7 +62,7 @@ public class AuthController {
     }
 
     @PostMapping("/logout")
-    public ResponseEntity<?> logout(@RequestHeader(name = "Access-Token") String accessToken) {
+    public ResponseEntity<?> logout(@RequestHeader(name = "Authorization") String accessToken) {
 
         // delete refresh token in mysql
 //        Optional<User> optionalUser = userRepository.findByRefreshToken(refreshToken);

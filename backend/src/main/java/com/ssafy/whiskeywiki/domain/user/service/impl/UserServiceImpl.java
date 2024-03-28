@@ -129,4 +129,19 @@ public class UserServiceImpl implements UserService {
         RedisRefreshToken redisRefreshToken = new RedisRefreshToken(jwt.getRefreshToken(), jwt.getAccessToken(), loginId);
         redisRefreshTokenRepository.save(redisRefreshToken);
     }
+
+    //AccessToken에서 userId 빼내는 메소드
+    @Override
+    public int getUserIdByAccessToken(String accessToken) {
+        Claims claims = jwtProvider.getClaims(accessToken);
+        String loginId = claims.getSubject();
+
+        if (userRepository.findByLoginId(loginId).isPresent()) {
+            User user = userRepository.findByLoginId(loginId).get();
+            int userId = user.getId();
+            return userId;
+        } else {
+            return -1;
+        }
+    }
 }

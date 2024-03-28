@@ -17,6 +17,9 @@ const Step3 = () => {
   const [zipCode, setZipCode] = useState("");
   const [address, setAddress] = useState("");
 
+  const [checkZipCode, setCheckZipCode] = useState(false);
+  const [checkAddress, setCheckAddress] = useState(false);
+
   const postSodeUrl =
     "//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js";
   const open = useDaumPostcodePopup(postSodeUrl);
@@ -25,6 +28,24 @@ const Step3 = () => {
     open({ onComplete: completeAddreses });
   };
 
+  // 조건 체크
+  useEffect(() => {
+    if (zipCode.length > 0) {
+      setCheckZipCode(true);
+    } else {
+      setCheckZipCode(false);
+    }
+  }, [zipCode]);
+
+  useEffect(() => {
+    if (address.length > 0) {
+      setCheckAddress(true);
+    } else {
+      setCheckAddress(false);
+    }
+  }, [address]);
+
+  // 주소 저장
   const completeAddreses = (data) => {
     // 우편번호 저장
     setZipCode(data.zonecode);
@@ -55,15 +76,17 @@ const Step3 = () => {
 
       <img src={line} className={`${style.line}`} />
 
-      <button
-        className={`${style.nextButton}`}
-        style={{ backgroundColor: "#EEB233", color: "#1C1C1C" }}
-        onClick={clickSignup}
-      >
-        가입하기
-      </button>
+      {checkZipCode && checkAddress && (
+        <button
+          className={`${style.nextButton}`}
+          style={{ backgroundColor: "#EEB233", color: "#1C1C1C" }}
+          onClick={clickSignup}
+        >
+          가입하기
+        </button>
+      )}
 
-      {/* {(checkNickname && checkPw) || (
+      {(checkZipCode && checkAddress) || (
         <button
           className={`${style.nextButton}`}
           style={{
@@ -74,7 +97,7 @@ const Step3 = () => {
         >
           가입하기
         </button>
-      )} */}
+      )}
     </div>
   );
 };
