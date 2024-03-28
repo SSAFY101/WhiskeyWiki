@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "../modal/Modal";
 import MyBarDetail from "./MyBarDetail";
 import MyBarBook from "./MyBarBook";
@@ -6,6 +6,44 @@ import style from "./MyBar.module.css";
 import { ShelfImage, BookImage, WhiskeyImages } from "./MyBarImages";
 
 function MyBar() {
+  const [whiskeyStatusList, setWhiskeyStatusList] = useState([]); // API Response 담을 변수 (빈 배열)
+
+  useEffect(() => {
+    // GET 요청: 위스키 보유 상태 리스트 조회
+    // axios({
+    //   method: "get",
+    //   url: "api/mybar/list",
+    // })
+    //   .then((res) => {
+    //     console.log("인식 위스키 정보 : ", res.data);
+    //     const data = res.data.data;
+    //     setWhiskeyStatusList(data);
+    //   })
+    //   .catch((err) => {
+    //     console.log("다른 유저의 My Bar 리스트 정보 ERROR :", err);
+    //   });
+
+    // API test 코드
+    setWhiskeyStatusList([
+      // {
+      // case 1. 위스키 없음
+      //   whiskeyId: 1,
+      //   isEmpty: false,
+      // },
+      {
+        // case 2. 위스키 보유
+        whiskeyId: 2,
+        isEmpty: false,
+      },
+      {
+        // case 3. 위스키 빈병
+        whiskeyId: 3,
+        isEmpty: true,
+      },
+    ]);
+  }, []);
+  console.log(whiskeyStatusList);
+
   // 모달 제어 - 1. 위스키 상세 모달
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
   const handleDetailCloseModal = () => {
@@ -18,31 +56,38 @@ function MyBar() {
     setIsBookModalOpen(false);
   };
 
-  // 개별 위스키 클릭 함수
+  // 개별 위스키 이미지 클릭 이벤트 핸들러 함수
   const [selectedWhiskey, setSelectedWhiskey] = useState(null);
   const handleWhiskeyClick = (whiskey) => {
     setSelectedWhiskey(whiskey);
     setIsDetailModalOpen(true);
   };
 
+  // 위스키 상태 표시 함수
+  const whiskeyStatus = (whiskeyId) => {
+    // whiskeyId와 whiskeyStatusList 안의 whiskeyId를 비교하여 상태를 결정합니다.
+    const whiskey = whiskeyStatusList.find(
+      (item) => item.whiskeyId === whiskeyId
+    );
+    if (whiskey) {
+      // whiskey가 존재하는 경우
+      if (!whiskey.isEmpty) {
+        // whiskey가 비어있지 않은 경우
+        return style.whiskeyEmpty;
+      } else {
+        // whiskey가 비어있는 경우
+        return style.whiskeyFull;
+      }
+    } else {
+      // whiskey가 존재하지 않는 경우
+      return style.whiskeyNone;
+    }
+  };
+
   // 뒤로가기 버튼
   const handleGoBack = () => {
     window.history.back();
   };
-
-  // 위스키 이미지 클릭 이벤트 핸들러 함수들
-  // const clickWhiskeys = [
-  //   () => console.log("Whiskey 클릭 이벤트 발생 1"),
-  //   () => console.log("Whiskey 클릭 이벤트 발생 2"),
-  //   () => console.log("Whiskey 클릭 이벤트 발생 3"),
-  //   () => console.log("Whiskey 클릭 이벤트 발생 4"),
-  //   () => console.log("Whiskey 클릭 이벤트 발생 5"),
-  //   () => console.log("Whiskey 클릭 이벤트 발생 6"),
-  //   () => console.log("Whiskey 클릭 이벤트 발생 7"),
-  //   () => console.log("Whiskey 클릭 이벤트 발생 8"),
-  //   () => console.log("Whiskey 클릭 이벤트 발생 9"),
-  //   () => console.log("Whiskey 클릭 이벤트 발생 10"),
-  // ];
 
   return (
     <div className={style.background}>
@@ -78,14 +123,13 @@ function MyBar() {
         {/* 위스키 이미지 */}
         {WhiskeyImages.map((whiskey, index) => (
           <img
-            // key={index}
             key={whiskey.whiskeyId}
             src={whiskey.imgUrl}
             alt=""
-            className={`${style.whiskey} ${
-              style[`whiskey${Math.floor(index / 10) + 1}`]
-            } ${style[`position${(index % 10) + 1}`]}`}
-            // onClick={clickWhiskeys[index]}
+            className={`${style.whiskey} ${whiskeyStatus(whiskey.whiskeyId)}
+             ${style[`whiskey${Math.floor(index / 10) + 1}`]} ${
+              style[`position${(index % 10) + 1}`]
+            }`}
             onClick={() => handleWhiskeyClick(whiskey)}
           />
         ))}
