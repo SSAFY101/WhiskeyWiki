@@ -77,6 +77,11 @@ function MyBarOther() {
     }
   };
 
+  // 나가기 버튼
+  const handleClose = () => {
+    window.close();
+  };
+
   // 거래 요청 버튼
   const startChat = () => {
     console.log("startChat");
@@ -84,6 +89,12 @@ function MyBarOther() {
 
   return (
     <div className={style.background}>
+      {/* 뒤로가기 버튼 */}
+      {/* 로그인한 유저 === Mybar페이지의 주인 => 뒤로가기 버튼 등장 */}
+      <button className={`${style.closeButton}`} onClick={handleClose}>
+        &lt; 나가기
+      </button>
+
       {/* 위스키 선반 */}
       <div>
         {[...Array(3)].map((_, index) => (
