@@ -1,11 +1,10 @@
-.container{
-
+.container {
   display: flex;
   background: transparent;
 }
-.cardContainer{
+.cardContainer {
   margin: 50px 30px 30px 30px;
   display: flex;
-  
+  flex-wrap: wrap;
 }
 
