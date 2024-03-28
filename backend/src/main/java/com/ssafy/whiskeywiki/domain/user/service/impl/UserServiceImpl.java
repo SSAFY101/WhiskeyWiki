@@ -85,8 +85,11 @@ public class UserServiceImpl implements UserService {
                 return null;
             }
 
+            redisRefreshTokenRepository.findByRefreshToken(refreshToken)
+                    .ifPresent(redisRefreshTokenRepository::delete);
+
             Optional<User> optionalUser = userRepository.findByLoginId(jwtClaims.getSubject());
-            if (optionalUser.isPresent()) { // 리프레시 토큰 유효성 체크
+            if (optionalUser.isPresent()) {
                 User user = optionalUser.get();
                 Map<String, Object> claims = new HashMap<>();
 
@@ -94,16 +97,33 @@ public class UserServiceImpl implements UserService {
                 String authenticateUserJson = objectMapper.writeValueAsString(authenticateUser);
 
                 claims.put(user.getLoginId(), authenticateUserJson);
-
                 Jwt jwt = jwtProvider.createJwt(claims, user.getLoginId());
-                updateRefreshToken(user.getLoginId(), jwt.getRefreshToken());
 
+                saveRefreshToken(jwt, user.getLoginId());
                 return jwt;
             }
-            return null;
+
+//            Optional<User> optionalUser = userRepository.findByLoginId(jwtClaims.getSubject());
+//            if (optionalUser.isPresent()) { // 리프레시 토큰 유효성 체크
+//                User user = optionalUser.get();
+//                Map<String, Object> claims = new HashMap<>();
+//
+//                AuthenticateUser authenticateUser = new AuthenticateUser(user.getLoginId());
+//                String authenticateUserJson = objectMapper.writeValueAsString(authenticateUser);
+//
+//                claims.put(user.getLoginId(), authenticateUserJson);
+//
+//                Jwt jwt = jwtProvider.createJwt(claims, user.getLoginId());
+//                updateRefreshToken(user.getLoginId(), jwt.getRefreshToken());
+//
+//                return jwt;
+//            }
+//            return null;
         } catch (Exception e){
             return null;
         }
+
+        return null;
     }
 
 //    private void tokenValidCheck(String refreshToken) throws Exception {

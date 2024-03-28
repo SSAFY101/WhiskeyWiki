@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import java.io.EOFException;
 import java.io.IOException;
 import java.util.Date;
 import java.util.Optional;
@@ -37,8 +38,19 @@ public class AuthFilter extends OncePerRequestFilter {
         }
 
         log.info("api filter init ....");
-        String accessToken = request.getHeader("Access-Token");
         try {
+//        String accessToken = request.getHeader("Access-Token");
+            String bearerToken = request.getHeader("authorization");
+            String accessToken = "";
+            log.info("bearer token(= {})", bearerToken);
+            if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
+                accessToken = bearerToken.substring(7);
+                log.info("access token(= {})", accessToken);
+            } else {
+                throw new EOFException();
+            }
+
+
             Claims claims = jwtProvider.getClaims(accessToken);
 
             // 만료 시간 확인
