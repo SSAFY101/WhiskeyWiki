@@ -2,9 +2,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://whiskeywiki.shop:3306/whiskeywikiDB?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
-    username: root
-    password: b101
+    url: jdbc:mysql://${MYSQL_HOST}:3306/whiskeywikiDB?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: ${MYSQL_USER}
+    password: ${MYSQL_PASSWORD}
 
   sql:
     init:
@@ -13,3 +13,12 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
+
+  data:
+    redis:
+      lettuce:
+        cluster:
+          refresh:
+            adaptive: true
+      host: ${REDIS_HOST}
+      port: 6379
