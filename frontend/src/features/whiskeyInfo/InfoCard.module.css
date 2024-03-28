@@ -1,3 +1,8 @@
+.container{
+  background: transparent;
+  margin: 50px 0 0 0;
+}
+
 .outerCard{
   display: flex;
   justify-content: center;
@@ -7,15 +12,14 @@
   border-radius: 30px;
   align-items: center;
   text-align: center;
-  margin-top: 5%;
-  margin-right: 30%;
-  margin-left: 30%;
+  margin-right: 30px;
+  margin-left: 30px;
   overflow: hidden;
   cursor:pointer;
 }
 /*outerCard의 하위 요소에 모두 적용*/
 .outerCard *{
-  background-color: #555555;
+  background: transparent;
 }
 .outerCard img{
   max-width: 80%;

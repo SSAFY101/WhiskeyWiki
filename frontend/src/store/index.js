@@ -6,11 +6,12 @@ import userSlice from "./slices/user";
 import registerSlice from "./slices/register";
 import exchangeSlice from "./slices/exchange";
 import signupSlice from "./slices/signup";
+import whiskeyInfoSlice from "./slices/whiskeyInfo";
 
 const persistConfig = {
   key: "root", // localStorage key
   storage, // localStorage
-  whitelist: ["user", "register", "exchange", "signup"], // 스토리지에 저장할 리덕스 모듈을 나열
+  whitelist: ["user", "register", "exchange", "signup","whiskeyInfo"], // 스토리지에 저장할 리덕스 모듈을 나열
 };
 
 const rootReducer = combineReducers({
@@ -18,6 +19,8 @@ const rootReducer = combineReducers({
   register: registerSlice.reducer,
   exchange: exchangeSlice.reducer,
   signup: signupSlice.reducer,
+  whiskeyInfo: whiskeyInfoSlice.reducer,
+
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
