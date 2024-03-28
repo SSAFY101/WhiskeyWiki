@@ -30,7 +30,7 @@ function Navbar({ onUserIconClick }) {
         .catch((err) => {
           console.log("토큰 재발급 실패", err);
           if (err.response.status == 401) {
-            alert("다시 로그인해주세요.");
+            // alert("다시 로그인해주세요.");
             dispatch(userAction.setNickname(null));
           }
         });
