@@ -3,12 +3,10 @@ server:
     context-path: /api
   port: 5000
 
-
 # DB와 secret key 세팅 값
 spring:
   profiles:
     include: local
-
 
   jpa:
     properties:
@@ -32,6 +30,6 @@ spring:
         cluster:
           refresh:
             adaptive: true
-      host: localhost
-      port: 6379
+      host: whiskeywiki.shop
+      port: 6380
 #    database-platform: org.hibernate.dialect.H2Dialect

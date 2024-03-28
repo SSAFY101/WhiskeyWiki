@@ -128,6 +128,7 @@ public class UserServiceImpl implements UserService {
     private void saveRefreshToken(Jwt jwt, String loginId) {
         RedisRefreshToken redisRefreshToken = new RedisRefreshToken(jwt.getRefreshToken(), jwt.getAccessToken(), loginId);
         redisRefreshTokenRepository.save(redisRefreshToken);
+    }
 
     //AccessToken에서 userId 빼내는 메소드
     @Override
@@ -135,12 +136,11 @@ public class UserServiceImpl implements UserService {
         Claims claims = jwtProvider.getClaims(accessToken);
         String loginId = claims.getSubject();
 
-        if(userRepository.findByLoginId(loginId).isPresent()){
+        if (userRepository.findByLoginId(loginId).isPresent()) {
             User user = userRepository.findByLoginId(loginId).get();
             int userId = user.getId();
             return userId;
-        }
-        else{
+        } else {
             return -1;
         }
     }

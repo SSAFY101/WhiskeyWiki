@@ -41,8 +41,9 @@ public class AuthController {
 
         // HTTP 헤더 설정 (access token, refresh token)
         HttpHeaders headers = new HttpHeaders();
-        headers.set("Access-Token", jwtAndNickName.getAccessToken());
-        headers.set("Refresh-Token", jwtAndNickName.getRefreshToken());
+//        headers.set("Access-Token", jwtAndNickName.getAccessToken());
+//        headers.set("Refresh-Token", jwtAndNickName.getRefreshToken());
+        headers.set("Authorization", "Bearer " + jwtAndNickName.getAccessToken());
 
         // COOKIE 설정 (refresh token)
         ResponseCookie refreshTokenCookie = ResponseCookie.from("Refresh-Token", jwtAndNickName.getRefreshToken())
