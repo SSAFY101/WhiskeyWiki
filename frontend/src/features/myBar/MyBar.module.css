@@ -6,7 +6,7 @@
 
 /* 배경 */
 .background {
-  background-image: url("../../assets/images/whiskey/MyBar_Wall.jpg");
+  background-image: url("../../assets/images/mybar/wall.jpg");
   background-size: cover;
   margin: 0;
   padding: 0;
@@ -63,6 +63,15 @@
   bottom: 37%;
   right: 5%;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* 그림자 효과를 추가합니다. */
+}
+
+/* 위스키 보유 관련 */
+.whiskeyNone {
+  opacity: 0; /* 투명도를 30%로 설정합니다. */
+}
+
+.whiskeyEmpty {
+  opacity: 0.3; /* 투명도를 30%로 설정합니다. */
 }
 
 /* 위스키 */

@@ -1,15 +1,15 @@
 const WhiskeyImages = [
   {
-    nameEn: "Absolut",
-    imgUrl: require("../../../assets/images/whiskey/Absolut.png"),
+    nameEn: "Absolute",
+    imgUrl: require("../../../assets/images/whiskey/Absolute.png"),
   },
   {
     nameEn: "Jack-Daniels",
-    imgUrl: require("../../../assets/images/whiskey/Jack-Daniels.png"),
+    imgUrl: require("../../../assets/images/whiskey/Jack_Daniels_No7.png"),
   },
   {
     nameEn: "Jim-Beam",
-    imgUrl: require("../../../assets/images/whiskey/Jim-Beam.png"),
+    imgUrl: require("../../../assets/images/whiskey/Jim_Beam.png"),
   },
   {
     nameEn: "Jagermeister",
@@ -17,7 +17,7 @@ const WhiskeyImages = [
   },
   {
     nameEn: "Johnie-Walker",
-    imgUrl: require("../../../assets/images/whiskey/Johnie-Walker.png"),
+    imgUrl: require("../../../assets/images/whiskey/Johnie_Walker_Black.png"),
   },
 ];
 
