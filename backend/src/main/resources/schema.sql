@@ -1,6 +1,6 @@
-    CREATE DATABASE IF NOT EXISTS whiskeywiki;
+--     CREATE DATABASE IF NOT EXISTS whiskeywiki;
 
-    use whiskeywiki;
+--     use whiskeywiki;
 
     CREATE TABLE IF NOT EXISTS users (
         user_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -45,7 +45,7 @@
         own_whiskey_id INT AUTO_INCREMENT PRIMARY KEY,
         user_id INT,
         whiskey_id INT,
-        is_empty TINYINT(1) DEFAULT 0,
+        is_empty TINYINT DEFAULT 0,
         FOREIGN KEY (user_id) REFERENCES users(user_id),
         FOREIGN KEY (whiskey_id) REFERENCES whiskey(whiskey_id)
     );
