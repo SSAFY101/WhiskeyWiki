@@ -9,6 +9,8 @@ function WhiskeySorter() {
         <select id="sort-select">
           <option value="name-asc">이름 순</option>
           <option value="name-desc">이름 역순</option>
+          <option value="abv-asc">도수 낮은순</option>
+          <option value="abv-desc">도수 높은순</option>
         </select>
 
       </div>
