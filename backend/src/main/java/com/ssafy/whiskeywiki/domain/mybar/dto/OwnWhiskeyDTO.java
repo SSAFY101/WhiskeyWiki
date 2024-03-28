@@ -14,6 +14,7 @@ public class OwnWhiskeyDTO {
     public static class WhiskeyStatus{
         private int whiskeyId;
         private String whiskeyNameKr;
+        private String whiskeyNameEn;
         private Boolean isEmpty;
     }
 }
