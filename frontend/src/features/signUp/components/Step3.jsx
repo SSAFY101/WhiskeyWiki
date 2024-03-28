@@ -16,7 +16,7 @@ import { useNavigate } from "react-router-dom";
 const Step3 = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.signUp.user);
+  const user = useSelector((state) => state.signup.user);
 
   const [zipCode, setZipCode] = useState("");
   const [address, setAddress] = useState("");
