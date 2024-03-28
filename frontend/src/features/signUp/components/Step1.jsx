@@ -80,6 +80,7 @@ const Step1 = () => {
 
   // 다음으로 버튼 클릭
   const clickNextButton = () => {
+    dispatch(signupAction.stepOne(userId, userPassword));
     dispatch(signupAction.pageTwo());
   };
 
@@ -189,6 +190,7 @@ const Step1 = () => {
             color: "#5A5A5A",
             cursor: "not-allowed",
           }}
+          disabled
         >
           다음으로
         </button>

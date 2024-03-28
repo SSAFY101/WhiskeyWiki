@@ -50,7 +50,17 @@ function Login() {
         instance.defaults.headers.common["Authorization"] = `${accessToken}`;
         instance.defaults.headers.post["Content-Type"] = "application/json";
 
-        // navigate("/");
+        // test
+        const cookies = res.headers["set-cookie"];
+
+        console.log(cookies);
+
+        // 쿠키가 있다면 클라이언트의 브라우저에 저장
+        if (cookies) {
+          document.cookie = cookies.join(";");
+        }
+
+        navigate("/");
       })
 
       .catch((err) => {

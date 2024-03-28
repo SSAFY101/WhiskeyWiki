@@ -25,19 +25,22 @@ const getNewToken = () => {
   console.log("getNewToken");
   // 재발급 요청
   axios
-    .post("http://localhost:5000/api/auth/refresh")
+    .post("http://localhost:5000/api/auth/refresh", null, {
+      withCredentials: true,
+    })
     .then((res) => {
       console.log("토큰 재발급", res);
-      // const accessToken = res.headers["authorization"];
+      const accessToken = res.headers["authorization"];
 
-      // instance.defaults.headers.common["Authorization"] = `${accessToken}`;
-      // instance.defaults.headers.post["Content-Type"] = "application/json";
+      instance.defaults.headers.common["Authorization"] = `${accessToken}`;
+      instance.defaults.headers.post["Content-Type"] = "application/json";
     })
     .catch((err) => {
       console.log("토큰 재발급 실패", err);
       if (err.response.status == 401) {
-        alert("다시 로그인해주세요.");
-        autoLogout();
+        console.log("401");
+        // alert("다시 로그인해주세요.");
+        // autoLogout();
       }
     });
 };
@@ -45,7 +48,7 @@ const getNewToken = () => {
 const autoLogout = () => {
   // 리프래시 토큰 만료 로그아웃
   axios.defaults.headers.common["Authorization"] = null;
-  window.location.reload();
+  // window.location.reload();
 };
 
 export default instance;

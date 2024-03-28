@@ -15,27 +15,27 @@ function Navbar({ onUserIconClick }) {
   const dispatch = useDispatch();
   const nickName = useSelector((state) => state.user.nickName);
 
-  useEffect(() => {
-    const accessToken = instance.defaults.headers.common["Authorization"];
-    if (!accessToken) {
-      axios
-        .post("http://localhost:5000/api/auth/refresh")
-        .then((res) => {
-          console.log("토큰 재발급", res);
-          // const accessToken = res.headers["authorization"];
+  // useEffect(() => {
+  //   const accessToken = instance.defaults.headers.common["Authorization"];
+  //   if (!accessToken) {
+  //     axios
+  //       .post("http://localhost:5000/api/auth/refresh")
+  //       .then((res) => {
+  //         console.log("토큰 재발급", res);
+  //         // const accessToken = res.headers["authorization"];
 
-          // instance.defaults.headers.common["Authorization"] = `${accessToken}`;
-          // instance.defaults.headers.post["Content-Type"] = "application/json";
-        })
-        .catch((err) => {
-          console.log("토큰 재발급 실패", err);
-          if (err.response.status == 401) {
-            // alert("다시 로그인해주세요.");
-            dispatch(userAction.setNickname(null));
-          }
-        });
-    }
-  }, []);
+  //         // instance.defaults.headers.common["Authorization"] = `${accessToken}`;
+  //         // instance.defaults.headers.post["Content-Type"] = "application/json";
+  //       })
+  //       .catch((err) => {
+  //         console.log("토큰 재발급 실패", err);
+  //         if (err.response.status == 401) {
+  //           // alert("다시 로그인해주세요.");
+  //           dispatch(userAction.setNickname(null));
+  //         }
+  //       });
+  //   }
+  // }, []);
 
   const logoutTest = (e) => {
     e.preventDefault();

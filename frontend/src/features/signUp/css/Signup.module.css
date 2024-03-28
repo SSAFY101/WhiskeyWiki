@@ -76,6 +76,37 @@
   width: 28% !important;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox  */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.yearInput {
+  text-align: center;
+  margin: 0rem 0.1rem 0rem 1.2rem !important;
+  padding: 0.2rem 1rem !important;
+  width: 7% !important;
+}
+
+.monthInput {
+  text-align: center;
+  margin: 0rem 0.1rem 0rem 0rem !important;
+  padding: 0.2rem 1rem !important;
+  width: 4% !important;
+}
+
+.BDtext {
+  color: #c1c1c1;
+  font-size: 1.4rem;
+  margin-right: 1rem;
+}
+
 .inputContainer {
   display: flex;
   align-items: center;
