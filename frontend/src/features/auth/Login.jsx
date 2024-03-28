@@ -27,30 +27,24 @@ function Login() {
 
     // 로그인 요청
     axios
-      .post("http://localhost:5050/api/auth/login", {
+      .post("http://localhost:5000/api/auth/login", {
         loginId: userId,
         password: userPassword,
       })
       .then((res) => {
-        console.log("로그인", res);
-
+        // console.log("로그인", res);
         const data = res.data.data;
+
+        // 닉네임
         const nickName = data.nickName;
-        localStorage.setItem("nickName", "테스트");
+        localStorage.setItem("nickName", nickName);
 
-        const accessToken = res.headers["access-token"];
-        const refreshToken = res.headers["refresh-token"];
+        // 엑세스 토큰
+        const accessToken = res.headers["authorization"];
 
-        console.log("accessToken", accessToken); // test
-        console.log("refreshToken", refreshToken); // test
-
+        // axios 기본 설정
         axios.defaults.headers.post["Content-Type"] = "application/json";
-
-        localStorage.setItem("test", refreshToken);
-
-        axios.defaults.headers.common["Access-Token"] = `${accessToken}`;
-
-        console.log(axios.defaults.headers.common["Access-Token"]); // test
+        axios.defaults.headers.common["Authorization"] = `${accessToken}`;
 
         navigate("/");
       })

@@ -12,22 +12,16 @@ function Navbar({ onUserIconClick }) {
   const logoutTest = (e) => {
     e.preventDefault();
     if (window.confirm("로그아웃 하시겠습니까?")) {
-      console.log(axios.defaults.headers.common["Access-Token"]); // test
-
-      localStorage.removeItem("nickName");
-      window.location.reload();
-
       axios
-        .post("http://localhost:5050/api/auth/login")
+        .post("http://localhost:5000/api/auth/logout")
         .then((res) => {
-          console.log("로그아웃", res); // test
+          // console.log("로그아웃", res);
+
+          // 닉네임 삭제
           localStorage.removeItem("nickName");
 
-          axios.defaults.headers.common["Access-Token"] = null;
-
-          console.log(axios.defaults.headers.common["Access-Token"]); // test
-
-          // window.location.reload();
+          // axiois 기본 설정 제거
+          axios.defaults.headers.common["Authorization"] = null;
         })
         .catch((err) => {
           console.log("로그아웃 실패", err);

@@ -16,7 +16,7 @@ function Signup() {
   const page = useSelector((state) => state.signup.page);
 
   useEffect(() => {
-    dispatch(signupAction.pageOne());
+    dispatch(signupAction.pageThree());
   }, []);
 
   const renderStep = () => {
@@ -27,8 +27,6 @@ function Signup() {
         return <Step2 />;
       case 3:
         return <Step3 />;
-      default:
-        return <Step1 />;
     }
   };
 
@@ -38,7 +36,9 @@ function Signup() {
 
   return (
     <div className={`${style.container}`}>
-      <button onClick={navigateBack}>뒤로</button>
+      <div onClick={navigateBack} className={`${style.logo}`}>
+        WW
+      </div>
       <div className={`${style.signupContainer}`}>
         <div className={`${style.title}`}>회원가입</div>
         {renderStep()}

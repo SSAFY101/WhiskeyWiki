@@ -27,6 +27,7 @@
   padding: 0rem 1rem;
   height: 3rem;
   width: 20rem;
+  outline: none;
 }
 
 .login button {
