@@ -1,3 +1,4 @@
+// 로그인
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UseDispatch, useDispatch } from "react-redux";
@@ -29,10 +30,12 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    console.log(process.env.REACT_APP_API_URL);
+
     // 로그인 요청
     axios
       .post(
-        process.env.REACT_APP_API_URL + "/auth/login",
+        `${process.env.REACT_APP_API_URL}/auth/login`,
         {
           loginId: userId,
           password: userPassword,
@@ -42,11 +45,11 @@ function Login() {
         }
       )
       .then((res) => {
-        // console.log("로그인", res);
+        console.log("로그인", res);
         const data = res.data.data;
 
         // 닉네임 저장
-        const nickName = data.nickName;
+        const nickName = data.nickname;
         dispatch(userAction.setNickname(nickName));
 
         // 엑세스 토큰
