@@ -11,17 +11,13 @@ public class UserDTO {
 
     @Getter
     @Builder
-    public static class SignupRequest {
+    public static class RegisterRequest {
         private String loginId;
         private String password;
-        private String nickName;
+        private String nickname;
         private String address;
         private String gender;
         private int age;
-        @Column(precision = 13, scale = 10)
-        private BigDecimal latitude;
-        @Column(precision = 13, scale = 10)
-        private BigDecimal longitude;
     }
 
     @Getter
@@ -34,7 +30,7 @@ public class UserDTO {
     @Getter
     @Builder
     public static class LoginResponse {
-        private String nickName;
+        private String nickname;
     }
 
     @Getter
@@ -42,33 +38,17 @@ public class UserDTO {
     public static class LoginServiceToController {
         private String accessToken;
         private String refreshToken;
-        private String nickName;
-    }
-
-    @Getter
-    @Builder
-    public static class RegisterRequest {
-        private String loginId;
-        private String password;
-        private String nickName;
-
-        public User entity() {
-            return User.builder()
-                    .loginId(loginId)
-                    .password(password)
-                    .nickname(nickName)
-                    .build();
-        }
+        private String nickname;
     }
 
     @Getter
     public static class RegisterResponse {
         private final String userId;
-        private final String nickName;
+        private final String nickname;
 
         public RegisterResponse(User user){
             this.userId = user.getLoginId();
-            this.nickName = user.getNickname();
+            this.nickname = user.getNickname();
         }
     }
 }

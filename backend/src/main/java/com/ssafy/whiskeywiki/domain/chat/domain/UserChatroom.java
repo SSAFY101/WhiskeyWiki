@@ -29,7 +29,7 @@ public class UserChatroom {
 //    @JoinColumn(name = "chatroom_id")
     private Chatroom chatroom;
 
-    @OneToMany(mappedBy = "userChatroom")
+    @OneToMany(mappedBy = "userChatroom", cascade = CascadeType.REMOVE)
     @Builder.Default
     private List<Chat> chatList = new ArrayList<>();
 

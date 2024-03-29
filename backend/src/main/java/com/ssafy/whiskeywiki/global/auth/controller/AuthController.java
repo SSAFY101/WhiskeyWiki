@@ -24,24 +24,7 @@ import java.util.Optional;
 public class AuthController {
     private final UserRepository userRepository;
     private final UserService userService;
-//    private final UserRepository userRepository;
     private final RedisRefreshTokenRepository redisRefreshTokenRepository;
-
-    @GetMapping("/id")
-    private ResponseEntity<?> checkId(@RequestBody String loginId) {
-
-        Optional<User> optionalUser = userRepository.findByLoginId(loginId);
-        if (optionalUser.isPresent()) {
-            CommonResponse<Boolean> response = CommonResponse.<Boolean>builder()
-                    .status(HttpStatus.OK.value())
-                    .message("login success")
-                    .data(true).build();
-
-            return ResponseEntity.ok()
-                    .body(response);
-        }
-        return ResponseEntity.ok().body(CommonResponse.<String>builder().build());
-    }
 
 //    @PostMapping("/signup")
 //    private ResponseEntity<> signup(@RequestBody UserDTO)
@@ -58,22 +41,20 @@ public class AuthController {
         if (jwtAndNickName == null)
             return ResponseEntity.ok().body("login fail");
 
-        String nickName = jwtAndNickName.getNickName();
+        String nickName = jwtAndNickName.getNickname();
         log.info("nickname(= {})", nickName);
         redisRefreshTokenRepository.findByNickName(nickName)
                 .ifPresent(redisRefreshTokenRepository::delete);
 
-        UserDTO.LoginResponse loginResponse = UserDTO.LoginResponse.builder().nickName(jwtAndNickName.getNickName()).build();
+        UserDTO.LoginResponse loginResponse = UserDTO.LoginResponse.builder().nickname(jwtAndNickName.getNickname()).build();
         CommonResponse<UserDTO.LoginResponse> response = CommonResponse.<UserDTO.LoginResponse>builder()
                 .status(HttpStatus.OK.value())
                 .message("login success")
                 .data(loginResponse)
                 .build();
 
-        // HTTP 헤더 설정 (access token, refresh token)
+        // HTTP 헤더 설정 (access token)
         HttpHeaders headers = new HttpHeaders();
-//        headers.set("Access-Token", jwtAndNickName.getAccessToken());
-//        headers.set("Refresh-Token", jwtAndNickName.getRefreshToken());
         headers.set("Authorization", "Bearer " + jwtAndNickName.getAccessToken());
 
         // COOKIE 설정 (refresh token)
@@ -121,15 +102,13 @@ public class AuthController {
     public ResponseEntity<Jwt> tokenRefresh(/*@RequestHeader(name = "Refresh-Token") String refreshToken*/
     HttpServletRequest request) {
 
-        String refreshToken = "";
+        String refreshToken = null;
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
             for (Cookie cookie : cookies) {
                 if ("Refresh-Token".equals(cookie.getName())) {
                     refreshToken = cookie.getValue();
                     log.info("refresh token(= {})", refreshToken);
-
-
                 }
             }
         }

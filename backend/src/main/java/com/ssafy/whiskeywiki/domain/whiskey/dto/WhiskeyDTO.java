@@ -36,4 +36,14 @@ public class WhiskeyDTO {
         private double abv;
         private int price;
     }
+
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Data
+    public static class WhiskeyNameData{
+        private String whiskeyNameKr;
+        private String whiskeyNameEn;
+    }
+
 }

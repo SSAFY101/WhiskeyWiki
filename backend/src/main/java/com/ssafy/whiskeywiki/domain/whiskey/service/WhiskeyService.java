@@ -25,4 +25,6 @@ public interface WhiskeyService {
     //위스키id로 만들 수 있는 칵테일 추천해주기
     List<CocktailDTO.CocktailInfo> recommendCocktail(int whiskeyId);
 
+    //전체 위스키 목록의 이름을 반환
+    List<WhiskeyDTO.WhiskeyNameData> getAllWhikseyName();
 }

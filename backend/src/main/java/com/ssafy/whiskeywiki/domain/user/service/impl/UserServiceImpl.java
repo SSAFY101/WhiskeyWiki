@@ -30,11 +30,11 @@ public class UserServiceImpl implements UserService {
     private final JwtProvider jwtProvider;
     private final ObjectMapper objectMapper;
 
-    @Override
-    public UserDTO.RegisterResponse registerUser(UserDTO.RegisterRequest request) {
-        User user = userRepository.save(request.entity());
-        return new UserDTO.RegisterResponse(user);
-    }
+//    @Override
+//    public UserDTO.RegisterResponse registerUser(UserDTO.RegisterRequest request) {
+//        User user = userRepository.save(request.entity());
+//        return new UserDTO.RegisterResponse(user);
+//    }
 
     @Override
     public UserDTO.LoginServiceToController login(UserDTO.LoginRequest loginRequest) {
@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
                 return UserDTO.LoginServiceToController.builder()
                         .accessToken(jwt.getAccessToken())
                         .refreshToken(jwt.getRefreshToken())
-                        .nickName(user.getNickname())
+                        .nickname(user.getNickname())
                         .build();
             }
             return null;
@@ -68,11 +68,11 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    @Override
-    public void updateRefreshToken(String loginId, String refreshToken) {
-        Optional<User> user = userRepository.findByLoginId(loginId);
-        user.ifPresent(u -> u.updateRefreshToken(refreshToken));
-    }
+//    @Override
+//    public void updateRefreshToken(String loginId, String refreshToken) {
+//        Optional<User> user = userRepository.findByLoginId(loginId);
+//        user.ifPresent(u -> u.updateRefreshToken(refreshToken));
+//    }
 
     @Override
     public Jwt refreshToken(String refreshToken) {  // 리프레시 토큰 기반 JWT 생성 로직
