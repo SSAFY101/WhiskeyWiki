@@ -1,5 +1,6 @@
 package com.ssafy.whiskeywiki.domain.mybar.service.impl;
 
+import com.ssafy.whiskeywiki.domain.cocktail.domain.Favorite;
 import com.ssafy.whiskeywiki.domain.cocktail.dto.CocktailDTO;
 import com.ssafy.whiskeywiki.domain.cocktail.dto.FavoriteDTO;
 import com.ssafy.whiskeywiki.domain.cocktail.repository.CocktailRepository;
@@ -21,10 +22,32 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class MyBarServiceImpl implements MyBarService{
+
     private final FavoriteRepository favoriteRepository;
     private final UserRepository userRepository;
     private final OwnWhiskeyRepository ownWhiskeyRepository;
 
+
+    @Override
+    public List<FavoriteDTO.FavoriteData> userFavoriteList(int userId) {
+        Optional<User> user = userRepository.findById(userId);
+        List<FavoriteDTO.FavoriteData> resultList = new ArrayList<>();
+        if(user.isPresent()){
+            List<Favorite> favoriteList = favoriteRepository.findByUser(user.get());
+
+            for(Favorite f : favoriteList){
+                int favoriteId = f.getId();
+                String cocktailName = f.getCocktail().getCocktailName();
+                String recipe = f.getCocktail().getReciepe();
+                String detail = f.getCocktail().getDetail();
+                FavoriteDTO.FavoriteData favoriteData = new FavoriteDTO.FavoriteData(favoriteId, cocktailName, recipe, detail);
+
+                resultList.add(favoriteData);
+            }
+
+        }
+        return resultList;
+    }
 
     @Override
     public List<OwnWhiskeyDTO.WhiskeyStatus> userOwnWhiskeyList(int userId) {
@@ -34,7 +57,7 @@ public class MyBarServiceImpl implements MyBarService{
 
         List<OwnWhiskeyDTO.WhiskeyStatus> whiskeyStatusList = new ArrayList<>();
         for(OwnWhiskey o : ownWhiskeyList){
-            OwnWhiskeyDTO.WhiskeyStatus whiskeyStatus = new OwnWhiskeyDTO.WhiskeyStatus(o.getUser().getId(), o.getWhiskey().getWhiskeyNameKr(), o.getWhiskey().getWhiskeyNameEn(),o.getIsEmpty());
+            OwnWhiskeyDTO.WhiskeyStatus whiskeyStatus = new OwnWhiskeyDTO.WhiskeyStatus(o.getUser().getId(),o.getIsEmpty());
             whiskeyStatusList.add(whiskeyStatus);
         }
 
