@@ -1,3 +1,4 @@
+// 아이디 중복 검사 - true/false 거꾸로 나오는 이슈
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { signupAction } from "../../../store/slices/signup";
@@ -39,28 +40,28 @@ const Step1 = () => {
   };
 
   // 조건
-  const checkValid = () => {
-    // 아이디 중복 검사
-    axios
-      .post("/api/users/valid/id", {
-        loginId: userId,
-      })
-      .then((res) => {
-        console.log("아이디 중복 검사", res);
-      })
-      .catch((err) => {
-        console.log("아이디 중복 검사 실패", err);
-      });
-  };
+  // const checkValid = () => {
+  //   // 아이디 중복 검사
+  //   axios
+  //     .post(`${process.env.REACT_APP_API_URL}/users/valid/id`, {
+  //       loginId: userId,
+  //     })
+  //     .then((res) => {
+  //       console.log("아이디 중복 검사", res);
+  //     })
+  //     .catch((err) => {
+  //       console.log("아이디 중복 검사 실패", err);
+  //     });
+  // };
 
   useEffect(() => {
     if (userId.length > 3) {
-      // 아이디 중복 체크 api 필요
+      // 아이디 중복 검사
       axios
-        .get(process.env.REACT_APP_API_URL + "/users/valid/" + userId)
+        .get(`${process.env.REACT_APP_API_URL}/users/id/${userId}`)
         .then((res) => {
           const isValid = res.data.data;
-          if (isValid) {
+          if (!isValid) {
             setCheckId(true);
           } else {
             setCheckId(false);
@@ -92,7 +93,7 @@ const Step1 = () => {
 
   // 다음으로 버튼 클릭
   const clickNextButton = () => {
-    dispatch(signupAction.stepOne(userId, userPassword));
+    dispatch(signupAction.stepOne({ userId, userPassword }));
     dispatch(signupAction.pageTwo());
   };
 
@@ -108,7 +109,7 @@ const Step1 = () => {
           onChange={changeUserId}
           spellCheck="false"
           maxLength="12"
-          onBlur={checkValid}
+          // onBlur={checkValid}
           style={{
             border:
               userId.length === 0
