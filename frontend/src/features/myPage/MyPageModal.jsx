@@ -22,7 +22,7 @@ function MyPageModal({ onClose }) {
           <img src={AlertIcon}></img>
           <p>채팅</p>
         </div>
-        <p className={style.alertCount}>!!</p>
+        <p className={style.lertCount}>!!</p>
       </div>
       <div className={style.innerLowerContainer}>
         <div
