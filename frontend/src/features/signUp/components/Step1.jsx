@@ -56,7 +56,19 @@ const Step1 = () => {
   useEffect(() => {
     if (userId.length > 3) {
       // 아이디 중복 체크 api 필요
-      setCheckId(true);
+      axios
+        .get(process.env.REACT_APP_API_URL + "/users/valid/" + userId)
+        .then((res) => {
+          const isValid = res.data.data;
+          if (isValid) {
+            setCheckId(true);
+          } else {
+            setCheckId(false);
+          }
+        })
+        .catch((err) => {
+          console.log("아이디 중복 검사 실패", err);
+        });
     } else {
       setCheckId(false);
     }
