@@ -1,9 +1,9 @@
-INSERT INTO users (login_id, password, nickname, address, gender, age, refresh_token, latitude, longitude)
+INSERT INTO users (login_id, password, nickname, address, gender, age, latitude, longitude)
 values
-('1234', '1234', '닉네임1', '도로명주소1 삼성화재 연수원', '남성', 20, 'refresh token1', 36.355359, 127.298385),
-('ssafy', '1234', '닉네임2', '도로명주소2 삼성화재 연수원', '여성', 21, 'refresh token2', 36.355212, 127.298924),
-('ssafy1', '1234', '닉네임3', '도로명주소3 한밭대 운동장', '여성', 22, 'refresh token3', 36.353544, 127.301025),
-('ssafy2', '1234', '닉네임4', '도로명주소4 한밭대 정문', '남성', 30, 'refresh token3', 36.350993, 127.298499);
+('1234', '1234', '닉네임1', '도로명주소1 삼성화재 연수원', '남성', 20, 36.355359, 127.298385),
+('ssafy', '1234', '닉네임2', '도로명주소2 삼성화재 연수원', '여성', 21, 36.355212, 127.298924),
+('ssafy1', '1234', '닉네임3', '도로명주소3 한밭대 운동장', '여성', 22, 36.353544, 127.301025),
+('ssafy2', '1234', '닉네임4', '도로명주소4 한밭대 정문', '남성', 30, 36.350993, 127.298499);
 
 INSERT INTO whiskey (whiskey_name_kr, whiskey_name_en, whiskey_flavor, abv, price, detail) VALUES
 ('앱솔루트', 'Absolute', 'NONE FLAVOR', 40, 35000, '앱솔루트 보드카’는 스웨덴의 400년 양조 전통이 낳은 최고의 산물로, 남부 아후스(Ahus) 지방에서 생산된 역사적인 보드카이다. ‘앱솔루트’는 천연재료로만 만들었으며, 설탕이 전혀 포함되지 않은 특유의 부드러움을 가지고 있는 제품이다.'), --2

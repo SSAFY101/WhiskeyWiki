@@ -4,6 +4,7 @@ import com.ssafy.whiskeywiki.domain.chat.domain.UserChatroom;
 import com.ssafy.whiskeywiki.domain.cocktail.domain.Favorite;
 //import com.ssafy.whiskeywiki.domain.trade.domain.TradeStatus;
 import com.ssafy.whiskeywiki.domain.mybar.domain.OwnWhiskey;
+import com.ssafy.whiskeywiki.domain.whiskey.domain.Review;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -41,9 +42,6 @@ public class User {
     @Builder.Default
     private int age = 0;
 
-    @Builder.Default
-    private String refreshToken = "";
-
     @Column(precision = 13, scale = 10)
     private BigDecimal latitude;
 
@@ -51,19 +49,22 @@ public class User {
     private BigDecimal longitude;
 
     //연관관계 매핑//
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    @Builder.Default
+    private List<Review> reviewList = new ArrayList<>();
 
     //2. 위스키 보유와 일대다
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     @Builder.Default
     private List<OwnWhiskey> ownWhiskeyList = new ArrayList<>();
 
     //3. 즐겨찾기와 일대다
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     @Builder.Default
     private List<Favorite> favoriteList = new ArrayList<>();
 
     //5. 유저 채팅방(User_ChatRooms)과 일대다
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     @Builder.Default
     private List<UserChatroom> userChatRoomList = new ArrayList<>();
 
@@ -72,7 +73,20 @@ public class User {
 //    @Builder.Default
 //    private List<TradeStatus> tradeStatusList = new ArrayList<>();
 
-    public void updateRefreshToken(String refreshToken) {
-        this.refreshToken = refreshToken;
+//    public void updateRefreshToken(String refreshToken) {
+//        this.refreshToken = refreshToken;
+//    }
+
+
+    public void updatePassword(String password) {
+        this.password = password;
+    }
+
+    public void updateNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public void updateAddress(String address) {
+        this.address = address;
     }
 }

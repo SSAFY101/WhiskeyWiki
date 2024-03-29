@@ -28,9 +28,16 @@ public class AuthFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
         // checking white label
-        String[] noFilterLabel = new String[] {"/api/auth", };    // Filter를 접근하지 않는 URLMapping
+        String[] noFilterLabel = new String[] {"/api/auth", "/api/users", "/api/whiskey", "/api/cocktail/recommend"};    // Filter를 접근하지 않는 URLMapping
+        String[] blackLabel = new String[] {"/api/whiskey/review/register"};    // black label
+        Loop1 :
         for (String url: noFilterLabel) {
             if (request.getRequestURI().startsWith(url)) {
+                for (String bLabel: blackLabel) {
+                   if (request.getRequestURI().startsWith(bLabel)) {
+                        break Loop1;
+                   }
+                }
                 log.info("white label ...");
                 filterChain.doFilter(request, response);
                 return;

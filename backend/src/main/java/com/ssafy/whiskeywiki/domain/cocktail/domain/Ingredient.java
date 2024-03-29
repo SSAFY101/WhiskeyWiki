@@ -22,7 +22,7 @@ public class Ingredient {
     private String name;
 
     //연관관계
-    @OneToMany(mappedBy = "ingredient")
+    @OneToMany(mappedBy = "ingredient", cascade = CascadeType.REMOVE)
     @Builder.Default
     private List<CocktailIngredient> cocktailIngredientList = new ArrayList<>();
 }
