@@ -17,20 +17,19 @@ function Navbar({ onUserIconClick }) {
 
   // useEffect(() => {
   //   const accessToken = instance.defaults.headers.common["Authorization"];
+
   //   if (!accessToken) {
   //     axios
   //       .post("http://localhost:5000/api/auth/refresh")
   //       .then((res) => {
-  //         console.log("토큰 재발급", res);
-  //         // const accessToken = res.headers["authorization"];
+  //         const accessToken = res.headers["authorization"];
 
-  //         // instance.defaults.headers.common["Authorization"] = `${accessToken}`;
-  //         // instance.defaults.headers.post["Content-Type"] = "application/json";
+  //         instance.defaults.headers.common["Authorization"] = `${accessToken}`;
+  //         instance.defaults.headers.post["Content-Type"] = "application/json";
   //       })
   //       .catch((err) => {
   //         console.log("토큰 재발급 실패", err);
   //         if (err.response.status == 401) {
-  //           // alert("다시 로그인해주세요.");
   //           dispatch(userAction.setNickname(null));
   //         }
   //       });

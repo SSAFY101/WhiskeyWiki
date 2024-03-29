@@ -51,5 +51,6 @@
 }
 
 .myPage {
+  z-index:4;
   cursor: pointer;
 }

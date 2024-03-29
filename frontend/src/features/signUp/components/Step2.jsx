@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { signupAction } from "../../../store/slices/signup";
 import axios from "axios";
-import ReactCalendar from "./Calendar";
 
 import style from "../css/Signup.module.css";
 
