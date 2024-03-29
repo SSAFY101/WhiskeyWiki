@@ -39,11 +39,14 @@ const Step2 = () => {
   const checkValid = () => {
     // 닉네임 중복 검사
     axios
-      .post("/api/users/valid/nickname", {
-        nickName: nickname,
-      })
+      .post(process.env.REACT_APP_API_URL + "/users/valid/" + nickname)
       .then((res) => {
-        console.log("닉네임 중복 검사", res);
+        const isValid = res.data.data;
+        if (isValid) {
+          setCheckNickname(true);
+        } else {
+          setCheckNickname(false);
+        }
       })
       .catch((err) => {
         console.log("닉네임 중복 검사 실패", err);
@@ -56,10 +59,10 @@ const Step2 = () => {
 
     // 한글 닉네임
     if (nickname.length > 1 && isKorean.test(nickname)) {
-      setCheckNickname(true);
+      checkValid();
       // 영어 닉네임
     } else if (nickname.length > 3 && isEnglish.test(nickname)) {
-      setCheckNickname(true);
+      checkValid();
     } else {
       setCheckNickname(false);
     }

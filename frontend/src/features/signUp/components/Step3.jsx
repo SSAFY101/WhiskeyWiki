@@ -64,7 +64,7 @@ const Step3 = () => {
 
   const signUp = () => {
     axios
-      .post("http://localhost:5000/api/users/register", user)
+      .post(process.env.REACT_APP_API_URL + "/users/register", user)
       .then((res) => {
         console.log("회원가입", res);
         alert("회원가입이 완료되었습니다."); // 페이지 따로 만들면 좋을듯
