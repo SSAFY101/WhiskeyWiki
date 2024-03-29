@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
@@ -29,7 +30,18 @@ function WhiskeyInfo() {
     setFilteredWhiskey(filtered);
     setDisplayedWhiskeys(filtered);
   };
-
+  // 위스키 목록 불러오기
+  const fetchWhiskeyList = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_URL}/whiskey/list`
+      );
+      console.log("위스키 목록 조회 성공", response.data);
+    } catch (error) {
+      console.error("에러 발생", error);
+    }
+  };
+  fetchWhiskeyList();
   const whiskeys = [
     {
       nameKr: "앱솔루트",
