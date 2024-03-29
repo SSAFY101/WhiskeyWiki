@@ -4,7 +4,7 @@ import axios from "axios";
 // const { dispatch } = store;
 
 const instance = axios.create({
-  baseURL: "",
+  baseURL: process.env.REACT_APP_API_URL,
   timeout: 5000,
   headers: {
     withCredentials: true,

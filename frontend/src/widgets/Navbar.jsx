@@ -41,7 +41,7 @@ function Navbar({ onUserIconClick }) {
 
     if (window.confirm("로그아웃 하시겠습니까?")) {
       instance
-        .post("http://localhost:5000/api/auth/logout")
+        .post(process.env.REACT_APP_API_URL + "/auth/logout")
         .then((res) => {
           console.log("로그아웃", res);
 
