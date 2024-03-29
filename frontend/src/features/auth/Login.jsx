@@ -31,12 +31,18 @@ function Login() {
 
     // 로그인 요청
     axios
-      .post("http://localhost:5000/api/auth/login", {
-        loginId: userId,
-        password: userPassword,
-      })
+      .post(
+        "http://localhost:5000/api/auth/login",
+        {
+          loginId: userId,
+          password: userPassword,
+        },
+        {
+          withCredentials: true,
+        }
+      )
       .then((res) => {
-        console.log("로그인", res);
+        // console.log("로그인", res);
         const data = res.data.data;
 
         // 닉네임 저장
@@ -49,16 +55,6 @@ function Login() {
         // axios 설정
         instance.defaults.headers.common["Authorization"] = `${accessToken}`;
         instance.defaults.headers.post["Content-Type"] = "application/json";
-
-        // test
-        const cookies = res.headers["set-cookie"];
-
-        console.log(cookies);
-
-        // 쿠키가 있다면 클라이언트의 브라우저에 저장
-        if (cookies) {
-          document.cookie = cookies.join(";");
-        }
 
         navigate("/");
       })
