@@ -1,0 +1,34 @@
+server:
+  servlet:
+    context-path: /api
+  port: 8080
+
+# DB와 secret key 세팅 값
+spring:
+  profiles:
+    active: prd
+---
+spring:
+  profiles:
+    active: dev
+---
+spring:
+  profiles:
+    active: local
+
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+
+
+  h2:
+    console:
+      enabled: true
+
+
+  main:
+    allow-bean-definition-overriding: false
+
+#    database-platform: org.hibernate.dialect.H2Dialect
