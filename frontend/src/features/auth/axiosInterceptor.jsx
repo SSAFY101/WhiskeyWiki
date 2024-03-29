@@ -1,7 +1,7 @@
 import axios from "axios";
-import { userAction } from "../../store/slices/user";
+// import { userAction } from "../../store/slices/user";
 
-const { dispatch } = store;
+// const { dispatch } = store;
 
 const instance = axios.create({
   baseURL: "",
@@ -53,7 +53,7 @@ instance.interceptors.response.use(
 const autoLogout = () => {
   // 리프래시 토큰 만료 로그아웃
   instance.defaults.headers.common["Authorization"] = null;
-  dispatch(userAction.setNickname(null));
+  // dispatch(userAction.setNickname(null));
   window.location.reload();
 };
 
