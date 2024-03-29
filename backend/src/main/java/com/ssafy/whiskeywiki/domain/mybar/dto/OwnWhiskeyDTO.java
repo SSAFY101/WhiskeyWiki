@@ -13,8 +13,6 @@ public class OwnWhiskeyDTO {
     @Data
     public static class WhiskeyStatus{
         private int whiskeyId;
-        private String whiskeyNameKr;
-        private String whiskeyNameEn;
         private Boolean isEmpty;
     }
 }

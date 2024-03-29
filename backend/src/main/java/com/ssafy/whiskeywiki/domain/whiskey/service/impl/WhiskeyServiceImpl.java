@@ -98,4 +98,16 @@ public class WhiskeyServiceImpl implements WhiskeyService {
     public List<CocktailDTO.CocktailInfo> recommendCocktail(int whiskeyId) {
         return null;
     }
+
+    @Override
+    public List<WhiskeyDTO.WhiskeyNameData> getAllWhikseyName() {
+        List<Whiskey> whiskeyList = whiskeyRepository.findAll();
+        List<WhiskeyDTO.WhiskeyNameData> resultList = new ArrayList<>();
+
+        for(Whiskey w : whiskeyList){
+            resultList.add(new WhiskeyDTO.WhiskeyNameData(w.getWhiskeyNameKr(), w.getWhiskeyNameEn()));
+        }
+
+        return resultList;
+    }
 }
