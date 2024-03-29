@@ -17,6 +17,7 @@ public class WhiskeyDTO {
     @NoArgsConstructor
     @Data
     public static class WhiskeySimpleInfo{
+        private int whiskeyId;
         private String whiskeyNameKr;
         private String whiskeyNameEn;
         private String whiskeyFlavor;
