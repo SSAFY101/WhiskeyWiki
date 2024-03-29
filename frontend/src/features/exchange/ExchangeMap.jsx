@@ -96,16 +96,17 @@ function Map() {
         '<div style="padding:5px; text-align: center;">' +
         `${bar.nickname}'s My Bar` +
         "<br>" +
-        // 10.-방법1) button 사용
+        // 10. 방법1) button 사용
         // `<button onclick=goToBar(${bar.userId})>` +
         // "이동" +
         // "</button>" +
 
-        // 10.-방법2) a태그 사용
-        `<a href="/mybar/${bar.userId}" style="color:black" target="_blank">` +
+        // 10. 방법2) a태그 사용
+        `<a href="/mybarOther?userId=${bar.userId}" style="color:black" target="_blank">` +
         "이동" +
         "</a>" +
         "</div>",
+
       latlng: new kakao.maps.LatLng(bar.latitude, bar.longitude),
     }));
 
