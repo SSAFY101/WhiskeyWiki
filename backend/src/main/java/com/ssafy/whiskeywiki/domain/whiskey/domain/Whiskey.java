@@ -33,7 +33,11 @@ public class Whiskey {
 
     private String detail;
 
-    @OneToMany(mappedBy = "whiskey", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "whiskey")
+    @Builder.Default
+    private List<Base> baseList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "whiskey")
     @Builder.Default
     private List<Review> reviewList = new ArrayList<>();
 }
