@@ -80,4 +80,16 @@ public class WhiskeyController {
     //위스키 선호도 통계 가져오기
 //    @GetMapping("/statistic/{whiskeyId}")
 
+    //위스키 전체 목록 이름 조회
+    @GetMapping("/list/name")
+    public ResponseEntity<CommonResponse> getAllWhikseyName(){
+        List<WhiskeyDTO.WhiskeyNameData> reusltList = whiskeyService.getAllWhikseyName();
+
+        return new ResponseEntity<>(CommonResponse.builder()
+                .status(HttpStatus.OK.value())
+                .message("위스키 이름 목록 조회 성공")
+                .data(reusltList)
+                .build(), HttpStatus.OK);
+    }
+
 }
