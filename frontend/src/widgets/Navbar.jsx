@@ -1,27 +1,56 @@
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { userAction } from "../store/slices/user";
+
 import axios from "axios";
+import instance from "../features/auth/axiosInterceptor";
+
 import style from "./Navbar.module.css";
 import UserIcon from "../assets/icon/UserIcon.svg";
-
 import myPageIcon from "../assets/images/nav/myPage.png";
 import myPageHoverIcon from "../assets/images/nav/myPage_hover.png";
+import { useEffect } from "react";
 
 function Navbar({ onUserIconClick }) {
-  const nickName = localStorage.getItem("nickName");
+  const dispatch = useDispatch();
+  const nickName = useSelector((state) => state.user.nickName);
+
+  // useEffect(() => {
+  //   const accessToken = instance.defaults.headers.common["Authorization"];
+  //   if (!accessToken) {
+  //     axios
+  //       .post("http://localhost:5000/api/auth/refresh")
+  //       .then((res) => {
+  //         console.log("토큰 재발급", res);
+  //         // const accessToken = res.headers["authorization"];
+
+  //         // instance.defaults.headers.common["Authorization"] = `${accessToken}`;
+  //         // instance.defaults.headers.post["Content-Type"] = "application/json";
+  //       })
+  //       .catch((err) => {
+  //         console.log("토큰 재발급 실패", err);
+  //         if (err.response.status == 401) {
+  //           // alert("다시 로그인해주세요.");
+  //           dispatch(userAction.setNickname(null));
+  //         }
+  //       });
+  //   }
+  // }, []);
 
   const logoutTest = (e) => {
     e.preventDefault();
+
     if (window.confirm("로그아웃 하시겠습니까?")) {
-      axios
+      instance
         .post("http://localhost:5000/api/auth/logout")
         .then((res) => {
-          // console.log("로그아웃", res);
+          console.log("로그아웃", res);
 
           // 닉네임 삭제
-          localStorage.removeItem("nickName");
+          dispatch(userAction.setNickname(null));
 
-          // axiois 기본 설정 제거
-          axios.defaults.headers.common["Authorization"] = null;
+          // axiois 설정 제거
+          instance.defaults.headers.common["Authorization"] = null;
         })
         .catch((err) => {
           console.log("로그아웃 실패", err);
