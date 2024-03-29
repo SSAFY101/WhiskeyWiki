@@ -26,9 +26,6 @@ public class AuthController {
     private final UserService userService;
     private final RedisRefreshTokenRepository redisRefreshTokenRepository;
 
-//    @PostMapping("/signup")
-//    private ResponseEntity<> signup(@RequestBody UserDTO)
-
     @PostMapping("/login")
     private ResponseEntity<?> login(@RequestBody UserDTO.LoginRequest request) {
         log.info("login init");
