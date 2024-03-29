@@ -8,10 +8,11 @@
   display:flex;
   justify-content:center;
   align-items:center;
-  z-index: 100; /* z-index 값을 증가 */
+  z-index: 3; /* z-index 값을 증가 */
 }
 
 .modalContent{
+  position:fixed;
   border-radius: 20px;
   position: fixed;
   display: flex;
@@ -22,7 +23,7 @@
   padding:20px;
   width:300px;
   height: 300px;
-  z-index: 101; /* z-index 값을 증가 */
+  z-index: 4; /* z-index 값을 증가 */
 }
 
 .CloseButton{
