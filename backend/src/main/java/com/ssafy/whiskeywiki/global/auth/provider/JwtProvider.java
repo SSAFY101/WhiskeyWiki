@@ -49,11 +49,15 @@ public class JwtProvider {
 
     public Date getExpireDateForAccessToken() {
         long expireTimeMills = 1000 * 60 * 60;
+        // +9 hours server time
+        long nineTimeMills = 1000 * 60 * 60 * 9;
         return new Date(System.currentTimeMillis() + expireTimeMills);
     }
 
     public Date getExpireDateForRefreshToken() {
         long expireTimeMills = 1000 * 60 * 60 * 24 * 7;
+        // +9 hours server time
+        long nineTimeMills = 1000 * 60 * 60 * 9;
         return new Date(System.currentTimeMillis() + expireTimeMills);
     }
 }

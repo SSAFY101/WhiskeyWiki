@@ -1,5 +1,4 @@
 --     CREATE DATABASE IF NOT EXISTS whiskeywiki;
--- -- CREATE SCHEMA IF NOT EXISTS whiskeywiki;
 
 --     use whiskeywiki;
 
@@ -11,7 +10,6 @@
         address VARCHAR(255) DEFAULT '',
         gender VARCHAR(255) DEFAULT '',
         age INT DEFAULT 0,
-        refresh_token VARCHAR(255) DEFAULT '',
         latitude DECIMAL(13, 10),
         longitude DECIMAL(13, 10)
     );
