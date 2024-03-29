@@ -8,6 +8,7 @@ import Navbar from "../widgets/Navbar";
 import Login from "../features/auth/Login";
 import SignUp from "../features/signUp/Signup";
 import Modal from "../features/modal/Modal";
+import ModalSmall from '../features/modal/ModalSmall'
 // 마이 바
 import MyBar from "../features/myBar/MyBar";
 import MyBarOther from "../features/myBar/MyBarOther";
@@ -94,9 +95,9 @@ const App = () => {
           </Modal>
         )} */}
         {isMyPageModalOpen && (
-          <Modal isOpen={isMyPageModalOpen} onClose={handleCloseModal}>
+          <ModalSmall isOpen={isMyPageModalOpen} onClose={handleCloseModal}>
             <MyPageModal onClose={handleCloseModal} />
-          </Modal>
+          </ModalSmall>
         )}
       </div>
     </Router>
