@@ -32,7 +32,7 @@ function Login() {
     // 로그인 요청
     axios
       .post(
-        "http://localhost:5000/api/auth/login",
+        process.env.REACT_APP_API_URL + "/auth/login",
         {
           loginId: userId,
           password: userPassword,

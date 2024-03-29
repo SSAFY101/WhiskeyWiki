@@ -61,5 +61,6 @@
   "devDependencies": {
     "@babel/preset-react": "^7.24.1",
     "tailwindcss": "^3.4.1"
-  }
+  },
+  "proxy": "http://dev.whiskeywiki.shop:9091/api"
 }
