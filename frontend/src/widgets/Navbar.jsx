@@ -98,11 +98,11 @@ function Navbar({ onUserIconClick }) {
         </li>
       </ul> */}
 
-      {/* <img
+      <img
         src={UserIcon}
         onClick={onUserIconClick}
         className={`${style.myPage}`}
-      /> */}
+      />
     </div>
   );
 }
