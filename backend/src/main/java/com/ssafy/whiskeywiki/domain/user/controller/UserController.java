@@ -25,7 +25,6 @@ import java.util.Optional;
 @RequestMapping("/users")
 public class UserController {
 
-    private final UserService userService;
     private final UserRepository userRepository;
     private final JwtProvider jwtProvider;
 
