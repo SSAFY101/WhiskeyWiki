@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { signupAction } from "../../../store/slices/signup";
+import axios from "axios";
 
 import style from "../css/Signup.module.css";
 
@@ -40,6 +41,16 @@ const Step1 = () => {
   // 조건
   const checkValid = () => {
     // 아이디 중복 검사
+    axios
+      .post("/api/users/valid/id", {
+        loginId: userId,
+      })
+      .then((res) => {
+        console.log("아이디 중복 검사", res);
+      })
+      .catch((err) => {
+        console.log("아이디 중복 검사 실패", err);
+      });
   };
 
   useEffect(() => {
@@ -69,6 +80,7 @@ const Step1 = () => {
 
   // 다음으로 버튼 클릭
   const clickNextButton = () => {
+    dispatch(signupAction.stepOne(userId, userPassword));
     dispatch(signupAction.pageTwo());
   };
 
@@ -178,6 +190,7 @@ const Step1 = () => {
             color: "#5A5A5A",
             cursor: "not-allowed",
           }}
+          disabled
         >
           다음으로
         </button>

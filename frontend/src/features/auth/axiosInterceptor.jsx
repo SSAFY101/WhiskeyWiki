@@ -3,11 +3,6 @@ import axios from "axios";
 const instance = axios.create({
   baseURL: "",
   timeout: 5000,
-  headers: {
-    post: {
-      "Content-Type": "application/json",
-    },
-  },
 });
 
 instance.interceptors.response.use(
@@ -15,7 +10,8 @@ instance.interceptors.response.use(
     return response;
   },
   async (error) => {
-    if (error.response.status == 401) {
+    console.log("------- interceptors response error -------"); // test
+    if (error.response.status == 400) {
       getNewToken();
 
       const response = await axios.request(error.config);
@@ -26,25 +22,33 @@ instance.interceptors.response.use(
 );
 
 const getNewToken = () => {
+  console.log("getNewToken");
   // 재발급 요청
   axios
-    .post("요청주소")
-    .then((response) => {
-      const accessToken = response.headers.accessToken;
-      axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+    .post("http://localhost:5000/api/auth/refresh", null, {
+      withCredentials: true,
     })
-    .catch((error) => {
-      if (error.response.status == 401) {
-        alert("다시 로그인해주세요.");
-        autoLogout();
+    .then((res) => {
+      console.log("토큰 재발급", res);
+      const accessToken = res.headers["authorization"];
+
+      instance.defaults.headers.common["Authorization"] = `${accessToken}`;
+      instance.defaults.headers.post["Content-Type"] = "application/json";
+    })
+    .catch((err) => {
+      console.log("토큰 재발급 실패", err);
+      if (err.response.status == 401) {
+        console.log("401");
+        // alert("다시 로그인해주세요.");
+        // autoLogout();
       }
     });
 };
 
 const autoLogout = () => {
   // 리프래시 토큰 만료 로그아웃
-  axios.defaults.headers.common["Authorization"] = ``;
-  localStorage.setItem("nickName", null);
+  axios.defaults.headers.common["Authorization"] = null;
+  // window.location.reload();
 };
 
 export default instance;

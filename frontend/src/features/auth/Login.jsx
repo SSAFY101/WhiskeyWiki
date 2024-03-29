@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import { UseDispatch, useDispatch } from "react-redux";
+import { userAction } from "../../store/slices/user";
 
+import axios from "axios";
 import instance from "./axiosInterceptor";
 
 import LoginButton from "./components/LoginButton";
@@ -9,7 +11,9 @@ import LoginButton from "./components/LoginButton";
 import style from "./css/auth.module.css";
 
 function Login() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const [userId, setUserId] = useState("");
   const [userPassword, setUserPassword] = useState("");
 
@@ -32,19 +36,29 @@ function Login() {
         password: userPassword,
       })
       .then((res) => {
-        // console.log("로그인", res);
+        console.log("로그인", res);
         const data = res.data.data;
 
-        // 닉네임
+        // 닉네임 저장
         const nickName = data.nickName;
-        localStorage.setItem("nickName", nickName);
+        dispatch(userAction.setNickname(nickName));
 
         // 엑세스 토큰
         const accessToken = res.headers["authorization"];
 
-        // axios 기본 설정
-        axios.defaults.headers.post["Content-Type"] = "application/json";
-        axios.defaults.headers.common["Authorization"] = `${accessToken}`;
+        // axios 설정
+        instance.defaults.headers.common["Authorization"] = `${accessToken}`;
+        instance.defaults.headers.post["Content-Type"] = "application/json";
+
+        // test
+        const cookies = res.headers["set-cookie"];
+
+        console.log(cookies);
+
+        // 쿠키가 있다면 클라이언트의 브라우저에 저장
+        if (cookies) {
+          document.cookie = cookies.join(";");
+        }
 
         navigate("/");
       })
