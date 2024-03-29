@@ -78,6 +78,12 @@ function Navbar({ onUserIconClick }) {
             <img src={myPageIcon} onClick={logoutTest} />
           </Link>
         )}
+        
+      <img
+        src={UserIcon}
+        onClick={onUserIconClick}
+        className={`${style.myPage}`}
+      />
 
         {/* <div onClick={onLoginClick} style={{ cursor: "pointer" }}>
           Login
@@ -98,11 +104,6 @@ function Navbar({ onUserIconClick }) {
         </li>
       </ul> */}
 
-      <img
-        src={UserIcon}
-        onClick={onUserIconClick}
-        className={`${style.myPage}`}
-      />
     </div>
   );
 }

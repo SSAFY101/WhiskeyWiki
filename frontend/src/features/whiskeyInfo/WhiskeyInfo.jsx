@@ -10,6 +10,7 @@ import WhiskeySorter from "./WhiskeySorter";
 import style from "./WhiskeyInfo.module.css";
 
 function WhiskeyInfo() {
+  const [whiskeys, setWhiskeys] = useState([]);
   const dispatch = useDispatch();
   // 정렬 순서 상태를 저장
   //기존값 한글 이름 오름차순
@@ -36,53 +37,21 @@ function WhiskeyInfo() {
       const response = await axios.get(
         `${process.env.REACT_APP_API_URL}/whiskey/list`
       );
-      console.log("위스키 목록 조회 성공", response.data);
+      console.log("위스키 목록 조회 성공", response.data.data);
+      setWhiskeys(response.data.data)
+      setDisplayedWhiskeys(response.data.data)
     } catch (error) {
       console.error("에러 발생", error);
     }
   };
-  fetchWhiskeyList();
-  const whiskeys = [
-    {
-      nameKr: "앱솔루트",
-      nameEn: "Absolute",
-      taste: "위스키 맛",
-      abv: "40도",
-      price: 10000,
-      rating: 5,
-    },
-    {
-      nameKr: "짐빔",
-      nameEn: "Jim_Beam",
-      taste: "위스키 맛2",
-      abv: "402도",
-      price: 100002,
-      rating: 2,
-    },
-    {
-      nameKr: "야호",
-      nameEn: "Kahlua",
-      taste: "위스키 맛2",
-      abv: "5000도",
-      price: 200000002,
-      rating: 2,
-    },
-    {
-      nameKr: "다른이름",
-      nameEn: "Malibu",
-      taste: "위스키 맛2",
-      abv: "5000도",
-      price: 200000002,
-      rating: 2,
-    },
-  ];
+ 
   //화면에 표시될 위스키 목록 따로 추가
   const [displayedWhiskeys, setDisplayedWhiskeys] = useState(whiskeys);
 
-  React.useEffect(() => {
+  useEffect(() => {
     //초기 로드시 모든 위스키를 보여줌
-    dispatch(setWhiskeys(whiskeys));
-  }, [dispatch]);
+    fetchWhiskeyList();
+  }, []);
 
   const navigate = useNavigate();
   const goToDetail = () => {
@@ -93,14 +62,14 @@ function WhiskeyInfo() {
     switch (sortOrder) {
       // 한글
       case "name-asc-kr":
-        return [...whiskeys].sort((a, b) => a.nameKr.localeCompare(b.nameKr));
+        return [...whiskeys].sort((a, b) => a.whiskeyNameKr.localeCompare(b.whiskeyNameKr));
       case "name-desc-kr":
-        return [...whiskeys].sort((a, b) => b.nameKr.localeCompare(a.nameKr));
+        return [...whiskeys].sort((a, b) => b.whiskeyNameKr.localeCompare(a.whiskeyNameKr));
       //영어
       case "name-asc-en":
-        return [...whiskeys].sort((a, b) => a.nameEn.localeCompare(b.nameEn));
+        return [...whiskeys].sort((a, b) => a.whiskeyNameEn.localeCompare(b.whiskeyNameEn));
       case "name-desc-en":
-        return [...whiskeys].sort((a, b) => b.nameEn.localeCompare(a.nameEn));
+        return [...whiskeys].sort((a, b) => b.whiskeyNameEn.localeCompare(a.whiskeyNameEn));
       //도수
       case "abv-asc":
         return [...whiskeys].sort(
@@ -138,10 +107,10 @@ function WhiskeyInfo() {
         <div className={style.cardContainer}>
           {displayedWhiskeys.map((item) => (
             <Infocard
-              key={item.nameEn}
-              nameKr={item.nameKr}
-              nameEn={item.nameEn}
-              taste={item.taste}
+              key={item.whiskeyNameEn}
+              nameKr={item.whiskeyNameKr}
+              nameEn={item.whiskeyNameEn}
+              taste={item.whiskeyFlavor}
               abv={item.abv}
               price={item.price}
               rating={item.rating}
