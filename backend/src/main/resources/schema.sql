@@ -18,6 +18,7 @@
         cocktail_id INT AUTO_INCREMENT PRIMARY KEY,
         reciepe VARCHAR(255),
         cocktail_name VARCHAR(255),
+        cocktail_name_en VARCHAR(255),
         detail VARCHAR(255)
     );
 

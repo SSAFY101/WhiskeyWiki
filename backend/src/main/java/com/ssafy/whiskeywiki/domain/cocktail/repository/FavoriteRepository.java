@@ -10,8 +10,8 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface FavoriteRepository extends JpaRepository<Favorite, Integer> {
     //유저가 즐겨찾기한 칵테일 리스트 가져오기
-    @Query("select f from Favorite f left outer join User u on f.user= :user")
-    List<FavoriteData> favoriteList(User user);
+//    @Query("select f from Favorite f left outer join User u on f.user= :user")
+    List<Favorite> findByUser(User user);
 
 //    @Query("select f from Favorite f left outer join Cocktail c on f.cocktail = :cocktail")
     List<Favorite> findByCocktail(Cocktail cocktail);
