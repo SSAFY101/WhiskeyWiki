@@ -21,25 +21,24 @@ import java.util.List;
 @RequestMapping("/mybar")
 @RequiredArgsConstructor
 public class MyBarController {
-    private final FavoriteService favoriteService;
     private final MyBarService myBarService;
     private final UserService userService;
 
-//    //즐겨찾기한 칵테일 목록 확인
-//    @GetMapping("/favorite/list")
-//    public ResponseEntity<CommonResponse> getFavoriteList(@RequestHeader(name = "Authorization") String accessToken) {
-//        int userId = userService.getUserIdByAccessToken(accessToken);
-//        List<FavoriteDTO.FavoriteData> favoriteDataList = myBarService.userFavoriteList(userId);
-//
-//        return new ResponseEntity<>(CommonResponse.builder()
-//                .status(HttpStatus.OK.value())
-//                .message("즐겨찾기한 칵테일 목록 조회 성공")
-//                .data(favoriteDataList)
-//                .build(), HttpStatus.OK);
-//
-//    }
+    //즐겨찾기한 칵테일 목록 확인
+    @GetMapping("/favorite/list")
+    public ResponseEntity<CommonResponse> getFavoriteList(@RequestHeader(name = "Access-Token") String accessToken) {
+        int userId = userService.getUserIdByAccessToken(accessToken);
+        List<FavoriteDTO.FavoriteData> favoriteDataList = myBarService.userFavoriteList(userId);
 
-    @GetMapping("/ownstatus/list")
+        return new ResponseEntity<>(CommonResponse.builder()
+                .status(HttpStatus.OK.value())
+                .message("즐겨찾기한 칵테일 목록 조회 성공")
+                .data(favoriteDataList)
+                .build(), HttpStatus.OK);
+
+    }
+
+    @GetMapping("/list")
     public ResponseEntity<CommonResponse> getOwnWhiskeyList(@RequestHeader(name = "Authorization")String accessToken){
         int userId = userService.getUserIdByAccessToken(accessToken);
 

@@ -3,7 +3,18 @@ server:
     context-path: /api
   port: 8080
 
+spring:
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+    defer-datasource-initialization: true
 
+#    database-platform: org.hibernate.dialect.H2Dialect
+
+
+---
 # DB와 secret key 세팅 값
 spring:
   profiles:
@@ -17,11 +28,3 @@ spring:
   profiles:
     active: local
 
-
-  jpa:
-    properties:
-      hibernate:
-        show_sql: true
-        format_sql: true
-    defer-datasource-initialization: true
-#    database-platform: org.hibernate.dialect.H2Dialect

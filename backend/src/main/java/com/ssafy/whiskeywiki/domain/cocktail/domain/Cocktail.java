@@ -23,6 +23,8 @@ public class Cocktail {
 
     private String cocktailName;
 
+    private String cocktailNameEn;
+
     private String detail;
 
     //연관관계

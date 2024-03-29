@@ -32,6 +32,8 @@ public class AuthController {
                 .password(request.getPassword())
                 .build());
 
+        System.out.println(loginResponse);
+
         if (loginResponse == null)
             return ResponseEntity.ok().body("fail");
 
