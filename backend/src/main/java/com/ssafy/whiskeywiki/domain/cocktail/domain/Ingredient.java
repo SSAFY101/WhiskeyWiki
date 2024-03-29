@@ -20,4 +20,9 @@ public class Ingredient {
     private int id;
 
     private String name;
+
+    //연관관계
+    @OneToMany(mappedBy = "ingredient")
+    @Builder.Default
+    private List<CocktailIngredient> cocktailIngredientList = new ArrayList<>();
 }

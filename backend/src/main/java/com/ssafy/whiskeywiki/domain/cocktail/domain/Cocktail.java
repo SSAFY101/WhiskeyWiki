@@ -38,4 +38,9 @@ public class Cocktail {
     @OneToMany(mappedBy = "cocktail")
     @Builder.Default
     private List<Base> baseList = new ArrayList<>();
+
+    //3, 즐겨찾기와 일대다 매핑
+    @OneToMany(mappedBy = "cocktail")
+    @Builder.Default
+    private List<Favorite> favoriteList = new ArrayList<>();
 }
