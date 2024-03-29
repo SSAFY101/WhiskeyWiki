@@ -1,15 +1,30 @@
+.container {
+  position: relative;
+  margin-top: -70px;
+}
+
 .head {
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
 }
 
-.container {
+.highlight {
+  font-size: 50px;
+  color: #eeb233;
+}
+
+.sorterandmap {
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
 
 .sorter {
-  margin-right: 20px; /* 오른쪽 여백 설정 */
+  width: 250px;
+  margin-right: 35px; /* 오른쪽 여백 설정 */
+}
+
+.map {
+  margin-right: 50px;
 }

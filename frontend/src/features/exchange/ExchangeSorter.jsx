@@ -1,13 +1,17 @@
 import { useCallback, useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { exchangeAction } from "../../store/slices/exchange";
-
-// 위스키 목록 (테스트용)
-const WhiskeyList = ["앱솔루트", "짐빔", "잭다니엘"];
+import { whiskeyList, whiskeyEnList } from "./ExchangeSorterWhiskeyList";
+import style from "./ExchangeSorter.module.css";
 
 function Sorter() {
   const [checkedWhiskeyList, setCheckedWhiskeyList] = useState([]); // 체크된 항목 목록
   const [isChecked, setIsChecked] = useState(false); // 선택 여부
+
+  // 컴포넌트가 처음 렌더링될 때, 전체 선택 (checkAllHandler를 호출)
+  useEffect(() => {
+    checkAllHandler();
+  }, []);
 
   // 4. Redux 활용 => checkedWhiskeyList 내용을 다른 컴포넌트에 넘겨주기
   const dispatch = useDispatch();
@@ -40,7 +44,7 @@ function Sorter() {
     // setIsChecked(!isChecked); // isChecked 상태를 토글해서 체크박스의 전체 선택 여부 업데이트
     checkedwhiskeyHandler(value, e.target.checked); // 함수 호출 => 체크된 항목 처리
 
-    if (checkedWhiskeyList.length === WhiskeyList.length + 1) {
+    if (checkedWhiskeyList.length === whiskeyList.length + 1) {
       setIsChecked(true); // 모든 항목이 선택되었으면 전체 선택 체크박스를 체크 상태로 설정
     } else {
       setIsChecked(false); // 그렇지 않으면 전체 선택 체크박스를 체크 해제 상태로 설정
@@ -53,7 +57,7 @@ function Sorter() {
   const checkAllHandler = () => {
     // 전체 선택
     if (!isChecked) {
-      const allChecked = WhiskeyList.slice(); // 현재 위스키 리스트를 복제하여 새 배열 생성
+      const allChecked = whiskeyList.slice(); // 현재 위스키 리스트를 복제하여 새 배열 생성
       setCheckedWhiskeyList(allChecked); // 모든 위스키를 선택 상태로 설정
       setIsChecked(true); // 전체 선택 체크박스의 상태를 true로 설정
     } else {
@@ -73,52 +77,59 @@ function Sorter() {
     [checkedWhiskeyList] // 의존성 배열에 checkedWhiskeyList를 지정 => checkedWhiskeyList가 변경될 때마다 함수 재성생
   );
 
-  // 컴포넌트가 처음 렌더링될 때, 전체 선택 (checkAllHandler를 호출)
-  useEffect(() => {
-    checkAllHandler();
-  }, []);
-
   return (
     <>
-      {/* <h2>Find Whiskey</h2> */}
-
       <form onSubmit={onSubmit}>
         <div className="checkbox-group">
           {/* 위스키 전체 선택 */}
-          <div className="checkbox">
+          <div className={style.checkbox}>
             <input
               type="checkbox"
               id="all"
               checked={isChecked}
               onChange={checkAllHandler}
             />
-            <label htmlFor="all">전체 선택</label>
+            <label className={style.nameKr} htmlFor="all">
+              전체 선택
+            </label>
           </div>
 
-          {/* 구분선(임시) */}
-          <p>---------------</p>
+          {/* 구분선 */}
+          <hr className={style.line} />
 
-          {/* 개별 위스키 선택 => WhiskeyList 순회하면서, 각 항목 화면에 표시 */}
-          {WhiskeyList.map((whiskey, idx) => (
-            <div className="checkbox" key={idx}>
-              {/* input 요소 렌더링 */}
-              <input
-                type="checkbox"
-                id={whiskey}
-                checked={checkedWhiskeyList.includes(whiskey)}
-                onChange={(e) => checkHandler(e, whiskey)}
-              />
-              {/* 라벨 요소 렌더링 => 체크박스 옆에 항목 이름 표시 */}
-              <label htmlFor={whiskey}>{whiskey}</label>
-            </div>
-          ))}
+          {/* 개별 위스키 선택 => whiskeyList 순회하면서, 각 항목 화면에 표시 */}
+          <div className={style.listbox}>
+            {whiskeyList.map((whiskey, idx) => (
+              <div className={style.checkbox} key={idx}>
+                {/* input 요소 렌더링 */}
+                <input
+                  type="checkbox"
+                  id={whiskey}
+                  checked={checkedWhiskeyList.includes(whiskey)}
+                  onChange={(e) => checkHandler(e, whiskey)}
+                />
+                {/* 라벨 요소 렌더링 => 체크박스 옆에 항목 이름 표시 */}
+                {/* 1) 한글이름 */}
+                <label className={style.nameKr} htmlFor={whiskey}>
+                  {whiskey}
+                </label>
+                <br />
+                {/* 2) 영어이름 */}
+                <label className={style.nameEn} htmlFor={whiskey}>
+                  {whiskeyEnList[idx]}
+                </label>
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* 구분선(임시) */}
-        <p>---------------</p>
+        {/* 구분선 */}
+        <hr className={style.line} />
 
         {/* 찾기 버튼 */}
-        <button type="submit">검색</button>
+        <button className={style.searchButton} type="submit">
+          My Bar 검색
+        </button>
       </form>
     </>
   );

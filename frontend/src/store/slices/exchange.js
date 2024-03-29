@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   checkedWhiskeyList: [],
+  otherbarCount: 0,
 };
 
 const exchangeSlice = createSlice({
@@ -10,6 +11,9 @@ const exchangeSlice = createSlice({
   reducers: {
     setCheckedWhiskeyList: (state, action) => {
       state.checkedWhiskeyList = action.payload;
+    },
+    setOtherbarCount: (state, action) => {
+      state.otherbarCount = action.payload;
     },
   },
 });
