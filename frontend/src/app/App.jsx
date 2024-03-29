@@ -76,7 +76,7 @@ const App = () => {
           <Route path="/chatRoom" element={<Chat />} />
           {/* 마이바 */}
           <Route path="/myBar" element={<MyBar />} />
-          <Route path="/myBar/123" element={<MyBarOther />} />
+          <Route path="/myBarOther" element={<MyBarOther />} />
           {/* 마이페이지 */}
           <Route path="/myPage" element={<MyPage />} />
           {/* 회원정보 */}
