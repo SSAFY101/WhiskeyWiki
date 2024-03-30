@@ -1,9 +1,11 @@
 package com.ssafy.whiskeywiki.domain.whiskey.service.impl;
 
 import com.ssafy.whiskeywiki.domain.cocktail.dto.CocktailDTO;
+import com.ssafy.whiskeywiki.domain.whiskey.domain.Review;
 import com.ssafy.whiskeywiki.domain.whiskey.domain.Whiskey;
 import com.ssafy.whiskeywiki.domain.whiskey.dto.SearchDTO;
 import com.ssafy.whiskeywiki.domain.whiskey.dto.WhiskeyDTO;
+import com.ssafy.whiskeywiki.domain.whiskey.repository.ReviewRepository;
 import com.ssafy.whiskeywiki.domain.whiskey.repository.WhiskeyRepository;
 import com.ssafy.whiskeywiki.domain.whiskey.service.WhiskeyService;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +19,7 @@ import java.util.List;
 public class WhiskeyServiceImpl implements WhiskeyService {
 
     private final WhiskeyRepository whiskeyRepository;
+    private final ReviewRepository reviewRepository;
 
     //전체 위스키 목록 가져오기
     @Override
@@ -25,6 +28,18 @@ public class WhiskeyServiceImpl implements WhiskeyService {
         List<WhiskeyDTO.WhiskeySimpleInfo> resultList = new ArrayList<>();
 
         for(Whiskey w : whiskeyList){
+
+            //이건 여기서 처리할 것이 아니라 whiskey나 review Entity에서 처리한뒤 보내줘야함! 나중에 리팩토링 하자.
+            List<Review> reviewList = reviewRepository.findByWhiskey(w);
+            double reviewRating = 0.0;
+
+            for(Review r : reviewList){
+                reviewRating += r.getReviewRating().getValue();
+            }
+            reviewRating = reviewRating / reviewList.size();
+            reviewRating = Math.round(reviewRating*10)/10.0;
+            System.out.println(w.getId() + " + " + reviewRating);
+
             WhiskeyDTO.WhiskeySimpleInfo whiskey = new WhiskeyDTO.WhiskeySimpleInfo();
             whiskey.setWhiskeyId(w.getId());
             whiskey.setWhiskeyNameKr(w.getWhiskeyNameKr());
@@ -32,6 +47,7 @@ public class WhiskeyServiceImpl implements WhiskeyService {
             whiskey.setWhiskeyFlavor(w.getWhiskeyFlavor());
             whiskey.setAbv(w.getAbv());
             whiskey.setPrice(w.getPrice());
+            whiskey.setReviewRating(reviewRating);
             resultList.add(whiskey);
         }
         return resultList;
