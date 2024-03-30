@@ -25,8 +25,8 @@ function WhiskeyInfo() {
   const handleSearch = (query) => {
     const filtered = whiskeys.filter(
       (whiskey) =>
-        whiskey.nameKr.toLowerCase().includes(query.toLowerCase()) ||
-        whiskey.nameEn.toLowerCase().includes(query.toLowerCase())
+        whiskey.whiskeyNameKr.toLowerCase().includes(query.toLowerCase()) ||
+        whiskey.whiskeyNameEn.toLowerCase().includes(query.toLowerCase())
     );
     setFilteredWhiskey(filtered);
     setDisplayedWhiskeys(filtered);
