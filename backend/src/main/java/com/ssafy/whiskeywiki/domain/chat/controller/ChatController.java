@@ -49,7 +49,7 @@ public class ChatController {
         // loginId
 
 
-        chatService.sendCustomMessages(chatRequest.getChatroomId(), loginId, loginId, content);
+//        chatService.sendCustomMessages(chatRequest.getChatroomId(), loginId, loginId);
 
 
         //        System.out.println("into pub/message" + chatRequest.getContent());

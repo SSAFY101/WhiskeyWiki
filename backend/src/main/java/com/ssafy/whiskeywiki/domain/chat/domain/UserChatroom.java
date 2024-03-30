@@ -17,7 +17,8 @@ import java.util.*;
 @Getter
 public class UserChatroom {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     @Column(name = "user_chatroom_id")
     private int id;
 
@@ -29,13 +30,14 @@ public class UserChatroom {
     @JoinColumn(name = "chatroom_id")
     private Chatroom chatroom;
 
-    @OneToMany(mappedBy = "userChatroom", cascade = CascadeType.REMOVE)
-    @Builder.Default
-    private List<Chat> chatList = new ArrayList<>();
-
-//    @OneToMany(mappedBy = "userChatroom")
-//    private List<Chat> chatList = new ArrayList<>();
-
     @Builder.Default
     private boolean tradeIntention = false;
+
+    private void updateUser(User user) {
+        this.user = user;
+    }
+
+    private void updateChatroom(Chatroom chatroom) {
+        this.chatroom = chatroom;
+    }
 }
