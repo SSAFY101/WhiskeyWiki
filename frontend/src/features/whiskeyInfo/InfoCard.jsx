@@ -10,10 +10,10 @@ function Infocard({ nameKr, nameEn, taste, abv, price, rating, onClick }) {
         <img className={style.whiskeyImg} src={image} alt="" />
         <div className={style.infoArea}>
           <h3>{nameEn}</h3>
-          <h3>{nameKr}</h3>
-          <h3>{abv}도</h3>
-          <h3>{taste}</h3>
-          <h3>{price}원</h3>
+          <p className={style.nameKr}>{nameKr}</p>
+          <h4>{abv}도</h4>
+          <h4>{taste}</h4>
+          <h4>{price}원</h4>
           <div className={style.rating}>{ratingStars}</div>
         </div>
       </div>

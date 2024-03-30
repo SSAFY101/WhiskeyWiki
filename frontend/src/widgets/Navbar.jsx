@@ -37,26 +37,26 @@ function Navbar({ onUserIconClick }) {
   //   }
   // }, []);
 
-  const logoutTest = (e) => {
-    e.preventDefault();
+  // const logoutTest = (e) => {
+  //   e.preventDefault();
 
-    if (window.confirm("로그아웃 하시겠습니까?")) {
-      instance
-        .post(`${process.env.REACT_APP_API_URL}/auth/logout`)
-        .then((res) => {
-          console.log("로그아웃", res);
+  //   if (window.confirm("로그아웃 하시겠습니까?")) {
+  //     instance
+  //       .post(`${process.env.REACT_APP_API_URL}/auth/logout`)
+  //       .then((res) => {
+  //         console.log("로그아웃", res);
 
-          // 닉네임 삭제
-          dispatch(userAction.setNickname(null));
+  //         // 닉네임 삭제
+  //         dispatch(userAction.setNickname(null));
 
-          // axiois 설정 제거
-          instance.defaults.headers.common["Authorization"] = null;
-        })
-        .catch((err) => {
-          console.log("로그아웃 실패", err);
-        });
-    }
-  };
+  //         // axiois 설정 제거
+  //         instance.defaults.headers.common["Authorization"] = null;
+  //       })
+  //       .catch((err) => {
+  //         console.log("로그아웃 실패", err);
+  //       });
+  //   }
+  // };
 
   return (
     <div className={`${style.container}`}>
@@ -75,16 +75,12 @@ function Navbar({ onUserIconClick }) {
       <div className={`${style.user}`}>
         {!nickName && <Link to="/login">Login</Link>}
         {nickName && (
-          <Link to="/myPage">
-            <img src={myPageIcon} onClick={logoutTest} />
-          </Link>
+          <img
+            src={UserIcon}
+            onClick={onUserIconClick}
+            className={`${style.myPage}`}
+          />
         )}
-        
-      <img
-        src={UserIcon}
-        onClick={onUserIconClick}
-        className={`${style.myPage}`}
-      />
 
         {/* <div onClick={onLoginClick} style={{ cursor: "pointer" }}>
           Login
@@ -104,7 +100,6 @@ function Navbar({ onUserIconClick }) {
           <Link to="/exchangeList">거래 목록</Link>
         </li>
       </ul> */}
-
     </div>
   );
 }
