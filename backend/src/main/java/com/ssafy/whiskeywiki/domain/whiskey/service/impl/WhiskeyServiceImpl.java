@@ -26,6 +26,7 @@ public class WhiskeyServiceImpl implements WhiskeyService {
 
         for(Whiskey w : whiskeyList){
             WhiskeyDTO.WhiskeySimpleInfo whiskey = new WhiskeyDTO.WhiskeySimpleInfo();
+            whiskey.setWhiskeyId(w.getId());
             whiskey.setWhiskeyNameKr(w.getWhiskeyNameKr());
             whiskey.setWhiskeyNameEn(w.getWhiskeyNameEn());
             whiskey.setWhiskeyFlavor(w.getWhiskeyFlavor());
