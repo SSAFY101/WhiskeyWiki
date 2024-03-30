@@ -34,7 +34,7 @@ public class FavoriteController {
 
     //칵테일 즐겨찾기 해제
     @DeleteMapping("/delete/{cocktailId}")
-    public ResponseEntity<CommonResponse> deleteFavorite(@RequestHeader(name = "AuthorizationaccessToken") String accessToken, @PathVariable(name = "cocktailId") int cocktailId){
+    public ResponseEntity<CommonResponse> deleteFavorite(@RequestHeader(name = "Authorization") String accessToken, @PathVariable(name = "cocktailId") int cocktailId){
 
         int userId = userService.getUserIdByAccessToken(accessToken);
         favoriteService.deleteFavorite(userId, cocktailId);
