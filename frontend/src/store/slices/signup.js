@@ -26,16 +26,16 @@ const signupSlice = createSlice({
       state.page = 3;
     },
     stepOne: (state, action) => {
-      state.loginId = action.payload.userId;
-      state.password = action.payload.userPassword;
+      state.user.loginId = action.payload.userId;
+      state.user.password = action.payload.userPassword;
     },
     stepTwo: (state, action) => {
-      state.nickName = action.payload.nickName;
-      state.age = action.payload.age;
-      state.gender = action.payload.gender;
+      state.user.nickName = action.payload.nickname;
+      state.user.age = action.payload.age;
+      state.user.gender = action.payload.gender;
     },
     stepThree: (state, action) => {
-      state.address = action.payload;
+      state.user.address = action.payload;
     },
   },
 });

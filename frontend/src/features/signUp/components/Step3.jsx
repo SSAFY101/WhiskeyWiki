@@ -1,3 +1,5 @@
+// 회원가입
+// 가입 완료 페이지 추가하면 좋을 듯
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { signupAction } from "../../../store/slices/signup";
@@ -55,20 +57,23 @@ const Step3 = () => {
     setZipCode(data.zonecode);
     // 주소 저장
     setAddress(data.roadAddress);
+    dispatch(signupAction.stepThree(address));
   };
 
   const clickSignup = () => {
-    dispatch(signupAction.stepThree(address));
+    console.log(address);
     signUp();
   };
 
+  // 회원가입 요청
   const signUp = () => {
+    console.log(user);
     axios
-      .post(process.env.REACT_APP_API_URL + "/users/register", user)
+      .post(`${process.env.REACT_APP_API_URL}/users/register`, user)
       .then((res) => {
         console.log("회원가입", res);
         alert("회원가입이 완료되었습니다."); // 페이지 따로 만들면 좋을듯
-        navigate("/");
+        // navigate("/");
       })
       .catch((err) => {
         console.log("회원가입 실패", err);
