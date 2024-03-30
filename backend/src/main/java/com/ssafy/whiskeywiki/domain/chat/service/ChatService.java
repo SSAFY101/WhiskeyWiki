@@ -1,10 +1,13 @@
 package com.ssafy.whiskeywiki.domain.chat.service;
 
 import com.ssafy.whiskeywiki.domain.chat.domain.Chat;
+import com.ssafy.whiskeywiki.domain.chat.domain.Chatroom;
 import com.ssafy.whiskeywiki.domain.chat.domain.UserChatroom;
 import com.ssafy.whiskeywiki.domain.chat.dto.ChatDTO;
 import com.ssafy.whiskeywiki.domain.chat.repository.ChatRepository;
+import com.ssafy.whiskeywiki.domain.chat.repository.ChatroomRepository;
 import com.ssafy.whiskeywiki.domain.user.domain.User;
+import com.ssafy.whiskeywiki.domain.user.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,10 +24,11 @@ import java.util.*;
 @RequiredArgsConstructor
 public class ChatService {
 
+    private final UserRepository userRepository;
     private final ChatRepository chatRepository;
-
-    @Autowired
-    SimpMessagingTemplate simpMessagingTemplate;
+    private final ChatroomRepository chatroomRepository;
+    private final ChatroomService chatroomService;
+    private final SimpMessagingTemplate simpMessagingTemplate;
 
     // 수신자 A, 수신자 B, 컨텐츠
     public void sendCustomMessages(String roomNumber, String userA, String userB, Object content) {
@@ -34,19 +38,28 @@ public class ChatService {
         simpMessagingTemplate.convertAndSendToUser(userB, "/topic/chatroom/" + roomNumber, content);
     }
 
-    public int saveChat(ChatDTO.ChatRequest chatRequest) {
+    public Chat saveChat(ChatDTO.ChatRequest chatRequest) {
 
-        System.out.println("chat room id: " + chatRequest.getChatroomId());
-//        System.out.println("user id: " + chatRequest.getUserId());
+        Optional<Chatroom> optionalChatroom = chatroomRepository.findById(chatRequest.getChatroomId());
+        if (optionalChatroom.isEmpty()) return null;
+        Chatroom chatroom = optionalChatroom.get();
 
-        Chat chat = chatRepository.save(Chat.builder()
-                        .userChatroom(UserChatroom.builder().id(chatRequest.getChatroomId()).build())
-                        .user(User.builder().id(chatRequest.getLoginId()).build())
-                        .message(chatRequest.getContent())
-                        .dateTime(LocalDateTime.now())
-                        .build());
+        Optional<User> optionalUser = userRepository.findByLoginId(chatRequest.getLoginId());
+        if (optionalUser.isEmpty()) return null;
+        User user = optionalUser.get();
 
-        return chat.getId();
+        String content = chatRequest.getContent();
+        LocalDateTime now = LocalDateTime.now();
+
+        chatroom.updateEditTime(now);
+        chatroom.updateLastChat(content);
+
+        return chatRepository.save(Chat.builder()
+                .chatroom(chatroom)
+                .user(user)
+                .message(content)
+                .dateTime(now)
+                .build());
     }
 
     public List<ChatDTO.ChatResponse> getChatList() {

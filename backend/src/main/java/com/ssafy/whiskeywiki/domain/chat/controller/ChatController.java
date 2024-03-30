@@ -35,31 +35,19 @@ public class ChatController {
     private final ChatRepository chatRepository;
 
     @MessageMapping("/message") // `/pub/message`
-    public void chat(ChatDTO.ChatRequest chatRequest, StompHeaderAccessor accessor,
-                     @Header("loginId") String loginId /* , @Header("pubId") String pubId */) {
+    public void chat(ChatDTO.ChatRequest chatRequest) {
         log.info("message(message = {})", chatRequest);
-        log.info("login id(= {})", loginId);
 
-        if (loginId.equals(chatRequest.getLoginId())) {
-            log.info("equals ...");
-        } else {
-            log.info("others ...");
-        }
-
-        // loginId
+        chatService.saveChat(chatRequest);
+        messageSendingOperations.convertAndSend("/topic/chatroom/" + chatRequest.getChatroomId(), chatRequest.getContent());
 
 
-//        chatService.sendCustomMessages(chatRequest.getChatroomId(), loginId, loginId);
-
-
-        //        System.out.println("into pub/message" + chatRequest.getContent());
-//        messageSendingOperations.convertAndSend("/sub/chat/room" + message.getRoomId(), message);
 //        int chatId = chatService.saveChat(chatRequest);
 //
 //        String id = accessor.getFirstNativeHeader("userId");
 //        System.out.println("init .... " + id);
-
-
+//
+//
 //        log.info("id(userId, pubId = {}, {})", userId, pubId);
 //        if (userId.equals(pubId)) {
 //            return;
@@ -70,16 +58,7 @@ public class ChatController {
 //                .content(chatRequest.getContent())
 //                .time(LocalDateTime.now())
 //                .build();
-
-        messageSendingOperations.convertAndSend("/topic/chatroom/" + chatRequest.getChatroomId(), chatRequest);
+//
+//        messageSendingOperations.convertAndSend("/topic/chatroom/" + chatRequest.getChatroomId(), chatRequest);
     }
 }
-
-//@MessageMapping("/message")
-//public void chat(ChatDTO.ChatRequest chatRequest, StompHeaderAccessor accessor) {
-//
-//    String id = accessor.getFirstNativeHeader("userId");
-//    System.out.println("init .... " + id);
-//
-//    messageSendingOperations.convertAndSend("/topic/chatroom/" + chatRequest.getChatroomId(), chatRequest);
-//}

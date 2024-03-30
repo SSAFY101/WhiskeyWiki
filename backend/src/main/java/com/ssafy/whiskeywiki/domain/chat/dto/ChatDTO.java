@@ -14,7 +14,7 @@ public class ChatDTO {
     @AllArgsConstructor
     @Builder
     public static class ChatRequest {
-        protected int loginId;
+        protected String loginId;
         protected int chatroomId;
         protected String content;
     }

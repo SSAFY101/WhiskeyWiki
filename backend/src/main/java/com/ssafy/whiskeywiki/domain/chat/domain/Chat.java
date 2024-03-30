@@ -23,8 +23,8 @@ public class Chat {
     private int id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_chatroom_id")
-    private UserChatroom userChatroom;
+    @JoinColumn(name = "chatroom_id")
+    private Chatroom chatroom;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")

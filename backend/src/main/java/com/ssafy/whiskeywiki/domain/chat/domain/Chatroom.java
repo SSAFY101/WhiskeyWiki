@@ -33,4 +33,12 @@ public class Chatroom {
     private LocalDateTime editTime;
 
     private String lastChat;
+
+    public void updateEditTime(LocalDateTime editTime) {
+        this.editTime = editTime;
+    }
+
+    public void updateLastChat(String lastChat) {
+        this.lastChat = lastChat;
+    }
 }
