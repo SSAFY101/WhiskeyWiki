@@ -7,10 +7,14 @@ import com.ssafy.whiskeywiki.domain.chat.repository.ChatRepository;
 import com.ssafy.whiskeywiki.domain.chat.service.ChatService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
+import org.springframework.messaging.simp.user.SimpUserRegistry;
 import org.springframework.stereotype.Controller;
 
 import java.time.LocalDateTime;
@@ -20,22 +24,46 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class ChatController {
 
+    @Autowired
+    SimpMessagingTemplate simpMessagingTemplate;
+
+    @Autowired
+    SimpUserRegistry simpUserRegistry;
+
     private final SimpMessageSendingOperations messageSendingOperations;
     private final ChatService chatService;
     private final ChatRepository chatRepository;
 
     @MessageMapping("/message") // `/pub/message`
-//    @SendTo("/topic/chatroom/")
-    public void chat(ChatDTO.ChatRequest chatRequest, StompHeaderAccessor accessor) {
-//        System.out.println("init ...");
+    public void chat(ChatDTO.ChatRequest chatRequest, StompHeaderAccessor accessor,
+                     @Header("loginId") String loginId /* , @Header("pubId") String pubId */) {
         log.info("message(message = {})", chatRequest);
-//        System.out.println("into pub/message" + chatRequest.getContent());
+        log.info("login id(= {})", loginId);
+
+        if (loginId.equals(chatRequest.getLoginId())) {
+            log.info("equals ...");
+        } else {
+            log.info("others ...");
+        }
+
+        // loginId
+
+
+        chatService.sendCustomMessages(chatRequest.getChatroomId(), loginId, loginId, content);
+
+
+        //        System.out.println("into pub/message" + chatRequest.getContent());
 //        messageSendingOperations.convertAndSend("/sub/chat/room" + message.getRoomId(), message);
-        int chatId = chatService.saveChat(chatRequest);
+//        int chatId = chatService.saveChat(chatRequest);
+//
+//        String id = accessor.getFirstNativeHeader("userId");
+//        System.out.println("init .... " + id);
 
-        String id = accessor.getFirstNativeHeader("userId");
-        System.out.println("init .... " + id);
 
+//        log.info("id(userId, pubId = {}, {})", userId, pubId);
+//        if (userId.equals(pubId)) {
+//            return;
+//        }
 //        ChatDTO.ChatResponse chatResponse = ChatDTO.ChatResponse.builder()
 //                .chatId(chatId)
 ////                .myMessage()
@@ -47,11 +75,11 @@ public class ChatController {
     }
 }
 
-@MessageMapping("/message")
-public void chat(ChatDTO.ChatRequest chatRequest, StompHeaderAccessor accessor) {
-
-    String id = accessor.getFirstNativeHeader("userId");
-    System.out.println("init .... " + id);
-
-    messageSendingOperations.convertAndSend("/topic/chatroom/" + chatRequest.getChatroomId(), chatRequest);
-}
+//@MessageMapping("/message")
+//public void chat(ChatDTO.ChatRequest chatRequest, StompHeaderAccessor accessor) {
+//
+//    String id = accessor.getFirstNativeHeader("userId");
+//    System.out.println("init .... " + id);
+//
+//    messageSendingOperations.convertAndSend("/topic/chatroom/" + chatRequest.getChatroomId(), chatRequest);
+//}

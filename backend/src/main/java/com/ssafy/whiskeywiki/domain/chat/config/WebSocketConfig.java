@@ -2,6 +2,7 @@ package com.ssafy.whiskeywiki.domain.chat.config;
 
 import com.ssafy.whiskeywiki.domain.chat.interceptor.StompMessageInterceptor;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.ChannelRegistration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
@@ -9,6 +10,7 @@ import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBr
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
 
+@Slf4j
 @Configuration
 @EnableWebSocketMessageBroker   // activate message broker
 @RequiredArgsConstructor
@@ -37,7 +39,13 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void configureClientInboundChannel(ChannelRegistration registration) {
         WebSocketMessageBrokerConfigurer.super.configureClientInboundChannel(registration);
-
         registration.interceptors(stompMessageInterceptor);
+    }
+
+    @Override
+    public void configureClientOutboundChannel(ChannelRegistration registration) {
+        WebSocketMessageBrokerConfigurer.super.configureClientOutboundChannel(registration);
+
+        log.info("registreation( ={})", registration);
     }
 }
