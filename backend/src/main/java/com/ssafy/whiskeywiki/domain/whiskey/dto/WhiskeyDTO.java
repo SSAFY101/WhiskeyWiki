@@ -23,7 +23,8 @@ public class WhiskeyDTO {
         private String whiskeyFlavor;
         private double abv;
         private int price;
-        private double reviewRating;
+        private double starRating;
+        private double starOriginRating;
     }
 
     @Builder

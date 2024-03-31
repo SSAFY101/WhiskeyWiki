@@ -8,6 +8,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ReviewDTO {
     @Builder
@@ -16,11 +18,20 @@ public class ReviewDTO {
     @Data
     public static class ReviewData {
         private String nickname;
-        private int reviewRating;
+        private int starRating;
         private String content;
         private String gender;
         private int age;
         private LocalDateTime createdDate;
+    }
+
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Data
+    public static class ReviewResponseData{
+        private double starRatingAvg;
+        List<ReviewData> reviewDataList;
     }
 
     @Builder
