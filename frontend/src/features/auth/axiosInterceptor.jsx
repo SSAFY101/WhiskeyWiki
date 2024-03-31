@@ -1,10 +1,10 @@
+// 엑세스 토큰 재발급
 import axios from "axios";
 // import { userAction } from "../../store/slices/user";
-
 // const { dispatch } = store;
 
 const instance = axios.create({
-  baseURL: "",
+  baseURL: process.env.REACT_APP_API_URL,
   timeout: 5000,
   headers: {
     withCredentials: true,
@@ -20,7 +20,7 @@ instance.interceptors.response.use(
     if (error.response.status == 400 || error.response.status == 401) {
       // 재발급 요청
       await axios
-        .post("http://localhost:5000/api/auth/refresh", null, {
+        .post(`${process.env.REACT_APP_API_URL}/auth/refresh`, null, {
           withCredentials: true,
         })
         .then((res) => {

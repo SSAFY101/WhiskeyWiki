@@ -1,3 +1,4 @@
+// 닉네임 중복 검사 - true/false 거꾸로 나오는 이슈
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { signupAction } from "../../../store/slices/signup";
@@ -39,11 +40,14 @@ const Step2 = () => {
   const checkValid = () => {
     // 닉네임 중복 검사
     axios
-      .post("/api/users/valid/nickname", {
-        nickName: nickname,
-      })
+      .get(`${process.env.REACT_APP_API_URL}/users/nickname/${nickname}`)
       .then((res) => {
-        console.log("닉네임 중복 검사", res);
+        const isValid = res.data.data;
+        if (!isValid) {
+          setCheckNickname(true);
+        } else {
+          setCheckNickname(false);
+        }
       })
       .catch((err) => {
         console.log("닉네임 중복 검사 실패", err);
@@ -56,10 +60,10 @@ const Step2 = () => {
 
     // 한글 닉네임
     if (nickname.length > 1 && isKorean.test(nickname)) {
-      setCheckNickname(true);
+      checkValid();
       // 영어 닉네임
     } else if (nickname.length > 3 && isEnglish.test(nickname)) {
-      setCheckNickname(true);
+      checkValid();
     } else {
       setCheckNickname(false);
     }
@@ -131,7 +135,7 @@ const Step2 = () => {
 
   // 다음으로 버튼 클릭
   const clickNextButton = () => {
-    dispatch(signupAction.stepTwo(nickname, age, gender));
+    dispatch(signupAction.stepTwo({ nickname, age, gender }));
     dispatch(signupAction.pageThree());
   };
 
