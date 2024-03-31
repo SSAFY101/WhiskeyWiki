@@ -15,4 +15,12 @@ public class OwnWhiskeyDTO {
         private int whiskeyId;
         private Boolean isEmpty;
     }
+
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Data
+    public static class ChangeWhiskeyStatusResponse{
+        private Boolean isChange;
+    }
 }

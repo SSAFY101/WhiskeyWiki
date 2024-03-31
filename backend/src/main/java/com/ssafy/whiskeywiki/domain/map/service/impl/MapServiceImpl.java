@@ -45,7 +45,7 @@ public class MapServiceImpl implements MapService {
 
         for(String name : condition){
             Whiskey whiskey = whiskeyRepository.findByWhiskeyNameKr(name);
-            List<OwnWhiskey> ownWhiskeyList = ownWhiskeyRepository.findByWhiskey(whiskey);
+            List<OwnWhiskey> ownWhiskeyList = ownWhiskeyRepository.findOwnWhiskeyListByWhiskey(whiskey);
             List<Integer> userIdList = new ArrayList<>();
 
             for(OwnWhiskey ownWhiskey : ownWhiskeyList){
