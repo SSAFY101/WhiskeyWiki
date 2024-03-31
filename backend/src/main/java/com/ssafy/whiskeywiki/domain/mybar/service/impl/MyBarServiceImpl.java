@@ -12,6 +12,7 @@ import com.ssafy.whiskeywiki.domain.mybar.repository.OwnWhiskeyRepository;
 import com.ssafy.whiskeywiki.domain.mybar.service.MyBarService;
 import com.ssafy.whiskeywiki.domain.user.domain.User;
 import com.ssafy.whiskeywiki.domain.user.repository.UserRepository;
+import com.ssafy.whiskeywiki.domain.whiskey.domain.Whiskey;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -67,9 +68,16 @@ public class MyBarServiceImpl implements MyBarService{
     @Override
     public void changeWhiskeyStatus(int userId, int whiskeyId) {
         List<OwnWhiskey> ownWhiskeyList = ownWhiskeyRepository.findByUser(userRepository.getById(userId));
+        Whiskey whiskey = new Whiskey();
         for(OwnWhiskey o : ownWhiskeyList){
-
+            if(o.getWhiskey().getId() == whiskeyId){
+                whiskey = o.getWhiskey();
+            }
         }
+        //최종적으로 상태를 바꿀 OwnWhiskey 찾기
+        OwnWhiskey ownWhiskey = ownWhiskeyRepository.findByWhiskey(whiskey);
+        ownWhiskey.updateStatus();
+        ownWhiskeyRepository.save(ownWhiskey);
     }
 
     @Override
