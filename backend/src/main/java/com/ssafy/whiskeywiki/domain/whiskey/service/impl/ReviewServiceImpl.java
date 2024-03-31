@@ -27,28 +27,43 @@ public class ReviewServiceImpl implements ReviewService {
     private final WhiskeyRepository whiskeyRepository;
     private final UserRepository userRepository;
     @Override
-    public List<ReviewDTO.ReviewData> reviewList(int whiskeyId) {
+    public ReviewDTO.ReviewResponseData reviewList(int whiskeyId) {
         Optional<Whiskey> whiskey = whiskeyRepository.findById(whiskeyId);
-        List<ReviewDTO.ReviewData> resultList = new ArrayList<>();
+        ReviewDTO.ReviewResponseData reviewResponseData = new ReviewDTO.ReviewResponseData();
+
+        List<Review> reviewList = reviewRepository.findByWhiskey(whiskeyRepository.getById(whiskeyId));
+        double starRatingAvg = 0.0;
+        for(Review r : reviewList){
+            starRatingAvg += r.getReviewRating().getValue();
+        }
+        starRatingAvg = starRatingAvg / reviewList.size();
+        starRatingAvg = Math.round(starRatingAvg*10)/10;
+
+        reviewResponseData.setStarRatingAvg(starRatingAvg);
+
+        List<ReviewDTO.ReviewData> reviewDataList = new ArrayList<>();
 
         if(whiskey.isPresent()){
-                List<Review> reviewDataList = reviewRepository.findByWhiskey(whiskey.get());
-                if(!reviewDataList.isEmpty()){
-                    for(Review r : reviewDataList){
+                List<Review> reviews = reviewRepository.findByWhiskey(whiskey.get());
+                if(!reviews.isEmpty()){
+                    for(Review r : reviews){
                         ReviewDTO.ReviewData reviewData = new ReviewDTO.ReviewData();
 
                         reviewData.setNickname(r.getUser().getNickname());
-                        reviewData.setReviewRating(r.getReviewRating().getValue());
+                        reviewData.setStarRating(r.getReviewRating().getValue());
                         reviewData.setAge(r.getUser().getAge());
                         reviewData.setGender(r.getUser().getGender());
                         reviewData.setContent(r.getContent());
                         reviewData.setCreatedDate(r.getCreatedDate());
 
-                        resultList.add(reviewData);
+                        reviewDataList.add(reviewData);
                 }
             }
         }
-        return resultList;
+
+        reviewResponseData.setReviewDataList(reviewDataList);
+
+        return reviewResponseData;
     }
 
     @Override
