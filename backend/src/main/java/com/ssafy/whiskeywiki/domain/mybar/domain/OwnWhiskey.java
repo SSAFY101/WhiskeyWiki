@@ -34,7 +34,4 @@ public class OwnWhiskey {
     public void updateStatus(){
         this.isEmpty = !this.isEmpty;
     }
-
-
-
 }

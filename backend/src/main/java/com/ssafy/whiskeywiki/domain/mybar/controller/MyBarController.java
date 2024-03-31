@@ -52,7 +52,7 @@ public class MyBarController {
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity<CommonResponse> lookAnotherMyBar(@PathVariable int userId){
+    public ResponseEntity<CommonResponse> lookAnotherMyBar(@PathVariable(name = "userId") int userId){
         List<MapDTO.OwnWhiskeyStatus> resultList = myBarService.lookAnotherMyBar(userId);
 
         return new ResponseEntity<>(CommonResponse.builder()
@@ -60,5 +60,18 @@ public class MyBarController {
                 .message("다른 유저 My bar 조회 성공")
                 .data(resultList)
                 .build(), HttpStatus.OK);
+    }
+
+    //위스키 상태 관리
+    @PostMapping("/status/{whiskeyId}")
+    public ResponseEntity<CommonResponse> changeWhiskeyStatus(@RequestHeader(name = "Authorization") String accessToken ,@PathVariable(name = "whiskeyId") int whiskeyId){
+        int userId = userService.getUserIdByAccessToken(accessToken);
+        myBarService.changeWhiskeyStatus(userId, whiskeyId);
+
+        return new ResponseEntity<>(CommonResponse.builder()
+                .status(HttpStatus.OK.value())
+                .message("위스키 상태 변경 성공")
+                .build(), HttpStatus.OK);
+
     }
 }
