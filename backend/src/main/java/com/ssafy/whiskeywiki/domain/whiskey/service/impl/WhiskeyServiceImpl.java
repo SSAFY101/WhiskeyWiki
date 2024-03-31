@@ -31,14 +31,16 @@ public class WhiskeyServiceImpl implements WhiskeyService {
 
             //이건 여기서 처리할 것이 아니라 whiskey나 review Entity에서 처리한뒤 보내줘야함! 나중에 리팩토링 하자.
             List<Review> reviewList = reviewRepository.findByWhiskey(w);
-            double reviewRating = 0.0;
+            double starOriginRating = 0.0;
+            double starRating = 0.0;
 
             for(Review r : reviewList){
-                reviewRating += r.getReviewRating().getValue();
+                starOriginRating += r.getReviewRating().getValue();
             }
-            reviewRating = reviewRating / reviewList.size();
-            reviewRating = Math.round(reviewRating*10)/10.0;
-            System.out.println(w.getId() + " + " + reviewRating);
+            starOriginRating = starOriginRating / reviewList.size();
+
+            starOriginRating = Math.round(starOriginRating*10)/10.0;
+            starRating = Math.round(starOriginRating);
 
             WhiskeyDTO.WhiskeySimpleInfo whiskey = new WhiskeyDTO.WhiskeySimpleInfo();
             whiskey.setWhiskeyId(w.getId());
@@ -47,7 +49,8 @@ public class WhiskeyServiceImpl implements WhiskeyService {
             whiskey.setWhiskeyFlavor(w.getWhiskeyFlavor());
             whiskey.setAbv(w.getAbv());
             whiskey.setPrice(w.getPrice());
-            whiskey.setReviewRating(reviewRating);
+            whiskey.setStarRating(starRating);
+            whiskey.setStarOriginRating(starOriginRating);
             resultList.add(whiskey);
         }
         return resultList;
