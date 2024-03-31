@@ -26,20 +26,19 @@ public class ReviewController {
     //위스키 id로 해당 위스키에 대한 리뷰 리스트 가져오기
     @GetMapping("/{whiskeyId}")
     public ResponseEntity<CommonResponse> reviewList(@PathVariable(name = "whiskeyId") int whiskeyId){
-        List<ReviewDTO.ReviewData> resultList = reviewService.reviewList(whiskeyId);
-        System.out.println(resultList.size());
-        if(!resultList.isEmpty()){
+        ReviewDTO.ReviewResponseData reviewResponseData = reviewService.reviewList(whiskeyId);
+        if(reviewResponseData != null){
             return new ResponseEntity<>(CommonResponse.builder()
                     .status(HttpStatus.OK.value())
                     .message("위스키 리뷰 리스트 조회 성공")
-                    .data(resultList)
+                    .data(reviewResponseData)
                     .build(), HttpStatus.OK);
         }
         else{
             return new ResponseEntity<>(CommonResponse.builder()
                     .status(HttpStatus.NO_CONTENT.value())
                     .message("해당 위스키에 대한 리뷰가 없습니다")
-                    .data(resultList)
+                    .data(reviewResponseData)
                     .build(), HttpStatus.NO_CONTENT);
         }
     }
