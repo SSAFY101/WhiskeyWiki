@@ -45,4 +45,12 @@ public class MapDTO {
         private String whiskeyNameKr;
         private Boolean isEmpty;
     }
+
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Data
+    public static class searchUserConditionRequest{
+        List<String> checkedWhiskeyList;
+    }
 }
