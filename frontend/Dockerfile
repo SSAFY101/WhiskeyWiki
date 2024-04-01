@@ -2,7 +2,7 @@ FROM node:16 AS builder
 WORKDIR /frontend
 COPY package.json .
 RUN npm install
-RUN npm install --save-dev @babel/plugin-proposal-private-property-in-object
+RUN npm install --save-dev @babel/plugin-proposal-private-property-in-object --legacy-peer-deps
 
 COPY . .
 RUN npm run build:prod
