@@ -167,7 +167,7 @@ function Map() {
         // currentMarker(locPosition, message); // 마커와 인포윈도우 표시
         // // (옵션2) 현재위치 표시 마커 이미지 변경 설정
         // var imageSrc =
-        //     "https://cdn-icons-png.flaticon.com/512/11542/11542151.png", // 마커이미지 주소
+        //     "https://cdn-icons-png.flaticon.com/512/11315/11315278.png", // 마커이미지 주소
         //   imageSize = new kakao.maps.Size(30, 30), // 마커이미지 크기
         //   imageOption = { offset: new kakao.maps.Point(27, 69) }; // 마커이미지 옵션
 
@@ -207,7 +207,7 @@ function Map() {
           // currentMarker(locPosition, message);
           // // (옵션2) 현재위치 표시 마커 이미지 변경 설정
           // var imageSrc =
-          //     "https://cdn-icons-png.flaticon.com/512/11542/11542151.png", // 마커이미지 주소
+          //     "https://cdn-icons-png.flaticon.com/512/11315/11315278.png", // 마커이미지 주소
           //   imageSize = new kakao.maps.Size(30, 30), // 마커이미지 크기
           //   imageOption = { offset: new kakao.maps.Point(27, 69) }; // 마커이미지 옵션
           // // 마커의 이미지정보를 가지고 있는 마커이미지를 생성
