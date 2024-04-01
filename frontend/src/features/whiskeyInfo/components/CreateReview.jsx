@@ -1,9 +1,11 @@
 import style from "./CreateReview.module.css";
 import { useState } from "react";
+import { UseDispatch, useDispatch } from "react-redux";
+import { submitReview } from "../../../store/slices/review";
 //로그인 상태일 때
-import axios from "axios";
 import instance from "../../auth/axiosInterceptor";
-const CreateReview = ({ whiskeyId, totalStars = 5 }) => {
+const CreateReview = ({ whiskeyId, closeModal, totalStars = 5 }) => {
+  const dispatch = useDispatch()
   const [rating, setRating] = useState(0);
   const [content, setContent] = useState("");
   const handleSetRating = (index) => {
@@ -22,8 +24,9 @@ const CreateReview = ({ whiskeyId, totalStars = 5 }) => {
     };
     try {
       await instance.post(url, data);
-      console.log("리뷰 등록 성공");
-      alert("리뷰가 성공적으로 등록되었습니다.")
+      alert("리뷰가 성공적으로 등록되었습니다.");
+      dispatch(submitReview());
+      closeModal()
     } catch (error) {
       console.error("리뷰 등록 실패", error);
     }

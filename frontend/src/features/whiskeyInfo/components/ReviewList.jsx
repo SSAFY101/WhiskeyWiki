@@ -75,7 +75,6 @@ function ReviewList({ reviewList , whiskeyId }) {
           <div key={index} className={style.ReviewBox}>
             <div className={style.PersonalInfo}>
               <p>{item.nickname}</p>{" "}
-              {/* 닉네임 속성 이름이 달라졌다면 여기도 수정하세요. */}
               <p>{getAgeIcon(item.age)}</p>
               <p>{getGenderIcon(item.gender)}</p>
             </div>
@@ -108,7 +107,7 @@ function ReviewList({ reviewList , whiskeyId }) {
       {/* 조건부 렌더링 */}
       {isReviewModalOpen && (
         <Modal isOpen={isReviewModalOpen} onClose={handleCloseModal}>
-          <CreateReview whiskeyId={whiskeyId} />
+          <CreateReview whiskeyId={whiskeyId} closeModal={handleCloseModal} />
         </Modal>
       )}
     </div>
