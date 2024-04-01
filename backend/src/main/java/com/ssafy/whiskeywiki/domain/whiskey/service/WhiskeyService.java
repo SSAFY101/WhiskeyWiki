@@ -29,4 +29,7 @@ public interface WhiskeyService {
 
     //전체 위스키 목록의 이름을 반환
     List<WhiskeyDTO.WhiskeyNameData> getAllWhikseyName();
+
+    //위스키 상태 확인
+    WhiskeyDTO.CheckWhiskeyStatus checkWhiskeyStatus(int userId, int whiskeyId);
 }

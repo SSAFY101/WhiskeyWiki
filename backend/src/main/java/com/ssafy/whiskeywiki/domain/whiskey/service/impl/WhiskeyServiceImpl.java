@@ -1,6 +1,8 @@
 package com.ssafy.whiskeywiki.domain.whiskey.service.impl;
 
 import com.ssafy.whiskeywiki.domain.cocktail.dto.CocktailDTO;
+import com.ssafy.whiskeywiki.domain.mybar.domain.OwnWhiskey;
+import com.ssafy.whiskeywiki.domain.mybar.repository.OwnWhiskeyRepository;
 import com.ssafy.whiskeywiki.domain.whiskey.domain.Review;
 import com.ssafy.whiskeywiki.domain.whiskey.domain.Whiskey;
 import com.ssafy.whiskeywiki.domain.whiskey.dto.SearchDTO;
@@ -21,6 +23,7 @@ public class WhiskeyServiceImpl implements WhiskeyService {
 
     private final WhiskeyRepository whiskeyRepository;
     private final ReviewRepository reviewRepository;
+    private final OwnWhiskeyRepository ownWhiskeyRepository;
 
     //전체 위스키 목록 가져오기
     @Override
@@ -163,5 +166,18 @@ public class WhiskeyServiceImpl implements WhiskeyService {
         }
 
         return resultList;
+    }
+
+    @Override
+    public WhiskeyDTO.CheckWhiskeyStatus checkWhiskeyStatus(int userId, int whiskeyId) {
+        Whiskey whiskey = whiskeyRepository.findById(whiskeyId).get();
+        List<OwnWhiskey> ownWhiskeyList = ownWhiskeyRepository.findOwnWhiskeyListByWhiskey(whiskey);
+
+        for(OwnWhiskey o : ownWhiskeyList){
+            if (o.getUser().getId() == userId){
+                return new WhiskeyDTO.CheckWhiskeyStatus(o.getIsEmpty());
+            }
+        }
+        return null;
     }
 }

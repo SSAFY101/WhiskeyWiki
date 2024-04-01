@@ -9,6 +9,8 @@ import com.ssafy.whiskeywiki.domain.mybar.dto.OwnWhiskeyDTO;
 import com.ssafy.whiskeywiki.domain.mybar.service.MyBarService;
 import com.ssafy.whiskeywiki.domain.user.domain.User;
 import com.ssafy.whiskeywiki.domain.user.service.UserService;
+import com.ssafy.whiskeywiki.domain.whiskey.dto.WhiskeyDTO;
+import com.ssafy.whiskeywiki.domain.whiskey.service.WhiskeyService;
 import com.ssafy.whiskeywiki.global.util.CommonResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -23,7 +25,7 @@ import java.util.List;
 public class MyBarController {
     private final MyBarService myBarService;
     private final UserService userService;
-
+    private final WhiskeyService whiskeyService;
     //즐겨찾기한 칵테일 목록 확인
     @GetMapping("/favorite/list")
     public ResponseEntity<CommonResponse> getFavoriteList(@RequestHeader(name = "Authorization") String authToken) {
@@ -74,5 +76,17 @@ public class MyBarController {
                 .message("위스키 상태 변경 성공")
                 .build(), HttpStatus.OK);
 
+    }
+
+    @GetMapping("/check-status/{whiskeyId}")
+    public ResponseEntity<CommonResponse> checkWhiskeyStatus(@RequestHeader(name = "Authorization") String authToken, @PathVariable int whiskeyId){
+        int userId = userService.getUserIdByAccessToken(authToken.substring(7));
+        WhiskeyDTO.CheckWhiskeyStatus checkWhiskeyStatus = whiskeyService.checkWhiskeyStatus(userId, whiskeyId);
+
+        return new ResponseEntity<>(CommonResponse.builder()
+                .status(HttpStatus.OK.value())
+                .message("위스키 보유 상태 확인 성공")
+                .data(checkWhiskeyStatus)
+                .build(), HttpStatus.OK);
     }
 }
