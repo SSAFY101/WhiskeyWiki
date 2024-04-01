@@ -30,7 +30,7 @@ function WhiskeyDetail() {
         const response = await axios.get(
           `${process.env.REACT_APP_API_URL}/whiskey/info/${whiskeyId}`
         );
-        console.log(response.data.data);
+        // console.log(response.data.data);
         setWhiskeyDetail(response.data.data);
       } catch (error) {
         console.error("위스키 상세 정보 가져오기 실패", error);
@@ -42,7 +42,8 @@ function WhiskeyDetail() {
         const response = await axios.get(
           `${process.env.REACT_APP_API_URL}/whiskey/statistic/${whiskeyId}`
         );
-        console.log("위스키 선호도 통계 가져오기 성공", response.data);
+        console.log("위스키 선호도 통계 가져오기 성공", response.data.data);
+        setWhiskeyStatistic(response.data.data)
       } catch (error) {
         console.log("위스키 선호도 통계 가져오기 실패", error);
       }
@@ -53,10 +54,10 @@ function WhiskeyDetail() {
         const response = await axios.get(
           `${process.env.REACT_APP_API_URL}/whiskey/review/${whiskeyId}`
         );
-        console.log(
-          "위스키 리뷰 가져오기 성공",
-          response.data.data.reviewDataList
-        );
+        // console.log(
+        //   "위스키 리뷰 가져오기 성공",
+        //   response.data.data.reviewDataList
+        // );
         setWhiskeyReview(response.data.data.reviewDataList);
         dispatch(resetReviewSubmission()); //상태 초기화
       } catch (error) {
@@ -93,7 +94,7 @@ function WhiskeyDetail() {
                 <p>{whiskeyDetail.detail}</p>
               </div>
             </div>
-            <Statistics />
+            <Statistics whiskeyStatistic={whiskeyStatistic} />
             <p className={style.titleWithLines}>recipe</p>
             <CocktailRecipe />
             <p className={style.titleWithLines}>review</p>
