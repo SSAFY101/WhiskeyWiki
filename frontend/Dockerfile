@@ -2,9 +2,11 @@ FROM node:16 AS builder
 WORKDIR /frontend
 COPY package.json .
 RUN npm install
+RUN npm install --save-dev @babel/plugin-proposal-private-property-in-object
 
 COPY . .
 RUN npm run build:prod
+RUN npm 
 
 FROM nginx:latest
 RUN rm /etc/nginx/conf.d/default.conf
