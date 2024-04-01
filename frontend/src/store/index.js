@@ -7,6 +7,7 @@ import registerSlice from "./slices/register";
 import exchangeSlice from "./slices/exchange";
 import signupSlice from "./slices/signup";
 import whiskeyInfoSlice from "./slices/whiskeyInfo";
+import reviewSlice from "./slices/review";
 
 const persistConfig = {
   key: "root", // localStorage key
@@ -20,6 +21,8 @@ const rootReducer = combineReducers({
   exchange: exchangeSlice.reducer,
   signup: signupSlice.reducer,
   whiskeyInfo: whiskeyInfoSlice.reducer,
+  review: reviewSlice.reducer,
+
 
 });
 

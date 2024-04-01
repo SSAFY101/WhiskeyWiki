@@ -4,7 +4,7 @@ import axios from "axios";
 // const { dispatch } = store;
 
 const instance = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
+  // baseURL: process.env.REACT_APP_API_URL,
   timeout: 5000,
   headers: {
     withCredentials: true,
@@ -17,6 +17,7 @@ instance.interceptors.response.use(
   },
   async (error) => {
     // 새로고침해서 토큰이 없거나, 토큰이 만료된 경우
+    console.log("interceptor 호출한 err : ", error);
     if (error.response.status == 400 || error.response.status == 401) {
       // 재발급 요청
       await axios
@@ -41,6 +42,8 @@ instance.interceptors.response.use(
         });
 
       console.log("3. getNewToken-after");
+
+      console.log(error.config);
 
       const response = await instance.request(error.config);
 

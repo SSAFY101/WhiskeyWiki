@@ -10,7 +10,7 @@ import Fifties from "../../../assets/icon/Fifties.svg";
 import Female from "../../../assets/icon/Female.svg";
 import Male from "../../../assets/icon/Male.svg";
 
-function ReviewList({ reviewList }) {
+function ReviewList({ reviewList , whiskeyId }) {
   //리뷰 모달 제어
   const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
   const handleCloseModal = () => {
@@ -75,7 +75,6 @@ function ReviewList({ reviewList }) {
           <div key={index} className={style.ReviewBox}>
             <div className={style.PersonalInfo}>
               <p>{item.nickname}</p>{" "}
-              {/* 닉네임 속성 이름이 달라졌다면 여기도 수정하세요. */}
               <p>{getAgeIcon(item.age)}</p>
               <p>{getGenderIcon(item.gender)}</p>
             </div>
@@ -108,7 +107,7 @@ function ReviewList({ reviewList }) {
       {/* 조건부 렌더링 */}
       {isReviewModalOpen && (
         <Modal isOpen={isReviewModalOpen} onClose={handleCloseModal}>
-          <CreateReview />
+          <CreateReview whiskeyId={whiskeyId} closeModal={handleCloseModal} />
         </Modal>
       )}
     </div>
