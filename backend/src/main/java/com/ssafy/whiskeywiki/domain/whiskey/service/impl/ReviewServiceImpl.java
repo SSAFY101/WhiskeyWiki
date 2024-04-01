@@ -84,4 +84,23 @@ public class ReviewServiceImpl implements ReviewService {
             }
         }
     }
+
+    //위스키중의 리뷰중 별점 4점 이상인 리뷰 반환해주는 메소드
+    @Override
+    public List<Review> getOverRatingFour(int whiskeyId) {
+        List<Review> resultList = new ArrayList<>();
+
+        Optional<Whiskey> whiskey = whiskeyRepository.findById(whiskeyId);
+
+        if(whiskey.isPresent()){
+            List<Review> reviewList = reviewRepository.findByWhiskey(whiskey.get());
+
+            for(Review r : reviewList){
+                if(r.getReviewRating().getValue() >= 4)
+                    resultList.add(r);
+            }
+        }
+
+        return resultList;
+    }
 }

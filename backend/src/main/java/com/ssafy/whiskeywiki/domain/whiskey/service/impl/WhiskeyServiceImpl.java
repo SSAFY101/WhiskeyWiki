@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -56,9 +57,6 @@ public class WhiskeyServiceImpl implements WhiskeyService {
         return resultList;
     }
 
-    /**
-     *  나중에 할 예정!!
-     */
     //해당 이름을 포함하는 위스키 리스트 가져오기
     @Override
     public List<WhiskeyDTO.WhiskeySimpleInfo> findWhiskeyNameList(String whiskeyName) {
@@ -108,23 +106,52 @@ public class WhiskeyServiceImpl implements WhiskeyService {
         return whiskeyInfo;
     }
 
-    //위스키 선호도 통계
     @Override
-    public WhiskeyDTO.WhiskeyStaticsData whiskeyStastics(int whiskeyId) {
-        return null;
+    public WhiskeyDTO.WhiskeyStaticsData whiskeyStaticsData(List<Review> reviews) {
+        double maleLikePer = 0.00;
+        double femaleLikePer = 0.00;
+        double twentiesLikePer = 0.00;
+        double thirtiesLikePer = 0.00;
+        double fortiesLikePer = 0.00;
+        double fiftiesLikePer = 0.00;
+        double sixtiesLikePer = 0.00;
+
+        int reviewSize = reviews.size();
+
+        if(!reviews.isEmpty()){
+            for(Review r : reviews){
+                String userGender = r.getUser().getGender();
+                int userAge = r.getUser().getAge();
+
+                if(userGender.equals("남성"))
+                    maleLikePer++;
+                else
+                    femaleLikePer++;
+
+                if(userAge >=60)
+                    sixtiesLikePer++;
+                else if(userAge >= 50)
+                    fiftiesLikePer++;
+                else if(userAge >= 40)
+                    fortiesLikePer++;
+                else if(userAge >= 30)
+                    thirtiesLikePer++;
+                else
+                    twentiesLikePer++;
+            }
+        }
+        return new WhiskeyDTO.WhiskeyStaticsData(
+                Math.round((maleLikePer/reviewSize)*100.00)/100.00,
+                Math.round((femaleLikePer/reviewSize)*100.00)/100.00,
+                Math.round((twentiesLikePer/reviewSize)*100.00)/100.00,
+                Math.round((thirtiesLikePer/reviewSize)*100.00)/100.00,
+                Math.round((fortiesLikePer/reviewSize)*100.00)/100.00,
+                Math.round((fiftiesLikePer/reviewSize)*100.00)/100.00,
+                Math.round((sixtiesLikePer/reviewSize)*100.00)/100.00
+               );
     }
 
     //위스키 id로 만들 수 있는 칵테일 추천해주기
-
-    /**
-     * 위스키 id 검색해서 해당 위스키로 만들 수 있는 칵테일 리스트 가져온 그중에 하나 추천해주자!
-     * -> 근데 랜덤으로 추천해줘야하는데..!!
-     */
-    @Override
-    public List<CocktailDTO.CocktailInfo> recommendCocktail(int whiskeyId) {
-
-        return null;
-    }
 
     @Override
     public List<WhiskeyDTO.WhiskeyNameData> getAllWhikseyName() {
