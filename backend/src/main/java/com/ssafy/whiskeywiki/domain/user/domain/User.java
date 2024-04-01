@@ -3,6 +3,8 @@ package com.ssafy.whiskeywiki.domain.user.domain;
 import com.ssafy.whiskeywiki.domain.chat.domain.UserChatroom;
 import com.ssafy.whiskeywiki.domain.cocktail.domain.Favorite;
 //import com.ssafy.whiskeywiki.domain.trade.domain.TradeStatus;
+import com.ssafy.whiskeywiki.domain.chat.domain.Chat;
+import com.ssafy.whiskeywiki.domain.cocktail.domain.Favorite;
 import com.ssafy.whiskeywiki.domain.mybar.domain.OwnWhiskey;
 import com.ssafy.whiskeywiki.domain.whiskey.domain.Review;
 import jakarta.persistence.*;
@@ -62,6 +64,11 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     @Builder.Default
     private List<Favorite> favoriteList = new ArrayList<>();
+
+    //4. 채팅과 일대다
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    @Builder.Default
+    private List<Chat> chatList = new ArrayList<>();
 
     //5. 유저 채팅방(User_ChatRooms)과 일대다
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
