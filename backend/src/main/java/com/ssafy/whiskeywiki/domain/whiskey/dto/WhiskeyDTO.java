@@ -57,4 +57,12 @@ public class WhiskeyDTO {
         private double sixtiesLikePer;
     }
 
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Data
+    public static class CheckWhiskeyStatus{
+        private Boolean isEmpty;
+    }
+
 }
