@@ -67,7 +67,7 @@ const App = () => {
           {/* 위스키 정보 */}
           <Route path="/whiskeyInfo" element={<WhiskeyInfo />}></Route>
           {/* 위스키 디테일 */}
-          <Route path="/WhiskeyDetail" element={<WhiskeyDetail />}></Route>
+          <Route path="/WhiskeyDetail/:whiskeyId" element={<WhiskeyDetail />}></Route>
           {/* 위스키 등록 */}
           <Route path="/register" element={<WhiskeyRegister />} />
           {/* 지도 */}
