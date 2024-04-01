@@ -1,3 +1,4 @@
+// 채팅방 리스트 조회
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -15,21 +16,21 @@ const ChatList = () => {
     setChatList([
       {
         chatRoomId: 0,
-        pair: "주정뱅이",
+        pairNickname: "주정뱅이",
         lastMassage: "헤에에에에",
         userStatus: true,
         pairStatus: true,
       },
       {
         chatRoomId: 1,
-        pair: "김싸피",
+        pairNickname: "김싸피",
         lastMassage: "ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ",
         userStatus: true,
         pairStatus: false,
       },
       {
         chatRoomId: 2,
-        pair: "헤에",
+        pairNickname: "헤에",
         lastMassage: "안녕하세요",
         userStatus: false,
         pairStatus: true,
@@ -42,7 +43,7 @@ const ChatList = () => {
         pairStatus: false,
       },
     ]);
-    // 채팅방 리스트 요청 / userId : 임시
+    // 채팅방 리스트 조회
     axios
       .get("/chatroom/list")
       .then((res) => {
@@ -69,7 +70,13 @@ const ChatList = () => {
       {/* 채팅 리스트 */}
       <div className={`${style.chatListContainer}`}>
         {chatList.map((chat) => (
-          <Link to={`/chatRoom`} state={{ chatRoomId: chat.chatRoomId }}>
+          <Link
+            to={`/chatRoom`}
+            state={{
+              chatRoomId: chat.chatRoomId,
+              pairNickname: chat.pairNickname,
+            }}
+          >
             <div className={`${style.chatContainer}`}>
               <div className={`${style.tradeStatus}`}>
                 <Status
@@ -79,7 +86,7 @@ const ChatList = () => {
                 />
               </div>
               <div className={`${style.contentContainer}`}>
-                <div className={`${style.pairId}`}>{chat.pair}</div>
+                <div className={`${style.pairId}`}>{chat.pairNickname}</div>
                 <div className={`${style.lastMessagae}`}>
                   {chat.lastMassage}
                 </div>
