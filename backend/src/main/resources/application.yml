@@ -32,3 +32,9 @@ spring:
     allow-bean-definition-overriding: false
 
 #    database-platform: org.hibernate.dialect.H2Dialect
+
+management:
+  endpoint:
+  endpoints:
+    web:
+      base-path: /whikseywiki
