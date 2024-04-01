@@ -5,8 +5,7 @@ RUN npm install
 RUN npm install --save-dev @babel/plugin-proposal-private-property-in-object --legacy-peer-deps
 
 COPY . .
-RUN npm run build:prod
-RUN npm 
+RUN CI=false npm run build:prod
 
 FROM nginx:latest
 RUN rm /etc/nginx/conf.d/default.conf
