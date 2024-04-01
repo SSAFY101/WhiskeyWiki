@@ -18,8 +18,8 @@ public class FavoriteController {
     private final UserService userService;
 
     @PostMapping("/register/{cocktailId}")
-    public ResponseEntity<CommonResponse> addFavorite(@RequestHeader(name = "Authorization") String accessToken, @PathVariable(name = "cocktailId") int cocktailId){
-        int userId = userService.getUserIdByAccessToken(accessToken);
+    public ResponseEntity<CommonResponse> addFavorite(@RequestHeader(name = "Authorization") String authToken, @PathVariable(name = "cocktailId") int cocktailId){
+        int userId = userService.getUserIdByAccessToken(authToken.substring(7));
 
         favoriteService.addFavorite(userId, cocktailId);
 
@@ -34,9 +34,9 @@ public class FavoriteController {
 
     //칵테일 즐겨찾기 해제
     @DeleteMapping("/delete/{cocktailId}")
-    public ResponseEntity<CommonResponse> deleteFavorite(@RequestHeader(name = "Authorization") String accessToken, @PathVariable(name = "cocktailId") int cocktailId){
+    public ResponseEntity<CommonResponse> deleteFavorite(@RequestHeader(name = "Authorization") String authToken, @PathVariable(name = "cocktailId") int cocktailId){
 
-        int userId = userService.getUserIdByAccessToken(accessToken);
+        int userId = userService.getUserIdByAccessToken(authToken.substring(7));
         favoriteService.deleteFavorite(userId, cocktailId);
 
         return new ResponseEntity<>(CommonResponse.builder()
