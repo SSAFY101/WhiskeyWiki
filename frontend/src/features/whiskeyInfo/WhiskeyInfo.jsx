@@ -54,9 +54,9 @@ function WhiskeyInfo() {
   }, []);
 
   const navigate = useNavigate();
-  const goToDetail = () => {
-    navigate("/whiskeyDetail");
-  };
+  // const goToDetail = (whiskeyId, image) => {
+  //   navigate(`/whiskeyDetail/${whiskeyId}`, { state: {imageUrl: image} });
+  // };
   // 정렬 함수
   const sortWhiskeys = (whiskeys) => {
     switch (sortOrder) {
@@ -108,13 +108,14 @@ function WhiskeyInfo() {
           {displayedWhiskeys.map((item) => (
             <Infocard
               key={item.whiskeyNameEn}
+              whiskeyId={item.whiskeyId}
               nameKr={item.whiskeyNameKr}
               nameEn={item.whiskeyNameEn}
               taste={item.whiskeyFlavor}
               abv={item.abv}
               price={item.price}
-              rating={item.rating}
-              onClick={goToDetail}
+              rating={item.starRating}
+            
             />
           ))}
         </div>

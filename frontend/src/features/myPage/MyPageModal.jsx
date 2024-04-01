@@ -2,10 +2,15 @@ import style from "./css/MyPageModal.module.css";
 import { useNavigate } from "react-router-dom";
 import AlertIcon from "../../assets/icon/AlertIcon.svg";
 import instance from "../auth/axiosInterceptor";
-import { UseDispatch, useDispatch } from "react-redux";
+import { UseDispatch, useDispatch, useSelector } from "react-redux";
 import { userAction } from "../../store/slices/user";
+import { UseSelector } from "react-redux";
 function MyPageModal({ onClose }) {
   const dispatch = useDispatch();
+
+  // 닉네임 가져오기
+  const nickName = useSelector(state => state.user.nickName)
+  console.log(nickName)
   const logoutTest = (e) => {
     e.preventDefault();
 
@@ -21,16 +26,14 @@ function MyPageModal({ onClose }) {
           // axiois 설정 제거
           instance.defaults.headers.common["Authorization"] = null;
           //마이페이지 모달 닫기
-          onClose()
+          onClose();
         })
         .catch((err) => {
           console.log("로그아웃 실패", err);
         });
     }
   };
-  const userData = {
-    nickname: "헤에",
-  };
+
   const navigate = useNavigate();
   const handleNavigate = () => {
     onClose();
@@ -39,7 +42,7 @@ function MyPageModal({ onClose }) {
   return (
     <div className={style.outerContainer}>
       <p>
-        <span className={style.highlight}>{userData.nickname}</span> 님,
+        <span className={style.highlight}>{nickName}</span> 님,
         환영합니다.
       </p>
       <div className={style.innerUpperContainer}>
@@ -57,7 +60,11 @@ function MyPageModal({ onClose }) {
         >
           마이페이지
         </div>
-        <div className={style.goTo} style={{ cursor: "pointer" }} onClick={logoutTest}>
+        <div
+          className={style.goTo}
+          style={{ cursor: "pointer" }}
+          onClick={logoutTest}
+        >
           로그아웃
         </div>
       </div>

@@ -1,21 +1,21 @@
 import style from "./IconContainer.module.css";
-import alcoholContent from "../../../assets/icon/AlcoholContent.svg";
-import flavor from "../../../assets/icon/Flavor.svg";
-import price from '../../../assets/icon/Price.svg'
-function IconContainer() {
+import abvIcon from "../../../assets/icon/AlcoholContent.svg";
+import flavorIcon from "../../../assets/icon/Flavor.svg";
+import priceIcon from '../../../assets/icon/Price.svg'
+function IconContainer({ abv, price, flavor }) {
   return (
     <div className={style.iconContainer}>
       <div className={style.iconWrapper}>
-        <img src={alcoholContent} alt="" />
-        <p>40도</p>
+        <img src={abvIcon} alt="" />
+        <p>{abv}</p>
       </div>
       <div className={style.iconWrapper}>
-        <img src={flavor} alt="" />
-        <p>복숭아 맛</p>
+        <img src={flavorIcon} alt="" />
+        <p>{flavor}</p>
       </div>
       <div className={style.iconWrapper}>
-        <img src={price} alt="" />
-        <p>4만원대</p>
+        <img src={priceIcon} alt="" />
+        <p>{price}</p>
       </div>
     
     </div>
