@@ -50,7 +50,7 @@ public class AuthFilter extends OncePerRequestFilter {
             String bearerToken = request.getHeader("authorization");
             String accessToken = "";
             log.info("bearer token(= {})", bearerToken);
-            if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
+            if (bearerToken != null && bearerToken.startsWith("bearer ")) {
                 accessToken = bearerToken.substring(7);
                 log.info("access token(= {})", accessToken);
             } else {

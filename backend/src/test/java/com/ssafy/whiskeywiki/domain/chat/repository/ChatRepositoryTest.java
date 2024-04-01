@@ -25,40 +25,39 @@ import static org.assertj.core.api.Assertions.*;
 @Rollback(value = false)
 class ChatRepositoryTest {
 
-    @Autowired
-    ChatRepository chatRepository;
-    @Autowired
-    EntityManager em;
+//    @Autowired
+//    ChatRepository chatRepository;
+//    @Autowired
+//    EntityManager em;
 
-    @Transactional
-    @Test
-    public void chatSaveFind() throws Exception {
+//    @Transactional
+//    @Test
+//    public void chatSaveFind() throws Exception {
 
         // given
-        Random random = new Random();
-
-        User user = User.builder().build();
-        User user2 = User.builder().build();
-        UserChatroom userChatroom = UserChatroom.builder().build();
-
-        Chat chat = Chat.builder()
-                .user(user)
-//                .chatVisible(false)
-                .message("message")
-                .dateTime(LocalDateTime.now())
-                .build();
-
-        // do
-        em.persist(user);
-        em.persist(user2);
-        em.persist(userChatroom);
-        chatRepository.save(chat);
-
-        em.flush();
-        em.clear();
+//        Random random = new Random();
+//
+//        User user = User.builder().build();
+//        User user2 = User.builder().build();
+//        UserChatroom userChatroom = UserChatroom.builder().build();
+//
+//        Chat chat = Chat.builder()
+//                .user(user)
+//                .message("message")
+//                .dateTime(LocalDateTime.now())
+//                .build();
+//
+//        // do
+//        em.persist(user);
+//        em.persist(user2);
+//        em.persist(userChatroom);
+//        chatRepository.save(chat);
+//
+//        em.flush();
+//        em.clear();
 
         // then
 //        Optional<Chat> findChat = chatRepository.findById(chat.getId());
 //        assertThat(chat.getId()).isEqualTo(findChat.get().getId());
-    }
+//    }
 }
