@@ -2,6 +2,7 @@ package com.ssafy.whiskeywiki.domain.whiskey.service;
 
 
 import com.ssafy.whiskeywiki.domain.cocktail.dto.CocktailDTO;
+import com.ssafy.whiskeywiki.domain.whiskey.domain.Review;
 import com.ssafy.whiskeywiki.domain.whiskey.dto.SearchDTO;
 import com.ssafy.whiskeywiki.domain.whiskey.dto.WhiskeyDTO;
 
@@ -21,10 +22,10 @@ public interface WhiskeyService {
     WhiskeyDTO.WhiskeyDetailInfo whiskeyDetailInfo(int whiskeyId);
 
     //위스키 선호도 통계 가져오기//
-    WhiskeyDTO.WhiskeyStaticsData whiskeyStaticsData(int whiskeyId);
+    WhiskeyDTO.WhiskeyStaticsData whiskeyStaticsData(List<Review> reviews);
 
     //위스키id로 만들 수 있는 칵테일 추천해주기
-    List<CocktailDTO.CocktailInfo> recommendCocktail(int whiskeyId);
+//    List<CocktailDTO.CocktailInfo> recommendCocktail(int whiskeyId);
 
     //전체 위스키 목록의 이름을 반환
     List<WhiskeyDTO.WhiskeyNameData> getAllWhikseyName();
