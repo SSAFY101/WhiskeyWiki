@@ -14,7 +14,7 @@ public class MapDTO {
     @NoArgsConstructor
     @Data
     public static class RequestSearchList{
-        private List<String> whiskeyList;
+        private List<String> checkedWhiskeyList;
     }
 
     @Builder
@@ -44,13 +44,5 @@ public class MapDTO {
     public static class OwnWhiskeyStatus{
         private int whiskeyId;
         private Boolean isEmpty;
-    }
-
-    @Builder
-    @AllArgsConstructor
-    @NoArgsConstructor
-    @Data
-    public static class searchUserConditionRequest{
-        List<String> checkedWhiskeyList;
     }
 }
