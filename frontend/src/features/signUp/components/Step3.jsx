@@ -1,7 +1,10 @@
+// 회원가입
+// 가입 완료 페이지 추가하면 좋을 듯
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signupAction } from "../../../store/slices/signup";
 import { useDaumPostcodePopup } from "react-daum-postcode";
+import axios from "axios";
 
 import style from "../css/Signup.module.css";
 
@@ -10,9 +13,12 @@ import icon1 from "../images/step3_1.png";
 import icon2 from "../images/step3_2.png";
 import line from "../images/line.png";
 import warningIcon from "../images/warning.png";
+import { useNavigate } from "react-router-dom";
 
 const Step3 = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.signup.user);
 
   const [zipCode, setZipCode] = useState("");
   const [address, setAddress] = useState("");
@@ -51,9 +57,28 @@ const Step3 = () => {
     setZipCode(data.zonecode);
     // 주소 저장
     setAddress(data.roadAddress);
+    dispatch(signupAction.stepThree(address));
   };
 
-  const clickSignup = () => {};
+  const clickSignup = () => {
+    console.log(address);
+    signUp();
+  };
+
+  // 회원가입 요청
+  const signUp = () => {
+    console.log(user);
+    axios
+      .post(`${process.env.REACT_APP_API_URL}/users/register`, user)
+      .then((res) => {
+        console.log("회원가입", res);
+        alert("회원가입이 완료되었습니다."); // 페이지 따로 만들면 좋을듯
+        // navigate("/");
+      })
+      .catch((err) => {
+        console.log("회원가입 실패", err);
+      });
+  };
 
   return (
     <div className={`${style.step3Container}`}>
@@ -94,6 +119,7 @@ const Step3 = () => {
             color: "#5A5A5A",
             cursor: "not-allowed",
           }}
+          disabled
         >
           가입하기
         </button>

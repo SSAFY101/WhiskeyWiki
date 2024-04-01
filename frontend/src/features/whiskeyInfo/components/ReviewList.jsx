@@ -1,6 +1,6 @@
 import { useState } from "react";
 import style from "./ReviewList.module.css";
-import Modal from "../../modal/Modal"
+import Modal from "../../modal/Modal";
 import CreateReview from "./CreateReview";
 // 회색 SVG
 import Twenties from "../../../assets/icon/Twenties.svg";
@@ -10,12 +10,12 @@ import Fifties from "../../../assets/icon/Fifties.svg";
 import Female from "../../../assets/icon/Female.svg";
 import Male from "../../../assets/icon/Male.svg";
 
-function ReviewList() {
-   //리뷰 모달 제어
-  const [isReviewModalOpen, setIsReviewModalOpen] = useState(false)
+function ReviewList({ reviewList }) {
+  //리뷰 모달 제어
+  const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
   const handleCloseModal = () => {
     setIsReviewModalOpen(false);
-  }
+  };
   const userData = [
     {
       nickName: "고독한 미식가",
@@ -48,7 +48,7 @@ function ReviewList() {
   };
   //성별에 따른 svg 아이콘을 반환하는 함수
   const getGenderIcon = (gender) => {
-    if (gender === "female") {
+    if (gender === "여성") {
       return <img src={Female} className={style.ageIcon} />;
     } else {
       return <img src={Male} className={style.ageIcon} />;
@@ -70,26 +70,46 @@ function ReviewList() {
   };
   return (
     <div className={style.ReviewContainer}>
-      {userData.map((item, index) => (
+      {reviewList && reviewList.length > 0 ? (
+        reviewList.map((item, index) => (
+          <div key={index} className={style.ReviewBox}>
+            <div className={style.PersonalInfo}>
+              <p>{item.nickname}</p>{" "}
+              {/* 닉네임 속성 이름이 달라졌다면 여기도 수정하세요. */}
+              <p>{getAgeIcon(item.age)}</p>
+              <p>{getGenderIcon(item.gender)}</p>
+            </div>
+            <div className={style.rating}>{renderStars(item.starRating)}</div>
+            <p>{item.content}</p>
+          </div>
+        ))
+      ) : (
+        <p>리뷰가 없습니다.</p> // 리뷰 데이터가 없을 때 표시될 메시지
+      )}
+      {/* {reviewList.map((item, index) => (
         <div key={index} className={style.ReviewBox}>
           <div className={style.PersonalInfo}>
-            <p>{item.nickName}</p>
+            <p>{item.nickname}</p>
             <p>{getAgeIcon(item.age)}</p>
             <p>{getGenderIcon(item.gender)}</p>
           </div>
           <div className={style.rating}>
-            {renderStars(item.star_rating)}
+            {renderStars(item.starRating)}
           </div>
           <p>{item.content}</p>
         </div>
-      ))}
-      <button className={style.CreateReviewButton} onClick={()=>setIsReviewModalOpen(true) }>리뷰 작성</button>
+      ))} */}
+      <button
+        className={style.CreateReviewButton}
+        onClick={() => setIsReviewModalOpen(true)}
+      >
+        리뷰 작성
+      </button>
       {/* 조건부 렌더링 */}
       {isReviewModalOpen && (
         <Modal isOpen={isReviewModalOpen} onClose={handleCloseModal}>
-          <CreateReview/>
+          <CreateReview />
         </Modal>
-
       )}
     </div>
   );

@@ -1,39 +1,99 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams, useLocation } from "react-router-dom";
+import axios from "axios";
 import style from "./WhiskeyDetail.module.css";
-import img from "../../assets/images/whiskey/Ballantines_Finest.png"
 import IconContainer from "./components/IconContainer";
 import Statistics from "./components/Statistics";
 import ReviewList from "./components/ReviewList";
 import CocktailRecipe from "./components/CocktailRecipe";
 
 function WhiskeyDetail() {
+  const params = useParams();
+  const location = useLocation();
+  const whiskeyId = params.whiskeyId;
+  const imageUrl = location.state?.imageUrl;
+  //기본정보
+  const [whiskeyDetail, setWhiskeyDetail] = useState(null);
+  //통계정보
+  const [whiskeyStatistic, setWhiskeyStatistic] = useState(null);
+  //리뷰
+  const [whiskeyReview, setWhiskeyReview] = useState(null)
+
+  useEffect(() => {
+    // 위스키 기본 정보 가져오기
+    const fetchWhiskeyDetail = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_API_URL}/whiskey/info/${whiskeyId}`
+        );
+        console.log(response.data.data);
+        setWhiskeyDetail(response.data.data);
+      } catch (error) {
+        console.error("위스키 상세 정보 가져오기 실패", error);
+      }
+    };
+    // 위스키 선호도 통계 가져오기
+    const fetchWhiskeyStatistic = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_API_URL}/whiskey/statistic/${whiskeyId}`
+        )
+        console.log('위스키 선호도 통계 가져오기 성공',response.data)
+      }
+      catch (error) {
+        console.log("위스키 선호도 통계 가져오기 실패",error)
+      }
+    }
+    //위스키 리뷰 가져오기
+    const fetchWhiskeyReview = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_API_URL}/whiskey/review/${whiskeyId}`
+        )
+        console.log('위스키 리뷰 가져오기 성공', response.data.data.reviewDataList)
+        setWhiskeyReview(response.data.data.reviewDataList);
+      }
+      catch (error) {
+        console.log("위스키 선호도 통계 가져오기 실패",error)
+      }
+    }
+
+    fetchWhiskeyDetail();
+    fetchWhiskeyStatistic();
+    fetchWhiskeyReview();
+  }, [whiskeyId]);
+
   return (
-    // <div>
-    //  <Statistics/>
-    // </div>
     <div>
-      <div className={style.outerContainer}>
-        <div className={style.innerContainer}>
-          <div className={style.infoArea}>
-            <img src={img} alt="" />
-            <div className={style.textArea}>
-              {/* <p style={{ fontSize: '40px' }}>Absolut</p> */}
-              <h1>Absolut</h1>
-              <h2>앱솔루트</h2>
-              <IconContainer />
-              <p>
-                앱솔루트는 정말 맛있는 술입니다. 게다가 정말 맛있는 술입니다.
-              </p>
-              <div className={style.statisticsContainer}></div>
+      {whiskeyDetail ? (
+        <div className={style.outerContainer}>
+          <div className={style.innerContainer}>
+            <div className={style.infoArea}>
+              <img src={imageUrl} alt="" />
+              <div className={style.textArea}>
+                {/* <p style={{ fontSize: '40px' }}>Absolut</p> */}
+                <h1>{whiskeyDetail.whiskeyNameEn}</h1>
+                <h2>{whiskeyDetail.whiskeyNameKr}</h2>
+                <IconContainer
+                  abv={whiskeyDetail.abv}
+                  price={whiskeyDetail.price}
+                  flavor={whiskeyDetail.whiskeyFlavor}
+                />
+
+                <p>{whiskeyDetail.detail}</p>
+                <div className={style.statisticsContainer}></div>
+              </div>
             </div>
+            <Statistics />
+            <p className={style.titleWithLines}>recipe</p>
+            <CocktailRecipe />
+            <p className={style.titleWithLines}>review</p>
+            <ReviewList reviewList={whiskeyReview} />
           </div>
-          <Statistics />
-          <p className={style.titleWithLines}>recipe</p>
-          <CocktailRecipe />
-          <p className={style.titleWithLines}>review</p>
-          <ReviewList />
         </div>
-      </div>
+      ) : (
+        <div>Loding...</div>
+      )}
     </div>
   );
 }

@@ -8,6 +8,7 @@ import Navbar from "../widgets/Navbar";
 import Login from "../features/auth/Login";
 import SignUp from "../features/signUp/Signup";
 import Modal from "../features/modal/Modal";
+import ModalSmall from '../features/modal/ModalSmall'
 // 마이 바
 import MyBar from "../features/myBar/MyBar";
 import MyBarOther from "../features/myBar/MyBarOther";
@@ -66,7 +67,7 @@ const App = () => {
           {/* 위스키 정보 */}
           <Route path="/whiskeyInfo" element={<WhiskeyInfo />}></Route>
           {/* 위스키 디테일 */}
-          <Route path="/WhiskeyDetail" element={<WhiskeyDetail />}></Route>
+          <Route path="/WhiskeyDetail/:whiskeyId" element={<WhiskeyDetail />}></Route>
           {/* 위스키 등록 */}
           <Route path="/register" element={<WhiskeyRegister />} />
           {/* 지도 */}
@@ -76,7 +77,7 @@ const App = () => {
           <Route path="/chatRoom" element={<Chat />} />
           {/* 마이바 */}
           <Route path="/myBar" element={<MyBar />} />
-          <Route path="/myBar/123" element={<MyBarOther />} />
+          <Route path="/myBarOther" element={<MyBarOther />} />
           {/* 마이페이지 */}
           <Route path="/myPage" element={<MyPage />} />
           {/* 회원정보 */}
@@ -94,9 +95,9 @@ const App = () => {
           </Modal>
         )} */}
         {isMyPageModalOpen && (
-          <Modal isOpen={isMyPageModalOpen} onClose={handleCloseModal}>
+          <ModalSmall isOpen={isMyPageModalOpen} onClose={handleCloseModal}>
             <MyPageModal onClose={handleCloseModal} />
-          </Modal>
+          </ModalSmall>
         )}
       </div>
     </Router>

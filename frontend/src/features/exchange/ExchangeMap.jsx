@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import style from "./ExchangeMap.module.css";
-import { Link } from "react-router-dom";
 import axios from "axios";
 
 // (문제) 스크립트로 kakao maps api를 가져오면, window전역 객체에 들어가게 된다.
@@ -96,23 +95,25 @@ function Map() {
         '<div style="padding:5px; text-align: center;">' +
         `${bar.nickname}'s My Bar` +
         "<br>" +
-        // 10.-방법1) button 사용
+        // 10. 방법1) button 사용
         // `<button onclick=goToBar(${bar.userId})>` +
         // "이동" +
         // "</button>" +
 
-        // 10.-방법2) a태그 사용
-        `<a href="/mybar/${bar.userId}" style="color:black" target="_blank">` +
+        // 10. 방법2) a태그 사용
+        `<a href="/mybarOther?userId=${bar.userId}" style="color:black" target="_blank">` +
         "이동" +
         "</a>" +
         "</div>",
+
       latlng: new kakao.maps.LatLng(bar.latitude, bar.longitude),
     }));
 
     // 4. 다른 이미지로 마커 생성
     const imageSrc = "https://cdn-icons-png.flaticon.com/512/6508/6508614.png", // 마커이미지의 주소 (url로 입력하면 커스텀 가능)
-      imageSize = new kakao.maps.Size(63, 65), // 마커이미지의 크기
-      imageOption = { offset: new kakao.maps.Point(30, 72) }; // 마커이미지 옵션 : 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정
+      // imageSize = new kakao.maps.Size(63, 65), // 마커이미지의 크기
+      imageSize = new kakao.maps.Size(81.5, 84.5), // 마커이미지의 크기 수정
+      imageOption = { offset: new kakao.maps.Point(37, 95) }; // 마커이미지 옵션 : 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정
 
     // 마커의 이미지정보를 가지고 있는 마커이미지 생성
     const markerImage = new kakao.maps.MarkerImage(
@@ -207,8 +208,8 @@ function Map() {
       <div
         id="map"
         style={{
-          width: "700px",
-          height: "400px",
+          width: "900px",
+          height: "460px",
           border: "1px solid black",
         }}
       ></div>
