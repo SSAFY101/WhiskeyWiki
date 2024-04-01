@@ -83,7 +83,7 @@
   color: #c2c2c2;
   font-size: 4rem;
   z-index: 2;
-  animation: title 3s move-background;
+  /*animation: title 3s move-background;*/
 }
 
 .leftSubTitle {
