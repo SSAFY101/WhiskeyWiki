@@ -37,4 +37,4 @@ management:
   endpoint:
   endpoints:
     web:
-      base-path: /whikseywiki
+      base-path: /whiskeywiki
