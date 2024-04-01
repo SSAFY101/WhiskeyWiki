@@ -158,8 +158,7 @@ public class UserServiceImpl implements UserService {
 
         if (userRepository.findByLoginId(loginId).isPresent()) {
             User user = userRepository.findByLoginId(loginId).get();
-            int userId = user.getId();
-            return userId;
+            return user.getId();
         } else {
             return -1;
         }
