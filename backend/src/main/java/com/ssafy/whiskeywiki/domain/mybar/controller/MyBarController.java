@@ -41,7 +41,7 @@ public class MyBarController {
     @GetMapping("/list")
     public ResponseEntity<CommonResponse> getOwnWhiskeyList(@RequestHeader(name = "Authorization")String authToken){
         int userId = userService.getUserIdByAccessToken(authToken.substring(7));
-
+        System.out.println(userId);
         List<OwnWhiskeyDTO.WhiskeyStatus> resultList = myBarService.userOwnWhiskeyList(userId);
 
         return new ResponseEntity<>(CommonResponse.builder()
@@ -66,6 +66,7 @@ public class MyBarController {
     @PostMapping("/status/{whiskeyId}")
     public ResponseEntity<CommonResponse> changeWhiskeyStatus(@RequestHeader(name = "Authorization") String authToken ,@PathVariable(name = "whiskeyId") int whiskeyId){
         int userId = userService.getUserIdByAccessToken(authToken.substring(7));
+        System.out.println(userId);
         myBarService.changeWhiskeyStatus(userId, whiskeyId);
 
         return new ResponseEntity<>(CommonResponse.builder()

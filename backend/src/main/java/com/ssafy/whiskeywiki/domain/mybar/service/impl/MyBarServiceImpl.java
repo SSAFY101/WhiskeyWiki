@@ -58,26 +58,55 @@ public class MyBarServiceImpl implements MyBarService{
 
         List<OwnWhiskeyDTO.WhiskeyStatus> whiskeyStatusList = new ArrayList<>();
         for(OwnWhiskey o : ownWhiskeyList){
-            OwnWhiskeyDTO.WhiskeyStatus whiskeyStatus = new OwnWhiskeyDTO.WhiskeyStatus(o.getUser().getId(),o.getIsEmpty());
+            OwnWhiskeyDTO.WhiskeyStatus whiskeyStatus = new OwnWhiskeyDTO.WhiskeyStatus(o.getWhiskey().getId(),o.getIsEmpty());
             whiskeyStatusList.add(whiskeyStatus);
         }
 
         return whiskeyStatusList;
     }
 
+//    @Override
+//    public void changeWhiskeyStatus(int userId, int whiskeyId) {
+//        List<OwnWhiskey> ownWhiskeyList = ownWhiskeyRepository.findByUser(userRepository.getById(userId));
+//        Whiskey whiskey = new Whiskey();
+//        for(OwnWhiskey o : ownWhiskeyList){
+//            if(o.getWhiskey().getId() == whiskeyId){
+//                whiskey = o.getWhiskey();
+//            }
+//        }
+//        //최종적으로 상태를 바꿀 OwnWhiskey 찾기
+//        OwnWhiskey ownWhiskey = ownWhiskeyRepository.findByWhiskey(whiskey);
+//        ownWhiskey.updateStatus();
+//        ownWhiskeyRepository.save(ownWhiskey);
+//    }
+
+    //GPT코드
     @Override
     public void changeWhiskeyStatus(int userId, int whiskeyId) {
-        List<OwnWhiskey> ownWhiskeyList = ownWhiskeyRepository.findByUser(userRepository.getById(userId));
-        Whiskey whiskey = new Whiskey();
-        for(OwnWhiskey o : ownWhiskeyList){
-            if(o.getWhiskey().getId() == whiskeyId){
-                whiskey = o.getWhiskey();
+        // 사용자 조회
+        User user = userRepository.getById(userId);
+        if (user == null) {
+            throw new IllegalArgumentException("User not found with ID: " + userId);
+        }
+
+        // 사용자가 소유한 위스키 목록 조회
+        List<OwnWhiskey> ownWhiskeyList = ownWhiskeyRepository.findByUser(user);
+
+        // 주어진 whiskeyId에 해당하는 위스키를 소유한 경우 상태 변경
+        boolean whiskeyFound = false;
+        for (OwnWhiskey ownWhiskey : ownWhiskeyList) {
+            if (ownWhiskey.getWhiskey().getId() == whiskeyId) {
+                ownWhiskey.updateStatus();
+                ownWhiskeyRepository.save(ownWhiskey);
+                whiskeyFound = true;
+                break;
             }
         }
-        //최종적으로 상태를 바꿀 OwnWhiskey 찾기
-        OwnWhiskey ownWhiskey = ownWhiskeyRepository.findByWhiskey(whiskey);
-        ownWhiskey.updateStatus();
-        ownWhiskeyRepository.save(ownWhiskey);
+
+        // 해당 위스키를 찾지 못한 경우 예외 처리
+        if (!whiskeyFound) {
+            throw new IllegalArgumentException("Whiskey not found with ID: " + whiskeyId);
+        }
     }
 
     @Override
