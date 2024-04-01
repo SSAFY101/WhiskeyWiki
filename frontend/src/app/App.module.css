@@ -1,0 +1,44 @@
+* {
+  cursor: default;
+  color: #f3f3f3;
+  background-color: #1c1c1c;
+  font-family: "NanumMyeongjo-Bold";
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-use-select: none;
+  user-select: none;
+}
+
+body {
+  margin: 0;
+}
+
+::-webkit-scrollbar {
+  width: 0.8rem;
+  height: 0.8rem;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #3b3b3b;
+  border-radius: 20px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #808080;
+  border-radius: 20px;
+}
+
+.navbar {
+  background-color: transparent !important;
+}
+
+.draggable {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-use-select: text;
+  user-select: text;
+}
+
+@font-face {
+  font-family: "NanumMyeongjo-Bold";
+  src: url("../assets/font/NanumMyeongjo-Bold.ttf");
+}

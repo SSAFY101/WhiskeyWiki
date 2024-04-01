@@ -1,0 +1,49 @@
+.outerContainer{
+  display:inline-flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+  /* background-color: #2E2E2E; */
+}
+.outerContainer *{
+  margin-top: 30px;
+
+}
+.starBox {
+  font-size: 50px; /* 별 크기 */
+  cursor: pointer;
+  border: none;
+  margin: 0 auto;
+}
+
+.outerContainer p {
+  margin-bottom:0px;
+  font-size: 30px;
+  
+}
+
+.on {
+  color: #ffc107; /* 채워진 별 색상 */
+}
+
+.off {
+  color: #787B7B; /* 빈 별 색상 */
+}
+
+.submitButton{
+  background-color:#ffc107;
+  color:#2E2E2E;
+  font-size: 25px;
+  height: 60px;
+  width: 200px;
+  border-radius: 10px;
+}
+
+textarea{
+  border: 2px solid #7b7b7b;
+  border-radius: 10px;
+  background-color: #454545;
+  width:400px;
+  height:200px;
+  font-size: 20px;
+}

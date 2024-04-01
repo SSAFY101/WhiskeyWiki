@@ -1,0 +1,31 @@
+.container img {
+  width: 7rem;
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5rem;
+  margin: 0rem 1rem 1rem 1rem;
+  background-color: #333333;
+  border-radius: 10px;
+}
+
+.container * {
+  background-color: #333333;
+}
+
+.container:hover {
+  cursor: pointer;
+  color: #333333;
+  background-color: #eeb233;
+}
+
+.container:hover * {
+  cursor: pointer;
+  color: #333333;
+  background-color: #eeb233;
+}

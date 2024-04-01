@@ -1,0 +1,124 @@
+.container {
+  display: flex;
+}
+
+.container * {
+  text-decoration-line: none;
+}
+
+.sideMenu {
+  width: 15%;
+  padding: 3rem;
+}
+
+.myPage {
+  color: #bcbcbc;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.menu {
+  margin-top: 2rem;
+}
+
+.menu * {
+  cursor: pointer;
+  color: #bcbcbc;
+  font-size: 1.3rem;
+  margin-top: 1.5rem;
+}
+
+.menu *:hover {
+  color: #eeb233;
+}
+
+.chatListContainer {
+  background-color: #3a3a3a;
+  width: 55%;
+  padding: 1rem 2rem 1rem 2rem;
+  border-radius: 10px;
+}
+
+.chatListContainer * {
+  background-color: #3a3a3a;
+}
+
+.chatContainer {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  /* padding: 2rem 1rem; */
+}
+
+.contentContainer * {
+  cursor: pointer;
+}
+
+.contentContainer {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  width: 80%;
+  height: 5rem;
+  margin: 1rem 0rem;
+}
+
+.contentContainer:hover {
+  background-color: #323232;
+  border-radius: 10px;
+}
+
+.contentContainer:hover * {
+  background-color: #323232;
+}
+
+.tradeStatus {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 6rem;
+  height: 1.5rem;
+  margin: 0rem 2rem;
+}
+
+.tradeStatus * {
+  background-color: transparent;
+}
+
+.statusContainer {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  padding: 0.4rem 0.7rem;
+  font-size: 1.2rem;
+}
+
+.statusContainer * {
+  cursor: pointer;
+}
+
+.pairId {
+  color: #e3e3e3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20%;
+  font-size: 1.5rem;
+  margin-right: 3rem;
+}
+
+.lastMessagae {
+  color: #a5a5a5;
+  font-size: 1.3rem;
+}
+
+.line {
+  border: none;
+  background-color: #605d5d;
+  height: 2px;
+  margin: 0rem 0rem 0rem 0rem;
+}
