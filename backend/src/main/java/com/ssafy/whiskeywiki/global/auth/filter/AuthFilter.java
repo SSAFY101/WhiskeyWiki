@@ -57,11 +57,12 @@ public class AuthFilter extends OncePerRequestFilter {
                 throw new EOFException();
             }
 
-
             Claims claims = jwtProvider.getClaims(accessToken);
 
             // 만료 시간 확인
             Date expiration = claims.getExpiration();
+            log.info("expiration(={})", expiration);
+            log.info("new date(={})", new Date());
             if (expiration.before(new Date())) {
                 throw new Exception();
             }
