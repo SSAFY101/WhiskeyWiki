@@ -2,7 +2,6 @@ package com.ssafy.whiskeywiki.domain.chat.service;
 
 import com.ssafy.whiskeywiki.domain.chat.domain.Chat;
 import com.ssafy.whiskeywiki.domain.chat.domain.Chatroom;
-import com.ssafy.whiskeywiki.domain.chat.domain.UserChatroom;
 import com.ssafy.whiskeywiki.domain.chat.dto.ChatDTO;
 import com.ssafy.whiskeywiki.domain.chat.repository.ChatRepository;
 import com.ssafy.whiskeywiki.domain.chat.repository.ChatroomRepository;
@@ -11,11 +10,11 @@ import com.ssafy.whiskeywiki.domain.user.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Slf4j
@@ -38,13 +37,13 @@ public class ChatService {
         simpMessagingTemplate.convertAndSendToUser(userB, "/topic/chatroom/" + roomNumber, content);
     }
 
-    public Chat saveChat(ChatDTO.ChatRequest chatRequest) {
+    public ChatDTO.ChatResponse saveChat(ChatDTO.ChatRequest chatRequest) {
 
         Optional<Chatroom> optionalChatroom = chatroomRepository.findById(chatRequest.getChatroomId());
         if (optionalChatroom.isEmpty()) return null;
         Chatroom chatroom = optionalChatroom.get();
 
-        Optional<User> optionalUser = userRepository.findByLoginId(chatRequest.getLoginId());
+        Optional<User> optionalUser = userRepository.findByLoginId(chatRequest.getUserId());
         if (optionalUser.isEmpty()) return null;
         User user = optionalUser.get();
 
@@ -54,12 +53,21 @@ public class ChatService {
         chatroom.updateEditTime(now);
         chatroom.updateLastChat(content);
 
-        return chatRepository.save(Chat.builder()
+        Chat chat = chatRepository.save(Chat.builder()
                 .chatroom(chatroom)
                 .user(user)
                 .message(content)
                 .dateTime(now)
                 .build());
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+        return ChatDTO.ChatResponse.builder()
+                .chatId(chat.getId())
+                .userId(chatRequest.getUserId())
+                .content(chatRequest.getContent())
+                .dateTime(now.format(formatter))
+                .build();
     }
 
     public List<ChatDTO.ChatResponse> getChatList() {

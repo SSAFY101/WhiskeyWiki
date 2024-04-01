@@ -1,5 +1,6 @@
 package com.ssafy.whiskeywiki.domain.chat.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ssafy.whiskeywiki.domain.user.domain.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -24,20 +25,27 @@ public class UserChatroom {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "chatroom_id")
+    @JsonIgnore
     private Chatroom chatroom;
+
+    @Builder.Default
+    private boolean exit = false;
 
     @Builder.Default
     private boolean tradeIntention = false;
 
-    private void updateUser(User user) {
+    public void updateUser(User user) {
         this.user = user;
     }
 
-    private void updateChatroom(Chatroom chatroom) {
+    public void updateChatroom(Chatroom chatroom) {
         this.chatroom = chatroom;
     }
+
+    public void exitChatroom() {this.exit = true;}
 }

@@ -1,7 +1,7 @@
 server:
   servlet:
     context-path: /api
-  port: 8080
+  port: 8081
 
 # DB와 secret key 세팅 값
 spring:
@@ -20,7 +20,7 @@ spring:
     properties:
       hibernate:
         show_sql: true
-        format_sql: true
+#        format_sql: true
 
 
   h2:
