@@ -4,6 +4,7 @@ import com.ssafy.whiskeywiki.domain.cocktail.domain.Favorite;
 import com.ssafy.whiskeywiki.domain.cocktail.dto.FavoriteDTO;
 import com.ssafy.whiskeywiki.domain.map.dto.MapDTO;
 import com.ssafy.whiskeywiki.domain.mybar.domain.OwnWhiskey;
+import com.ssafy.whiskeywiki.domain.mybar.dto.MyBarDTO;
 import com.ssafy.whiskeywiki.domain.mybar.dto.OwnWhiskeyDTO;
 import com.ssafy.whiskeywiki.domain.user.domain.User;
 
@@ -17,5 +18,5 @@ public interface MyBarService {
 
     void changeWhiskeyStatus(int userId, int whiskeyId);
 
-    List<MapDTO.OwnWhiskeyStatus> lookAnotherMyBar(int userId);
+    List<MyBarDTO.AnotherUserMyBarDTO> lookAnotherMyBar(int userId);
 }

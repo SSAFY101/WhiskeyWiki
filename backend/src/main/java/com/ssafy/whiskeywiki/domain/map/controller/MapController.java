@@ -38,7 +38,7 @@ public class MapController {
     }
 
     @PostMapping("/search-condition")
-    public ResponseEntity<CommonResponse> searchCondition(@RequestBody MapDTO.RequestSearchList checkedWhiskeyList){
+    public ResponseEntity<CommonResponse> searchCondition(@RequestHeader(name = "Authorization")String authToken, @RequestBody MapDTO.RequestSearchList checkedWhiskeyList){
         if(checkedWhiskeyList == null){
             return new ResponseEntity<>(CommonResponse.builder()
                     .status(HttpStatus.NO_CONTENT.value())
@@ -46,7 +46,8 @@ public class MapController {
                     .data(null)
                     .build(), HttpStatus.NO_CONTENT);
         }
-        List<MapDTO.ResponseAnotherMyBar> resultList = mapService.userList(checkedWhiskeyList.getCheckedWhiskeyList());
+        int userId = userService.getUserIdByAccessToken(authToken.substring(7));
+        List<MapDTO.ResponseAnotherMyBar> resultList = mapService.userList(userId, checkedWhiskeyList.getCheckedWhiskeyList());
 
         return new ResponseEntity<>(CommonResponse.builder()
                 .status(HttpStatus.OK.value())
