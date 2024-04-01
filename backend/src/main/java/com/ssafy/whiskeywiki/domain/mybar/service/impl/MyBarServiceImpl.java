@@ -91,7 +91,7 @@ public class MyBarServiceImpl implements MyBarService{
             for(OwnWhiskey ownWhiskey : ownWhiskeyList){
                 MapDTO.OwnWhiskeyStatus info = new MapDTO.OwnWhiskeyStatus();
                 info.setIsEmpty(ownWhiskey.getIsEmpty());
-                info.setWhiskeyNameKr(ownWhiskey.getWhiskey().getWhiskeyNameKr());
+                info.setWhiskeyId(ownWhiskey.getWhiskey().getId());
 
                 result.add(info);
             }

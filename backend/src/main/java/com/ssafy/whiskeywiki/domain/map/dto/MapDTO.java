@@ -42,7 +42,7 @@ public class MapDTO {
     @NoArgsConstructor
     @Data
     public static class OwnWhiskeyStatus{
-        private String whiskeyNameKr;
+        private int whiskeyId;
         private Boolean isEmpty;
     }
 
