@@ -46,8 +46,8 @@ public class ReviewController {
 
     //위스키 리뷰 작성
     @PostMapping("/register")
-    public ResponseEntity<CommonResponse> addReview(@RequestHeader(name = "Authorization") String accessToken ,@RequestBody ReviewDTO.ReviewRequest reviewRequest){
-        int userId = userService.getUserIdByAccessToken(accessToken);
+    public ResponseEntity<CommonResponse> addReview(@RequestHeader(name = "Authorization") String authToken ,@RequestBody ReviewDTO.ReviewRequest reviewRequest){
+        int userId = userService.getUserIdByAccessToken(authToken.substring(7));
 
         reviewService.addReview(reviewRequest, userId);
 
