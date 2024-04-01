@@ -1,0 +1,16 @@
+.iconContainer * {
+  display: inline;
+  margin: 0;
+}
+
+.iconWrapper img{
+  width: 5%;
+  margin: 10px 10px 10px 10px;
+
+}
+.iconWrapper {
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  margin-right: 10px;
+}

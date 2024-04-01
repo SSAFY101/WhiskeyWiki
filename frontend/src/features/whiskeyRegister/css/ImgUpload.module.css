@@ -1,0 +1,79 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3rem;
+}
+
+.top {
+  display: flex;
+  justify-content: center;
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 2.5rem;
+  margin-right: 5rem;
+}
+
+.textContainer div {
+  margin: 1rem 0rem;
+}
+
+.imgUpload {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30rem;
+  height: 25rem;
+  border-radius: 20px;
+  background-color: #f3f3f3;
+  box-shadow: 0px 5px 30px 20px rgb(111, 111, 111);
+}
+
+.imgUpload:hover div {
+  background-color: #eeb233;
+  color: #f3f3f3;
+}
+
+.imgUpload div {
+  cursor: pointer;
+  color: #f3f3f3;
+  background-color: #dda733;
+  border-radius: 30px;
+  font-size: 1.5rem;
+  padding: 0.8rem 1.8rem;
+}
+
+.imgUpload div:hover {
+  color: #f3f3f3;
+}
+
+.imgUpload img {
+  width: 12rem;
+}
+
+.preview img {
+  cursor: pointer;
+  background-color: #f3f3f3;
+  border-radius: 20px;
+  width: 30rem;
+  height: 25rem;
+  box-shadow: 0px 5px 30px 10px gray;
+  object-fit: cover;
+}
+
+.detectButton {
+  cursor: pointer;
+  color: #1c1c1c;
+  background-color: #eeb233;
+  border: none;
+  border-radius: 10px;
+  padding: 1rem 2rem;
+  margin-top: 5rem;
+  font-size: 1.7rem;
+}

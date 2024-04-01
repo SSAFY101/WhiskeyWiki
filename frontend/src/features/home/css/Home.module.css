@@ -1,0 +1,170 @@
+.container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  overflow-y: auto;
+  z-index: 0;
+}
+
+.container::-webkit-scrollbar {
+  display: none;
+}
+
+.section {
+  height: 100vh;
+  width: 100vw;
+  background-size: cover;
+  position: relative;
+}
+
+.layer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: black;
+  height: 100vh;
+  width: 50%;
+  opacity: 40%;
+  z-index: 1;
+  animation: layer 2s;
+}
+
+@keyframes layer {
+  0% {
+    opacity: 70%;
+    left: 0%;
+    width: 100%;
+  }
+  100% {
+    opacity: 40%;
+    left: 0;
+    width: 50%;
+  }
+}
+
+.navbar {
+  position: absolute;
+  background-color: transparent;
+  width: 100%;
+  z-index: 2;
+}
+
+.title {
+  position: absolute;
+  background-color: transparent;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ececec;
+  font-size: 4rem;
+  z-index: 2;
+  animation: title 3s;
+}
+
+@keyframes title {
+  0% {
+    opacity: 0%;
+  }
+  100% {
+    opacity: 100%;
+  }
+}
+
+/* Section2,4 */
+
+.leftTitle {
+  position: absolute;
+  background-color: transparent;
+  top: 15%;
+  left: 10%;
+  color: #c2c2c2;
+  font-size: 4rem;
+  z-index: 2;
+  animation: title 3s move-background;
+}
+
+.leftSubTitle {
+  position: absolute;
+  background-color: transparent;
+  top: 35%;
+  left: 10%;
+  color: #eaeaea;
+  font-size: 3rem;
+  z-index: 2;
+}
+
+.leftLink {
+  cursor: pointer;
+  position: absolute;
+  background-color: transparent;
+  top: 75%;
+  left: 10%;
+  font-size: 2.5rem;
+  text-decoration-line: none;
+  z-index: 2;
+}
+
+.leftLink:hover {
+  color: #eeb233;
+}
+
+.leftLayer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: black;
+  height: 100vh;
+  width: 65%;
+  opacity: 35%;
+  z-index: 1;
+}
+
+/* Section 3 */
+.rightTitle {
+  position: absolute;
+  background-color: transparent;
+  top: 15%;
+  left: 40%;
+  color: #c2c2c2;
+  font-size: 4rem;
+  z-index: 2;
+}
+
+.rightSubTitle {
+  position: absolute;
+  background-color: transparent;
+  top: 35%;
+  left: 40%;
+  color: #eaeaea;
+  font-size: 3rem;
+  z-index: 2;
+}
+
+.rightLink {
+  cursor: pointer;
+  position: absolute;
+  background-color: transparent;
+  top: 75%;
+  left: 40%;
+  font-size: 2.5rem;
+  text-decoration-line: none;
+  z-index: 2;
+}
+
+.rightLink:hover {
+  color: #eeb233;
+}
+
+.rightLayer {
+  position: absolute;
+  bottom: 0;
+  left: 35%;
+  background-color: black;
+  height: 100vh;
+  width: 65%;
+  opacity: 35%;
+  z-index: 1;
+}

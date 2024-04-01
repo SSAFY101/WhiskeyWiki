@@ -1,0 +1,70 @@
+.outerContainer{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.outerContainer *{
+  font-size:20px;
+}
+
+.innerContainer{
+  align-content: center;
+  border-radius: 20px;
+  background-color:#2E2E2E;
+  
+}
+.field{
+
+  margin: 0 30px 0 30px;
+  width: 600px;
+  height: 80px;
+  display:flex;
+  background: transparent;
+
+}
+
+.field:not(:last-child){
+  border-bottom: 2px solid #4C4C4C;
+}
+
+.field input {
+  flex-grow: 1;
+  border:none;
+  background: transparent;
+  padding:8px;
+}
+
+.button{
+  border-radius: 10px;
+  background-color: #b5b5b5;
+  color: #2E2E2E;
+  width: 80px;
+  height: 40px;
+  font-size: 15px;
+  margin-top:20px;
+  cursor: pointer;
+}
+
+.button:hover{
+  background-color: #ffcc00;
+}
+
+.withdrawal{
+  width: 200px; /* 버튼의 너비를 조절 */
+  height: 50px; /* 버튼의 높이를 조절 */
+  background-color: #363636; /* 버튼의 배경색을 조절 */
+  color: #fff; /* 버튼의 텍스트 색상을 흰색으로 조절 */
+  border: none; /* 테두리 제거 */
+  border-radius: 10px; /* 둥근 버튼을 만들기 위해 모서리를 반지름 25px으로 조절 */
+  margin-top: 30px; /* 상단 여백 조절 */
+  margin-bottom: 30px; /* 하단 여백 조절 */
+  cursor: pointer; /* 마우스 오버 시 커서를 포인터로 변경 */
+  font-weight: bold; /* 텍스트를 굵게 */
+}
+
+.withdrawalContainer{
+  width: 600px;
+  display: flex;
+  justify-content: flex-end;
+}

@@ -1,0 +1,56 @@
+.container {
+  width: 100%;
+  background-color: transparent;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 2rem 0rem 6rem 0rem;
+  font-size: 1.2rem;
+}
+
+.container * {
+  background-color: transparent;
+}
+
+.logo * {
+  cursor: pointer;
+  text-decoration-line: none;
+  font-size: 1.5rem;
+}
+
+.menu {
+  display: flex;
+  justify-content: space-around;
+  /* 임시 */
+  margin-left: 10rem;
+}
+
+.menu * {
+  cursor: pointer;
+  text-decoration-line: none;
+  margin: 0rem 3rem;
+}
+
+.menu *:hover {
+  color: #eeb233;
+}
+
+.user {
+  display: flex;
+  justify-content: space-around;
+}
+
+.user * {
+  cursor: pointer;
+  margin-left: 3rem;
+  text-decoration-line: none;
+}
+
+.user img {
+  width: 1.6rem;
+}
+
+.myPage {
+  z-index:4;
+  cursor: pointer;
+}

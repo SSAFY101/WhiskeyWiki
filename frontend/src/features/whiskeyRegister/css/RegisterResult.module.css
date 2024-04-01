@@ -1,0 +1,104 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5rem;
+}
+
+.title {
+  color: #efefef;
+  font-size: 3rem;
+  margin-bottom: 2rem;
+}
+
+.cardList {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 3rem;
+}
+
+.whiskeyGroup {
+  display: flex;
+}
+
+.card {
+  margin: 1rem 1.5rem;
+}
+
+.cardContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 3rem;
+  border-radius: 20px;
+}
+
+.cardContainer:hover {
+  cursor: pointer;
+  background-color: #262626;
+}
+
+.cardContainer:hover img {
+  cursor: pointer;
+  background-color: #262626;
+}
+
+.cardContainer:hover .nameEn {
+  cursor: pointer;
+  background-color: #262626;
+  color: #f3f3f3;
+}
+
+.cardContainer:hover .detail {
+  cursor: pointer;
+  background-color: #262626;
+  color: rgb(181, 181, 181);
+  visibility: visible;
+}
+
+.cardImg {
+  height: 15rem;
+  margin-bottom: 1rem;
+  border-radius: 20px;
+}
+
+.goMyBarButton {
+  color: #1c1c1c;
+  background-color: #eeb233;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  padding: 0.8rem 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.nameEn {
+  color: #a6a6a6;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.detailContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: solid 3px #3f3f3f;
+  border-radius: 20px;
+  padding: 2rem 5rem;
+}
+
+.detailTitle {
+  color: #b5b5b5;
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+}
+
+.detail {
+  visibility: hidden;
+  font-size: 1rem;
+}
