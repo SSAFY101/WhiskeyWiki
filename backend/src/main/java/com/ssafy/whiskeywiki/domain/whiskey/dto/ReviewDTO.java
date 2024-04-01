@@ -40,7 +40,7 @@ public class ReviewDTO {
     @Data
     public static class ReviewRequest{
         private int whiskeyId;
-        private int reviewRating;
+        private int starRating;
         private String content;
     }
     @Builder

@@ -77,7 +77,7 @@ public class ReviewServiceImpl implements ReviewService {
                 Review review = Review.builder()
                         .user(reviewer.get())
                         .whiskey(whiskey.get())
-                        .reviewRating(StarRating.values()[reviewRequest.getReviewRating()])
+                        .reviewRating(StarRating.values()[reviewRequest.getStarRating()])
                         .content(reviewRequest.getContent())
                         .build();
                 reviewRepository.save(review);
