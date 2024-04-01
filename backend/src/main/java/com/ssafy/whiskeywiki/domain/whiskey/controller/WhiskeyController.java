@@ -2,7 +2,9 @@ package com.ssafy.whiskeywiki.domain.whiskey.controller;
 
 
 import com.ssafy.whiskeywiki.domain.cocktail.dto.FavoriteDTO;
+import com.ssafy.whiskeywiki.domain.whiskey.domain.Review;
 import com.ssafy.whiskeywiki.domain.whiskey.dto.WhiskeyDTO;
+import com.ssafy.whiskeywiki.domain.whiskey.service.ReviewService;
 import com.ssafy.whiskeywiki.domain.whiskey.service.WhiskeyService;
 import com.ssafy.whiskeywiki.global.util.CommonResponse;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +23,7 @@ import java.util.List;
 public class WhiskeyController {
 
     private final WhiskeyService whiskeyService;
+    private final ReviewService reviewService;
 
     //위스키 목록
     @GetMapping("/list")
@@ -78,7 +81,21 @@ public class WhiskeyController {
     }
 
     //위스키 선호도 통계 가져오기
-//    @GetMapping("/statistic/{whiskeyId}")
+    @GetMapping("/statistic/{whiskeyId}")
+    public ResponseEntity<CommonResponse> getWhiskeyStastics(@PathVariable(name = "whiskeyId") int whiskeyId){
+
+        List<Review> reviews = reviewService.getOverRatingFour(whiskeyId);
+
+        WhiskeyDTO.WhiskeyStaticsData result = whiskeyService.whiskeyStaticsData(reviews);
+        System.out.println(result.toString());
+
+        return new ResponseEntity<>(CommonResponse.builder()
+                .status(HttpStatus.OK.value())
+                .message("위스키 선호도 통계 조회 성공")
+                .data(result)
+                .build(), HttpStatus.OK);
+    }
+
 
     //위스키 전체 목록 이름 조회
     @GetMapping("/list/name")
