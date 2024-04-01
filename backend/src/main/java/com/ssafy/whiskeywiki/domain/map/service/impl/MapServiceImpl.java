@@ -37,14 +37,14 @@ public class MapServiceImpl implements MapService {
     }
 
     @Override
-    public List<MapDTO.ResponseAnotherMyBar> userList(List<String> condition) {
+    public List<MapDTO.ResponseAnotherMyBar> userList(List<String> checkedWhiskeyList) {
         /**
          * 빈병이 아닌 위스키를 가진 유저에 대해서만 처리해줘야함!
          */
         List<MapDTO.ResponseAnotherMyBar> result = new ArrayList<>();
         List<Integer> userIdList = new ArrayList<>();
 
-        for(String name : condition){
+        for(String name : checkedWhiskeyList){
 //            System.out.println(name);
             Whiskey whiskey = whiskeyRepository.findByWhiskeyNameKr(name);
             List<OwnWhiskey> ownWhiskeyList = ownWhiskeyRepository.findOwnWhiskeyListByWhiskey(whiskey);
