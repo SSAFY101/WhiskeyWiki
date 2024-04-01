@@ -20,6 +20,13 @@ public class MapController {
 
     @GetMapping("/location")
     public ResponseEntity<CommonResponse> getUserLocation(@RequestHeader(name = "Authorization") String authToken){
+        if(authToken == null){
+            return new ResponseEntity<>(CommonResponse.builder()
+                    .status(HttpStatus.BAD_REQUEST.value())
+                    .message("해당 유저가 없습니다.")
+                    .data(null)
+                    .build(), HttpStatus.BAD_REQUEST);
+        }
         int userId = userService.getUserIdByAccessToken(authToken.substring(7));
         MapDTO.ResponseUserLocation userLocation = mapService.getUserLocation(userId);
 
@@ -30,10 +37,16 @@ public class MapController {
                 .build(), HttpStatus.OK);
     }
 
-    @GetMapping("/search-condition")
-    public ResponseEntity<CommonResponse> searchCondition(@RequestBody MapDTO.searchUserConditionRequest condition){
-        System.out.println(condition);
-        List<MapDTO.ResponseAnotherMyBar> resultList = mapService.userList(condition.getCheckedWhiskeyList());
+    @PostMapping("/search-condition")
+    public ResponseEntity<CommonResponse> searchCondition(@RequestBody MapDTO.RequestSearchList checkedWhiskeyList){
+        if(checkedWhiskeyList == null){
+            return new ResponseEntity<>(CommonResponse.builder()
+                    .status(HttpStatus.NO_CONTENT.value())
+                    .message("다른 유저의 My Bar 리스트 조회 실패")
+                    .data(null)
+                    .build(), HttpStatus.NO_CONTENT);
+        }
+        List<MapDTO.ResponseAnotherMyBar> resultList = mapService.userList(checkedWhiskeyList.getCheckedWhiskeyList());
 
         return new ResponseEntity<>(CommonResponse.builder()
                 .status(HttpStatus.OK.value())
