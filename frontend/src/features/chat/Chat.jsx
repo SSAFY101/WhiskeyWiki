@@ -57,15 +57,7 @@ const Chat = () => {
   useEffect(() => {
     // 채팅방 메세지 리스트 불러오기
     axios
-      .get(`/trade/room`, {
-        headers: {
-          accessToken: "토큰",
-        },
-        params: {
-          userId,
-          chatRoomId,
-        },
-      })
+      .get(`/chat/list/${chatRoomId}`)
       .then((res) => {
         // 토큰 받는 경우 (만료)
         // 만료 안되서 요청만 수락된 경우
@@ -83,11 +75,7 @@ const Chat = () => {
   const clickExitHandler = () => {
     if (window.confirm("채팅방에서 나가시겠습니까?")) {
       axios
-        .put("/trade/room", chatRoomId, {
-          headers: {
-            accessToken: "토큰",
-          },
-        })
+        .delete(`/chatroom/${chatRoomId}`)
         .then((res) => {
           console.log("채팅방 나가기", res);
         })

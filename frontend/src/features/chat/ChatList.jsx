@@ -44,11 +44,7 @@ const ChatList = () => {
     ]);
     // 채팅방 리스트 요청 / userId : 임시
     axios
-      .get("/trade/rooms", userId, {
-        headers: {
-          accessToken: "토큰",
-        },
-      })
+      .get("/chatroom/list")
       .then((res) => {
         console.log("채팅방 리스트", res); // 테스트
         const data = res.data.data.chatRoomList;
