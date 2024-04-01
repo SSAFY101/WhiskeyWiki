@@ -43,7 +43,6 @@ class ChatRepositoryTest {
 
         Chat chat = Chat.builder()
                 .user(user)
-                .userChatroom(userChatroom)
 //                .chatVisible(false)
                 .message("message")
                 .dateTime(LocalDateTime.now())
