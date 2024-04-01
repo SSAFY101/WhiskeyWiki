@@ -1,11 +1,17 @@
 import style from "./InfoCard.module.css";
 import whiskeyImages from "./components/Whiskeys";
-function Infocard({ nameKr, nameEn, taste, abv, price, rating, onClick }) {
+import { useNavigate } from "react-router-dom";
+function Infocard({ whiskeyId, nameKr, nameEn, taste, abv, price, rating, onClick }) {
   const ratingStars = "★".repeat(rating) + "☆".repeat(5 - rating);
   // nameEn을 사용해 해당하는 이미지 찾기
   const image = whiskeyImages[nameEn];
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate(`/whiskeyDetail/${whiskeyId}`, {state:{imageUrl:image}})
+
+  }
   return (
-    <div className={style.container}>
+    <div className={style.container} onClick={handleClick}>
       <div className={style.outerCard} onClick={onClick}>
         <img className={style.whiskeyImg} src={image} alt="" />
         <div className={style.infoArea}>
