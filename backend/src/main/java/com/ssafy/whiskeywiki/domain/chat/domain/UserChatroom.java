@@ -1,5 +1,6 @@
 package com.ssafy.whiskeywiki.domain.chat.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ssafy.whiskeywiki.domain.user.domain.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -17,25 +18,34 @@ import java.util.*;
 @Getter
 public class UserChatroom {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue
     @Column(name = "user_chatroom_id")
     private int id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "chatroom_id")
+    @JoinColumn(name = "chatroom_id")
+    @JsonIgnore
     private Chatroom chatroom;
 
-    @OneToMany(mappedBy = "userChatroom", cascade = CascadeType.REMOVE)
     @Builder.Default
-    private List<Chat> chatList = new ArrayList<>();
-
-//    @OneToMany(mappedBy = "userChatroom")
-//    private List<Chat> chatList = new ArrayList<>();
+    private boolean exit = false;
 
     @Builder.Default
     private boolean tradeIntention = false;
+
+    public void updateUser(User user) {
+        this.user = user;
+    }
+
+    public void updateChatroom(Chatroom chatroom) {
+        this.chatroom = chatroom;
+    }
+
+    public void exitChatroom() {this.exit = true;}
 }

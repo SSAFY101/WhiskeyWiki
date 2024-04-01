@@ -8,8 +8,9 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
+import java.util.*;
 
-@Builder(toBuilder = true)
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -21,9 +22,23 @@ public class Chatroom {
     @Column(name = "chatroom_id")
     private int id;
 
+    @OneToMany(mappedBy = "chatroom", cascade = CascadeType.REMOVE)
+    @Builder.Default
+    private List<UserChatroom> userChatroomList = new ArrayList<>();
+
     @CreatedDate
     private LocalDateTime createTime;
 
     @CreatedDate
     private LocalDateTime editTime;
+
+    private String lastChat;
+
+    public void updateEditTime(LocalDateTime editTime) {
+        this.editTime = editTime;
+    }
+
+    public void updateLastChat(String lastChat) {
+        this.lastChat = lastChat;
+    }
 }
