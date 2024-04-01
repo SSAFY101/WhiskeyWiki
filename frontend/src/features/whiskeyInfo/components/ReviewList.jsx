@@ -10,7 +10,7 @@ import Fifties from "../../../assets/icon/Fifties.svg";
 import Female from "../../../assets/icon/Female.svg";
 import Male from "../../../assets/icon/Male.svg";
 
-function ReviewList({ reviewList }) {
+function ReviewList({ reviewList , whiskeyId }) {
   //리뷰 모달 제어
   const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
   const handleCloseModal = () => {
@@ -108,7 +108,7 @@ function ReviewList({ reviewList }) {
       {/* 조건부 렌더링 */}
       {isReviewModalOpen && (
         <Modal isOpen={isReviewModalOpen} onClose={handleCloseModal}>
-          <CreateReview />
+          <CreateReview whiskeyId={whiskeyId} />
         </Modal>
       )}
     </div>
