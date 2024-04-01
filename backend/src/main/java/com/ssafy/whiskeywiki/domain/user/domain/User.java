@@ -48,6 +48,9 @@ public class User {
     @Column(precision = 13, scale = 10)
     private BigDecimal longitude;
 
+    @Builder.Default
+    private String district = "";
+
     //연관관계 매핑//
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     @Builder.Default
