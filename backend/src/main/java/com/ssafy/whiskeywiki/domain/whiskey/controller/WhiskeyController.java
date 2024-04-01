@@ -2,6 +2,7 @@ package com.ssafy.whiskeywiki.domain.whiskey.controller;
 
 
 import com.ssafy.whiskeywiki.domain.cocktail.dto.FavoriteDTO;
+import com.ssafy.whiskeywiki.domain.user.service.UserService;
 import com.ssafy.whiskeywiki.domain.whiskey.domain.Review;
 import com.ssafy.whiskeywiki.domain.whiskey.dto.WhiskeyDTO;
 import com.ssafy.whiskeywiki.domain.whiskey.service.ReviewService;
@@ -10,10 +11,7 @@ import com.ssafy.whiskeywiki.global.util.CommonResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -108,5 +106,4 @@ public class WhiskeyController {
                 .data(reusltList)
                 .build(), HttpStatus.OK);
     }
-
 }
