@@ -108,6 +108,12 @@ public class WhiskeyServiceImpl implements WhiskeyService {
         return whiskeyInfo;
     }
 
+    //위스키 선호도 통계
+    @Override
+    public WhiskeyDTO.WhiskeyStaticsData whiskeyStastics(int whiskeyId) {
+        return null;
+    }
+
     //위스키 id로 만들 수 있는 칵테일 추천해주기
 
     /**
@@ -116,6 +122,7 @@ public class WhiskeyServiceImpl implements WhiskeyService {
      */
     @Override
     public List<CocktailDTO.CocktailInfo> recommendCocktail(int whiskeyId) {
+
         return null;
     }
 

@@ -1,15 +1,9 @@
 package com.ssafy.whiskeywiki.domain.whiskey.dto;
 
-import com.ssafy.whiskeywiki.domain.cocktail.domain.Base;
-import com.ssafy.whiskeywiki.domain.cocktail.domain.Ingredient;
-import com.ssafy.whiskeywiki.domain.cocktail.dto.BaseDTO;
-import com.ssafy.whiskeywiki.domain.cocktail.dto.IngredientDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 public class WhiskeyDTO {
     @Builder
@@ -47,6 +41,20 @@ public class WhiskeyDTO {
     public static class WhiskeyNameData{
         private String whiskeyNameKr;
         private String whiskeyNameEn;
+    }
+
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Data
+    public static class WhiskeyStaticsData {
+        private double maleLikePer;
+        private double femaleLikePer;
+        private double twentiesLikePer;
+        private double thirtiesLikePer;
+        private double fortiesLikePer;
+        private double fiftiesLikePer;
+        private double sixtiesLikePer;
     }
 
 }

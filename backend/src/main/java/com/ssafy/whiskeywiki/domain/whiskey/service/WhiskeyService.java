@@ -20,7 +20,8 @@ public interface WhiskeyService {
     //위스키id로 상세 정보 가져오기
     WhiskeyDTO.WhiskeyDetailInfo whiskeyDetailInfo(int whiskeyId);
 
-    //위스키 선호도 통계 가져오기// -> 나중에하기!!
+    //위스키 선호도 통계 가져오기//
+    WhiskeyDTO.WhiskeyStaticsData whiskeyStaticsData(int whiskeyId);
 
     //위스키id로 만들 수 있는 칵테일 추천해주기
     List<CocktailDTO.CocktailInfo> recommendCocktail(int whiskeyId);
