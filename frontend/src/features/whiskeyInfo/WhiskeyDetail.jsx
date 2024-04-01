@@ -12,9 +12,15 @@ function WhiskeyDetail() {
   const location = useLocation();
   const whiskeyId = params.whiskeyId;
   const imageUrl = location.state?.imageUrl;
+  //기본정보
   const [whiskeyDetail, setWhiskeyDetail] = useState(null);
+  //통계정보
+  const [whiskeyStatistic, setWhiskeyStatistic] = useState(null);
+  //리뷰
+  const [whiskeyReview, setWhiskeyReview] = useState(null)
 
   useEffect(() => {
+    // 위스키 기본 정보 가져오기
     const fetchWhiskeyDetail = async () => {
       try {
         const response = await axios.get(
@@ -26,7 +32,35 @@ function WhiskeyDetail() {
         console.error("위스키 상세 정보 가져오기 실패", error);
       }
     };
+    // 위스키 선호도 통계 가져오기
+    const fetchWhiskeyStatistic = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_API_URL}/whiskey/statistic/${whiskeyId}`
+        )
+        console.log('위스키 선호도 통계 가져오기 성공',response.data)
+      }
+      catch (error) {
+        console.log("위스키 선호도 통계 가져오기 실패",error)
+      }
+    }
+    //위스키 리뷰 가져오기
+    const fetchWhiskeyReview = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_API_URL}/whiskey/review/${whiskeyId}`
+        )
+        console.log('위스키 리뷰 가져오기 성공', response.data.data.reviewDataList)
+        setWhiskeyReview(response.data.data.reviewDataList);
+      }
+      catch (error) {
+        console.log("위스키 선호도 통계 가져오기 실패",error)
+      }
+    }
+
     fetchWhiskeyDetail();
+    fetchWhiskeyStatistic();
+    fetchWhiskeyReview();
   }, [whiskeyId]);
 
   return (
@@ -54,7 +88,7 @@ function WhiskeyDetail() {
             <p className={style.titleWithLines}>recipe</p>
             <CocktailRecipe />
             <p className={style.titleWithLines}>review</p>
-            <ReviewList />
+            <ReviewList reviewList={whiskeyReview} />
           </div>
         </div>
       ) : (
