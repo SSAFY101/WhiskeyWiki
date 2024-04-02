@@ -20,7 +20,7 @@ function MyBarCheckEmpty({
     // GET 요청: 위스키 보유 상태 확인
     instance({
       method: "get",
-      url: `${process.env.REACT_APP_API_URL}/mybar/check-status/${whiskeyId}`,
+      url: `/api/mybar/check-status/${whiskeyId}`,
     })
       .then((res) => {
         // console.log("위스키 보유 상태 확인 성공 : ", res.data.data.isEmpty);
@@ -43,7 +43,7 @@ function MyBarCheckEmpty({
     // POST 요청: 위스키 보유 상태 관리 (보유 <-> 빈병 변경)
     instance({
       method: "post",
-      url: `${process.env.REACT_APP_API_URL}/mybar/status/${whiskeyId}`,
+      url: `/api/mybar/status/${whiskeyId}`,
     })
       .then((res) => {
         // console.log("위스키 상태 변경 성공 : ", res.data);
