@@ -51,7 +51,14 @@ public class User {
     private BigDecimal longitude;
 
     @Builder.Default
-    private String district = "";
+    private String region = "";
+
+    @Builder.Default
+    private String city = "";
+
+    @Builder.Default
+    private String village = "";
+
 
     //연관관계 매핑//
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
