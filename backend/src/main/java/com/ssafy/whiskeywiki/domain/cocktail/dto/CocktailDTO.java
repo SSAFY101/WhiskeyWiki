@@ -13,9 +13,19 @@ public class CocktailDTO {
     @NoArgsConstructor
     @Data
     public static class CocktailInfo{
-        private String name;
-        private String flavor;
-        private List<BaseDTO.BaseData> whiskeyList;
-        private List<IngredientDTO.IngredientName> ingredients;
+        private String cocktailName;
+        private String cocktailNameEn;
+        private String recipe;
+        private String detail;
+        private List<String> whiskeyList;
+        private List<String> ingredients;
+    }
+
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Data
+    public static class rememberRecommended{
+        private List<String> recommendedList;
     }
 }

@@ -29,7 +29,6 @@ public class MyBarServiceImpl implements MyBarService{
     private final UserRepository userRepository;
     private final OwnWhiskeyRepository ownWhiskeyRepository;
 
-
     @Override
     public List<FavoriteDTO.FavoriteData> userFavoriteList(int userId) {
         Optional<User> user = userRepository.findById(userId);
@@ -40,7 +39,7 @@ public class MyBarServiceImpl implements MyBarService{
             for(Favorite f : favoriteList){
                 int favoriteId = f.getId();
                 String cocktailName = f.getCocktail().getCocktailName();
-                String recipe = f.getCocktail().getReciepe();
+                String recipe = f.getCocktail().getRecipe();
                 String detail = f.getCocktail().getDetail();
                 FavoriteDTO.FavoriteData favoriteData = new FavoriteDTO.FavoriteData(favoriteId, cocktailName, recipe, detail);
 
@@ -66,22 +65,6 @@ public class MyBarServiceImpl implements MyBarService{
         return whiskeyStatusList;
     }
 
-//    @Override
-//    public void changeWhiskeyStatus(int userId, int whiskeyId) {
-//        List<OwnWhiskey> ownWhiskeyList = ownWhiskeyRepository.findByUser(userRepository.getById(userId));
-//        Whiskey whiskey = new Whiskey();
-//        for(OwnWhiskey o : ownWhiskeyList){
-//            if(o.getWhiskey().getId() == whiskeyId){
-//                whiskey = o.getWhiskey();
-//            }
-//        }
-//        //최종적으로 상태를 바꿀 OwnWhiskey 찾기
-//        OwnWhiskey ownWhiskey = ownWhiskeyRepository.findByWhiskey(whiskey);
-//        ownWhiskey.updateStatus();
-//        ownWhiskeyRepository.save(ownWhiskey);
-//    }
-
-    //GPT코드
     @Override
     public void changeWhiskeyStatus(int userId, int whiskeyId) {
         // 사용자 조회
