@@ -34,7 +34,7 @@ public class WhiskeyServiceImpl implements WhiskeyService {
         for(Whiskey w : whiskeyList){
 
             //이건 여기서 처리할 것이 아니라 whiskey나 review Entity에서 처리한뒤 보내줘야함! 나중에 리팩토링 하자.
-            List<Review> reviewList = reviewRepository.findByWhiskey(w);
+            List<Review> reviewList = reviewRepository.findReviewByWhiskey(w);
             double starOriginRating = 0.0;
             double starRating = 0.0;
 
