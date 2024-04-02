@@ -2,9 +2,9 @@ import torch
 from PIL import Image
 import io
 
-import pathlib
-temp = pathlib.PosixPath
-pathlib.PosixPath = pathlib.WindowsPath
+# import pathlib
+# temp = pathlib.PosixPath
+# pathlib.PosixPath = pathlib.WindowsPath
 
 def get_yolov5():
     # local best.pt
