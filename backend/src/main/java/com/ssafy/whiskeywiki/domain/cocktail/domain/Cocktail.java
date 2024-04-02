@@ -19,7 +19,7 @@ public class Cocktail {
     @Column(name = "cocktail_id")
     private int id;
 
-    private String reciepe;
+    private String recipe;
 
     private String cocktailName;
 

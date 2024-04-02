@@ -1,5 +1,9 @@
 package com.ssafy.whiskeywiki.domain.cocktail.service;
 
+import com.ssafy.whiskeywiki.domain.cocktail.dto.CocktailDTO;
+
+import java.util.List;
+
 public interface CocktailService {
-    //칵테일 추천
+    List<CocktailDTO.CocktailInfo> recommendCocktail(int whiskeyId);
 }
