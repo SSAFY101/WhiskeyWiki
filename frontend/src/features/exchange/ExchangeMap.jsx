@@ -24,7 +24,7 @@ function Map() {
     // 9. POST 요청: 다른 유저의 My Bar 리스트 조회 (검색 조건에 따라)
     instance({
       method: "post",
-      url: `${process.env.REACT_APP_API_URL}/map/search-condition`,
+      url: `/api/map/search-condition`,
       data: {
         checkedWhiskeyList,
       },
@@ -194,7 +194,7 @@ function Map() {
       // GET 요청: 유저의 My bar 위치 조회
       instance({
         method: "get",
-        url: `${process.env.REACT_APP_API_URL}/map/location`,
+        url: `/api/map/location`,
       })
         .then((res) => {
           console.log("인식 위스키 정보 : ", res.data.data);
