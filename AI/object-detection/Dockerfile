@@ -72,22 +72,20 @@ RUN conda env create -f environment.yml
 EXPOSE 8000
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 
-## 베이스 이미지로 Anaconda를 포함한 이미지 사용
-#FROM continuumio/anaconda3
 
-## object-detection 디렉토리 생성 및 현재 디렉토리의 파일 복사
-#RUN mkdir /object-detection
-#ADD . /object-detection
-#WORKDIR /object-detection
-#
-## environment.yml 파일을 사용하여 Conda 환경 생성
-#RUN conda env create -f environment.yml
-#
-## 쉘 스크립트에서 Conda 환경을 활성화하고 필요한 패키지를 설치
-#SHELL ["conda", "run", "-n", "myenv", "/bin/bash", "-c"]
-#
-## 8000 포트로 설정
-#EXPOSE 8000
-#
-## 컨테이너가 실행될 때 FastAPI 애플리케이션을 Uvicorn으로 실행
-#CMD ["conda", "run", "-n", "myenv", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+# 베이스 이미지 선택
+FROM continuumio/miniconda3
+
+# 작업 디렉토리 설정 및 소스 코드 추가
+RUN mkdir /object-detection
+ADD . /object-detection
+WORKDIR /object-detection
+
+# environment.yml 파일을 Docker 이미지로 복사
+COPY environment.yml /object-detection/environment.yml
+
+# environment.yml 파일을 사용하여 Conda 환경 생성
+RUN conda env create -f /object-detection/environment.yml
+
+EXPOSE 8000
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
