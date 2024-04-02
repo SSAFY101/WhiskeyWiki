@@ -26,6 +26,7 @@ import java.util.Optional;
 public class UserController {
 
     private final UserRepository userRepository;
+    private final UserService userService;
     private final JwtProvider jwtProvider;
 
     @GetMapping("/id/{loginId}")
@@ -79,7 +80,7 @@ public class UserController {
         Optional<User> optionalUser2 = userRepository.findByNickname(request.getNickname());
         if (optionalUser2.isPresent()) return ResponseEntity.ok().body("already exist account");
 
-        String[] point = Address.getKakaoApiFromAddress(request.getAddress());
+        String[] answer = Address.getKakaoApiFromAddress(request.getAddress());
         User user = User.builder()
                 .loginId(request.getLoginId())
                 .password(request.getPassword())
@@ -87,8 +88,11 @@ public class UserController {
                 .address(request.getAddress())
                 .gender(request.getGender())
                 .age(request.getAge())
-                .longitude(new BigDecimal(point[0]))
-                .latitude(new BigDecimal(point[1]))
+                .longitude(new BigDecimal(answer[0]))
+                .latitude(new BigDecimal(answer[1]))
+                .region(answer[2])
+                .city(answer[3])
+                .town(answer[4])
                 .build();
 
         log.info("user(= {})", user);
@@ -100,6 +104,11 @@ public class UserController {
             return ResponseEntity.ok().body("fail");
         }
     }
+
+//    @GetMapping("/")
+//    public ResponseEntity<?> find(@RequestHeader(name = "authorization") String authToken) {
+//
+//    }
 
     @DeleteMapping("/edit/delete")
     public ResponseEntity<?> delete(@RequestHeader(name = "authorization") String authToken) {
