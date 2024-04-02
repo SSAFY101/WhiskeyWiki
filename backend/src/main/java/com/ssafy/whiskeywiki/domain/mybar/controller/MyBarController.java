@@ -55,7 +55,7 @@ public class MyBarController {
 
     @GetMapping("/{userId}")
     public ResponseEntity<CommonResponse> lookAnotherMyBar(@PathVariable(name = "userId") int userId){
-        List<MapDTO.OwnWhiskeyStatus> resultList = myBarService.lookAnotherMyBar(userId);
+        List<MyBarDTO.AnotherUserMyBarDTO> resultList = myBarService.lookAnotherMyBar(userId);
 
         return new ResponseEntity<>(CommonResponse.builder()
                 .status(HttpStatus.OK.value())

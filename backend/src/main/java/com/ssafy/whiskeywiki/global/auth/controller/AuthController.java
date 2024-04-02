@@ -52,7 +52,7 @@ public class AuthController {
 
         // HTTP 헤더 설정 (access token)
         HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", "Bearer " + jwtAndNickName.getAccessToken());
+        headers.set("Authorization", "bearer " + jwtAndNickName.getAccessToken());
 
         // COOKIE 설정 (refresh token)
         ResponseCookie refreshTokenCookie = ResponseCookie.from("Refresh-Token", jwtAndNickName.getRefreshToken())
