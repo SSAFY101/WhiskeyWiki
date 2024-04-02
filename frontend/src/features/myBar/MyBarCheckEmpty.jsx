@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import style from "./MyBarCheckEmpty.module.css";
 // import axios from "axios";
 import instance from "../auth/axiosInterceptor";
 
@@ -8,7 +9,12 @@ function MyBarCheckEmpty({
   whiskeyNameEn,
   handleCloseCheckEmptyModal,
 }) {
-  // 1. 위스키 보유 상태 확인
+  // 1. 이미지 불러오기
+  const imgUrl = {
+    imgUrl: require(`../../assets/images/whiskey/${whiskeyNameEn}.png`),
+  };
+
+  // 2. 위스키 보유 상태 확인
   const [message, setMessage] = useState(""); // message 상태 추가
   useEffect(() => {
     // GET 요청: 위스키 보유 상태 확인
@@ -32,7 +38,7 @@ function MyBarCheckEmpty({
       });
   }, []);
 
-  // 2. 위스키 보유 상태 변경 함수
+  // 3. 위스키 보유 상태 변경 함수
   const changeStatus = () => {
     // POST 요청: 위스키 보유 상태 관리 (보유 <-> 빈병 변경)
     instance({
@@ -51,14 +57,16 @@ function MyBarCheckEmpty({
   };
   return (
     <>
-      {/* <p>{whiskeyId}</p> */}
-      <p>
-        {whiskeyNameKr}({whiskeyNameEn})
-      </p>
+      <p className={style.whiskeyNameKr}>{whiskeyNameKr}</p>
+      <h4>{whiskeyNameEn}</h4>
 
-      <p>{message}</p>
+      <img src={imgUrl.imgUrl} alt="" className={style.whiskeyImage} />
 
-      <button onClick={changeStatus}>확인</button>
+      <h1>{message}</h1>
+
+      <button className={style.checkBtn} onClick={changeStatus}>
+        확인
+      </button>
     </>
   );
 }
