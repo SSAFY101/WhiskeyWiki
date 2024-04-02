@@ -8,7 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 
 basicModel = get_yolov5_basic()
-johnnieModel = get_yolov5_johinne()
+johnnieModel = get_yolov5_johnnie()
 
 app = FastAPI(
     title="Custom YOLOV5 Machine Learning API",
