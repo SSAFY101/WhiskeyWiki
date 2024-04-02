@@ -21,6 +21,17 @@ public class UserDTO {
     }
 
     @Getter
+    public static class RegisterResponse {
+        private final String userId;
+        private final String nickname;
+
+        public RegisterResponse(User user){
+            this.userId = user.getLoginId();
+            this.nickname = user.getNickname();
+        }
+    }
+
+    @Getter
     @Builder
     public static class LoginRequest {
         private String loginId;
@@ -42,13 +53,12 @@ public class UserDTO {
     }
 
     @Getter
-    public static class RegisterResponse {
-        private final String userId;
-        private final String nickname;
-
-        public RegisterResponse(User user){
-            this.userId = user.getLoginId();
-            this.nickname = user.getNickname();
-        }
+    @Builder
+    public static class FindResponse {
+        private String loginId;
+        private String nickname;
+        private int age;
+        private String gender;
+        private String address;
     }
 }
