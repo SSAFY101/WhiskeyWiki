@@ -11,7 +11,10 @@
         gender VARCHAR(255) DEFAULT '',
         age INT DEFAULT 0,
         latitude DECIMAL(13, 10),
-        longitude DECIMAL(13, 10)
+        longitude DECIMAL(13, 10),
+        region VARCHAR(255) DEFAULT '',
+        city VARCHAR(255) DEFAULT '',
+        village VARCHAR(255) DEFAULT ''
     );
 
     CREATE TABLE IF NOT EXISTS cocktail (
