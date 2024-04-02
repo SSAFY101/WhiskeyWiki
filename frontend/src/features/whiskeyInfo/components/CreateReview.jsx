@@ -16,7 +16,7 @@ const CreateReview = ({ whiskeyId, closeModal, totalStars = 5 }) => {
   };
   //리뷰 post 요청
   const handleSubmit = async () => {
-    const url = `${process.env.REACT_APP_API_URL}/whiskey/review/register`;
+    const url = `/api/whiskey/review/register`;
     const data = {
       whiskeyId,
       starRating: rating,
