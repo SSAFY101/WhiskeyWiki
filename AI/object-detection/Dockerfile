@@ -23,9 +23,9 @@
 
 FROM continuumio/anaconda3
 
-RUN /yolov5-fastapi
-ADD . /yolov5-fastapi
-WORKDIR /yolov5-fastapi
+RUN mkdir /object-detection
+ADD . /object-detection
+WORKDIR /object-detection
 
 
 # Conda 환경 파일을 사용하여 환경 생성
