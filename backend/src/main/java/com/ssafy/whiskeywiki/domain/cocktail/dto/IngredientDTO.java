@@ -11,6 +11,6 @@ public class IngredientDTO {
     @NoArgsConstructor
     @Data
     public static class IngredientName {
-        private int name;
+        private String name;
     }
 }

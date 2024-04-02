@@ -11,6 +11,6 @@ public class BaseDTO {
     @NoArgsConstructor
     @Data
     public static class BaseData{
-        private int whiskeyId;
+        private String whiskeyName;
     }
 }
