@@ -1,3 +1,5 @@
+// 채팅방 메세지 리스트 불러오기
+// 채팅방 나가기
 import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -11,13 +13,17 @@ import Status from "./component/Status";
 import backIcon from "./images/before.png";
 import moreIcon from "./images/openModal.png";
 import exitIcon from "./images/exit.png";
+import { useSelector } from "react-redux";
 
 const Chat = () => {
   const location = useLocation();
   const chatRoomId = location.state.chatRoomId;
+  const pairNickname = location.state.pairNickname;
   const [pairId, setPairId] = useState(0);
 
+  const userNickname = useSelector((state) => state.user.nickName);
   const userId = 0; // Temp
+
   const userStatus = false;
   const pairStatus = false;
 
@@ -57,18 +63,8 @@ const Chat = () => {
   useEffect(() => {
     // 채팅방 메세지 리스트 불러오기
     axios
-      .get(`/trade/room`, {
-        headers: {
-          accessToken: "토큰",
-        },
-        params: {
-          userId,
-          chatRoomId,
-        },
-      })
+      .get(`/chat/list/${chatRoomId}`)
       .then((res) => {
-        // 토큰 받는 경우 (만료)
-        // 만료 안되서 요청만 수락된 경우
         console.log("채팅방 메세지 리스트 불러오기", res); // 테스트
         const chatList = res.data.data.chatList;
         const pairId = res.data.data.pairId;
@@ -76,18 +72,14 @@ const Chat = () => {
         setPairId(pairId);
       })
       .catch((err) => {
-        console.log("채팅방 메세지 리스트 불러오기 ERR", err);
+        console.log("채팅방 메세지 리스트 불러오기 실패", err);
       });
   });
 
   const clickExitHandler = () => {
     if (window.confirm("채팅방에서 나가시겠습니까?")) {
       axios
-        .put("/trade/room", chatRoomId, {
-          headers: {
-            accessToken: "토큰",
-          },
-        })
+        .delete(`/chatroom/${chatRoomId}`)
         .then((res) => {
           console.log("채팅방 나가기", res);
         })
@@ -116,8 +108,8 @@ const Chat = () => {
       <hr className={style.line} />
       <div className={`${style.content}`}>
         <div className={`${style.whiskeyList}`}>
-          <WhiskeyList userId={pairId} />
-          <WhiskeyList userId={userId} />
+          <WhiskeyList userId={pairId} userNickname={pairNickname} />
+          <WhiskeyList userId={userId} userNickname={userNickname} />
         </div>
         <div className={`${style.line2}`}></div>
         <MessageList messageListProp={messageList} />
