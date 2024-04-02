@@ -15,19 +15,23 @@ import FiftiesColor from "../../../assets/icon/FiftiesColor.svg";
 import FemaleColor from "../../../assets/icon/FemaleColor.svg";
 import MaleColor from "../../../assets/icon/MaleColor.svg";
 
-function Statistics() {
+function Statistics({ whiskeyStatistic }) {
+  if (!whiskeyStatistic) {
+    return <div className={style.outerContainer}>로딩 중...</div>
+  }
+  console.log("넘겨받은 통계 데이터", whiskeyStatistic);
   // 성별 데이터
   const genderData = [
     {
       svg: Female,
       colorSvg: FemaleColor,
-      progress: 0.5,
+      progress: whiskeyStatistic.femaleLikePer,
       color: "#FF4C6C",
     },
     {
       svg: Male,
       colorSvg: MaleColor,
-      progress: 0.2,
+      progress: whiskeyStatistic.maleLikePer,
       color: "#4F88DD",
     },
   ];
@@ -36,17 +40,17 @@ function Statistics() {
     {
       svg: Twenties,
       colorSvg: TwentiesColor,
-      progress: 0.51,
+      progress: whiskeyStatistic.twentiesLikePer,
       color: "#48D287",
     },
     {
       svg: Thirties,
       colorSvg: ThirtiesColor,
-      progress: 0.9,
+      progress: whiskeyStatistic.thirtiesLikePer,
       color: "#42CBDD",
     },
-    { svg: Forties, colorSvg: FortiesColor, progress: 0.3, color: "#6765D6" },
-    { svg: Fifties, colorSvg: FiftiesColor, progress: 0.8, color: "#B456E1" },
+    { svg: Forties, colorSvg: FortiesColor, progress: whiskeyStatistic.fortiesLikePer, color: "#6765D6" },
+    { svg: Fifties, colorSvg: FiftiesColor, progress: whiskeyStatistic.fiftiesLikePer, color: "#B456E1" },
   ];
   // 나이대별 최고 수치
   const highestProgressAge = Math.max(...ageData.map((item) => item.progress));
@@ -61,7 +65,7 @@ function Statistics() {
         {/* 성별 */}
         <div className={style.progressBarContainer}>
           {genderData.map((item, index) => (
-            <div key={index} className={style.iconAndProgress }>
+            <div key={index} className={style.iconAndProgress}>
               <img
                 src={
                   item.progress === highestProgressGender
