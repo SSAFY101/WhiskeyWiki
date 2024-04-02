@@ -13,6 +13,7 @@ public class CocktailDTO {
     @NoArgsConstructor
     @Data
     public static class CocktailInfo{
+        private int cocktailId;
         private String cocktailName;
         private String cocktailNameEn;
         private String recipe;
