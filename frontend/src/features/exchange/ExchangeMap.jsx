@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import style from "./ExchangeMap.module.css";
-import axios from "axios";
+// import axios from "axios";
+import instance from "../auth/axiosInterceptor";
 
 // (문제) 스크립트로 kakao maps api를 가져오면, window전역 객체에 들어가게 된다.
 // (해결) 함수형 컴포넌트에 인지시키고, window에서 kakao 객체를 뽑아서 사용 / window.kakao.~ 처럼 inline으로 사용하는 것도 방법!
@@ -20,45 +21,44 @@ function Map() {
     // console.log("useEffect 1 시작");
     // console.log(checkedWhiskeyList); // Redux 작동 test
 
-    // 9. 백에 axios 요청
-    // GET 요청: 다른 유저의 My Bar 리스트 조회 (검색 조건에 따라)
-    // axios({
-    //   method: "get",
-    //   url: "api/map/search-condition",
-    //   params: {
-    //     checkedWhiskeyList,
-    //   },
-    // })
-    //   .then((res) => {
-    //     console.log("인식 위스키 정보 : ", res.data);
-    //     const data = res.data.data;
-    //     setMybarList(data);
-    //   })
-    //   .catch((err) => {
-    //     console.log("다른 유저의 My Bar 리스트 정보 ERROR :", err);
-    //   });
+    // 9. POST 요청: 다른 유저의 My Bar 리스트 조회 (검색 조건에 따라)
+    instance({
+      method: "post",
+      url: `${process.env.REACT_APP_API_URL}/map/search-condition`,
+      data: {
+        checkedWhiskeyList,
+      },
+    })
+      .then((res) => {
+        // console.log("인식 위스키 정보 : ", res.data.data);
+        const data = res.data.data;
+        setMybarList(data);
+      })
+      .catch((err) => {
+        console.log("다른 유저의 My Bar 리스트 정보 ERROR :", err);
+      });
 
-    // axios 요청으로 받아 온 결과 (예시)
-    setMybarList([
-      {
-        userId: 123,
-        nickname: "Jieun",
-        latitude: 36.355065,
-        longitude: 127.298377,
-      },
-      {
-        userId: 456,
-        nickname: "주차장1",
-        latitude: 36.355838,
-        longitude: 127.299748,
-      },
-      {
-        userId: 789,
-        nickname: "주차장2",
-        latitude: 36.354696,
-        longitude: 127.300253,
-      },
-    ]);
+    // // axios 요청으로 받아 온 결과 (예시)
+    // setMybarList([
+    //   {
+    //     userId: 1,
+    //     nickname: "Jieun",
+    //     latitude: 36.355065,
+    //     longitude: 127.298377,
+    //   },
+    //   {
+    //     userId: 2,
+    //     nickname: "주차장1",
+    //     latitude: 36.355838,
+    //     longitude: 127.299748,
+    //   },
+    //   {
+    //     userId: 3,
+    //     nickname: "주차장2",
+    //     latitude: 36.354696,
+    //     longitude: 127.300253,
+    //   },
+    // ]);
 
     // console.log("useEffect 1 끝");
   }, []);
@@ -161,19 +161,79 @@ function Map() {
       navigator.geolocation.getCurrentPosition(function (position) {
         const lat = position.coords.latitude; // 위도
         const lon = position.coords.longitude; // 경도
+        // // (옵션1) 현재위치 마커 표시
+        // const locPosition = new kakao.maps.LatLng(lat, lon); // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성
+        // const message = '<div style="padding:0px; margin:10px;">🥃 현재 위치 🥃</div>'; // 인포윈도우에 표시될 내용
+        // currentMarker(locPosition, message); // 마커와 인포윈도우 표시
+        // // (옵션2) 현재위치 표시 마커 이미지 변경 설정
+        // var imageSrc =
+        //     "https://cdn-icons-png.flaticon.com/512/11315/11315278.png", // 마커이미지 주소
+        //   imageSize = new kakao.maps.Size(30, 30), // 마커이미지 크기
+        //   imageOption = { offset: new kakao.maps.Point(27, 69) }; // 마커이미지 옵션
 
-        const locPosition = new kakao.maps.LatLng(lat, lon); // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성
-        const message = '<div style="padding:5px;">현재 위치입니다.</div>'; // 인포윈도우에 표시될 내용
+        // // 마커의 이미지정보를 가지고 있는 마커이미지를 생성
+        // var markerImage = new kakao.maps.MarkerImage(
+        //     imageSrc,
+        //     imageSize,
+        //     imageOption
+        //   ),
+        const markerPosition = new kakao.maps.LatLng(lat, lon); // 마커가 표시될 위치
+        // // 마커 생성
+        // var marker = new kakao.maps.Marker({
+        //   position: markerPosition,
+        //   image: markerImage, // 마커이미지 설정
+        // });
+        // // 마커가 지도 위에 표시되도록 설정
+        // marker.setMap(map);
 
-        currentMarker(locPosition, message); // 마커와 인포윈도우 표시
+        // 지도의 중심좌표 이동
+        map.setCenter(markerPosition);
       });
     } else {
       // HTML5의 GeoLocation을 사용할 수 없을때, 마커 표시 위치와 인포윈도우 내용을 설정
-      // (추후에 사용자가 등록한 주소로 변경 예정)
-      const locPosition = new kakao.maps.LatLng(36.3550659, 127.2983779);
-      const message = "사용자가 등록한 주소입니다.";
+      // GET 요청: 유저의 My bar 위치 조회
+      instance({
+        method: "get",
+        url: `${process.env.REACT_APP_API_URL}/map/location`,
+      })
+        .then((res) => {
+          console.log("인식 위스키 정보 : ", res.data.data);
+          const data = res.data.data;
+          const lat = data.latitude;
+          const lon = data.longitude;
+          // // (옵션1) 현재위치 마커 표시
+          // const locPosition = new kakao.maps.LatLng(lat, lon);
+          // const message = "사용자가 등록한 주소";
+          // currentMarker(locPosition, message);
+          // // (옵션2) 현재위치 표시 마커 이미지 변경 설정
+          // var imageSrc =
+          //     "https://cdn-icons-png.flaticon.com/512/11315/11315278.png", // 마커이미지 주소
+          //   imageSize = new kakao.maps.Size(30, 30), // 마커이미지 크기
+          //   imageOption = { offset: new kakao.maps.Point(27, 69) }; // 마커이미지 옵션
+          // // 마커의 이미지정보를 가지고 있는 마커이미지를 생성
+          // var markerImage = new kakao.maps.MarkerImage(
+          //     imageSrc,
+          //     imageSize,
+          //     imageOption
+          //   ),
+          const markerPosition = new kakao.maps.LatLng(lat, lon); // 마커가 표시될 위치
+          // // 마커 생성
+          // var marker = new kakao.maps.Marker({
+          //   position: markerPosition,
+          //   image: markerImage, // 마커이미지 설정
+          // });
+          // // 마커가 지도 위에 표시되도록 설정
+          // marker.setMap(map);
 
-      currentMarker(locPosition, message);
+          // 지도의 중심좌표 이동
+          map.setCenter(markerPosition);
+        })
+        .catch((err) => {
+          console.log("다른 유저의 My Bar 리스트 정보 ERROR :", err);
+          const locPosition = new kakao.maps.LatLng(36.3550659, 127.2983779);
+          const message = "사용자와 MyBar의 위치를 알 수 없습니다.";
+          currentMarker(locPosition, message);
+        });
     }
 
     // 7-2. 지도에 현재 위치에 대한 마커 & 인포윈도우를 표시하는 함수
