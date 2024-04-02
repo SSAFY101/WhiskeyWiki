@@ -71,8 +71,8 @@ function Sorter() {
   const onSubmit = useCallback(
     (e) => {
       e.preventDefault(); // click하는 순간, 새로고침 X (이벤트의 기본 동작 방지)
-
-      console.log("checkedWhiskeyList:", checkedWhiskeyList); // checkedWhiskeyList 배열 출력
+      // console.log("checkedWhiskeyList:", checkedWhiskeyList); // checkedWhiskeyList 배열 출력
+      window.location.reload(); // 제출 버튼을 누르면 페이지를 새로고침
     },
     [checkedWhiskeyList] // 의존성 배열에 checkedWhiskeyList를 지정 => checkedWhiskeyList가 변경될 때마다 함수 재성생
   );
