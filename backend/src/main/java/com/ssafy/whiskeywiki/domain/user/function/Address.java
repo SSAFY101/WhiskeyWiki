@@ -45,7 +45,7 @@ public class Address {
 
             while ((line=br.readLine()) != null) {
                 docJson.append(line);
-                System.out.println(line);
+//                System.out.println(line);
             }
 
             jsonString = docJson.toString();
@@ -55,6 +55,8 @@ public class Address {
             e.printStackTrace();
         }
         String[] point = jsonToPoint(jsonString);
+
+        String[] addresses = jsonToAddress(jsonString);
 
         return point;
     }
@@ -77,5 +79,30 @@ public class Address {
         }
 
         return point;
+    }
+
+    private static String[] jsonToAddress(String jsonString) {
+
+        String[] address = new String[3];
+        JSONObject jsonObject = new JSONObject(jsonString);
+
+        JSONArray documents = jsonObject.getJSONArray("documents");
+
+        for (int i = 0; i < documents.length(); i++) {
+            JSONObject document = documents.getJSONObject(i);
+            String address_depth1 = document.getString("region_1depth_name");
+            String address_depth2 = document.getString("region_2depth_name");
+            String address_depth3 = document.getString("region_3depth_name");
+
+            address[0] = address_depth1;
+            address[1] = address_depth2;
+            address[2] = address_depth3;
+
+            log.info("depth1(= {})", address[0]);
+            log.info("depth2(= {})", address[1]);
+            log.info("depth3(= {})", address[2]);
+        }
+
+        return address;
     }
 }
