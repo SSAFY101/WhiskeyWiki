@@ -1,77 +1,3 @@
-#FROM tiangolo/uvicorn-gunicorn:python3.9-slim
-#
-#LABEL maintainer="team-erc"
-#
-#ENV WORKERS_PER_CORE=4
-#ENV MAX_WORKERS=24
-#ENV LOG_LEVEL="warning"
-#ENV TIMEOUT="200"
-#
-#RUN mkdir /yolov5-fastapi
-#
-#COPY requirements.txt /yolov5-fastapi
-#
-#COPY . /yolov5-fastapi
-#
-#WORKDIR /yolov5-fastapi
-#
-#RUN pip install -r requirements.txt
-#
-#EXPOSE 8000
-#
-#CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
-
-#FROM continuumio/anaconda3
-#
-#RUN mkdir /object-detection
-#ADD . /object-detection
-#WORKDIR /object-detection
-#
-#
-## Conda 환경 파일을 사용하여 환경 생성
-#RUN conda env export -n environment -f environment.yml --from-history
-##RUN pip3 install opencv-python
-##RUN apt-get update
-##RUN apt-get -y install libgl1-mesa-glx
-##RUN pip install websocket
-##RUN pip install channels
-##RUN pip install fastapi 'uvicorn[standard]'
-#
-#EXPOSE 8000
-## 컨테이너 생성 및 실행 시 실행하는 명령어
-#CMD ["uvicorn", "backend_ai_conda.asgi:application", "--host", "0.0.0.0", "--port", "8000", "--reload"]
-
-#FROM continuumio/anaconda3
-#
-#RUN mkdir /object-detection
-#ADD . /object-detection
-#WORKDIR /object-detection
-#
-#
-## Conda 환경 파일을 사용하여 환경 생성
-#RUN conda env export -n environment -f environment.yml --from-history
-#RUN pip install fastapi
-#RUN conda install -c conda-forge uvicorn
-#
-#EXPOSE 8000
-## 컨테이너 생성 및 실행 시 실행하는 명령어
-#CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
-
-#FROM continuumio/anaconda3
-#
-## 작업 디렉토리 설정 및 소스 코드 추가
-#RUN mkdir /object-detection
-#ADD . /object-detection
-#WORKDIR /object-detection
-#
-## environment.yml을 사용하여 Conda 환경 생성
-#RUN conda env create -f environment.yml
-#
-## 생성된 Conda 환경 활성화. CMD에서 직접 실행 시 환경이 활성화되지 않으므로,
-## 실행할 명령어를 sh -c 내에서 실행하여 환경을 활성화합니다.
-#EXPOSE 8000
-#CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
-
 # 베이스 이미지로 Anaconda를 포함한 이미지 사용
 FROM continuumio/anaconda3
 
@@ -81,14 +7,16 @@ ADD . /object-detection
 WORKDIR /object-detection
 
 # environment.yml 파일을 사용하여 Conda 환경 생성
+# 이 명령은 environment.yml 파일 내에 정의된 모든 패키지를 설치합니다.
 RUN conda env create -f environment.yml
 
-# 쉘 스크립트에서 Conda 환경을 활성화하고 필요한 패키지를 설치
-SHELL ["conda", "run", "-n", "myenv", "/bin/bash", "-c"]
-RUN pip install fastapi uvicorn
+# Conda 환경을 활성화하고 필요한 패키지를 설치하는 단계는
+# environment.yml 파일에 의해 자동으로 처리되므로 생략
 
 # 8000 포트로 설정
 EXPOSE 8000
 
 # 컨테이너가 실행될 때 FastAPI 애플리케이션을 Uvicorn으로 실행
-CMD ["conda", "run", "-n", "myenv", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+# 여기서 'myenv'는 실제로 생성한 Conda 환경의 이름과 일치해야 합니다.
+# 'base' 환경을 사용하는 경우 'base'로 변경하세요.
+CMD ["conda", "run", "-n", "base", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
