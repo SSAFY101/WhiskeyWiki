@@ -81,11 +81,8 @@ RUN mkdir /object-detection
 ADD . /object-detection
 WORKDIR /object-detection
 
-# environment.yml 파일을 Docker 이미지로 복사
-COPY environment.yml /object-detection/environment.yml
-
 # environment.yml 파일을 사용하여 Conda 환경 생성
-RUN conda env create -f /object-detection/environment.yml
+RUN conda env create -f /environment.yml
 
 EXPOSE 8000
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
