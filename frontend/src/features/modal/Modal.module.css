@@ -23,3 +23,9 @@
   height: 500px;
   z-index: 101; /* z-index 값을 증가 */
 }
+
+.CloseButton{
+  position: absolute;
+  top: 20px;
+  right:20px;
+}

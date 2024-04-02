@@ -1,0 +1,20 @@
+.whiskeyNameKr {
+  font-size: xx-large;
+  margin: -5px;
+  color: #eeb233;
+}
+
+.whiskeyImage {
+  height: 220px;
+}
+
+.checkBtn {
+  margin: 0px 15px;
+  padding: 10px 25px;
+  background-color: #eeb233;
+  color: #1c1c1c;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 20px;
+}
