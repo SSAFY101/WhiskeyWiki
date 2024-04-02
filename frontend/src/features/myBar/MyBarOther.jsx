@@ -20,7 +20,7 @@ function MyBarOther() {
     // GET 요청: 다른 유저의 My Bar 조회 (다른 유저의 위스키 보유 상태 리스트 조회)
     instance({
       method: "get",
-      url: `${process.env.REACT_APP_API_URL}/mybar/${userId}`,
+      url: `/api/mybar/${userId}`,
     })
       .then((res) => {
         // console.log("다른 유저의 My Bar 인식 위스키 정보 : ", res.data.data);

@@ -14,7 +14,7 @@ function MyBar() {
     // GET 요청: 유저의 My Bar 위스키 보유 상태 리스트 조회
     instance({
       method: "get",
-      url: `${process.env.REACT_APP_API_URL}/mybar/list`,
+      url: `/api/mybar/list`,
     })
       .then((res) => {
         // console.log("유저의 My Bar 리스트 정보 : ", res.data.data);

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Modal from "../modal/Modal";
 import MyBarCheckEmpty from "./MyBarCheckEmpty";
 import { Link } from "react-router-dom";
+import style from "./MyBarDetail.module.css";
 
 function MyBarDetail({ whiskeyId, whiskeyNameKr, whiskeyNameEn, isOwner }) {
   // 모달 제어 - 3. 빈 병 표시하기
@@ -24,11 +25,15 @@ function MyBarDetail({ whiskeyId, whiskeyNameKr, whiskeyNameEn, isOwner }) {
       <p>영어로는 {whiskeyNameEn}</p>
 
       {/* 위스키별 상세페이지로 이동 */}
-      <Link to="/whiskeyDetail/{whiskeyId}">상세 정보 보기</Link>
+      <Link to={`/whiskeyDetail/${whiskeyId}`} className={style.button}>
+        상세 정보 보기
+      </Link>
 
       {/* 위스키별 빈 병 표시하기 */}
       {isOwner && ( // isOwner가 true일 때에만 버튼 렌더링
-        <button onClick={checkWhiskeyEmpty}>빈 병 표시하기</button>
+        <button className={style.button} onClick={checkWhiskeyEmpty}>
+          빈 병 표시하기
+        </button>
       )}
 
       {/* 조건부 렌더링 */}
