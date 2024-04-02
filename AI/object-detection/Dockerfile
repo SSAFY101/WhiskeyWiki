@@ -50,6 +50,7 @@ WORKDIR /object-detection
 
 # Conda 환경 파일을 사용하여 환경 생성
 RUN conda env export -n environment -f environment.yml --from-history
+RUN conda install -c conda-forge uvicorn
 
 EXPOSE 8000
 # 컨테이너 생성 및 실행 시 실행하는 명령어
