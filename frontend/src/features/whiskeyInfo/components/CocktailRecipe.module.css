@@ -10,6 +10,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   width:60%;
   height: 100%;
   position: relative;
@@ -48,16 +49,17 @@
   display:flex;
   justify-content: space-around;
   font-size:20px;
-  /* width:500px; */
 }
 
 .textArea{
   width:300px;
 }
-.imageArea img{
-  height: 70%
-
+.imageArea{
+  display:inline-flex;
+  height: 300px;
+  margin: 0 40px 30px 50px;
 }
+
 .recommendAgain{
   background-color:#ffc107;
   color:#2E2E2E;
@@ -78,9 +80,17 @@
 .titleWithLines::after{
   content:'';
   flex:1;
-  height: 1px;
-  background: #DDDDDD; /*선 색깔*/
+  height: 2px;
+  background: #DDDD
+  ; /*선 색깔*/
   /* 위, 오른쪽, 아래, 왼쪽 (시계방향) */
   margin: 10px 20px 0 20px;
 }
 
+.detailBox{
+width:70%
+}
+
+.recommendAgain{
+  margin-top: 50px;
+}

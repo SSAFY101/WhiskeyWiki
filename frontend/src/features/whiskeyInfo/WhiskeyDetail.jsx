@@ -27,9 +27,7 @@ function WhiskeyDetail() {
     // 위스키 기본 정보 가져오기
     const fetchWhiskeyDetail = async () => {
       try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_API_URL}/whiskey/info/${whiskeyId}`
-        );
+        const response = await axios.get(`/api/whiskey/info/${whiskeyId}`);
         // console.log(response.data.data);
         setWhiskeyDetail(response.data.data);
       } catch (error) {
@@ -39,11 +37,9 @@ function WhiskeyDetail() {
     // 위스키 선호도 통계 가져오기
     const fetchWhiskeyStatistic = async () => {
       try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_API_URL}/whiskey/statistic/${whiskeyId}`
-        );
+        const response = await axios.get(`/api/whiskey/statistic/${whiskeyId}`);
         console.log("위스키 선호도 통계 가져오기 성공", response.data.data);
-        setWhiskeyStatistic(response.data.data)
+        setWhiskeyStatistic(response.data.data);
       } catch (error) {
         console.log("위스키 선호도 통계 가져오기 실패", error);
       }
@@ -52,7 +48,7 @@ function WhiskeyDetail() {
     const fetchWhiskeyReview = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_API_URL}/whiskey/review/${whiskeyId}`
+          `/api/whiskey/review/${whiskeyId}`
         );
         // console.log(
         //   "위스키 리뷰 가져오기 성공",
