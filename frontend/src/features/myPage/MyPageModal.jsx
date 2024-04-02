@@ -9,14 +9,14 @@ function MyPageModal({ onClose }) {
   const dispatch = useDispatch();
 
   // 닉네임 가져오기
-  const nickName = useSelector(state => state.user.nickName)
-  console.log(nickName)
+  const nickName = useSelector((state) => state.user.nickName);
+  console.log(nickName);
   const logoutTest = (e) => {
     e.preventDefault();
 
     if (window.confirm("로그아웃 하시겠습니까?")) {
       instance
-        .post(`${process.env.REACT_APP_API_URL}/auth/logout`)
+        .post(`/api/auth/logout`)
         .then((res) => {
           console.log("로그아웃", res);
 
@@ -42,8 +42,7 @@ function MyPageModal({ onClose }) {
   return (
     <div className={style.outerContainer}>
       <p>
-        <span className={style.highlight}>{nickName}</span> 님,
-        환영합니다.
+        <span className={style.highlight}>{nickName}</span> 님, 환영합니다.
       </p>
       <div className={style.innerUpperContainer}>
         <div className={style.chatIconWrapper}>
