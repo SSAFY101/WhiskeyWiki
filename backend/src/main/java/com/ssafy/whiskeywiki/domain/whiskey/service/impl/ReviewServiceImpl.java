@@ -31,7 +31,7 @@ public class ReviewServiceImpl implements ReviewService {
         Optional<Whiskey> whiskey = whiskeyRepository.findById(whiskeyId);
         ReviewDTO.ReviewResponseData reviewResponseData = new ReviewDTO.ReviewResponseData();
 
-        List<Review> reviewList = reviewRepository.findByWhiskey(whiskeyRepository.getById(whiskeyId));
+        List<Review> reviewList = reviewRepository.findReviewByWhiskey(whiskeyRepository.getById(whiskeyId));
         double starRatingAvg = 0.0;
         for(Review r : reviewList){
             starRatingAvg += r.getReviewRating().getValue();
@@ -44,7 +44,7 @@ public class ReviewServiceImpl implements ReviewService {
         List<ReviewDTO.ReviewData> reviewDataList = new ArrayList<>();
 
         if(whiskey.isPresent()){
-                List<Review> reviews = reviewRepository.findByWhiskey(whiskey.get());
+                List<Review> reviews = reviewRepository.findReviewByWhiskey(whiskey.get());
                 if(!reviews.isEmpty()){
                     for(Review r : reviews){
                         ReviewDTO.ReviewData reviewData = new ReviewDTO.ReviewData();
@@ -93,7 +93,7 @@ public class ReviewServiceImpl implements ReviewService {
         Optional<Whiskey> whiskey = whiskeyRepository.findById(whiskeyId);
 
         if(whiskey.isPresent()){
-            List<Review> reviewList = reviewRepository.findByWhiskey(whiskey.get());
+            List<Review> reviewList = reviewRepository.findReviewByWhiskey(whiskey.get());
 
             for(Review r : reviewList){
                 if(r.getReviewRating().getValue() >= 4)
