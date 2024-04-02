@@ -11,17 +11,17 @@ function CocktailRecipe({ whiskeyId }) {
   const [isFavorite, setIsFavorite] = useState(false);
 
   // 즐겨찾기로 등록 및 해제
-  const RegisterAsFav = async () => {
-    try {
-      await instance.post(
-        `/api/cocktail/favorite/register/${selectedRecipe.cocktailId}`
-      );
-      console.log("즐겨찾기 추가 성공");
-      setIsFavorite(true);
-    } catch (error) {
-      console.error("즐겨찾기 추가 실패", error);
-    }
-  };
+  // const RegisterAsFav = async () => {
+  //   try {
+  //     await instance.post(
+  //       `/api/cocktail/favorite/register/${selectedRecipe.cocktailId}`
+  //     );
+  //     console.log("즐겨찾기 추가 성공");
+  //     setIsFavorite(true);
+  //   } catch (error) {
+  //     console.error("즐겨찾기 추가 실패", error);
+  //   }
+  // };
   const toggleFavorite = async () => {
     try {
       if (isFavorite) {
