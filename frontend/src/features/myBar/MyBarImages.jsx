@@ -148,6 +148,24 @@ const WhiskeyImages = [
     whiskeyNameEn: "Smirnoff",
     imgUrl: require("../../assets/images/whiskey/Smirnoff.png"),
   },
+  {
+    whiskeyId: 24,
+    whiskeyNameKr: "트리플 섹",
+    whiskeyNameEn: "Triple_Sec",
+    imgUrl: require("../../assets/images/whiskey/Triple_Sec.png"),
+  },
+  {
+    whiskeyId: 25,
+    whiskeyNameKr: "블루 큐라소",
+    whiskeyNameEn: "Blue_Curacao",
+    imgUrl: require("../../assets/images/whiskey/Blue_Curacao.png"),
+  },
+  {
+    whiskeyId: 26,
+    whiskeyNameKr: "피치 트리",
+    whiskeyNameEn: "Peach_Tree",
+    imgUrl: require("../../assets/images/whiskey/Peach_Tree.png"),
+  },
 ];
 
 export { ShelfImage, BookImage, WhiskeyImages };

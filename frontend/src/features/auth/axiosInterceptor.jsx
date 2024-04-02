@@ -21,7 +21,7 @@ instance.interceptors.response.use(
     if (error.response.status == 400 || error.response.status == 401) {
       // 재발급 요청
       await axios
-        .post(`${process.env.REACT_APP_API_URL}/auth/refresh`, null, {
+        .post(`/api/auth/refresh`, null, {
           withCredentials: true,
         })
         .then((res) => {
