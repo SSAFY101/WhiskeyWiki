@@ -76,13 +76,26 @@
 # 베이스 이미지 선택
 FROM continuumio/miniconda3
 
-# 작업 디렉토리 설정 및 소스 코드 추가
+## 작업 디렉토리 설정 및 소스 코드 추가
+#RUN mkdir /object-detection
+#ADD . /object-detection
+#WORKDIR /object-detection
+#
+## environment.yml 파일을 사용하여 Conda 환경 생성
+#RUN conda env create -f /environment.yml
+
+
 RUN mkdir /object-detection
-ADD . /object-detection
+
+COPY requirements.txt /object-detection
+
+COPY . /object-detection
+
 WORKDIR /object-detection
 
-# environment.yml 파일을 사용하여 Conda 환경 생성
-RUN conda env create -f /environment.yml
+RUN pip install -r requirements.txt
 
 EXPOSE 8000
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+
+
