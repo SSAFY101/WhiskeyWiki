@@ -70,4 +70,4 @@ RUN conda env create -f environment.yml
 # 생성된 Conda 환경 활성화. CMD에서 직접 실행 시 환경이 활성화되지 않으므로,
 # 실행할 명령어를 sh -c 내에서 실행하여 환경을 활성화합니다.
 EXPOSE 8000
-CMD ["sh", "-c", "conda run -n environment uvicorn main:app --host 0.0.0.0 --port 8000"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
