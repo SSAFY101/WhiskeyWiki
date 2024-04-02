@@ -6,12 +6,17 @@ from pathlib import Path
 # temp = pathlib.PosixPath
 # pathlib.PosixPath = pathlib.WindowsPath
 
-def get_yolov5():
+def get_yolov5_basic():
     # local best.pt
     model = torch.hub.load('./yolov5', 'custom', path=Path('./model/model5L.pt'), source='local')  # local repo
     model.conf = 0.5
     return model
 
+def get_yolov5_johnnie():
+    # local best.pt
+    model = torch.hub.load('./yolov5', 'custom', path=Path('./model/johnnie.pt'), source='local')  # local repo
+    model.conf = 0.5
+    return model
 
 def get_image_from_bytes(binary_image, max_size=1024):
     input_image = Image.open(io.BytesIO(binary_image)).convert("RGB")

@@ -1,5 +1,5 @@
 from fastapi import FastAPI, File
-from segmentation import get_yolov5, get_image_from_bytes
+from segmentation import get_yolov5_basic, get_yolov5_johnnie, get_image_from_bytes
 from starlette.responses import Response
 import io
 from PIL import Image
@@ -7,7 +7,8 @@ import json
 from fastapi.middleware.cors import CORSMiddleware
 
 
-basicModel = get_yolov5()
+basicModel = get_yolov5_basic()
+johnnieModel = get_yolov5_johinne()
 
 app = FastAPI(
     title="Custom YOLOV5 Machine Learning API",
@@ -49,7 +50,7 @@ def get_health():
     return dict(msg='OK')
 
 
-@app.post("/object-to-json")
+@app.post("/object-to-json/basic")
 async def detect_whiskey_return_json_result(file: bytes = File(...)):
     input_image = get_image_from_bytes(file)
     results = basicModel(input_image)
@@ -58,7 +59,16 @@ async def detect_whiskey_return_json_result(file: bytes = File(...)):
     # detect_res = json.loads(detect_res)
     return {"result": result_json}
 
-def results_to_json(results, basicModel):
+@app.post("/object-to-json/johnnie")
+async def detect_whiskey_return_json_result(file: bytes = File(...)):
+    input_image = get_image_from_bytes(file)
+    results = johnnieModel(input_image)
+    result_json = results_to_json(results, johnnieModel)
+    # detect_res = results.pandas().xyxy[0].to_json(orient="records")  # JSON img1 predictions
+    # detect_res = json.loads(detect_res)
+    return {"result": result_json}
+
+def results_to_json(results, model):
     answer = []
     whiskeys = {}
     utils = {}
@@ -66,7 +76,7 @@ def results_to_json(results, basicModel):
     whiskeyCount = 0
     for result in results.xyxy:
         for pred in result:
-            class_name = basicModel.basicModel.names[int(pred[5])]
+            class_name = model.model.names[int(pred[5])]
             if class_name == 'others':
                 othersCount += 1
                 continue
