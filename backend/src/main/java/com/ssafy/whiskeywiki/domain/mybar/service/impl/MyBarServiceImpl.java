@@ -7,6 +7,7 @@ import com.ssafy.whiskeywiki.domain.cocktail.repository.CocktailRepository;
 import com.ssafy.whiskeywiki.domain.cocktail.repository.FavoriteRepository;
 import com.ssafy.whiskeywiki.domain.map.dto.MapDTO;
 import com.ssafy.whiskeywiki.domain.mybar.domain.OwnWhiskey;
+import com.ssafy.whiskeywiki.domain.mybar.dto.MyBarDTO;
 import com.ssafy.whiskeywiki.domain.mybar.dto.OwnWhiskeyDTO;
 import com.ssafy.whiskeywiki.domain.mybar.repository.OwnWhiskeyRepository;
 import com.ssafy.whiskeywiki.domain.mybar.service.MyBarService;
@@ -110,17 +111,19 @@ public class MyBarServiceImpl implements MyBarService{
     }
 
     @Override
-    public List<MapDTO.OwnWhiskeyStatus> lookAnotherMyBar(int userId) {
+    public List<MyBarDTO.AnotherUserMyBarDTO> lookAnotherMyBar(int userId) {
         Optional<User> user = userRepository.findById(userId);
-        List<MapDTO.OwnWhiskeyStatus> result = new ArrayList<>();
+        List<MyBarDTO.AnotherUserMyBarDTO> result = new ArrayList<>();
 
         if(user.isPresent()){
             List<OwnWhiskey> ownWhiskeyList = ownWhiskeyRepository.findByUser(user.get());
 
             for(OwnWhiskey ownWhiskey : ownWhiskeyList){
-                MapDTO.OwnWhiskeyStatus info = new MapDTO.OwnWhiskeyStatus();
+                MyBarDTO.AnotherUserMyBarDTO info = new MyBarDTO.AnotherUserMyBarDTO();
                 info.setIsEmpty(ownWhiskey.getIsEmpty());
                 info.setWhiskeyId(ownWhiskey.getWhiskey().getId());
+                info.setWhiskeyNameKr(ownWhiskey.getWhiskey().getWhiskeyNameKr());
+                info.setWhiskeyNameEn(ownWhiskey.getWhiskey().getWhiskeyNameEn());
 
                 result.add(info);
             }

@@ -37,7 +37,7 @@ public class MapServiceImpl implements MapService {
     }
 
     @Override
-    public List<MapDTO.ResponseAnotherMyBar> userList(List<String> checkedWhiskeyList) {
+    public List<MapDTO.ResponseAnotherMyBar> userList(int userId, List<String> checkedWhiskeyList) {
         /**
          * 빈병이 아닌 위스키를 가진 유저에 대해서만 처리해줘야함!
          */
@@ -52,18 +52,18 @@ public class MapServiceImpl implements MapService {
             for(OwnWhiskey ownWhiskey : ownWhiskeyList){
                 //빈병이 아닌 보유하고 있는 위스키에 대해서만 진행
                 if(ownWhiskey.getIsEmpty()){
-                    int userId = ownWhiskey.getUser().getId();
-                    if(!userIdList.contains(userId)){
+                    int id = ownWhiskey.getUser().getId();
+                    if(id != userId && !userIdList.contains(id)){
 //                        System.out.println("해당 위스키를 보유한 유저입니다. " + userId);
-                        userIdList.add(userId);
+                        userIdList.add(id);
                     }
                 }
             }
         }
 
-        for(int userId : userIdList){
+        for(int id : userIdList){
             MapDTO.ResponseAnotherMyBar responseAnotherMyBar = new MapDTO.ResponseAnotherMyBar();
-            User selectUser = userRepository.getById(userId);
+            User selectUser = userRepository.getById(id);
             responseAnotherMyBar.setUserId(selectUser.getId());
             responseAnotherMyBar.setNickname(selectUser.getNickname());
             responseAnotherMyBar.setLatitude(selectUser.getLatitude());
