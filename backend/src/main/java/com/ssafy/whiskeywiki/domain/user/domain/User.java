@@ -52,16 +52,7 @@ public class User {
 
     private String region;
     private String city;
-    private String town;
-
-    @Builder.Default
-    private String region = "";
-
-    @Builder.Default
-    private String city = "";
-
-    @Builder.Default
-    private String village = "";
+    private String village;
 
 
     //연관관계 매핑//

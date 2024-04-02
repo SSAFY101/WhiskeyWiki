@@ -7,6 +7,7 @@ import com.ssafy.whiskeywiki.global.auth.provider.JwtProvider;
 import com.ssafy.whiskeywiki.domain.user.repository.UserRepository;
 import com.ssafy.whiskeywiki.domain.user.service.UserService;
 import com.ssafy.whiskeywiki.global.util.CommonResponse;
+import com.ssafy.whiskeywiki.global.util.Function;
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -92,7 +93,7 @@ public class UserController {
                 .latitude(new BigDecimal(answer[1]))
                 .region(answer[2])
                 .city(answer[3])
-                .town(answer[4])
+                .village(answer[4])
                 .build();
 
         log.info("user(= {})", user);
@@ -105,10 +106,29 @@ public class UserController {
         }
     }
 
-//    @GetMapping("/")
-//    public ResponseEntity<?> find(@RequestHeader(name = "authorization") String authToken) {
-//
-//    }
+    @GetMapping("/info")
+    public ResponseEntity<CommonResponse<UserDTO.FindResponse>> find(@RequestHeader(name = "authorization") String authToken) {
+
+        String loginId = Function.authTokenToUserId(authToken);
+
+        Optional<User> optionalUser = userRepository.findByLoginId(loginId);
+        if (optionalUser.isEmpty()) return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        User user = optionalUser.get();
+
+        UserDTO.FindResponse response = UserDTO.FindResponse.builder()
+                .loginId(user.getLoginId())
+                .nickname(user.getNickname())
+                .age(user.getAge())
+                .gender(user.getGender())
+                .address(user.getAddress())
+                .build();
+
+        return ResponseEntity.ok().body(CommonResponse.<UserDTO.FindResponse>builder()
+                                                                            .status(200)
+                                                                            .message("find success")
+                                                                            .data(response)
+                                                                            .build());
+    }
 
     @DeleteMapping("/edit/delete")
     public ResponseEntity<?> delete(@RequestHeader(name = "authorization") String authToken) {
