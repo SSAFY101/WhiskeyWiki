@@ -2,13 +2,13 @@ import torch
 from PIL import Image
 import io
 
-# import pathlib
+from pathlib import Path
 # temp = pathlib.PosixPath
 # pathlib.PosixPath = pathlib.WindowsPath
 
 def get_yolov5():
     # local best.pt
-    model = torch.hub.load('./yolov5', 'custom', path='./model/model5L.pt', source='local')  # local repo
+    model = torch.hub.load('./yolov5', 'custom', path=Path('./model/model5L.pt'), source='local')  # local repo
     model.conf = 0.5
     return model
 
