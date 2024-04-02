@@ -4,55 +4,57 @@ import MyBarDetail from "./MyBarDetail";
 import MyBarBook from "./MyBarBook";
 import style from "./MyBar.module.css";
 import { ShelfImage, BookImage, WhiskeyImages } from "./MyBarImages";
+// import axios from "axios";
+import instance from "../auth/axiosInterceptor";
 
 function MyBar() {
   const [whiskeyStatusList, setWhiskeyStatusList] = useState([]); // API Response 담을 변수 (빈 배열)
 
   useEffect(() => {
-    // GET 요청: 위스키 보유 상태 리스트 조회
-    // axios({
-    //   method: "get",
-    //   url: "api/mybar/list",
-    // })
-    //   .then((res) => {
-    //     console.log("인식 위스키 정보 : ", res.data);
-    //     const data = res.data.data;
-    //     setWhiskeyStatusList(data);
-    //   })
-    //   .catch((err) => {
-    //     console.log("유저의 My Bar 리스트 정보 ERROR :", err);
-    //   });
+    // GET 요청: 유저의 My Bar 위스키 보유 상태 리스트 조회
+    instance({
+      method: "get",
+      url: `/api/mybar/list`,
+    })
+      .then((res) => {
+        // console.log("유저의 My Bar 리스트 정보 : ", res.data.data);
+        const data = res.data.data;
+        setWhiskeyStatusList(data);
+      })
+      .catch((err) => {
+        console.log("유저의 My Bar 리스트 ERROR :", err);
+      });
 
-    // API test 코드
-    setWhiskeyStatusList([
-      // {
-      // // case 1. 위스키 없음
-      //   whiskeyId: 1,
-      //   isEmpty: false,
-      // },
-      {
-        // case 2. 위스키 보유
-        whiskeyId: 2,
-        isEmpty: false,
-      },
-      {
-        // case 3. 위스키 빈병
-        whiskeyId: 3,
-        isEmpty: true,
-      },
-      {
-        whiskeyId: 6,
-        isEmpty: true,
-      },
-      {
-        whiskeyId: 17,
-        isEmpty: false,
-      },
-      {
-        whiskeyId: 22,
-        isEmpty: true,
-      },
-    ]);
+    // // API test 코드
+    // setWhiskeyStatusList([
+    //   // {
+    //   // // case 1. 위스키 없음
+    //   //   whiskeyId: 1,
+    //   //   isEmpty: false,
+    //   // },
+    //   {
+    //     // case 2. 위스키 보유
+    //     whiskeyId: 2,
+    //     isEmpty: false,
+    //   },
+    //   {
+    //     // case 3. 위스키 빈병
+    //     whiskeyId: 3,
+    //     isEmpty: true,
+    //   },
+    //   {
+    //     whiskeyId: 6,
+    //     isEmpty: true,
+    //   },
+    //   {
+    //     whiskeyId: 17,
+    //     isEmpty: false,
+    //   },
+    //   {
+    //     whiskeyId: 22,
+    //     isEmpty: true,
+    //   },
+    // ]);
   }, []);
   // console.log(whiskeyStatusList);
 
