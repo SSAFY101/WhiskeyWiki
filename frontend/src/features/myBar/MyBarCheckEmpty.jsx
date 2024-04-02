@@ -55,6 +55,11 @@ function MyBarCheckEmpty({
     // 모달 종료 코드
     handleCloseCheckEmptyModal();
   };
+
+  // 4. 모달 종료 함수
+  const closeModal = () => {
+    handleCloseCheckEmptyModal();
+  };
   return (
     <>
       <p className={style.whiskeyNameKr}>{whiskeyNameKr}</p>
@@ -64,9 +69,14 @@ function MyBarCheckEmpty({
 
       <h1>{message}</h1>
 
-      <button className={style.checkBtn} onClick={changeStatus}>
-        확인
-      </button>
+      <div>
+        <button className={style.checkBtn} onClick={changeStatus}>
+          네
+        </button>
+        <button className={style.checkBtn} onClick={closeModal}>
+          아니오
+        </button>
+      </div>
     </>
   );
 }
