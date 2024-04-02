@@ -7,8 +7,7 @@ function MyBarBook() {
       <div className={style.background}>
         {/* <button>&lt; 레시피 뒤로가기 버튼</button> */}
         <div className={style.recipe}>
-          <p>칵테일 레시피 즐겨찾기 내용 울렐레~~</p>
-          <p>(정렬테스트)</p>
+          <h1>즐겨찾기한 칵테일이 없습니다.</h1>
           {/* <button>상세 정보 보기</button> */}
         </div>
       </div>
