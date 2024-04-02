@@ -7,7 +7,7 @@ import json
 from fastapi.middleware.cors import CORSMiddleware
 
 
-model = get_yolov5()
+basicModel = get_yolov5()
 
 app = FastAPI(
     title="Custom YOLOV5 Machine Learning API",
@@ -52,13 +52,13 @@ def get_health():
 @app.post("/object-to-json")
 async def detect_whiskey_return_json_result(file: bytes = File(...)):
     input_image = get_image_from_bytes(file)
-    results = model(input_image)
-    result_json = results_to_json(results, model)
+    results = basicModel(input_image)
+    result_json = results_to_json(results, basicModel)
     # detect_res = results.pandas().xyxy[0].to_json(orient="records")  # JSON img1 predictions
     # detect_res = json.loads(detect_res)
     return {"result": result_json}
 
-def results_to_json(results, model):
+def results_to_json(results, basicModel):
     answer = []
     whiskeys = {}
     utils = {}
@@ -66,7 +66,7 @@ def results_to_json(results, model):
     whiskeyCount = 0
     for result in results.xyxy:
         for pred in result:
-            class_name = model.model.names[int(pred[5])]
+            class_name = basicModel.basicModel.names[int(pred[5])]
             if class_name == 'others':
                 othersCount += 1
                 continue
@@ -86,7 +86,7 @@ def results_to_json(results, model):
 @app.post("/object-to-img")
 async def detect_food_return_base64_img(file: bytes = File(...)):
     input_image = get_image_from_bytes(file)
-    results = model(input_image)
+    results = basicModel(input_image)
     r_img = results.render()  # updates results.imgs with boxes and labels
 
     bytes_io = io.BytesIO()
