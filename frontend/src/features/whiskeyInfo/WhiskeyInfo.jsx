@@ -35,7 +35,7 @@ function WhiskeyInfo() {
   const fetchWhiskeyList = async () => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/whiskey/list`
+        `/api/whiskey/list`
       );
       console.log("위스키 목록 조회 성공", response.data.data);
       setWhiskeys(response.data.data)

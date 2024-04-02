@@ -36,8 +36,8 @@
     "dev": "env-cmd -f .env.development react-scripts start",
     "prd": "env-cmd -f .env.production react-scripts start",
     "build": "env-cmd -f .env.local react-scripts build",
-    "build:prod": "env-cmd -f .env.production react-scripts build && move build ./build_prod",
-    "build:dev": "env-cmd -f .env.development react-scripts build && move build ./build_dev",
+    "build:prod": "env-cmd -f .env.production react-scripts build",
+    "build:dev": "env-cmd -f .env.development react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -60,8 +60,20 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "7.22.5",
+    "@babel/eslint-parser": "7.22.5",
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@babel/preset-env": "7.22.5",
     "@babel/preset-react": "^7.24.1",
     "tailwindcss": "^3.4.1"
   },
-  "proxy": "http://dev.whiskeywiki.shop"
+  "proxy": "https://www.whiskeywiki.shop/api",
+  "plugins": [
+    [
+      "@babel/plugin-proposal-private-property-in-object",
+      {
+        "loose": true
+      }
+    ]
+  ]
 }
