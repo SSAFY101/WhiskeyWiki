@@ -50,6 +50,10 @@ public class User {
     @Column(precision = 13, scale = 10)
     private BigDecimal longitude;
 
+    private String region;
+    private String city;
+    private String town;
+
     @Builder.Default
     private String region = "";
 
