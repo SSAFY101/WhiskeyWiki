@@ -1,5 +1,5 @@
 from fastapi import FastAPI, File
-from segmentation import get_yolov5_basic, get_yolov5_johinee, get_image_from_bytes
+from segmentation import get_yolov5_basic, get_yolov5_johnnie, get_image_from_bytes
 from starlette.responses import Response
 import io
 from PIL import Image
@@ -8,7 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 
 basicModel = get_yolov5_basic()
-johinneModel = get_yolov5_johinne()
+johnnieModel = get_yolov5_johinne()
 
 app = FastAPI(
     title="Custom YOLOV5 Machine Learning API",
@@ -62,8 +62,8 @@ async def detect_whiskey_return_json_result(file: bytes = File(...)):
 @app.post("/object-to-json/johnnie")
 async def detect_whiskey_return_json_result(file: bytes = File(...)):
     input_image = get_image_from_bytes(file)
-    results = johinneModel(input_image)
-    result_json = results_to_json(results, johinneModel)
+    results = johnnieModel(input_image)
+    result_json = results_to_json(results, johnnieModel)
     # detect_res = results.pandas().xyxy[0].to_json(orient="records")  # JSON img1 predictions
     # detect_res = json.loads(detect_res)
     return {"result": result_json}
