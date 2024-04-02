@@ -6,6 +6,7 @@
 }
 
 .bubble{
+  position: fixed;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -32,6 +33,15 @@
   background-color: #EEEEEE;
   color: #2E2E2E;
   border-radius: 20px;
+}
+
+.heartIcon{
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width:60px;
+  height:auto;
+  cursor:pointer;
 }
 
 .infoArea{
