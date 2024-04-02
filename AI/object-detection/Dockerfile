@@ -13,6 +13,11 @@ COPY . /app
 RUN conda install python=3.8
 RUN conda install pytorch torchvision cudatoolkit=11.3 -c pytorch
 RUN pip install fastapi uvicorn
+RUN pip install opencv-python-headless
+# 필요한 패키지 설치
+RUN conda install -c conda-forge opencv
+
+
 
 # 8000 포트를 컨테이너 외부로 노출
 EXPOSE 8000
