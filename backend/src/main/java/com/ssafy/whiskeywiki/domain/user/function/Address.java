@@ -110,7 +110,6 @@ public class Address {
             log.info("depth2(= {})", answer[3]);
             log.info("depth3(= {})", answer[4]);
         }
-
         return answer;
     }
 }
