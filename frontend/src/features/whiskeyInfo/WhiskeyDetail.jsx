@@ -96,7 +96,7 @@ function WhiskeyDetail() {
             </div>
             <Statistics whiskeyStatistic={whiskeyStatistic} />
             <p className={style.titleWithLines}>recipe</p>
-            <CocktailRecipe />
+            <CocktailRecipe whiskeyId={whiskeyId} />
             <p className={style.titleWithLines}>review</p>
             <ReviewList reviewList={whiskeyReview} whiskeyId={whiskeyId} />
           </div>
