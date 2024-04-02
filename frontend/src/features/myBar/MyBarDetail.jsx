@@ -8,6 +8,7 @@ function MyBarDetail({ whiskeyId, whiskeyNameKr, whiskeyNameEn, isOwner }) {
   const [isCheckEmptyModalOpen, setIsCheckEmptyModalOpen] = useState(false);
   const handleCloseCheckEmptyModal = () => {
     setIsCheckEmptyModalOpen(false);
+    window.location.reload(); // 모달을 닫으면 페이지를 새로고침
   };
 
   // 빈 병 표시하기 (모달)
@@ -40,6 +41,7 @@ function MyBarDetail({ whiskeyId, whiskeyNameKr, whiskeyNameEn, isOwner }) {
             whiskeyId={whiskeyId}
             whiskeyNameKr={whiskeyNameKr}
             whiskeyNameEn={whiskeyNameEn}
+            handleCloseCheckEmptyModal={handleCloseCheckEmptyModal}
           />
         </Modal>
       )}
