@@ -25,24 +25,35 @@ public class ChatroomController {
     private final UserChatroomRepository userChatroomRepository;
 
     @PostMapping("/create")
-    public ResponseEntity<CommonResponse<Object>> create(@RequestHeader (name = "authorization") String authToken, @RequestBody ChatroomDTO.PairIdRequest request) {
+    public ResponseEntity<CommonResponse<ChatroomDTO.LoadChatroomResponse>> create(@RequestHeader (name = "authorization") String authToken, @RequestBody ChatroomDTO.PairIdRequest request) {
         String loginId = Function.authTokenToUserId(authToken);
         String pairId = request.getPairId();
-        log.info("pairId(={})", pairId);
 
         String message;
-        int httpStatus;
-        Chatroom chatroom = chatroomService.createChatroom(loginId, pairId);
-        if (chatroom == null) {
+        HttpStatus httpStatus = HttpStatus.OK;
+        ChatroomDTO.LoadChatroomResponse response = chatroomService.createChatroom(loginId, pairId);
+        if (response == null) {
             message = "create chatroom fail";
-            httpStatus = 501; // 501
+//            httpStatus = 501;
+            httpStatus = HttpStatus.NOT_IMPLEMENTED; // 501
+        } else if (response.isExist()) {
+            message = "reload chatroom success";
+//            httpStatus = 201;
+            httpStatus = HttpStatus.CREATED;    // 201
         } else {
             message = "create chatroom success";
-            httpStatus = 201;    // 201
+//            httpStatus = 201;
+            httpStatus = HttpStatus.CREATED;    // 201
         }
-        return ResponseEntity
-                .status(httpStatus)
-                .body(CommonResponse.builder().status(httpStatus).message(message).build());
+
+
+
+        return ResponseEntity.ok()
+                .body(CommonResponse.<ChatroomDTO.LoadChatroomResponse>builder()
+                        .message(message)
+                        .status(httpStatus.value())
+                        .data(response)
+                        .build());
     }
 
     @GetMapping("/list")
@@ -63,16 +74,16 @@ public class ChatroomController {
             }
 
             chatroomResponseList.add(ChatroomDTO.ChatroomResponse.builder()
-                            .id(chatroom.getId())
+                            .chatroomId(chatroom.getId())
                             .pairNickname(pairNickname)
-                            .lastChat(chatroom.getLastChat())
+                            .lastMassage(chatroom.getLastChat())
                             .editDateTime(chatroom.getEditTime())
                             .userStatus(false)
                             .pairStatus(false)
                             .build());
         }
 
-        ChatroomDTO.ChatroomlistResponse chatroomlistResponse = ChatroomDTO.ChatroomlistResponse.builder().chatroomList(chatroomResponseList).build();
+        ChatroomDTO.ChatroomlistResponse chatroomlistResponse = ChatroomDTO.ChatroomlistResponse.builder().chatRoomList(chatroomResponseList).build();
         CommonResponse<ChatroomDTO.ChatroomlistResponse> response = CommonResponse.<ChatroomDTO.ChatroomlistResponse>builder()
                 .message("chatroom list")
                 .data(chatroomlistResponse)

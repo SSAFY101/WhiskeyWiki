@@ -90,13 +90,15 @@
     CREATE TABLE IF NOT EXISTS chatrooms (
         chatroom_id INT AUTO_INCREMENT PRIMARY KEY,
         create_time DATETIME,
-        edit_time DATETIME
+        edit_time DATETIME,
+        last_chat VARCHAR
     );
 
     CREATE TABLE IF NOT EXISTS user_chatrooms (
         user_chatroom_id INT AUTO_INCREMENT PRIMARY KEY,
         user_id INT,
         chatroom_id INT,
+        exited TINYINT,
         FOREIGN KEY (user_id) REFERENCES users(user_id),
         FOREIGN KEY (chatroom_id) REFERENCES chatrooms(chatroom_id)
     );
@@ -104,12 +106,12 @@
 
     CREATE TABLE IF NOT EXISTS chats (
         chat_id INT AUTO_INCREMENT PRIMARY KEY,
-        user_chatroom_id INT,
+        chatroom_id INT,
         user_id INT,
         is_read BOOLEAN,
         chat_visible BOOLEAN,
         message VARCHAR(255),
         date_time DATETIME,
-        FOREIGN KEY (user_chatroom_id) REFERENCES user_chatrooms(user_chatroom_id),
+        FOREIGN KEY (chatroom_id) REFERENCES user_chatrooms(chatroom_id),
         FOREIGN KEY (user_id) REFERENCES users(user_id)
     );
