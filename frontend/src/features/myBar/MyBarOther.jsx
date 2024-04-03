@@ -3,7 +3,7 @@ import Modal from "../modal/Modal";
 import MyBarDetail from "./MyBarDetail";
 import style from "./MyBar.module.css";
 import { ShelfImage, BookImage, WhiskeyImages } from "./MyBarImages";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 // import axios from "axios";
 import instance from "../auth/axiosInterceptor";
 
@@ -11,7 +11,7 @@ function MyBarOther() {
   // a태그로 넘겨받은 userId 값을 사용하여 작업 수행
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const userId = queryParams.get("userId");
+  const pairId = queryParams.get("userId");
 
   const [whiskeyStatusList, setWhiskeyStatusList] = useState([]); // API Response 담을 변수 (빈 배열)
 
@@ -20,7 +20,7 @@ function MyBarOther() {
     // GET 요청: 다른 유저의 My Bar 조회 (다른 유저의 위스키 보유 상태 리스트 조회)
     instance({
       method: "get",
-      url: `/api/mybar/${userId}`,
+      url: `/api/mybar/${pairId}`,
     })
       .then((res) => {
         // console.log("다른 유저의 My Bar 인식 위스키 정보 : ", res.data.data);
@@ -93,7 +93,11 @@ function MyBarOther() {
 
   // 거래 요청 버튼
   const startChat = () => {
-    console.log("startChat");
+    console.log(pairId); // pairId 는 현재 열람하고 있는 유저(상대방)의 Id 입니다.
+    // chatroom create axios 요청(pairId) ~ API 명세서 참고! -> chatroom 넘버 정보 받아오기
+
+    // 받아온 내용 넘겨주기 => 네비게이트 훅으로 이동
+    <Link to={`/chatRoom`}></Link>;
   };
 
   return (
