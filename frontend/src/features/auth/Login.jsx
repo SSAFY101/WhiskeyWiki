@@ -1,4 +1,4 @@
-// 로그인
+// api : 로그인
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UseDispatch, useDispatch } from "react-redux";
