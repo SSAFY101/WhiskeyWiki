@@ -32,4 +32,9 @@ public interface WhiskeyService {
 
     //위스키 상태 확인
     WhiskeyDTO.CheckWhiskeyStatus checkWhiskeyStatus(int userId, int whiskeyId);
+
+    //인식한 위스키 정보 반환하기
+    WhiskeyDTO.DetectionWhiskeyInfoData getDetectionWhikseyInfo(int userId, WhiskeyDTO.DetectionWhiskeyList detectionWhiskeyList);
+
+    void registMybarDetectedWhiskey(int userId, WhiskeyDTO.DetectionWhiskeyList detectionWhiskeyList);
 }

@@ -24,8 +24,8 @@ public class MapDTO {
     public static class ResponseAnotherMyBar{
         private int userId;
         private String nickname;
-        private BigDecimal latitude;
         private BigDecimal longitude;
+        private BigDecimal latitude;
     }
 
     @Builder
@@ -44,5 +44,14 @@ public class MapDTO {
     public static class OwnWhiskeyStatus{
         private int whiskeyId;
         private Boolean isEmpty;
+    }
+
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Data
+    public static class LocationResponse{
+        private double longitude;
+        private double latitude;
     }
 }

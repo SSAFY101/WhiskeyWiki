@@ -5,6 +5,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class WhiskeyDTO {
     @Builder
     @AllArgsConstructor
@@ -65,4 +68,29 @@ public class WhiskeyDTO {
         private Boolean isEmpty;
     }
 
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Data
+    public static class DetectionWhiskeyList{
+        private List<String> whiskeyReqList;
+    }
+
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Data
+    public static class DetectionWhiskeyInfoData{
+        private List<WhiskeySummaryInfo> whiskeyResList  = new ArrayList<>();
+    }
+
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Data
+    public static class WhiskeySummaryInfo{
+        private String nameKr;
+        private String nameEn;
+        Boolean isOwn;
+    }
 }

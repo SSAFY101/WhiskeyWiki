@@ -18,4 +18,6 @@ public interface WhiskeyRepository extends JpaRepository<Whiskey, Integer> {
 
     Whiskey findByWhiskeyNameKr(String whiskeyNameKr);
 
+    Whiskey getWhiskeyByWhiskeyNameEn(String whiskeyNameEn);
+
 }
