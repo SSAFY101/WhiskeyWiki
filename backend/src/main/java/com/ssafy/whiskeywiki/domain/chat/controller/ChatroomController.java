@@ -74,16 +74,16 @@ public class ChatroomController {
             }
 
             chatroomResponseList.add(ChatroomDTO.ChatroomResponse.builder()
-                            .id(chatroom.getId())
+                            .chatroomId(chatroom.getId())
                             .pairNickname(pairNickname)
-                            .lastChat(chatroom.getLastChat())
+                            .lastMassage(chatroom.getLastChat())
                             .editDateTime(chatroom.getEditTime())
                             .userStatus(false)
                             .pairStatus(false)
                             .build());
         }
 
-        ChatroomDTO.ChatroomlistResponse chatroomlistResponse = ChatroomDTO.ChatroomlistResponse.builder().chatroomList(chatroomResponseList).build();
+        ChatroomDTO.ChatroomlistResponse chatroomlistResponse = ChatroomDTO.ChatroomlistResponse.builder().chatRoomList(chatroomResponseList).build();
         CommonResponse<ChatroomDTO.ChatroomlistResponse> response = CommonResponse.<ChatroomDTO.ChatroomlistResponse>builder()
                 .message("chatroom list")
                 .data(chatroomlistResponse)
