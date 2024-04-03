@@ -1,31 +1,35 @@
-.modalOverlay{
+.modalOverlay {
   position: fixed;
-  top:0;
-  left:0;
-  right:0;
-  bottom:0;
-  background-color: rgba(0,0,0,0.5);
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
   z-index: 100; /* z-index 값을 증가 */
 }
 
-.modalContent{
+.modalContent {
   position: fixed;
   display: flex;
   flex-direction: column;
-  align-items:center ;
+  align-items: center;
   justify-content: center;
   /* background-color:#2E2E2E; */
-  padding:20px;
-  width:500px;
+  padding: 20px;
+  width: 500px;
   height: 500px;
   z-index: 101; /* z-index 값을 증가 */
 }
 
-.CloseButton{
+.CloseButton {
   position: absolute;
   top: 20px;
-  right:20px;
+  right: 20px;
+}
+
+.CloseButton img{
+  width:45px;
 }
