@@ -3,6 +3,8 @@ package com.ssafy.whiskeywiki.domain.whiskey.service.impl;
 import com.ssafy.whiskeywiki.domain.cocktail.dto.CocktailDTO;
 import com.ssafy.whiskeywiki.domain.mybar.domain.OwnWhiskey;
 import com.ssafy.whiskeywiki.domain.mybar.repository.OwnWhiskeyRepository;
+import com.ssafy.whiskeywiki.domain.user.domain.User;
+import com.ssafy.whiskeywiki.domain.user.repository.UserRepository;
 import com.ssafy.whiskeywiki.domain.whiskey.domain.Review;
 import com.ssafy.whiskeywiki.domain.whiskey.domain.Whiskey;
 import com.ssafy.whiskeywiki.domain.whiskey.dto.SearchDTO;
@@ -24,6 +26,7 @@ public class WhiskeyServiceImpl implements WhiskeyService {
     private final WhiskeyRepository whiskeyRepository;
     private final ReviewRepository reviewRepository;
     private final OwnWhiskeyRepository ownWhiskeyRepository;
+    private final UserRepository userRepository;
 
     //전체 위스키 목록 가져오기
     @Override
@@ -179,5 +182,58 @@ public class WhiskeyServiceImpl implements WhiskeyService {
             }
         }
         return null;
+    }
+
+
+    @Override
+    public WhiskeyDTO.DetectionWhiskeyInfoData getDetectionWhikseyInfo(int userId, WhiskeyDTO.DetectionWhiskeyList detectionWhiskeyList) {
+
+        WhiskeyDTO.DetectionWhiskeyInfoData whiskeyResList = new WhiskeyDTO.DetectionWhiskeyInfoData();
+        List<String> detectedList = detectionWhiskeyList.getWhiskeyReqList();
+        User loginUser = userRepository.getById(userId);
+        List<OwnWhiskey> ownWhiskeyList = ownWhiskeyRepository.findByUser(loginUser);
+        List<String> ownWhiskeyNameList = new ArrayList<>();
+
+        for(OwnWhiskey o :ownWhiskeyList){
+            ownWhiskeyNameList.add(o.getWhiskey().getWhiskeyNameEn());
+        }
+
+        //ownWhiskeyNameList에는 현재 유저가 보유중인 위스키의 영어 이름이 담겨있음.
+        for(String detectedName : detectedList){
+            Boolean isOwn = false;
+
+            if(ownWhiskeyNameList.contains(detectedName)){
+                isOwn = true;
+            }
+
+            Whiskey whiskey = whiskeyRepository.getWhiskeyByWhiskeyNameEn(detectedName);
+            System.out.println(whiskey.getWhiskeyNameKr());
+
+            whiskeyResList.getWhiskeyResList().add(
+                    new WhiskeyDTO.WhiskeySummaryInfo(
+                            whiskey.getWhiskeyNameKr(),
+                            whiskey.getWhiskeyNameEn(),
+                            isOwn));
+        }
+
+        return whiskeyResList;
+
+    }
+
+    //인식된 위스키 mybar에 저장
+    @Override
+    public void registMybarDetectedWhiskey(int userId, WhiskeyDTO.DetectionWhiskeyList detectionWhiskeyList) {
+        User user = userRepository.getById(userId);
+        List<String> whiskeyNameList = detectionWhiskeyList.getWhiskeyReqList();
+        for(String whiskeyName : whiskeyNameList){
+            Whiskey whiskey = whiskeyRepository.getWhiskeyByWhiskeyNameEn(whiskeyName);
+
+            OwnWhiskey ownWhiskey = OwnWhiskey.builder()
+                    .user(user)
+                    .whiskey(whiskey)
+                    .isEmpty(false)
+                    .build();
+            ownWhiskeyRepository.save(ownWhiskey);
+        }
     }
 }

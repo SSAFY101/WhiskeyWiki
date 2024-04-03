@@ -7,15 +7,10 @@ import Whiskey from "./component/Whiskey";
 import style from "./css/WhiskeyList.module.css";
 
 const WhiskeyList = ({ userId, userNickname }) => {
-  const [whiskeyList, setWhiskeyList] = useState([
-    { nameEn: "Absolut", nameKr: "앱솔루트" },
-    { nameEn: "Jim-Beam", nameKr: "짐빔" },
-    { nameEn: "Jack-Daniels", nameKr: "잭다니엘" },
-    { nameEn: "Jagermeister", nameKr: "예거마이스터" },
-    { nameEn: "Johnie-Walker", nameKr: "조니워커" },
-  ]);
+  const [whiskeyList, setWhiskeyList] = useState([]);
 
   useEffect(() => {
+    console.log("whiskeyList useEffect");
     // 다른 유저의 My Bar 조회
     instance
       .get(`/api/mybar/${userId}`)
