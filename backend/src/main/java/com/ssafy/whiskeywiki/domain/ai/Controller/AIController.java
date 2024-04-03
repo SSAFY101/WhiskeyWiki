@@ -17,11 +17,11 @@ import org.springframework.web.multipart.MultipartFile;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/detection")
+@RequestMapping
 public class AIController {
 
     private final AIService aiService;
-    @PostMapping("/object-to-json")
+    @PostMapping("/detection")
     public ResponseEntity<AIDTO.JsonResponse> whiskeyDetect(MultipartFile file) {
 
         return ResponseEntity.ok()
