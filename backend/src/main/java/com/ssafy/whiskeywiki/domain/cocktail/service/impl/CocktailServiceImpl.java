@@ -62,7 +62,7 @@ public class CocktailServiceImpl implements CocktailService {
                 for(CocktailIngredient c : cocktailIngredients){
                     ingredientNameList.add(c.getIngredient().getName());
                 }
-                cocktailInfo.add(new CocktailDTO.CocktailInfo(cocktailName, cocktailNameEn, recipe, detail, whiskeyNameList, ingredientNameList));
+                cocktailInfo.add(new CocktailDTO.CocktailInfo(cocktailId, cocktailName, cocktailNameEn, recipe, detail, whiskeyNameList, ingredientNameList));
             }
         }
 

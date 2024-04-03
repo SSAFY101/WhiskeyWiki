@@ -1,8 +1,10 @@
+// api : 거래 상태 변경
 import { useEffect, useState } from "react";
 
 import style from "../css/ChatList.module.css";
+import instance from "../../auth/axiosInterceptor";
 
-const Status = ({ userStatus, pairStatus, canHover }) => {
+const Status = ({ userStatus, pairStatus, canHover, chatRoomId, userId }) => {
   const [status, setStatus] = useState("");
   const [textColor, setTextColor] = useState("");
   const [bgColor, setBgColor] = useState("");
@@ -12,6 +14,56 @@ const Status = ({ userStatus, pairStatus, canHover }) => {
     figureStatus(userStatus, pairStatus);
   }, [hover]);
 
+  // 거래 상태 변경
+  const statusChange = (requestType) => {
+    instance
+      .put(`/api/chatroom/status`, {
+        chatRoomId,
+        userId,
+        requestType,
+      })
+      .then((res) => {
+        console.log("거래 상태 변경", res);
+      })
+      .catch((err) => {
+        console.log("거래 상태 변경 실패", err);
+      });
+  };
+
+  // 클릭 시 요청
+  const clickHandler = () => {
+    const requestType = null;
+
+    if (!canHover) return;
+    if (!userStatus && !pairStatus) {
+      // 요청
+      if (window.confirm("거래 요청을 보낼까요?")) {
+        requestType = "요청";
+      }
+    } else if (userStatus && !pairStatus) {
+      // 요청 취소
+      if (window.confirm("거래 요청을 취소할까요?")) {
+        requestType = "요청 취소";
+      }
+    } else if (!userStatus && pairStatus) {
+      // 수락, 거절
+      if (window.confirm("거래 요청을 수락할까요?")) {
+        requestType = "수락";
+      } else {
+        requestType = "거절";
+      }
+    } else if (userStatus && pairStatus) {
+      // 거래 취소
+      if (window.confirm("정말 거래를 취소할까요?")) {
+        requestType = "거래 취소";
+      }
+    }
+    if (!requestType) return;
+
+    statusChange(requestType); // 거래 상태 변경 요청
+  };
+
+  // status별 설정
   const figureStatus = (user, pair) => {
     if (!user && !pair) {
       if (canHover && hover) {
@@ -35,7 +87,7 @@ const Status = ({ userStatus, pairStatus, canHover }) => {
       }
     } else if (!user && pair) {
       if (canHover && hover) {
-        setStatus("수락하기");
+        setStatus("수락/거절");
         setTextColor("#ffffff");
         setBgColor("#EEB233");
       } else {
@@ -53,20 +105,6 @@ const Status = ({ userStatus, pairStatus, canHover }) => {
         setTextColor("#E3E3E3");
         setBgColor("#FF5B5B");
       }
-    }
-  };
-
-  const clickHandler = () => {
-    if (!canHover) return;
-    if (!userStatus && !pairStatus) {
-      // 요청
-    } else if (userStatus && !pairStatus) {
-      // 요청 취소
-    } else if (!userStatus && pairStatus) {
-      // 요청 거절
-      // 요청 수락
-    } else if (userStatus && pairStatus) {
-      // 거래 취소
     }
   };
 
