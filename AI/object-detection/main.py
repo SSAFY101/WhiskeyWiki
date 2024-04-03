@@ -107,7 +107,7 @@ async def detect_whiskey_return_json_result(file: bytes = File(...)):
 def results_to_json(results, model, all_c):
 
     answer = list()
-    whiskeys = {}
+    whiskeys = set()
     whiskeyCount = 0
     # utils = {}
     # all count & detect count
@@ -117,28 +117,28 @@ def results_to_json(results, model, all_c):
     for result in results.xyxy:
         for pred in result:
             class_name = model.model.names[int(pred[5])]
-            # whiskeys.add(class_name)
+            whiskeys.add(class_name)
             # if class_name == 'others':
             #     othersCount += 1
             #     continue
             #
-            if class_name in whiskeys:
-                whiskeys[class_name] += 1
-            else:
-                whiskeys[class_name] = 1
+            # if class_name in whiskeys:
+            #     whiskeys[class_name] += 1
+            # else:
+            #     whiskeys[class_name] = 1
             whiskeyCount += 1
 
 
     othersCount = all_c - whiskeyCount
-    whiskeys[others] = othersCount
+    # whiskeys[others] = othersCount
     # utils["others"] = othersCount
     # utils["all"] = whiskeyCount + othersCount
-    # answer.append(whiskeys)
-    # answer.append(othersCount)
+    answer.append(whiskeys)
+    answer.append(othersCount)
     # for whiskey in whiskeys:
     #     answer.append()
     # answer.append(utils)
-    return whiskeys
+    return {"whiskeys": whiskeys, "others": othersCount}
 
 def all_count(input_image):
     results = emptyModel(input_image)
