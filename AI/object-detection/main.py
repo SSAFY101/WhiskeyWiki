@@ -134,7 +134,7 @@ def results_to_json(results, model, all_c):
     answer.append(whiskeys)
     answer.append(othersCount)
     # answer.append(utils)
-    return answer
+    return {"whiskeys": whiskeys, "others": othersCount}
 
 def all_count(input_image):
     results = emptyModel(input_image)
