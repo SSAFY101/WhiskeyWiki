@@ -89,6 +89,7 @@ async def detect_whiskey_return_json_result(file: bytes = File(...)):
     results = ballentinesModel(input_image)
     all_c = all_count(input_image)
     result_json = results_to_json(results, ballentinesModel, all_c)
+    #
     # detect_res = results.pandas().xyxy[0].to_json(orient="records")  # JSON img1 predictions
     # detect_res = json.loads(detect_res)
     return result_json
