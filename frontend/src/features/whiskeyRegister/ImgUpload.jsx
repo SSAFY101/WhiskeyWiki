@@ -81,11 +81,11 @@ const ImgUpload = () => {
         }
 
         // 미탐지 위스키 처리
-        if (others > 0) {
-          // 미탐지 위스키 처리
-          alert("미탐지 위스키 있음");
-          return;
-        }
+        // if (others > 0) {
+        //   // 미탐지 위스키 처리
+        //   alert("미탐지 위스키 있음");
+        //   return;
+        // }
 
         dispatch(registerAction.setWhiskeyList(whiskeyNameList));
         dispatch(registerAction.pageTwo());

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { registerAction } from "../../../store/slices/register";
 
-import { WhiskeyImages } from "../images/WhiskeyImages";
+import { WhiskeyImages } from "../../WhiskeyImages";
 import style from "../css/DetectionResult.module.css";
 
 const DectectResCard = ({ nameKr, nameEn, isOwn }) => {
