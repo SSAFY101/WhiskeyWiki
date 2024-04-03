@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 public class AIDTO {
 
     @Getter
@@ -14,5 +16,14 @@ public class AIDTO {
     public static class JSONAndImg {
         String name;
         byte[] img;
+    }
+
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    public static class JsonResponse {
+        List<String> result;
+        int others;
     }
 }

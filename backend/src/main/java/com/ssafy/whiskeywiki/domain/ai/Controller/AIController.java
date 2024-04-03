@@ -22,14 +22,13 @@ public class AIController {
 
     private final AIService aiService;
     @PostMapping("/object-to-json")
-    public ResponseEntity<byte[]> whiskeyDetect(MultipartFile file) {
+    public ResponseEntity<AIDTO.JsonResponse> whiskeyDetect(MultipartFile file) {
 
         aiService.whiskeyDetection(file);
 
 
         return ResponseEntity.ok()
-                .header("Content-Type", "image/jpeg")
-                .body(aiService.whiskeyDetection(file).getBody());
+                .body(aiService.whiskeyDetection(file));
     }
 
     @PostMapping("/object-to-img")
