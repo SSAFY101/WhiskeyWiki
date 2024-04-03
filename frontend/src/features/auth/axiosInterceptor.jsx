@@ -33,8 +33,6 @@ instance.interceptors.response.use(
 
           newAccessToken = res.headers["authorization"];
 
-          console.log("재발급된 토큰", newAccessToken);
-
           // instance 재설정
           instance.defaults.headers.common[
             "Authorization"
