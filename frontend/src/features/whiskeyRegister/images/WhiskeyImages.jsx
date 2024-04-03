@@ -4,8 +4,12 @@ const WhiskeyImages = [
     imgUrl: require("../../../assets/images/whiskey/Absolute.png"),
   },
   {
-    nameEn: "Jack-Daniels",
+    nameEn: "Jack-Daniels no.7",
     imgUrl: require("../../../assets/images/whiskey/Jack_Daniels_No7.png"),
+  },
+  {
+    nameEn: "Jack-Daniels honey",
+    imgUrl: require("../../../assets/images/whiskey/Jack_Daniels_Honey.png"),
   },
   {
     nameEn: "Jim-Beam",

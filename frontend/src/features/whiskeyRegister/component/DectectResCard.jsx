@@ -8,6 +8,8 @@ import style from "../css/DetectionResult.module.css";
 const DectectResCard = ({ nameKr, nameEn, isOwn }) => {
   const dispatch = useDispatch();
 
+  console.log(nameEn);
+
   // 이미지 불러오기
   const Whiskey = WhiskeyImages.find((it) => it.nameEn === nameEn);
   const imgUrl = Whiskey.imgUrl;

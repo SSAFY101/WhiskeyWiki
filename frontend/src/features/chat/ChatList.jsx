@@ -37,6 +37,7 @@ const ChatList = () => {
           <div>채팅 목록</div>
         </div>
       </div>
+
       {/* 채팅 리스트 */}
       <div className={`${style.chatListContainer}`}>
         {chatList.length == 0 && <div>채팅방 리스트가 없습니다.</div>}
