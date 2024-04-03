@@ -46,15 +46,15 @@ public class ChatDTO {
     @AllArgsConstructor
     @Builder
     public static class ChatlistResponse {
-        String userId;
-        String pairId;
-        List<ChatlistResponseEntity> chatList;
+        int userId;
+        int pairId;
+        List<ChatlistResponseEntity> chatResponseList;
 
-        void updateUserId(String userId) {
+        void updateUserId(int userId) {
             this.userId = userId;
         }
 
-        void updatePairId(String pairId) {
+        void updatePairId(int pairId) {
             this.pairId = pairId;
         }
     }

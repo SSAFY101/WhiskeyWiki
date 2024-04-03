@@ -87,17 +87,21 @@ public class ChatController {
         }
 
         List<UserChatroom> userChatroomList = userChatroomRepository.findAllByChatroom(chatroom);
-        String pairId = null;
+        int pairKey = 0;
+        int userKey = 0;
+
         for (UserChatroom uc: userChatroomList) {
             if (!uc.getUser().getLoginId().equals(loginId)) {
-                pairId = uc.getUser().getLoginId();
+                pairKey = uc.getUser().getId();
+            } else {
+                userKey = uc.getUser().getId();
             }
         }
 
         ChatDTO.ChatlistResponse chatlistResponse = ChatDTO.ChatlistResponse.builder()
-                .userId(loginId)
-                .pairId(pairId)
-                .chatList(chatResponseList).build();
+                .userId(userKey)
+                .pairId(pairKey)
+                .chatResponseList(chatResponseList).build();
 
         return ResponseEntity.ok().body(CommonResponse.<ChatDTO.ChatlistResponse>builder().data(chatlistResponse).build());
     }
