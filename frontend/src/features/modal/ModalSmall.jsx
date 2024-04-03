@@ -1,5 +1,6 @@
 import style from "./ModalSmall.module.css";
 import CloseButton from "../../assets/icon/CloseButton.svg";
+import justClose from "../../assets/icon/justClose.svg";
 
 function Modal({ isOpen, onClose, children }) {
   if (!isOpen) return null;
@@ -9,7 +10,7 @@ function Modal({ isOpen, onClose, children }) {
         <div className={style.CloseButton}>
           <img
             onClick={onClose}
-            src={CloseButton}
+            src={justClose}
             style={{ cursor: "pointer" }}
           ></img>
         </div>
