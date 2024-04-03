@@ -94,7 +94,6 @@
         user_chatroom_id INT AUTO_INCREMENT PRIMARY KEY,
         user_id INT,
         chatroom_id INT,
-        trade_intention BOOLEAN DEFAULT false,
         FOREIGN KEY (user_id) REFERENCES users(user_id),
         FOREIGN KEY (chatroom_id) REFERENCES chatrooms(chatroom_id)
     );
