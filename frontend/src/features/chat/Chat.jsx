@@ -17,10 +17,14 @@ import { useSelector } from "react-redux";
 
 const Chat = () => {
   const location = useLocation();
-  const chatRoomId = location.state.chatRoomId;
-  const pairNickname = location.state.pairNickname;
+
+  const chatRoomIdprop = location.state.chatRoomId;
+  const pairNicknameprop = location.state.pairNickname;
+
   const [pairId, setPairId] = useState(null);
   const [userId, setUserId] = useState(null);
+  const [chatRoomId, setChatRoomId] = useState(null);
+  const [pairNickname, setPairNickname] = useState(null);
 
   const userNickname = useSelector((state) => state.user.nickName);
 
@@ -40,27 +44,14 @@ const Chat = () => {
     //   content: "잭다니엘 내놔",
     //   dateTime: "2023-11-08 11:58",
     // },
-    // {
-    //   chatId: 2,
-    //   myMessage: true,
-    //   content: "헤에",
-    //   dateTime: "2024-03-08 11:58",
-    // },
-    // {
-    //   chatId: 3,
-    //   myMessage: false,
-    //   content: "잭다니엘 내놔",
-    //   dateTime: "2024-03-21 11:58",
-    // },
-    // {
-    //   chatId: 4,
-    //   myMessage: true,
-    //   content: "헤에에에에",
-    //   dateTime: "2024-03-21 16:00",
-    // },
   ]);
 
   useEffect(() => {
+    console.log("chatRoomIdprop", chatRoomIdprop);
+    console.log("pairNicknameprop", pairNicknameprop);
+    setChatRoomId(chatRoomIdprop);
+    setPairNickname(pairNicknameprop);
+
     // 채팅방 메세지 리스트 불러오기
     instance
       .get(`/api/chat/list/${chatRoomId}`)
@@ -79,7 +70,7 @@ const Chat = () => {
       .catch((err) => {
         console.log("채팅방 메세지 리스트 불러오기 실패", err);
       });
-  });
+  }, []);
 
   const clickExitHandler = () => {
     if (window.confirm("채팅방에서 나가시겠습니까?")) {

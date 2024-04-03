@@ -7,6 +7,12 @@
   z-index: -1;
 }
 
+.container *{
+  background: none;
+  color:black;
+  font-size:20px;
+}
+
 /* 배경 */
 .background {
   display: flex;

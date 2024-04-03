@@ -2,9 +2,11 @@ import { WhiskeyImages } from "../images/WhiskeyImages";
 
 import style from "../css/Whiskey.module.css";
 
-const Whiskey = ({ WhiskeyNameEn, whiskeyNameKr }) => {
+const Whiskey = ({ whiskeyNameEn, whiskeyNameKr }) => {
   // 이미지 불러오기
-  const Whiskey = WhiskeyImages.find((it) => it.nameEn === WhiskeyNameEn);
+  console.log(whiskeyNameEn);
+  console.log(whiskeyNameKr);
+  const Whiskey = WhiskeyImages.find((it) => it.nameEn === whiskeyNameEn);
   const imgUrl = Whiskey.imgUrl;
 
   return (
