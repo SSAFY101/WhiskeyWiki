@@ -1,23 +1,19 @@
 import { useEffect, useState, useRef } from "react";
-import axios from "axios";
 import * as StompJs from "@stomp/stompjs";
 
+import instance from "../auth/axiosInterceptor";
+
 import Message from "./component/Message";
-
 import style from "./css/MessageList.module.css";
-
 import sendIcon from "./images/sendMessage.png";
 
-const MessageList = ({ messageListProp }) => {
+const MessageList = ({ messageListProp, chatRoomId, userId, pairId }) => {
   const messageListRef = useRef();
   const messageListEndRef = useRef();
   const client = useRef({});
 
   const [messageList, setMessageList] = useState([]);
   const [newMessage, setNewMessage] = useState("");
-
-  const chatRoomId = 0; // 테스트
-  const userId = 0; // 테스트
 
   console.log("prop", messageListProp);
   console.log(messageList);
@@ -42,7 +38,7 @@ const MessageList = ({ messageListProp }) => {
     client.current = new StompJs.Client({
       brokerURL: "ws://localhost:8080/ws",
       connectHeaders: {
-        accessToken: "토큰",
+        accessToken: instance.defaults.headers.common["Authorization"],
       },
       debug: (str) => {
         console.log("debug : ", str); // 테스트
@@ -84,12 +80,21 @@ const MessageList = ({ messageListProp }) => {
     client.current.publish({
       destination: "/pub/chatroom",
       body: JSON.stringify({
-        // type: "",
-        chatRoomId: "0",
-        sender: "테서터",
-        chat: msg,
+        chatRoomId,
+        userId,
+        content: msg,
       }),
     });
+
+    // setMessageList((messageList) => [
+    //   ...messageList,
+    //   {
+    //     id: 5,
+    //     myMessage: true,
+    //     content: msg,
+    //     dateTime: new Date(),
+    //   },
+    // ]);
   };
 
   // 메세지 상태
@@ -105,17 +110,7 @@ const MessageList = ({ messageListProp }) => {
 
     console.log("메세지 보내기", newMessage); // 테스트
 
-    setMessageList((messageList) => [
-      ...messageList,
-      {
-        id: 5,
-        myMessage: true,
-        content: newMessage,
-        dateTime: new Date(),
-      },
-    ]);
-
-    // publish(newMessage);
+    publish(newMessage);
     setNewMessage("");
   };
 

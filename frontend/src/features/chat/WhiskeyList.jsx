@@ -1,9 +1,10 @@
 // 다른 유저의 My Bar 조회
 import { useEffect, useState } from "react";
-import Whiskey from "./component/Whiskey";
-
-import style from "./css/WhiskeyList.module.css";
 import axios from "axios";
+import instance from "../auth/axiosInterceptor";
+
+import Whiskey from "./component/Whiskey";
+import style from "./css/WhiskeyList.module.css";
 
 const WhiskeyList = ({ userId, userNickname }) => {
   const [whiskeyList, setWhiskeyList] = useState([
@@ -15,13 +16,13 @@ const WhiskeyList = ({ userId, userNickname }) => {
   ]);
 
   useEffect(() => {
-    // 위스키 목록 호출
-    axios
-      .get(`/mybar/${userId}`)
+    // 다른 유저의 My Bar 조회
+    instance
+      .get(`/api/mybar/${userId}`)
       .then((res) => {
         console.log("다른 유저의 My Bar 조회", res);
 
-        const newWhiskeyList = res.data.data;
+        const newWhiskeyList = res.data.data.whiskeyStatusList;
         setWhiskeyList(newWhiskeyList);
       })
       .catch((err) => {
@@ -36,7 +37,7 @@ const WhiskeyList = ({ userId, userNickname }) => {
       </div>
       <div className={`${style.whiskeyList}`}>
         {whiskeyList.map((whiskey) => (
-          <Whiskey key={whiskey.nameEn} {...whiskey} />
+          <Whiskey key={whiskey.WhiskeyNameEn} {...whiskey} />
         ))}
       </div>
     </div>
