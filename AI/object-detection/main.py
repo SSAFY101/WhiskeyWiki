@@ -61,7 +61,7 @@ async def detect_whiskey_return_json_result(file: bytes = File(...)):
     result_json = results_to_json(results, basicModel, all_c)
     # detect_res = results.pandas().xyxy[0].to_json(orient="records")  # JSON img1 predictions
     # detect_res = json.loads(detect_res)
-    return {"result": result_json}
+    return result_json
 
 @app.post("/object-to-json/johnnie")
 async def detect_whiskey_return_json_result(file: bytes = File(...)):
@@ -71,7 +71,7 @@ async def detect_whiskey_return_json_result(file: bytes = File(...)):
     result_json = results_to_json(results, johnnieModel, all_c)
     # detect_res = results.pandas().xyxy[0].to_json(orient="records")  # JSON img1 predictions
     # detect_res = json.loads(detect_res)
-    return {"result": result_json}
+    return result_json
 
 @app.post("/object-to-json/jack")
 async def detect_whiskey_return_json_result(file: bytes = File(...)):
@@ -81,7 +81,7 @@ async def detect_whiskey_return_json_result(file: bytes = File(...)):
     result_json = results_to_json(results, jackModel, all_c)
     # detect_res = results.pandas().xyxy[0].to_json(orient="records")  # JSON img1 predictions
     # detect_res = json.loads(detect_res)
-    return {"result": result_json}
+    return result_json
 
 @app.post("/object-to-json/ballentines")
 async def detect_whiskey_return_json_result(file: bytes = File(...)):
@@ -91,7 +91,7 @@ async def detect_whiskey_return_json_result(file: bytes = File(...)):
     result_json = results_to_json(results, ballentinesModel, all_c)
     # detect_res = results.pandas().xyxy[0].to_json(orient="records")  # JSON img1 predictions
     # detect_res = json.loads(detect_res)
-    return {"result": result_json}
+    return result_json
 
 @app.post("/object-to-json/empty")
 async def detect_whiskey_return_json_result(file: bytes = File(...)):
@@ -101,7 +101,7 @@ async def detect_whiskey_return_json_result(file: bytes = File(...)):
     result_json = results_to_json(results, emptyModel, all_c)
     # detect_res = results.pandas().xyxy[0].to_json(orient="records")  # JSON img1 predictions
     # detect_res = json.loads(detect_res)
-    return {"result": result_json}
+    return result_json
 
 def results_to_json(results, model, all_c):
 
