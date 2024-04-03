@@ -34,7 +34,7 @@ public class UserChatroom {
     private Chatroom chatroom;
 
     @Builder.Default
-    private boolean exit = false;
+    private boolean exited = false;
 
     public void updateUser(User user) {
         this.user = user;
@@ -44,5 +44,5 @@ public class UserChatroom {
         this.chatroom = chatroom;
     }
 
-    public void exitChatroom() {this.exit = true;}
+    public void exitChatroom() {this.exited = true;}
 }
