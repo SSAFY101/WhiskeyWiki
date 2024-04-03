@@ -61,7 +61,7 @@ async def detect_whiskey_return_json_result(file: bytes = File(...)):
     result_json = results_to_json(results, basicModel, all_c)
     # detect_res = results.pandas().xyxy[0].to_json(orient="records")  # JSON img1 predictions
     # detect_res = json.loads(detect_res)
-    return result_json
+    return {"result": result_json}
 
 @app.post("/object-to-json/johnnie")
 async def detect_whiskey_return_json_result(file: bytes = File(...)):
@@ -71,7 +71,7 @@ async def detect_whiskey_return_json_result(file: bytes = File(...)):
     result_json = results_to_json(results, johnnieModel, all_c)
     # detect_res = results.pandas().xyxy[0].to_json(orient="records")  # JSON img1 predictions
     # detect_res = json.loads(detect_res)
-    return result_json
+    return {"result": result_json}
 
 @app.post("/object-to-json/jack")
 async def detect_whiskey_return_json_result(file: bytes = File(...)):
@@ -81,7 +81,7 @@ async def detect_whiskey_return_json_result(file: bytes = File(...)):
     result_json = results_to_json(results, jackModel, all_c)
     # detect_res = results.pandas().xyxy[0].to_json(orient="records")  # JSON img1 predictions
     # detect_res = json.loads(detect_res)
-    return result_json
+    return {"result": result_json}
 
 @app.post("/object-to-json/ballentines")
 async def detect_whiskey_return_json_result(file: bytes = File(...)):
@@ -92,7 +92,7 @@ async def detect_whiskey_return_json_result(file: bytes = File(...)):
     #
     # detect_res = results.pandas().xyxy[0].to_json(orient="records")  # JSON img1 predictions
     # detect_res = json.loads(detect_res)
-    return result_json
+    return {"result": result_json}
 
 @app.post("/object-to-json/empty")
 async def detect_whiskey_return_json_result(file: bytes = File(...)):
@@ -102,12 +102,12 @@ async def detect_whiskey_return_json_result(file: bytes = File(...)):
     result_json = results_to_json(results, emptyModel, all_c)
     # detect_res = results.pandas().xyxy[0].to_json(orient="records")  # JSON img1 predictions
     # detect_res = json.loads(detect_res)
-    return result_json
+    return {"result": result_json}
 
 def results_to_json(results, model, all_c):
 
     answer = list()
-    whiskeys = {}
+    whiskeys = set()
     whiskeyCount = 0
     # utils = {}
     # all count & detect count
@@ -117,28 +117,28 @@ def results_to_json(results, model, all_c):
     for result in results.xyxy:
         for pred in result:
             class_name = model.model.names[int(pred[5])]
-            # whiskeys.add(class_name)
+            whiskeys.add(class_name)
             # if class_name == 'others':
             #     othersCount += 1
             #     continue
             #
-            if class_name in whiskeys:
-                whiskeys[class_name] += 1
-            else:
-                whiskeys[class_name] = 1
+            # if class_name in whiskeys:
+            #     whiskeys[class_name] += 1
+            # else:
+            #     whiskeys[class_name] = 1
             whiskeyCount += 1
 
 
     othersCount = all_c - whiskeyCount
-    whiskeys[others] = othersCount
+    # whiskeys[others] = othersCount
     # utils["others"] = othersCount
     # utils["all"] = whiskeyCount + othersCount
-    # answer.append(whiskeys)
-    # answer.append(othersCount)
+    answer.append(whiskeys)
+    answer.append(othersCount)
     # for whiskey in whiskeys:
     #     answer.append()
     # answer.append(utils)
-    return whiskeys
+    return {"whiskeys": whiskeys, "others": othersCount}
 
 def all_count(input_image):
     results = emptyModel(input_image)
