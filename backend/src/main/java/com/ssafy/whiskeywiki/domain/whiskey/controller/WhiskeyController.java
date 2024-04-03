@@ -22,6 +22,7 @@ public class WhiskeyController {
 
     private final WhiskeyService whiskeyService;
     private final ReviewService reviewService;
+    private final UserService userService;
 
     //위스키 목록
     @GetMapping("/list")
@@ -106,4 +107,29 @@ public class WhiskeyController {
                 .data(reusltList)
                 .build(), HttpStatus.OK);
     }
+
+    @PostMapping("/info/detection")
+    public ResponseEntity<CommonResponse> getDetectedWhiskeyInfo(@RequestHeader(name = "Authorization") String authToken ,@RequestBody WhiskeyDTO.DetectionWhiskeyList detectionWhiskeyList){
+        int userId = userService.getUserIdByAccessToken(authToken.substring(7));
+        WhiskeyDTO.DetectionWhiskeyInfoData whiskeyResList = whiskeyService.getDetectionWhikseyInfo(userId, detectionWhiskeyList);
+
+        return new ResponseEntity<>(CommonResponse.builder()
+                .status(HttpStatus.OK.value())
+                .message("위스키 인식 정보 반환")
+                .data(whiskeyResList)
+                .build(), HttpStatus.OK);
+    }
+
+    @PostMapping("/ownwhiskey/register")
+    public ResponseEntity<CommonResponse> registMybarDetectedWhiskey(@RequestHeader(name = "Authorization") String authToken ,@RequestBody WhiskeyDTO.DetectionWhiskeyList detectionWhiskeyList){
+        int userId = userService.getUserIdByAccessToken(authToken.substring(7));
+        whiskeyService.registMybarDetectedWhiskey(userId,detectionWhiskeyList);
+
+        return new ResponseEntity<>(CommonResponse.builder()
+                .status(HttpStatus.CREATED.value())
+                .message("위스키 My Bar 등록 성공")
+                .data("")
+                .build(), HttpStatus.CREATED);
+    }
 }
+

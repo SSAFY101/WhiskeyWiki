@@ -27,9 +27,8 @@ public class AuthFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
-        // checking white label
-        String[] noFilterLabel = new String[] {"/api/auth", "/api/users", "/api/whiskey", "/api/cocktail/recommend", "/api/ws"};    // Filter를 접근하지 않는 URLMapping
-        String[] whiteLabel = new String[] {"/api/swagger-ui", "/api/v3" ,"/api/auth", "/api/users", "/api/whiskey", "/api/cocktail/recommend", "/api/mybar", "/api/map"};    // Filter를 접근하지 않는 URLMapping
+
+        String[] whiteLabel = new String[] {"/api/detection","/api/swagger-ui", "/api/v3" ,"/api/auth", "/api/users", "/api/whiskey", "/api/cocktail/recommend", "/api/mybar", "/api/map", "/api/ws"};    // Filter를 접근하지 않는 URLMapping
         String[] blackLabel = new String[] {"/api/whiskey/review/register"};    // black label
         Loop1 :
         for (String url: whiteLabel) {

@@ -20,18 +20,15 @@ spring:
     properties:
       hibernate:
         show_sql: true
-#        format_sql: true
-
-
-  h2:
-    console:
-      enabled: true
-
-
-  main:
-    allow-bean-definition-overriding: false
+        format_sql: true
+        use-new-id-generator-mappings: false
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 25MB
 
 #    database-platform: org.hibernate.dialect.H2Dialect
+
 
 management:
   endpoint:
