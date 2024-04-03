@@ -24,3 +24,6 @@ spring:
             adaptive: true
       host: ${REDIS_HOST}
       port: ${REDIS_PROD_PORT}
+
+FAST_API:
+  URL: ${AI_LOCAL_URL}
