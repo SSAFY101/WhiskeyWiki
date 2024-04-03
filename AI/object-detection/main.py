@@ -126,7 +126,6 @@ def results_to_json(results, model, all_c):
             #     whiskeys[class_name] += 1
             # else:
             #     whiskeys[class_name] = 1
-            whiskeyCount += 1
 
     othersCount = all_c - len(whiskeys)
     # utils["others"] = othersCount
