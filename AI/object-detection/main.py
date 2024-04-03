@@ -57,7 +57,7 @@ def get_health():
 async def detect_whiskey_return_json_result(file: bytes = File(...)):
     input_image = get_image_from_bytes(file)
     results = basicModel(input_image)
-    all_c = all_count(results, input_image)
+    all_c = all_count(input_image)
     result_json = results_to_json(results, basicModel, all_c)
     # detect_res = results.pandas().xyxy[0].to_json(orient="records")  # JSON img1 predictions
     # detect_res = json.loads(detect_res)
@@ -67,7 +67,7 @@ async def detect_whiskey_return_json_result(file: bytes = File(...)):
 async def detect_whiskey_return_json_result(file: bytes = File(...)):
     input_image = get_image_from_bytes(file)
     results = johnnieModel(input_image)
-    all_c = all_count(results, input_image)
+    all_c = all_count(input_image)
     result_json = results_to_json(results, johnnieModel, all_c)
     # detect_res = results.pandas().xyxy[0].to_json(orient="records")  # JSON img1 predictions
     # detect_res = json.loads(detect_res)
@@ -77,7 +77,7 @@ async def detect_whiskey_return_json_result(file: bytes = File(...)):
 async def detect_whiskey_return_json_result(file: bytes = File(...)):
     input_image = get_image_from_bytes(file)
     results = jackModel(input_image)
-    all_c = all_count(results, input_image)
+    all_c = all_count(input_image)
     result_json = results_to_json(results, jackModel, all_c)
     # detect_res = results.pandas().xyxy[0].to_json(orient="records")  # JSON img1 predictions
     # detect_res = json.loads(detect_res)
@@ -87,7 +87,7 @@ async def detect_whiskey_return_json_result(file: bytes = File(...)):
 async def detect_whiskey_return_json_result(file: bytes = File(...)):
     input_image = get_image_from_bytes(file)
     results = ballentinesModel(input_image)
-    all_c = all_count(results, input_image)
+    all_c = all_count(input_image)
     result_json = results_to_json(results, ballentinesModel, all_c)
     # detect_res = results.pandas().xyxy[0].to_json(orient="records")  # JSON img1 predictions
     # detect_res = json.loads(detect_res)
@@ -97,7 +97,7 @@ async def detect_whiskey_return_json_result(file: bytes = File(...)):
 async def detect_whiskey_return_json_result(file: bytes = File(...)):
     input_image = get_image_from_bytes(file)
     results = emptyModel(input_image)
-    all_c = all_count(results, input_image)
+    all_c = all_count(input_image)
     result_json = results_to_json(results, emptyModel, all_c)
     # detect_res = results.pandas().xyxy[0].to_json(orient="records")  # JSON img1 predictions
     # detect_res = json.loads(detect_res)
