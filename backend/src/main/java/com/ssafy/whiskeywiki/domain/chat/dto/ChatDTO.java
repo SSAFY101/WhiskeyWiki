@@ -49,7 +49,7 @@ public class ChatDTO {
         int userId;
         int pairId;
         List<ChatlistResponseEntity> chatResponseList;
-
+//
         void updateUserId(int userId) {
             this.userId = userId;
         }
