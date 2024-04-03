@@ -2,6 +2,7 @@
 import axios from "axios";
 // import { userAction } from "../../store/slices/user";
 // const { dispatch } = store;
+import { persistor } from "../../store";
 
 const instance = axios.create({
   // baseURL: process.env.REACT_APP_API_URL,
@@ -18,6 +19,9 @@ instance.interceptors.response.use(
   async (error) => {
     // 새로고침해서 토큰이 없거나, 토큰이 만료된 경우
     console.log("interceptor 호출한 err : ", error);
+
+    let newAccessToken = null;
+
     if (error.response.status == 400 || error.response.status == 401) {
       // 재발급 요청
       await axios
@@ -25,39 +29,47 @@ instance.interceptors.response.use(
           withCredentials: true,
         })
         .then((res) => {
-          console.log("2. 토큰 재발급", res);
+          console.log("토큰 재발급", res);
 
-          // axios 재설정
-          const accessToken = res.headers["authorization"];
-          instance.defaults.headers.common["Authorization"] = `${accessToken}`;
+          newAccessToken = res.headers["authorization"];
+
+          console.log("재발급된 토큰", newAccessToken);
+
+          // instance 재설정
+          instance.defaults.headers.common[
+            "Authorization"
+          ] = `${newAccessToken}`;
           instance.defaults.headers.post["Content-Type"] = "application/json";
         })
         .catch((err) => {
           console.log("토큰 재발급 실패", err);
-          if (err.response.status == 401) {
-            console.log("401");
+          if (err.response && err.response.status == 401) {
             alert("다시 로그인해주세요.");
-            autoLogout();
+            // 로그아웃 처리
+            instance.defaults.headers.common["Authorization"] = null;
+            window.location.replace("/logoutRedirect");
           }
         });
 
-      console.log("3. getNewToken-after");
-
-      console.log(error.config);
-
-      const response = await instance.request(error.config);
+      const response = await axios.request({
+        ...error.config,
+        headers: {
+          ...error.config.headers,
+          common: {
+            ...error.config.headers.common,
+            Authorization: `${newAccessToken}`,
+          },
+          post: {
+            ...error.config.headers.post,
+            "Content-Type": "application/json",
+          },
+        },
+      });
 
       return response;
     }
     return Promise.reject(error);
   }
 );
-
-const autoLogout = () => {
-  // 리프래시 토큰 만료 로그아웃
-  instance.defaults.headers.common["Authorization"] = null;
-  // dispatch(userAction.setNickname(null));
-  window.location.reload();
-};
 
 export default instance;

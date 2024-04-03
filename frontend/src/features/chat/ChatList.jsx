@@ -51,7 +51,7 @@ const ChatList = () => {
       .then((res) => {
         console.log("채팅방 리스트", res);
 
-        const data = res.data.data.chatRoomList;
+        const data = res.data.data.chatroomList;
         setChatList(data);
       })
       .catch((err) => {
@@ -72,32 +72,34 @@ const ChatList = () => {
       </div>
       {/* 채팅 리스트 */}
       <div className={`${style.chatListContainer}`}>
-        {chatList.map((chat) => (
-          <Link
-            to={`/chatRoom`}
-            state={{
-              chatRoomId: chat.chatRoomId,
-              pairNickname: chat.pairNickname,
-            }}
-          >
-            <div className={`${style.chatContainer}`}>
-              <div className={`${style.tradeStatus}`}>
-                <Status
-                  userStatus={chat.userStatus}
-                  pairStatus={chat.pairStatus}
-                  canHover={false}
-                />
-              </div>
-              <div className={`${style.contentContainer}`}>
-                <div className={`${style.pairId}`}>{chat.pairNickname}</div>
-                <div className={`${style.lastMessagae}`}>
-                  {chat.lastMassage}
+        {chatList.length == 0 && <div>채팅방 리스트가 없습니다.</div>}
+        {chatList.length > 0 &&
+          chatList.map((chat) => (
+            <Link
+              to={`/chatRoom`}
+              state={{
+                chatRoomId: chat.chatRoomId,
+                pairNickname: chat.pairNickname,
+              }}
+            >
+              <div className={`${style.chatContainer}`}>
+                <div className={`${style.tradeStatus}`}>
+                  <Status
+                    userStatus={chat.userStatus}
+                    pairStatus={chat.pairStatus}
+                    canHover={false}
+                  />
+                </div>
+                <div className={`${style.contentContainer}`}>
+                  <div className={`${style.pairId}`}>{chat.pairNickname}</div>
+                  <div className={`${style.lastMessagae}`}>
+                    {chat.lastMassage}
+                  </div>
                 </div>
               </div>
-            </div>
-            <hr className={style.line} />
-          </Link>
-        ))}
+              <hr className={style.line} />
+            </Link>
+          ))}
       </div>
     </div>
   );
