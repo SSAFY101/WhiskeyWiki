@@ -36,9 +36,6 @@ public class UserChatroom {
     @Builder.Default
     private boolean exit = false;
 
-    @Builder.Default
-    private boolean tradeIntention = false;
-
     public void updateUser(User user) {
         this.user = user;
     }
