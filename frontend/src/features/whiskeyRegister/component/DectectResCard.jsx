@@ -5,19 +5,12 @@ import { registerAction } from "../../../store/slices/register";
 import { WhiskeyImages } from "../images/WhiskeyImages";
 import style from "../css/DetectionResult.module.css";
 
-const DectectResCard = ({ nameKr, nameEn, summery, isOwn }) => {
+const DectectResCard = ({ nameKr, nameEn, isOwn }) => {
   const dispatch = useDispatch();
 
   // 이미지 불러오기
   const Whiskey = WhiskeyImages.find((it) => it.nameEn === nameEn);
   const imgUrl = Whiskey.imgUrl;
-
-  // 더보기 토글
-  // const [toggle, setToggle] = useState(false);
-
-  // const toggleHandler = () => {
-  //   setToggle(!toggle);
-  // };
 
   const WhiskeyList = useSelector((state) => state.register.whiskeyList);
 

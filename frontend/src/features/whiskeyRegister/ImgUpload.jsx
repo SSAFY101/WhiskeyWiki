@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { registerAction } from "../../store/slices/register";
 import imageCompression from "browser-image-compression";
 import axios from "axios";
+import instance from "../auth/axiosInterceptor";
 
 import style from "./css/ImgUpload.module.css";
 
@@ -12,9 +13,9 @@ const ImgUpload = () => {
   const [img, setImg] = useState(null);
   const [preview, setPreview] = useState(null);
 
-  useEffect(() => {
-    console.log(img);
-  }, [img]);
+  // useEffect(() => {
+  //   console.log(img);
+  // }, [img]);
 
   // 파일 업로드 클릭
   const imgInput = useRef();
@@ -26,7 +27,7 @@ const ImgUpload = () => {
   const imgInputClickHandler = async (e) => {
     const input = e.target.files[0];
 
-    console.log(input);
+    // console.log(input);
 
     try {
       const compressedImage = await imageCompression(input, {
@@ -74,13 +75,25 @@ const ImgUpload = () => {
         //   whiskeyNameList.push(item.class_name);
         // });
 
+        // 인식한 위스키가 0개일 때
+        if (whiskeyNameList.length === 0) {
+          alert("인식된 위스키가 없습니다.");
+          return;
+        }
+
+        // 미탐지 위스키 처리
+        if (others > 0) {
+          // 미탐지 위스키 처리
+          alert("미탐지 위스키 있음");
+          return;
+        }
+
         dispatch(registerAction.setWhiskeyList(whiskeyNameList));
+        dispatch(registerAction.pageTwo());
       })
       .catch((err) => {
         console.log("Object Detection ERROR : ", err);
       });
-
-    dispatch(registerAction.pageTwo());
   };
 
   return (

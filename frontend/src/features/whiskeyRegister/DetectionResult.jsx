@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import instance from "../auth/axiosInterceptor";
 
 import { registerAction } from "../../store/slices/register";
 import DectectResCard from "./component/DectectResCard";
@@ -15,63 +16,59 @@ const DetectionResult = () => {
   const navigate = useNavigate();
 
   const nickName = localStorage.getItem("nickName");
-  const whiskeyList = useSelector((state) => state.register.whiskeyList);
+  const whiskeyReqList = useSelector((state) => state.register.whiskeyList);
 
   const [whiskeyInfoList, setWhiskeyList] = useState([]);
 
   useEffect(() => {
     // 인식 위스키 정보
-    // axios
-    //   .get("API 주소", whiskeyList, {
-    //     headers: {
-    //       accessToken: "토큰",
-    //     },
-    //   })
-    //   .then((res) => {
-    //     console.log("인식 위스키 정보 : ", res);
-    //     const data = res.data.data;
-    //     setWhiskeyList(data);
-    //   })
-    //   .catch((err) => {
-    //     console.log("인식 위스키 정보 ERROR : ", err);
-    //   });
+    instance
+      .get(`/api/whiskey/info/detection`, { whiskeyReqList })
+      .then((res) => {
+        console.log("인식 위스키 정보 : ", res);
+        const data = res.data.data;
+        setWhiskeyList(data);
+      })
+      .catch((err) => {
+        console.log("인식 위스키 정보 ERROR : ", err);
+      });
   }, []);
 
   // 테스트 -> whiskeyInfoList로 바꿔야 함
-  const 테스트 = [
-    {
-      nameKr: "앱솔루트",
-      nameEn: "Absolut",
-      summery: "앱솔루트는 정말 맛있어요",
-      isOwn: true,
-    },
-    {
-      nameKr: "잭다니엘",
-      nameEn: "Jack-Daniels",
-      summery: "잭다니엘은 정말 맛있어요",
-      isOwn: false,
-    },
-    {
-      nameKr: "짐빔",
-      nameEn: "Jim-Beam",
-      summery: "짐빔은 정말 맛있어요",
-      isOwn: false,
-    },
-    {
-      nameKr: "예거마이스터",
-      nameEn: "Jagermeister",
-      summery: "예거마이스터는 정말 맛있어요",
-      isOwn: false,
-    },
-    {
-      nameKr: "조니워커",
-      nameEn: "Johnie-Walker",
-      summery: "조니워커는 정말 맛있어요",
-      isOwn: false,
-    },
-  ];
+  // const 테스트 = [
+  //   {
+  //     nameKr: "앱솔루트",
+  //     nameEn: "Absolut",
+  //     summery: "앱솔루트는 정말 맛있어요",
+  //     isOwn: true,
+  //   },
+  //   {
+  //     nameKr: "잭다니엘",
+  //     nameEn: "Jack-Daniels",
+  //     summery: "잭다니엘은 정말 맛있어요",
+  //     isOwn: false,
+  //   },
+  //   {
+  //     nameKr: "짐빔",
+  //     nameEn: "Jim-Beam",
+  //     summery: "짐빔은 정말 맛있어요",
+  //     isOwn: false,
+  //   },
+  //   {
+  //     nameKr: "예거마이스터",
+  //     nameEn: "Jagermeister",
+  //     summery: "예거마이스터는 정말 맛있어요",
+  //     isOwn: false,
+  //   },
+  //   {
+  //     nameKr: "조니워커",
+  //     nameEn: "Johnie-Walker",
+  //     summery: "조니워커는 정말 맛있어요",
+  //     isOwn: false,
+  //   },
+  // ];
 
-  const size = 테스트.length; // 찾은 위스키 개수
+  const size = whiskeyInfoList.length; // 찾은 위스키 개수
 
   // 보여줄 위스키 인덱싱
   const [startIdx, setStartIdx] = useState(0);
@@ -98,24 +95,20 @@ const DetectionResult = () => {
       return;
     }
 
-    if (whiskeyList.length === 0) {
+    if (whiskeyReqList.length === 0) {
       alert("아무것도 안 넣으셔?");
       return;
     }
 
-    console.log("등록할 위스키 리스트", whiskeyList);
-    // axios
-    //   .post("API 주소", whiskeyList, {
-    //     headers: {
-    //       accessToken: "토큰",
-    //     },
-    //   })
-    //   .then((res) => {
-    //     console.log("My Bar 등록 : ", res);
-    //   })
-    //   .catch((err) => {
-    //     console.log("My Bar 등록 ERROR : ", err);
-    //   });
+    console.log("등록할 위스키 리스트", whiskeyReqList);
+    instance
+      .post(`/api/whiskey/ownwhiskey/register`, { whiskeyReqList })
+      .then((res) => {
+        console.log("My Bar 등록 : ", res);
+      })
+      .catch((err) => {
+        console.log("My Bar 등록 ERROR : ", err);
+      });
 
     dispatch(registerAction.pageThree());
   };
@@ -133,11 +126,12 @@ const DetectionResult = () => {
           className={`${style.cardListMoveButton}`}
         />
         <div className={`${style.cardList}`}>
-          {테스트.slice(startIdx, startIdx + 3).map((whiskey) => (
-            <div className={`${style.card}`}>
-              <DectectResCard key={whiskey.nameEn} {...whiskey} />
-            </div>
-          ))}
+          {whiskeyInfoList &&
+            whiskeyInfoList.slice(startIdx, startIdx + 3).map((whiskey) => (
+              <div className={`${style.card}`}>
+                <DectectResCard key={whiskey.nameEn} {...whiskey} />
+              </div>
+            ))}
         </div>
         <img
           onClick={nextClickHandler}
@@ -147,7 +141,7 @@ const DetectionResult = () => {
         />
       </div>
       <div className={`${style.whiskeyCount}`}>
-        <span>{whiskeyList.length}</span>개 선택
+        <span>{whiskeyReqList.length}</span>개 선택
       </div>
 
       <button
