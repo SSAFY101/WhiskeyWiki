@@ -18,7 +18,7 @@ const ChatList = () => {
       .then((res) => {
         console.log("채팅방 리스트", res);
 
-        const data = res.data.data.chatroomList;
+        const data = res.data.data.chatRoomList;
         setChatList(data);
       })
       .catch((err) => {

@@ -6,6 +6,7 @@ import { UseDispatch, useDispatch, useSelector } from "react-redux";
 import { userAction } from "../../store/slices/user";
 import { UseSelector } from "react-redux";
 function MyPageModal({ onClose }) {
+  
   const dispatch = useDispatch();
 
   // 닉네임 가져오기

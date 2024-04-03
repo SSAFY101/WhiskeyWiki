@@ -1,47 +1,33 @@
 /* 모달 전체 CSS */
 .container {
+  width:450px;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: fixed;
-  z-index: -1;
 }
 
 .container *{
   background: none;
-  color:black;
-  font-size:20px;
-}
-
-/* 배경 */
-.background {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-
-  background: none;
-  background-image: url("../../assets/images/mybar/openedBook.jpg");
-  background-size: cover;
-  background-position: center; /* 배경 이미지 가운데 정렬 */
-  background-repeat: no-repeat; /* 배경 이미지 반복X */
-
-  margin: 0;
-  padding: 0;
-  top: 8%;
-  left: 15%;
-  width: 70%;
-  height: 84%;
-}
-
-/* 칵테일 레시피 즐겨찾기 내용 */
-.recipe {
-  background: none;
-  background-color: rgb(227, 227, 202);
+  font-size:17px;
   text-align: center;
-  position: absolute;
+}
 
-  width: 70%;
-  height: 75%;
+.title{
+  font-size: 30px;
+  color: #eeb233;
+}
+
+.pagenation{
+  background-color:#ffc107;
+  font-size: 15px;
+  color:#2E2E2E;
+  height: 50px;
+  width: 80px;
+  border-radius: 10px;
+}
+
+.buttonContainer{
+  display: flex;
+  justify-content: space-evenly;
+
 }
