@@ -97,7 +97,7 @@ public class ChatController {
         ChatDTO.ChatlistResponse chatlistResponse = ChatDTO.ChatlistResponse.builder()
                 .userId(loginId)
                 .pairId(pairId)
-                .chatResponseList(chatResponseList).build();
+                .chatList(chatResponseList).build();
 
         return ResponseEntity.ok().body(CommonResponse.<ChatDTO.ChatlistResponse>builder().data(chatlistResponse).build());
     }
