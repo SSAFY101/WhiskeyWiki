@@ -5,29 +5,46 @@ import instance from "../../auth/axiosInterceptor";
 import CocktailSample from "../../../assets/images/cocktail/CocktailSample.png";
 import HeartGray from "../../../assets/icon/HeartGray.svg";
 import HeartFilled from "../../../assets/icon/HeartFilled.svg";
+import cocktailImages from '../components/Cocktail'
 function CocktailRecipe({ whiskeyId }) {
   const [recipes, setRecipe] = useState(null); //전체 레시피
   const [selectedRecipe, setSelectedRecipe] = useState(null);
   const [isFavorite, setIsFavorite] = useState(false);
-  const cocktail = {
-    id: 1,
-    name: "앱솔루트 오렌지 하이볼",
-    alcoholContent: "앱솔루트",
-    otherContent: "탄산읍료, 얼음, 오렌지 슬라이스",
-    recipe:
-      "1. 컵에 얼음과 앱솔루트를 넣는다. 2. 탄산 음료를 넣고 섞는다. 3. 오렌지 슬라이스로 장식한다",
-  };
-  //즐겨찾기로 등록
+  const [cocktailImg, setCocktailImg] = useState(CocktailSample)
+
+  // 즐겨찾기로 등록 및 해제
   // const RegisterAsFav = async () => {
   //   try {
-  //     await axios.post(`/api/cocktail/favorite/register/${cocktail.id}`)
-  //     console.log("즐겨찾기 추가 성공")
-  //     setIsFavorite(true)
+  //     await instance.post(
+  //       `/api/cocktail/favorite/register/${selectedRecipe.cocktailId}`
+  //     );
+  //     console.log("즐겨찾기 추가 성공");
+  //     setIsFavorite(true);
+  //   } catch (error) {
+  //     console.error("즐겨찾기 추가 실패", error);
   //   }
-  //   catch (error) {
-  //     console.error("즐겨찾기 추가 실패",error)
-  //   }
-  // }
+  // };
+  const toggleFavorite = async () => {
+    try {
+      if (isFavorite) {
+        //즐겨찾기 해제
+        await instance.delete(
+          `/api/cocktail/favorite/delete/${selectedRecipe.cocktailId}`
+        );
+        alert("즐겨찾기 해제 성공");
+      } else {
+        //즐겨찾기 등록
+        await instance.post(
+          `/api/cocktail/favorite/register/${selectedRecipe.cocktailId}`
+        );
+        alert("즐겨찾기 추가 성공");
+      }
+      //즐겨찾기 상태 초기화
+      setIsFavorite(!isFavorite);
+    } catch (error) {
+      console.error("즐겨찾기 처리 실패", error);
+    }
+  };
   //컴포넌트 마운트 시 칵테일 레시피를 가져오기
   useEffect(() => {
     fetchRecipe();
@@ -62,7 +79,7 @@ function CocktailRecipe({ whiskeyId }) {
         <div className={style.bubble}>
           <img
             className={style.heartIcon}
-            // onClick={RegisterAsFav}
+            onClick={toggleFavorite}
             src={isFavorite ? HeartFilled : HeartGray}
           ></img>
           <h1>{selectedRecipe.cocktailName}</h1>

@@ -36,7 +36,7 @@ const MessageList = ({ messageListProp, chatRoomId, userId, pairId }) => {
   // 소켓 : connect
   const connect = () => {
     client.current = new StompJs.Client({
-      brokerURL: "ws://localhost:8080/ws",
+      brokerURL: "wss://www.whiskeywiki.shop/api/ws",
       connectHeaders: {
         accessToken: instance.defaults.headers.common["Authorization"],
       },
@@ -125,9 +125,10 @@ const MessageList = ({ messageListProp, chatRoomId, userId, pairId }) => {
     <div className={`${style.container}`}>
       {/* 메세지 리스트 */}
       <div className={`${style.messageList}`} ref={messageListRef}>
-        {messageList.map((msg) => (
-          <Message key={msg.chatId} {...msg}></Message>
-        ))}
+        {messageList &&
+          messageList.map((msg) => (
+            <Message key={msg.chatId} {...msg}></Message>
+          ))}
         <div ref={messageListEndRef}></div>
       </div>
       {/* 메세지 작성 */}

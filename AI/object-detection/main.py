@@ -1,5 +1,5 @@
 from fastapi import FastAPI, File
-from segmentation import get_yolov5_basic, get_yolov5_johnnie, get_image_from_bytes
+from segmentation import get_image_from_bytes, get_yolov5_basic, get_yolov5_johnnie, get_yolov5_jack, get_yolov5_ballentines, get_yolov5_empty
 from starlette.responses import Response
 import io
 from PIL import Image
@@ -9,6 +9,9 @@ from fastapi.middleware.cors import CORSMiddleware
 
 basicModel = get_yolov5_basic()
 johnnieModel = get_yolov5_johnnie()
+jackModel = get_yolov5_jack()
+ballentinesModel = get_yolov5_ballentines()
+emptyModel = get_yolov5_empty()
 
 app = FastAPI(
     title="Custom YOLOV5 Machine Learning API",
@@ -54,44 +57,111 @@ def get_health():
 async def detect_whiskey_return_json_result(file: bytes = File(...)):
     input_image = get_image_from_bytes(file)
     results = basicModel(input_image)
-    result_json = results_to_json(results, basicModel)
+    all_c = all_count(input_image)
+    result_json = results_to_json(results, basicModel, all_c)
     # detect_res = results.pandas().xyxy[0].to_json(orient="records")  # JSON img1 predictions
     # detect_res = json.loads(detect_res)
-    return {"result": result_json}
+    return result_json
 
 @app.post("/object-to-json/johnnie")
 async def detect_whiskey_return_json_result(file: bytes = File(...)):
     input_image = get_image_from_bytes(file)
     results = johnnieModel(input_image)
-    result_json = results_to_json(results, johnnieModel)
+    all_c = all_count(input_image)
+    result_json = results_to_json(results, johnnieModel, all_c)
     # detect_res = results.pandas().xyxy[0].to_json(orient="records")  # JSON img1 predictions
     # detect_res = json.loads(detect_res)
-    return {"result": result_json}
+    return result_json
 
-def results_to_json(results, model):
-    answer = []
+@app.post("/object-to-json/jack")
+async def detect_whiskey_return_json_result(file: bytes = File(...)):
+    input_image = get_image_from_bytes(file)
+    results = jackModel(input_image)
+    all_c = all_count(input_image)
+    result_json = results_to_json(results, jackModel, all_c)
+    # detect_res = results.pandas().xyxy[0].to_json(orient="records")  # JSON img1 predictions
+    # detect_res = json.loads(detect_res)
+    return result_json
+
+@app.post("/object-to-json/ballentines")
+async def detect_whiskey_return_json_result(file: bytes = File(...)):
+    input_image = get_image_from_bytes(file)
+    results = ballentinesModel(input_image)
+    all_c = all_count(input_image)
+    result_json = results_to_json(results, ballentinesModel, all_c)
+    # detect_res = results.pandas().xyxy[0].to_json(orient="records")  # JSON img1 predictions
+    # detect_res = json.loads(detect_res)
+    return result_json
+
+@app.post("/object-to-json/empty")
+async def detect_whiskey_return_json_result(file: bytes = File(...)):
+    input_image = get_image_from_bytes(file)
+    results = emptyModel(input_image)
+    all_c = all_count(input_image)
+    result_json = results_to_json(results, emptyModel, all_c)
+    # detect_res = results.pandas().xyxy[0].to_json(orient="records")  # JSON img1 predictions
+    # detect_res = json.loads(detect_res)
+    return result_json
+
+def results_to_json(results, model, all_c):
+
+    answer = list()
     whiskeys = {}
-    utils = {}
-    othersCount = 0
     whiskeyCount = 0
+    # utils = {}
+    # all count & detect count
+
+
+
     for result in results.xyxy:
         for pred in result:
             class_name = model.model.names[int(pred[5])]
-            if class_name == 'others':
-                othersCount += 1
-                continue
-
+            # whiskeys.add(class_name)
+            # if class_name == 'others':
+            #     othersCount += 1
+            #     continue
+            #
             if class_name in whiskeys:
                 whiskeys[class_name] += 1
             else:
                 whiskeys[class_name] = 1
             whiskeyCount += 1
 
-    utils["others"] = othersCount
-    utils["all"] = whiskeyCount + othersCount
-    answer.append(whiskeys)
-    answer.append(utils)
-    return answer
+
+    othersCount = all_c - whiskeyCount
+    whiskeys[others] = othersCount
+    # utils["others"] = othersCount
+    # utils["all"] = whiskeyCount + othersCount
+    # answer.append(whiskeys)
+    # answer.append(othersCount)
+    # for whiskey in whiskeys:
+    #     answer.append()
+    # answer.append(utils)
+    return whiskeys
+
+def all_count(input_image):
+    results = emptyModel(input_image)
+    count = 0
+    # whiskeyCount = 0
+    for result in results.xyxy:
+        for pred in result:
+            count += 1
+            # class_name = model.model.names[int(pred[5])]
+            # if class_name == 'others':
+            #     count += 1
+            #     continue
+            #
+            # if class_name in whiskeys:
+            #     whiskeys[class_name] += 1
+            # else:
+            #     whiskeys[class_name] = 1
+            # whiskeyCount += 1
+
+    # utils["others"] = othersCount
+    # utils["all"] = whiskeyCount + othersCount
+    # answer.append(whiskeys)
+    # answer.append(utils)
+    return count
 
 @app.post("/object-to-img/basic")
 async def detect_food_return_base64_img(file: bytes = File(...)):
