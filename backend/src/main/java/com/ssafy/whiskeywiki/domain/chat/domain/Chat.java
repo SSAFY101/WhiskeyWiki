@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 @Getter
 public class Chat {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "chat_id")
     private int id;
 
