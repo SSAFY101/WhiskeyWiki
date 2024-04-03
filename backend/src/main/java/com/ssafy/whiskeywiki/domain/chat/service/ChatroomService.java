@@ -86,7 +86,7 @@ public class ChatroomService {
         userChatroom.exitChatroom();
 
         for (UserChatroom uc: userChatroomList) {
-            if (uc.getId() != userChatroom.getId() && uc.isExit()) {
+            if (uc.getId() != userChatroom.getId() && uc.isExited()) {
                 // delete chatroom
                 userChatroomRepository.delete(uc);
                 userChatroomRepository.delete(userChatroom);
