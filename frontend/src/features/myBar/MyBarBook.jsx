@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import style from "./MyBarBook.module.css";
 import instance from "../auth/axiosInterceptor";
+import cocktailImages from "../whiskeyInfo/components/Cocktail";
 
 function MyBarBook() {
   const [myFavorite, setMyFavorite] = useState([]);
@@ -32,21 +33,25 @@ function MyBarBook() {
 
   return (
     <div className={style.container}>
-      <div className={style.background}>
-        <div className={style.recipe}>
-          {myFavorite.length > 0 ? (
-            <div className={style.recipe}>
-              <p>{myFavorite[currentIndex].cocktailName}</p>
-              <p>{myFavorite[currentIndex].detail}</p>
-              <p>{myFavorite[currentIndex].recipe}</p>
-              <button onClick={handlePrevious}>이전</button>
-              <button onClick={handleNext}>다음</button>
-            </div>
-          ) : (
-            <h1>즐겨찾기한 칵테일이 없습니다.</h1>
-          )}
+      {myFavorite.length > 0 ? (
+        <div>
+          <span className={style.title}>
+            {myFavorite[currentIndex].cocktailName}
+          </span>
+          <p>{myFavorite[currentIndex].detail}</p>
+          <p>{myFavorite[currentIndex].recipe}</p>
+          <div className={style.buttonContainer}>
+            <button className={style.pagenation} onClick={handlePrevious}>
+              이전
+            </button>
+            <button className={style.pagenation} onClick={handleNext}>
+              다음
+            </button>
+          </div>
         </div>
-      </div>
+      ) : (
+        <h1>즐겨찾기한 칵테일이 없습니다.</h1>
+      )}
     </div>
   );
 }

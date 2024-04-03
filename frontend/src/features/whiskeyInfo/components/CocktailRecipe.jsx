@@ -49,6 +49,13 @@ function CocktailRecipe({ whiskeyId }) {
   useEffect(() => {
     fetchRecipe();
   }, [whiskeyId]);
+  // 칵테일 이미지 불러오기
+  useEffect(() => {
+    if (selectedRecipe && selectedRecipe.cocktailNameEn) {
+      const image = cocktailImages[selectedRecipe.cocktailNameEn]
+      setCocktailImg(image|| CocktailSample)
+    }
+  },[selectedRecipe])
 
   //가져온 레시피를 저장
   const fetchRecipe = async () => {
@@ -93,7 +100,7 @@ function CocktailRecipe({ whiskeyId }) {
               {selectedRecipe.recipe}
             </div>
             <div className={style.imageArea}>
-              <img src={CocktailSample} />
+              <img src={cocktailImg} />
             </div>
           </div>
         </div>
