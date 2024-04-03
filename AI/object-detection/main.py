@@ -93,10 +93,21 @@ def results_to_json(results, model):
     answer.append(utils)
     return answer
 
-@app.post("/object-to-img")
+@app.post("/object-to-img/basic")
 async def detect_food_return_base64_img(file: bytes = File(...)):
     input_image = get_image_from_bytes(file)
     results = basicModel(input_image)
+    r_img = results.render()  # updates results.imgs with boxes and labels
+
+    bytes_io = io.BytesIO()
+    img_base64 = Image.fromarray(r_img[0])
+    img_base64.save(bytes_io, format="jpeg")
+    return Response(content=bytes_io.getvalue(), media_type="image/jpeg")
+
+@app.post("/object-to-img/johnnie")
+async def detect_food_return_base64_img(file: bytes = File(...)):
+    input_image = get_image_from_bytes(file)
+    results = johnnieModel(input_image)
     r_img = results.render()  # updates results.imgs with boxes and labels
 
     bytes_io = io.BytesIO()
