@@ -65,9 +65,8 @@ const ImgUpload = () => {
         console.log("Object Detection : ", res);
 
         // 받은 배열 -> 칵테일 이름 배열 -> 리덕스
-        const data = res.data.data;
-
-        const whiskeyNameList = data.whiskeyList;
+        const data = res.data;
+        const whiskeyNameList = data.result;
         const others = data.others;
 
         //  const whiskeyNameList = [];
