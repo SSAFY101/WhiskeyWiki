@@ -28,24 +28,27 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
+
+        log.info("register stomp endpoints");
+
         // endpoints cors setting
         WebSocketMessageBrokerConfigurer.super.registerStompEndpoints(registry);
-        registry.addEndpoint("/ws")         // create websocket
+        registry.addEndpoint("/ws", "/api/ws")       // create websocket
                 .setAllowedOrigins("*");
 //                .setAllowedOriginPatterns("*")     // cors setting
 //                .withSockJS();                     // possible to connect even with browser that do not support websocket
     }
 
-    @Override
-    public void configureClientInboundChannel(ChannelRegistration registration) {
-        WebSocketMessageBrokerConfigurer.super.configureClientInboundChannel(registration);
-        registration.interceptors(stompMessageInterceptor);
-    }
-
-    @Override
-    public void configureClientOutboundChannel(ChannelRegistration registration) {
-        WebSocketMessageBrokerConfigurer.super.configureClientOutboundChannel(registration);
-
-        log.info("registreation( ={})", registration);
-    }
+//    @Override
+//    public void configureClientInboundChannel(ChannelRegistration registration) {
+//        WebSocketMessageBrokerConfigurer.super.configureClientInboundChannel(registration);
+//        registration.interceptors(stompMessageInterceptor);
+//    }
+//
+//    @Override
+//    public void configureClientOutboundChannel(ChannelRegistration registration) {
+//        WebSocketMessageBrokerConfigurer.super.configureClientOutboundChannel(registration);
+//
+//        log.info("registreation( ={})", registration);
+//    }
 }

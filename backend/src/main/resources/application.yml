@@ -6,7 +6,7 @@ server:
 # DB와 secret key 세팅 값
 spring:
   profiles:
-    active: prd
+    active: prod
 ---
 spring:
   profiles:
@@ -19,7 +19,7 @@ spring:
   jpa:
     properties:
       hibernate:
-        show_sql: true
+#        show_sql: true
         format_sql: true
         use-new-id-generator-mappings: false
   servlet:
