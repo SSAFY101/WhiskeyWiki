@@ -49,4 +49,14 @@ public class ChatroomDTO {
     public static class PairIdRequest {
         String pairId;
     }
+
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    public static class LoadChatroomResponse {
+        int chatroomId;
+        String pairNickname;
+        boolean exist;
+    }
 }

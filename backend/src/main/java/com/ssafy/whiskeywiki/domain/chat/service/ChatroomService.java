@@ -26,26 +26,31 @@ public class ChatroomService {
     private final UserRepository userRepository;
     private final UserChatroomRepository userChatroomRepository;
 
-    public Chatroom createChatroom(String loginId, String pairId) {
+    public ChatroomDTO.LoadChatroomResponse createChatroom(String loginId, String pairId) {
         Optional<User> optionalUser1 = userRepository.findByLoginId(loginId);
         if (optionalUser1.isEmpty()) return null;
-        log.info("optional user1(={})", optionalUser1.get());
-        log.info("login id(={})", loginId);
-        log.info("pair id(={})", pairId);
         Optional<User> optionalUser2 = userRepository.findByLoginId(pairId);
         if (optionalUser2.isEmpty()) return null;
-        log.info("optional user2(={})", optionalUser2.get());
 
+        Chatroom chatroom = null;
+        boolean exist = false;
         Optional<Chatroom> optionalChatroom = userChatroomRepository.findChatroomByLoginIds(loginId, pairId);
-        if (optionalChatroom.isPresent()) return null;
+        if (optionalChatroom.isPresent()) {
+            chatroom = optionalChatroom.get();
+            exist = true;
+        } else {
+            chatroom = Chatroom.builder().createTime(LocalDateTime.now()).build();
+            chatroomRepository.save(chatroom);
 
-        Chatroom chatroom = Chatroom.builder().createTime(LocalDateTime.now()).build();
-        chatroomRepository.save(chatroom);
+            associateUserAndChatroom(loginId, chatroom);
+            associateUserAndChatroom(pairId, chatroom);
+        }
 
-        associateUserAndChatroom(loginId, chatroom);
-        associateUserAndChatroom(pairId, chatroom);
-
-        return chatroom;
+        return ChatroomDTO.LoadChatroomResponse.builder()
+                .chatroomId(chatroom.getId())
+                .pairNickname(optionalUser2.get().getNickname())
+                .exist(exist)
+                .build();
     }
 
     private void associateUserAndChatroom(String loginId, Chatroom chatroom) {
