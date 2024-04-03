@@ -24,9 +24,6 @@ public class AIController {
     @PostMapping("/object-to-json")
     public ResponseEntity<AIDTO.JsonResponse> whiskeyDetect(MultipartFile file) {
 
-        aiService.whiskeyDetection(file);
-
-
         return ResponseEntity.ok()
                 .body(aiService.whiskeyDetection(file));
     }

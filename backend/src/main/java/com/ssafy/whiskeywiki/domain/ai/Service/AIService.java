@@ -57,6 +57,7 @@ public class AIService {
         // String url;
         ResponseEntity<Object> response = restTemplate.postForEntity("http://ai.whiskeywiki.shop" + "/object-to-json/basic", requestEntity, Object.class);
         LinkedHashMap<String, Object> hashMap = (LinkedHashMap<String, Object>) response.getBody();
+        log.info("hashMap(={})",hashMap);
         List<String> whiskeys = (List<String>) hashMap.get("whiskeys");
         int others = (int) hashMap.get("others");
         log.info("info(={})", response);
