@@ -17,7 +17,7 @@ function MyBar() {
       url: `/api/mybar/list`,
     })
       .then((res) => {
-        // console.log("유저의 My Bar 리스트 정보 : ", res.data.data);
+        console.log("유저의 My Bar 리스트 정보 : ", res);
         const data = res.data.data;
         setWhiskeyStatusList(data);
       })
