@@ -7,6 +7,7 @@ import Navbar from "../widgets/Navbar";
 // 유저 관리
 import Login from "../features/auth/Login";
 import SignUp from "../features/signUp/Signup";
+import LogoutRedirect from "../features/auth/LogoutRedirect";
 import Modal from "../features/modal/Modal";
 import ModalSmall from "../features/modal/ModalSmall";
 // 마이 바
@@ -64,10 +65,14 @@ const App = () => {
           {/* 유저 */}
           <Route path="/login" element={<Login />} />
           <Route path="/signUp" element={<SignUp />} />
+          <Route path="/logoutRedirect" element={<LogoutRedirect />} />
           {/* 위스키 정보 */}
           <Route path="/whiskeyInfo" element={<WhiskeyInfo />}></Route>
           {/* 위스키 디테일 */}
-          <Route path="/WhiskeyDetail/:whiskeyId" element={<WhiskeyDetail />}></Route>
+          <Route
+            path="/WhiskeyDetail/:whiskeyId"
+            element={<WhiskeyDetail />}
+          ></Route>
           {/* 위스키 등록 */}
           <Route path="/register" element={<WhiskeyRegister />} />
           {/* 지도 */}
