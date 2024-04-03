@@ -34,11 +34,12 @@ function Map() {
       },
     })
       .then((res) => {
-        // console.log("인식 위스키 정보 : ", res.data.data);
+        console.log("인식 위스키 정보 : ", res);
         const data = res.data.data;
 
-        if (data.mybarList) {
-          const cnt = data.mybarList.length;
+        if (data) {
+          console.log("mybarList");
+          const cnt = data.length;
           dispatch(exchangeAction.setOtherbarCount(cnt));
         }
 
