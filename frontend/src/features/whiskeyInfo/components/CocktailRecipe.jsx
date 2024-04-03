@@ -5,10 +5,12 @@ import instance from "../../auth/axiosInterceptor";
 import CocktailSample from "../../../assets/images/cocktail/CocktailSample.png";
 import HeartGray from "../../../assets/icon/HeartGray.svg";
 import HeartFilled from "../../../assets/icon/HeartFilled.svg";
+import cocktailImages from '../components/Cocktail'
 function CocktailRecipe({ whiskeyId }) {
   const [recipes, setRecipe] = useState(null); //전체 레시피
   const [selectedRecipe, setSelectedRecipe] = useState(null);
   const [isFavorite, setIsFavorite] = useState(false);
+  const [cocktailImg, setCocktailImg] = useState(CocktailSample)
 
   // 즐겨찾기로 등록 및 해제
   // const RegisterAsFav = async () => {
