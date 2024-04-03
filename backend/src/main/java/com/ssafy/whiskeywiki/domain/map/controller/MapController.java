@@ -47,12 +47,24 @@ public class MapController {
                     .build(), HttpStatus.NO_CONTENT);
         }
         int userId = userService.getUserIdByAccessToken(authToken.substring(7));
-        List<MapDTO.ResponseAnotherMyBar> resultList = mapService.userList(userId, checkedWhiskeyList.getCheckedWhiskeyList());
+        List<MapDTO.ResponseAnotherMyBar> resultList = mapService.userFilterList(userId, checkedWhiskeyList.getCheckedWhiskeyList());
 
         return new ResponseEntity<>(CommonResponse.builder()
                 .status(HttpStatus.OK.value())
                 .message("다른 유저의 My Bar 리스트 조회 성공")
                 .data(resultList)
+                .build(), HttpStatus.OK);
+    }
+
+    @PostMapping("/district")
+    public ResponseEntity<CommonResponse> getDistrict(@RequestBody MapDTO.LocationResponse point){
+
+        String[] result = mapService.getDistrictByLocationPoint(point);
+
+        return new ResponseEntity<>(CommonResponse.builder()
+                .status(HttpStatus.OK.value())
+                .message("행정구역 반환 성공")
+                .data(result)
                 .build(), HttpStatus.OK);
     }
 }

@@ -48,7 +48,7 @@ public class ChatDTO {
     public static class ChatlistResponse {
         String userId;
         String pairId;
-        List<ChatlistResponseEntity> chatResponseList;
+        List<ChatlistResponseEntity> chatList;
 
         void updateUserId(String userId) {
             this.userId = userId;

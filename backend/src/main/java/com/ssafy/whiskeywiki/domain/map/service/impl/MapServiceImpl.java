@@ -5,13 +5,16 @@ import com.ssafy.whiskeywiki.domain.map.service.MapService;
 import com.ssafy.whiskeywiki.domain.mybar.domain.OwnWhiskey;
 import com.ssafy.whiskeywiki.domain.mybar.repository.OwnWhiskeyRepository;
 import com.ssafy.whiskeywiki.domain.user.domain.User;
+import com.ssafy.whiskeywiki.domain.user.function.Address;
 import com.ssafy.whiskeywiki.domain.user.repository.UserRepository;
 import com.ssafy.whiskeywiki.domain.whiskey.domain.Whiskey;
 import com.ssafy.whiskeywiki.domain.whiskey.repository.WhiskeyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -70,6 +73,59 @@ public class MapServiceImpl implements MapService {
             responseAnotherMyBar.setLongitude(selectUser.getLongitude());
 
             result.add(responseAnotherMyBar);
+        }
+
+        return result;
+    }
+
+    @Override
+    public String[] getDistrictByLocationPoint(MapDTO.LocationResponse point) {
+        String x = Double.toString(point.getLongitude());
+        String y = Double.toString(point.getLatitude());
+
+        Arrays.toString(Address.getDistrictFromAddress(x,y));
+
+        return Address.getDistrictFromAddress(x,y);
+
+    }
+
+    @Override
+    public List<MapDTO.ResponseAnotherMyBar> userFilterList(int userId, List<String> checkedWhiskeyList) {
+        User loginUser = userRepository.getById(userId);
+
+        String city = loginUser.getCity();
+        String village = loginUser.getVillage();
+
+        List<MapDTO.ResponseAnotherMyBar> result = new ArrayList<>();
+        List<Integer> userIdList = new ArrayList<>();
+
+        for(String name : checkedWhiskeyList){
+            Whiskey whiskey = whiskeyRepository.findByWhiskeyNameKr(name);
+            List<OwnWhiskey> ownWhiskeyList = ownWhiskeyRepository.findOwnWhiskeyListByWhiskey(whiskey);
+
+            for(OwnWhiskey ownWhiskey : ownWhiskeyList){
+                if(ownWhiskey.getIsEmpty()){
+                    int id = ownWhiskey.getUser().getId();
+                    User user = userRepository.getById(id);
+                    if(id != userId
+                            && !userIdList.contains(id)
+                            && city.equals(user.getCity())
+                            && village.equals(user.getVillage())){
+                        userIdList.add(id);
+                    }
+                }
+            }
+        }
+
+        for(int id : userIdList){
+            MapDTO.ResponseAnotherMyBar responseAnotherMyBar = new MapDTO.ResponseAnotherMyBar();
+            User selectUser = userRepository.getById(id);
+
+            result.add(new MapDTO.ResponseAnotherMyBar(
+                    selectUser.getId(),
+                    selectUser.getNickname(),
+                    selectUser.getLatitude(),
+                    selectUser.getLongitude()));
         }
 
         return result;
