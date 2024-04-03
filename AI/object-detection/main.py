@@ -57,7 +57,8 @@ def get_health():
 async def detect_whiskey_return_json_result(file: bytes = File(...)):
     input_image = get_image_from_bytes(file)
     results = basicModel(input_image)
-    result_json = results_to_json(results, basicModel)
+    all_c = all_count(results, input_image)
+    result_json = results_to_json(results, basicModel, all_c)
     # detect_res = results.pandas().xyxy[0].to_json(orient="records")  # JSON img1 predictions
     # detect_res = json.loads(detect_res)
     return {"result": result_json}
@@ -66,7 +67,8 @@ async def detect_whiskey_return_json_result(file: bytes = File(...)):
 async def detect_whiskey_return_json_result(file: bytes = File(...)):
     input_image = get_image_from_bytes(file)
     results = johnnieModel(input_image)
-    result_json = results_to_json(results, johnnieModel)
+    all_c = all_count(results, input_image)
+    result_json = results_to_json(results, johnnieModel, all_c)
     # detect_res = results.pandas().xyxy[0].to_json(orient="records")  # JSON img1 predictions
     # detect_res = json.loads(detect_res)
     return {"result": result_json}
@@ -75,7 +77,8 @@ async def detect_whiskey_return_json_result(file: bytes = File(...)):
 async def detect_whiskey_return_json_result(file: bytes = File(...)):
     input_image = get_image_from_bytes(file)
     results = jackModel(input_image)
-    result_json = results_to_json(results, jackModel)
+    all_c = all_count(results, input_image)
+    result_json = results_to_json(results, jackModel, all_c)
     # detect_res = results.pandas().xyxy[0].to_json(orient="records")  # JSON img1 predictions
     # detect_res = json.loads(detect_res)
     return {"result": result_json}
@@ -84,7 +87,8 @@ async def detect_whiskey_return_json_result(file: bytes = File(...)):
 async def detect_whiskey_return_json_result(file: bytes = File(...)):
     input_image = get_image_from_bytes(file)
     results = ballentinesModel(input_image)
-    result_json = results_to_json(results, ballentinesModel)
+    all_c = all_count(results, input_image)
+    result_json = results_to_json(results, ballentinesModel, all_c)
     # detect_res = results.pandas().xyxy[0].to_json(orient="records")  # JSON img1 predictions
     # detect_res = json.loads(detect_res)
     return {"result": result_json}
@@ -93,35 +97,68 @@ async def detect_whiskey_return_json_result(file: bytes = File(...)):
 async def detect_whiskey_return_json_result(file: bytes = File(...)):
     input_image = get_image_from_bytes(file)
     results = emptyModel(input_image)
-    result_json = results_to_json(results, emptyModel)
+    all_c = all_count(results, input_image)
+    result_json = results_to_json(results, emptyModel, all_c)
     # detect_res = results.pandas().xyxy[0].to_json(orient="records")  # JSON img1 predictions
     # detect_res = json.loads(detect_res)
     return {"result": result_json}
 
-def results_to_json(results, model):
-    answer = []
-    whiskeys = {}
-    utils = {}
+def results_to_json(results, model, all_c):
+
+    answer = list()
+    whiskeys = set()
+    # utils = {}
     othersCount = 0
-    whiskeyCount = 0
+    # whiskeyCount = 0
+    # all count & detect count
+
+
+
     for result in results.xyxy:
         for pred in result:
             class_name = model.model.names[int(pred[5])]
-            if class_name == 'others':
-                othersCount += 1
-                continue
-
-            if class_name in whiskeys:
-                whiskeys[class_name] += 1
-            else:
-                whiskeys[class_name] = 1
+            whiskeys.add(class_name)
+            # if class_name == 'others':
+            #     othersCount += 1
+            #     continue
+            #
+            # if class_name in whiskeys:
+            #     whiskeys[class_name] += 1
+            # else:
+            #     whiskeys[class_name] = 1
             whiskeyCount += 1
 
-    utils["others"] = othersCount
-    utils["all"] = whiskeyCount + othersCount
+    othersCount = all_c - len(whiskeys)
+    # utils["others"] = othersCount
+    # utils["all"] = whiskeyCount + othersCount
     answer.append(whiskeys)
-    answer.append(utils)
+    answer.append(othersCount)
+    # answer.append(utils)
     return answer
+
+def all_count(input_image):
+    results = emptyModel(input_image)
+    count = 0
+    # whiskeyCount = 0
+    for result in results.xyxy:
+        for pred in result:
+            count += 1
+            # class_name = model.model.names[int(pred[5])]
+            # if class_name == 'others':
+            #     count += 1
+            #     continue
+            #
+            # if class_name in whiskeys:
+            #     whiskeys[class_name] += 1
+            # else:
+            #     whiskeys[class_name] = 1
+            # whiskeyCount += 1
+
+    # utils["others"] = othersCount
+    # utils["all"] = whiskeyCount + othersCount
+    # answer.append(whiskeys)
+    # answer.append(utils)
+    return count
 
 @app.post("/object-to-img/basic")
 async def detect_food_return_base64_img(file: bytes = File(...)):
