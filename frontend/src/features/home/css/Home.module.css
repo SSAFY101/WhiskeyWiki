@@ -56,10 +56,10 @@
   position: absolute;
   background-color: transparent;
   top: 50%;
-  left: 50%;
+  left: 52%;
   transform: translate(-50%, -50%);
   color: #ececec;
-  font-size: 4rem;
+  font-size: 3.5rem;
   z-index: 2;
   animation: title 3s;
 }
