@@ -18,9 +18,9 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class AIService {
 
-    @Value("${FASTAPI.URL}")
-    private static String url;
-    private static void whiskeyDetection(MultipartFile file) {
+//    @Value(value = "${FASTAPI.URL}")
+//    private String url;
+    public ResponseEntity<byte[]> whiskeyDetection(MultipartFile file) {
 
         // file to byteArrayResource
         Resource resource = null;
@@ -38,8 +38,12 @@ public class AIService {
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
         body.add("file", resource);
 
+        log.info("body map (={})", body);
+
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+
+        log.info("headers (={})", headers);
 
         HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
 
@@ -47,8 +51,46 @@ public class AIService {
         RestTemplate restTemplate = new RestTemplate();
 
         // String url;
-        ResponseEntity<Object> response = restTemplate.postForEntity(url, requestEntity, Object.class);
+        ResponseEntity<byte[]> response = restTemplate.postForEntity("http://ai.whiskeywiki.shop" + "/object-to-img", requestEntity, byte[].class);
         log.info("info(={})", response);
-        System.out.println(response.getBody());
+
+        return response;
+    }
+
+    public ResponseEntity<byte[]> noDetect(MultipartFile file) {
+
+        // file to byteArrayResource
+        Resource resource = null;
+        try {
+            resource =  new ByteArrayResource(file.getBytes()) {
+                @Override
+                public String getFilename() {
+                    return file.getOriginalFilename();
+                }
+            };
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+        body.add("file", resource);
+
+        log.info("body map (={})", body);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+
+        log.info("headers (={})", headers);
+
+        HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
+
+        // Rest template
+        RestTemplate restTemplate = new RestTemplate();
+
+        // String url; /object-to-image/
+        ResponseEntity<byte[]> response = restTemplate.postForEntity("http://ai.whiskeywiki.shop" + "/object-to-img", requestEntity, byte[].class);
+        log.info("info(={})", response);
+
+        return response;
     }
 }

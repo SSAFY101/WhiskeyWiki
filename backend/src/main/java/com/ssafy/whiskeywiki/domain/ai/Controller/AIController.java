@@ -1,33 +1,50 @@
 package com.ssafy.whiskeywiki.domain.ai.Controller;
 
+import com.ssafy.whiskeywiki.domain.ai.Service.AIService;
+import com.ssafy.whiskeywiki.domain.ai.dto.AIDTO;
+import com.ssafy.whiskeywiki.domain.user.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.ByteArrayResource;
-import org.springframework.core.io.Resource;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 @Slf4j
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/detection")
 public class AIController {
 
-    @Value("${FASTAPI.URL}")
-    private static String url;
-    @PostMapping("/whiskey")
-    public static ResponseEntity<?> whiskeyDetect(MultipartFile file) {
+    private final AIService aiService;
+    @PostMapping("/object-to-json")
+    public ResponseEntity<byte[]> whiskeyDetect(MultipartFile file) {
+
+        aiService.whiskeyDetection(file);
 
 
+        return ResponseEntity.ok()
+                .header("Content-Type", "image/jpeg")
+                .body(aiService.whiskeyDetection(file).getBody());
+    }
 
-        return ResponseEntity.ok().body(true);
+    @PostMapping("/object-to-img")
+    public ResponseEntity<AIDTO.JSONAndImg> noDetect(MultipartFile file) {
+
+//        HttpHeaders httpHeaders = new HttpHeaders();
+//        httpHeaders.add("Content-Type", "multipart/form-data");
+//        httpHeaders.add("Content-Type", "image/jpeg");
+
+        AIDTO.JSONAndImg response = AIDTO.JSONAndImg.builder()
+                .name("whiskey")
+                .img(aiService.noDetect(file).getBody())
+                .build();
+
+        return ResponseEntity.ok()
+                .body(response);
     }
 }
