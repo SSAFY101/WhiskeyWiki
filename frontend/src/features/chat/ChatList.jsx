@@ -1,7 +1,8 @@
-// 채팅방 리스트 조회
+// api : 채팅방 리스트
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import instance from "../auth/axiosInterceptor";
 
 import Status from "./component/Status";
 
@@ -13,41 +14,43 @@ const ChatList = () => {
   const [chatList, setChatList] = useState([]);
 
   useEffect(() => {
-    setChatList([
-      {
-        chatRoomId: 0,
-        pairNickname: "주정뱅이",
-        lastMassage: "헤에에에에",
-        userStatus: true,
-        pairStatus: true,
-      },
-      {
-        chatRoomId: 1,
-        pairNickname: "김싸피",
-        lastMassage: "ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ",
-        userStatus: true,
-        pairStatus: false,
-      },
-      {
-        chatRoomId: 2,
-        pairNickname: "헤에",
-        lastMassage: "안녕하세요",
-        userStatus: false,
-        pairStatus: true,
-      },
-      {
-        chatRoomId: 3,
-        pair: "Hehehe",
-        lastMassage: "헤헤ㅎㅎ",
-        userStatus: false,
-        pairStatus: false,
-      },
-    ]);
+    // setChatList([
+    //   {
+    //     chatRoomId: 0,
+    //     pairNickname: "주정뱅이",
+    //     lastMassage: "헤에에에에",
+    //     userStatus: true,
+    //     pairStatus: true,
+    //   },
+    //   {
+    //     chatRoomId: 1,
+    //     pairNickname: "김싸피",
+    //     lastMassage: "ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ",
+    //     userStatus: true,
+    //     pairStatus: false,
+    //   },
+    //   {
+    //     chatRoomId: 2,
+    //     pairNickname: "헤에",
+    //     lastMassage: "안녕하세요",
+    //     userStatus: false,
+    //     pairStatus: true,
+    //   },
+    //   {
+    //     chatRoomId: 3,
+    //     pair: "Hehehe",
+    //     lastMassage: "헤헤ㅎㅎ",
+    //     userStatus: false,
+    //     pairStatus: false,
+    //   },
+    // ]);
+
     // 채팅방 리스트 조회
-    axios
-      .get("/chatroom/list")
+    instance
+      .get(`/api/chatroom/list`)
       .then((res) => {
-        console.log("채팅방 리스트", res); // 테스트
+        console.log("채팅방 리스트", res);
+
         const data = res.data.data.chatRoomList;
         setChatList(data);
       })
