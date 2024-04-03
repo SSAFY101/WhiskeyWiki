@@ -1,6 +1,8 @@
 package com.ssafy.whiskeywiki.domain.whiskey.service.impl;
 
 
+import com.ssafy.whiskeywiki.domain.mybar.domain.OwnWhiskey;
+import com.ssafy.whiskeywiki.domain.mybar.repository.OwnWhiskeyRepository;
 import com.ssafy.whiskeywiki.domain.user.domain.User;
 import com.ssafy.whiskeywiki.domain.user.repository.UserRepository;
 import com.ssafy.whiskeywiki.domain.whiskey.domain.Review;
@@ -26,6 +28,7 @@ public class ReviewServiceImpl implements ReviewService {
     private final ReviewRepository reviewRepository;
     private final WhiskeyRepository whiskeyRepository;
     private final UserRepository userRepository;
+    private final OwnWhiskeyRepository ownWhiskeyRepository;
     @Override
     public ReviewDTO.ReviewResponseData reviewList(int whiskeyId) {
         Optional<Whiskey> whiskey = whiskeyRepository.findById(whiskeyId);
