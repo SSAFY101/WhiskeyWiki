@@ -5,6 +5,8 @@ import imageCompression from "browser-image-compression";
 import axios from "axios";
 import instance from "../auth/axiosInterceptor";
 
+import Loading from "./component/Loading";
+
 import style from "./css/ImgUpload.module.css";
 
 const ImgUpload = () => {
@@ -12,6 +14,7 @@ const ImgUpload = () => {
 
   const [img, setImg] = useState(null);
   const [preview, setPreview] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   // useEffect(() => {
   //   console.log(img);
@@ -46,14 +49,11 @@ const ImgUpload = () => {
     const formData = new FormData();
     formData.append("file", img);
 
-    // const 테스트 = [
-    //   "Absolut",
-    //   "Jack-Daniels",
-    //   "Jim-Beam",
-    //   "Jagermeister",
-    //   "Johnie-Walker",
-    // ];
-    // dispatch(registerAction.setWhiskeyList(테스트));
+    setLoading(true);
+
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
 
     axios
       .post(`/api/detection`, formData, {
@@ -81,11 +81,11 @@ const ImgUpload = () => {
         }
 
         // 미탐지 위스키 처리
-        if (others > 0) {
-          // 미탐지 위스키 처리
-          alert("미탐지 위스키 있음");
-          return;
-        }
+        // if (others > 0) {
+        //   // 미탐지 위스키 처리
+        //   alert("미탐지 위스키 있음");
+        //   return;
+        // }
 
         dispatch(registerAction.setWhiskeyList(whiskeyNameList));
         dispatch(registerAction.pageTwo());
@@ -97,6 +97,11 @@ const ImgUpload = () => {
 
   return (
     <div className={`${style.container}`}>
+      {/* {!loading && (
+        <div className={`${style.loadingBackground}`}>
+          <Loading />
+        </div>
+      )} */}
       <div className={`${style.top}`}>
         <div className={`${style.textContainer}`}>
           <div>이미지를 업로드해서</div>

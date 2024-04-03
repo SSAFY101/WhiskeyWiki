@@ -36,7 +36,7 @@ const MessageList = ({ messageListProp, chatRoomId, userId, pairId }) => {
   // 소켓 : connect
   const connect = () => {
     client.current = new StompJs.Client({
-      brokerURL: "wss://www.whiskeywiki.shop/api/ws",
+      brokerURL: "ws://www.whiskeywiki.shop/api/ws",
       connectHeaders: {
         accessToken: instance.defaults.headers.common["Authorization"],
       },
