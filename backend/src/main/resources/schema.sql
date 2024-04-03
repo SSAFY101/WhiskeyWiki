@@ -91,7 +91,7 @@
         chatroom_id INT AUTO_INCREMENT PRIMARY KEY,
         create_time DATETIME,
         edit_time DATETIME,
-        last_chat VARCHAR
+        last_chat VARCHAR(255)
     );
 
     CREATE TABLE IF NOT EXISTS user_chatrooms (
