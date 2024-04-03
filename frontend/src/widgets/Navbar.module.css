@@ -23,14 +23,15 @@
   text-decoration-line: none;
   font-size: 1.3rem;
 }
-.logo img{
+.logo img {
   width: 40px;
   margin: 0 10px 0 10px;
 }
-.logo a{
+.logo a {
   line-height: 40px;
 }
-.logo img, .logo a{
+.logo img,
+.logo a {
   vertical-align: middle;
 }
 
@@ -38,7 +39,7 @@
   display: flex;
   justify-content: space-around;
   /* 임시 */
-  margin-left: 10rem;
+  margin-right: 6rem;
 }
 
 .menu * {
