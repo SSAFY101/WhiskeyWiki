@@ -231,7 +231,7 @@ public class WhiskeyServiceImpl implements WhiskeyService {
             OwnWhiskey ownWhiskey = OwnWhiskey.builder()
                     .user(user)
                     .whiskey(whiskey)
-                    .isEmpty(false)
+                    .isEmpty(true)
                     .build();
             ownWhiskeyRepository.save(ownWhiskey);
         }
