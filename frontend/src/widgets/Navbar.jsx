@@ -12,6 +12,8 @@ import myPageIcon from "../assets/images/nav/myPage.png";
 import myPageHoverIcon from "../assets/images/nav/myPage_hover.png";
 import { useEffect } from "react";
 
+import whiskeyWiki from "../assets/icon/whiskeyWiki.svg";
+
 function Navbar({ onUserIconClick }) {
   const dispatch = useDispatch();
   const nickName = useSelector((state) => state.user.nickName);
@@ -62,7 +64,10 @@ function Navbar({ onUserIconClick }) {
     <div className={`${style.container}`}>
       {/* 로고 */}
       <div className={`${style.logo}`}>
-        <Link to="/">WW</Link>
+        <Link to="/">
+          <img src={whiskeyWiki} alt="" />
+          Whiskey Wiki
+        </Link>
       </div>
       {/* 메뉴 */}
       <div className={`${style.menu}`}>
