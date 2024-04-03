@@ -8,13 +8,31 @@ from pathlib import Path
 
 def get_yolov5_basic():
     # local best.pt
-    model = torch.hub.load('./yolov5', 'custom', path=Path('./model/model5L.pt'), source='local')  # local repo
+    model = torch.hub.load('./yolov5', 'custom', path=Path('./model/basic_semi_final.pt'), source='local')  # local repo
     model.conf = 0.5
     return model
 
 def get_yolov5_johnnie():
     # local best.pt
     model = torch.hub.load('./yolov5', 'custom', path=Path('./model/johnnie.pt'), source='local')  # local repo
+    model.conf = 0.5
+    return model
+
+def get_yolov5_jack():
+    # local best.pt
+    model = torch.hub.load('./yolov5', 'custom', path=Path('./model/jack.pt'), source='local')  # local repo
+    model.conf = 0.5
+    return model
+
+def get_yolov5_ballentines():
+    # local best.pt
+    model = torch.hub.load('./yolov5', 'custom', path=Path('./model/ballentines.pt'), source='local')  # local repo
+    model.conf = 0.5
+    return model
+
+def get_yolov5_empty():
+    # local best.pt
+    model = torch.hub.load('./yolov5', 'custom', path=Path('./model/empty.pt'), source='local')  # local repo
     model.conf = 0.5
     return model
 
