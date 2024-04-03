@@ -21,17 +21,33 @@ spring:
       hibernate:
         show_sql: true
 #        format_sql: true
-
+    defer-datasource-initialization: true
 
   h2:
     console:
       enabled: true
-
+  sql:
+    init:
+      mode: always
 
   main:
     allow-bean-definition-overriding: false
+  data:
+    redis:
+      lettuce:
+        cluster:
+          refresh:
+            adaptive: true
+      host: whiskeywiki.shop
+      port: 6380
+
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 25MB
 
 #    database-platform: org.hibernate.dialect.H2Dialect
+
 
 management:
   endpoint:
