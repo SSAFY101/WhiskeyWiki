@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
-import { setWhiskeys } from "../../store/slices/whiskeyInfo";
+import whiskeyInfoSlice, { setWhiskeys as setwhiskeyRedux } from "../../store/slices/whiskeyInfo";
 import { Route, useNavigate } from "react-router-dom";
 import SearchBar from "../../widgets/Searchbar";
 import Infocard from "./InfoCard";
@@ -37,7 +37,7 @@ function WhiskeyInfo() {
       const response = await axios.get(
         `/api/whiskey/list`
       );
-      console.log("위스키 목록 조회 성공", response.data.data);
+      console.log("위스키 목록 조회 성공", response);
       setWhiskeys(response.data.data)
       setDisplayedWhiskeys(response.data.data)
     } catch (error) {
@@ -46,12 +46,16 @@ function WhiskeyInfo() {
   };
  
   //화면에 표시될 위스키 목록 따로 추가
-  const [displayedWhiskeys, setDisplayedWhiskeys] = useState(whiskeys);
+  const [displayedWhiskeys, setDisplayedWhiskeys] = useState([]);
 
   useEffect(() => {
     //초기 로드시 모든 위스키를 보여줌
     fetchWhiskeyList();
   }, []);
+
+  useEffect(() => {
+    setDisplayedWhiskeys(whiskeys)
+  },[whiskeys])
 
   const navigate = useNavigate();
   // const goToDetail = (whiskeyId, image) => {
@@ -105,7 +109,7 @@ function WhiskeyInfo() {
       <div className={style.container}>
         <WhiskeySorter onSortChange={handleSortChange} />
         <div className={style.cardContainer}>
-          {displayedWhiskeys.map((item) => (
+          {Array.isArray(displayedWhiskeys) && displayedWhiskeys.map((item) => (
             <Infocard
               key={item.whiskeyNameEn}
               whiskeyId={item.whiskeyId}
