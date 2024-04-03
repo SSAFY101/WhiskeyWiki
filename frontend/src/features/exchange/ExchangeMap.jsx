@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { exchangeAction } from "../../store/slices/exchange";
 import style from "./ExchangeMap.module.css";
 // import axios from "axios";
 import instance from "../auth/axiosInterceptor";
@@ -9,6 +10,8 @@ import instance from "../auth/axiosInterceptor";
 const { kakao } = window;
 
 function Map() {
+  const dispatch = useDispatch();
+
   const infowindowList = []; // 인포윈도우를 담을 변수
   const [mybarList, setMybarList] = useState([]); // API Response 담을 변수 (빈 배열)
 
@@ -22,6 +25,7 @@ function Map() {
     // console.log(checkedWhiskeyList); // Redux 작동 test
 
     // 9. POST 요청: 다른 유저의 My Bar 리스트 조회 (검색 조건에 따라)
+
     instance({
       method: "post",
       url: `/api/map/search-condition`,
@@ -32,6 +36,12 @@ function Map() {
       .then((res) => {
         // console.log("인식 위스키 정보 : ", res.data.data);
         const data = res.data.data;
+
+        if (data.mybarList) {
+          const cnt = data.mybarList.length;
+          dispatch(exchangeAction.setOtherbarCount(cnt));
+        }
+
         setMybarList(data);
       })
       .catch((err) => {
