@@ -12,10 +12,26 @@
   background-color: transparent;
 }
 
+.logo {
+  display: flex;
+  justify-content: center; /* 가로 방향으로 중앙 정렬 */
+  align-items: center; /* 세로 방향으로 중앙 정렬 */
+}
+
 .logo * {
   cursor: pointer;
   text-decoration-line: none;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
+}
+.logo img{
+  width: 40px;
+  margin: 0 10px 0 10px;
+}
+.logo a{
+  line-height: 40px;
+}
+.logo img, .logo a{
+  vertical-align: middle;
 }
 
 .menu {
@@ -51,6 +67,6 @@
 }
 
 .myPage {
-  z-index:4;
+  z-index: 4;
   cursor: pointer;
 }
