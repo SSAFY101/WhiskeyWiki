@@ -56,43 +56,49 @@ public class AIService {
 
         // String url;
         ResponseEntity<Object> response = restTemplate.postForEntity("http://ai.whiskeywiki.shop" + "/object-to-json/basic", requestEntity, Object.class);
-        LinkedHashMap<String, Object> hashMap = (LinkedHashMap<String, Object>) response.getBody();
-        log.info("hashMap(={})",hashMap);
-        List<String> whiskeys = (List<String>) hashMap.get("whiskeys");
-        int others = (int) hashMap.get("others");
-        log.info("info(={})", response);
-        log.info("response(={})", response.getBody().getClass());
-        log.info("whiskeys (={})", whiskeys);
+        log.info("response get(={})", response.getBody().toString());
+        log.info("response get(={})", response.getBody().getClass());
+
+        LinkedHashMap<String, Integer> whiskeys = (LinkedHashMap<String, Integer>) response.getBody();
+//        log.info("hashMap(={})",hashMap.get("Ballantines"));
+//        List<String> whiskeys = (List<String>) hashMap.get("whiskeys");
+//        int others = (int) hashMap.get("others");
+//        log.info("info(={})", response);
+//        log.info("response(={})", response.getBody().getClass());
+//        log.info("whiskeys (={})", whiskeys);
 //        log.info("first(={})", hashMap.get("result").getClass());
 
         List<String> detailWhiskeys = new ArrayList<>();
-        for (String whiskey: whiskeys) {
-            if (whiskey.equals("Ballantines")) {
-//
-                ResponseEntity<Object> ballantinesResponse = restTemplate.postForEntity("http://ai.whiskeywiki.shop" + "/object-to-json/ballentines", requestEntity, Object.class);
-                LinkedHashMap<String, Object> ballantinesHashMap = (LinkedHashMap<String, Object>) ballantinesResponse.getBody();
-                List<String> ballantinesWhiskeys = (List<String>) ballantinesHashMap.get("whiskeys");
+//        for (String key: whiskeys.keySet()) {
+//            if (key.equals(""))
+//        }
+        for (String key: whiskeys.keySet()) {
+            if (key.equals("Ballantines")) {
 
-                for (String ballantines: ballantinesWhiskeys) {
+                ResponseEntity<Object> ballantinesResponse = restTemplate.postForEntity("http://ai.whiskeywiki.shop" + "/object-to-json/ballentines", requestEntity, Object.class);
+                LinkedHashMap<String, Integer> ballantinesHashMap = (LinkedHashMap<String, Integer>) ballantinesResponse.getBody();
+//                List<String> ballantinesWhiskeys = (List<String>) ballantinesHashMap.get("whiskeys");
+
+                for (String ballantines: ballantinesHashMap.keySet()) {
                     if (ballantines.equals("finest")) {
-                        detailWhiskeys.add("ballantines finest");
+                        detailWhiskeys.add("Ballantines finest");
                     } else if (ballantines.equals("17")) {
-                        detailWhiskeys.add("ballantines 17");
+                        detailWhiskeys.add("Ballantines 17");
                     } else if (ballantines.equals("21")) {
-                        detailWhiskeys.add("ballantines 21");
+                        detailWhiskeys.add("Ballantines 21");
                     } else if (ballantines.equals("30")) {
-                        detailWhiskeys.add("ballantines 30");
+                        detailWhiskeys.add("Ballantines 30");
                     } else {
-                        detailWhiskeys.add("ballantines");
+                        detailWhiskeys.add("Ballantines");
                     }
                 }
-            } else if (whiskey.equals("Jack-Daniels")) {
-//
-                ResponseEntity<Object> jackResponse = restTemplate.postForEntity("http://ai.whiskeywiki.shop" + "/object-to-json/jack", requestEntity, Object.class);
-                LinkedHashMap<String, Object> jackHashMap = (LinkedHashMap<String, Object>) jackResponse.getBody();
-                List<String> jackWhiskeys = (List<String>) jackHashMap.get("whiskeys");
+            } else if (key.equals("Jack-Daniels")) {
 
-                for (String jack: jackWhiskeys) {
+                ResponseEntity<Object> jackResponse = restTemplate.postForEntity("http://ai.whiskeywiki.shop" + "/object-to-json/jack", requestEntity, Object.class);
+                LinkedHashMap<String, Integer> jackHashMap = (LinkedHashMap<String, Integer>) jackResponse.getBody();
+//                List<String> jackWhiskeys = (List<String>) jackHashMap.get("whiskeys");
+
+                for (String jack: jackHashMap.keySet()) {
                     if (jack.equals("no.7")) {
                         detailWhiskeys.add("Jack-Daniels no.7");
                     } else if (jack.equals("honey")) {
@@ -101,12 +107,12 @@ public class AIService {
                         detailWhiskeys.add("Jack-Daniels");
                     }
                 }
-            } else if (whiskey.equals("Johnie-Walker")) { //"Johnie-Walker"
+            } else if (key.equals("Johnie-Walker")) { //"Johnie-Walker"
                 ResponseEntity<Object> johnieResponse = restTemplate.postForEntity("http://ai.whiskeywiki.shop" + "/object-to-json/johnnie", requestEntity, Object.class);
-                LinkedHashMap<String, Object> johnieHashMap = (LinkedHashMap<String, Object>) johnieResponse.getBody();
-                List<String> johnieWhiskeys = (List<String>) johnieHashMap.get("whiskeys");
-                log.info("johnie(={})", johnieWhiskeys);
-                for (String johnie: johnieWhiskeys) {
+                LinkedHashMap<String, Integer> johnieHashMap = (LinkedHashMap<String, Integer>) johnieResponse.getBody();
+//                List<String> johnieWhiskeys = (List<String>) johnieHashMap.get("whiskeys");
+//                log.info("johnie(={})", johnieWhiskeys);
+                for (String johnie: johnieHashMap.keySet()) {
                     if (johnie.equals("black")) {
                         detailWhiskeys.add("Johnie-Walker black");
                     } else if (johnie.equals("red")) {
@@ -123,8 +129,12 @@ public class AIService {
         whiskeys.remove("Jack-Daniels");
         whiskeys.remove("Ballantines");
 
-        for (String detail: detailWhiskeys) {
-            whiskeys.add(detail);
+//        for (String detail: detailWhiskeys) {
+//            whiskeys.add(detail);
+//        }
+
+        for (String key: whiskeys.keySet()) {
+            detailWhiskeys.add(key);
         }
 
         // if others -> 세부 모델 존재 "Ballantines", "Jack-Daniels", "Johnie-Walker"
@@ -139,9 +149,13 @@ public class AIService {
          * "Johnie-Walker black" "Johnie-Walker red" "Johnie-Walker blue"
          * "Jack-Daniels no.7" "Jack-Daniels honey"
          */
+        if (detailWhiskeys.contains("others")) {
+            detailWhiskeys.remove("others");
+        }
+
         return AIDTO.JsonResponse.builder()
-                .result(whiskeys)
-                .others(others)
+                .result(detailWhiskeys)
+                .others(0)
                 .build();
     }
 
