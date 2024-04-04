@@ -25,7 +25,7 @@
 }
 
 .card {
-  width: 18rem;
+  width: 20em;
   height: 30rem;
   margin: 0rem 3.5em;
 }
@@ -34,18 +34,18 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 3rem 0rem;
+  padding: 2rem 0rem;
   border-radius: 20px;
   border: solid 3px;
 }
 
 .cardImg {
   height: 15rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 2rem;
 }
 
 .cardNameEn {
-  font-size: 2rem;
+  font-size: 1.5rem;
   margin-bottom: 0.3rem;
   color: #f3f3f3;
 }
@@ -58,7 +58,8 @@
 .whiskeyCount {
   font-size: 1.5rem;
   color: #d3d3d3;
-  margin-bottom: 1rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 .whiskeyCount span {
