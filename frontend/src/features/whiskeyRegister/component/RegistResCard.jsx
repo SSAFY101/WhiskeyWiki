@@ -1,4 +1,4 @@
-import { WhiskeyImages } from "../images/WhiskeyImages";
+import { WhiskeyImages } from "../../WhiskeyImages";
 
 import style from "../css/RegisterResult.module.css";
 

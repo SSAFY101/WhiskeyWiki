@@ -15,58 +15,26 @@ const DetectionResult = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const nickName = localStorage.getItem("nickName");
+  const nickName = useSelector((state) => state.user.nickName);
   const whiskeyReqList = useSelector((state) => state.register.whiskeyList);
 
   const [whiskeyInfoList, setWhiskeyList] = useState([]);
 
   useEffect(() => {
+    console.log(whiskeyReqList);
     // 인식 위스키 정보
     instance
-      .get(`/api/whiskey/info/detection`, { whiskeyReqList })
+      .post(`/api/whiskey/info/detection`, { whiskeyReqList })
       .then((res) => {
         console.log("인식 위스키 정보 : ", res);
         const data = res.data.data;
-        setWhiskeyList(data);
+        console.log(data.whiskeyResList);
+        setWhiskeyList(data.whiskeyResList);
       })
       .catch((err) => {
         console.log("인식 위스키 정보 ERROR : ", err);
       });
   }, []);
-
-  // 테스트 -> whiskeyInfoList로 바꿔야 함
-  // const 테스트 = [
-  //   {
-  //     nameKr: "앱솔루트",
-  //     nameEn: "Absolut",
-  //     summery: "앱솔루트는 정말 맛있어요",
-  //     isOwn: true,
-  //   },
-  //   {
-  //     nameKr: "잭다니엘",
-  //     nameEn: "Jack-Daniels",
-  //     summery: "잭다니엘은 정말 맛있어요",
-  //     isOwn: false,
-  //   },
-  //   {
-  //     nameKr: "짐빔",
-  //     nameEn: "Jim-Beam",
-  //     summery: "짐빔은 정말 맛있어요",
-  //     isOwn: false,
-  //   },
-  //   {
-  //     nameKr: "예거마이스터",
-  //     nameEn: "Jagermeister",
-  //     summery: "예거마이스터는 정말 맛있어요",
-  //     isOwn: false,
-  //   },
-  //   {
-  //     nameKr: "조니워커",
-  //     nameEn: "Johnie-Walker",
-  //     summery: "조니워커는 정말 맛있어요",
-  //     isOwn: false,
-  //   },
-  // ];
 
   const size = whiskeyInfoList.length; // 찾은 위스키 개수
 
