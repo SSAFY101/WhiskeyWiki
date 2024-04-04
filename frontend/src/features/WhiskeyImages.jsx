@@ -21,15 +21,15 @@ const WhiskeyImages = [
   },
   {
     nameEn: "Ballantines 17",
-    imgUrl: require("../assets/images/whiskey/Ballantines_Finest.png"),
+    imgUrl: require("../assets/images/whiskey/Ballantines 17.png"),
   },
   {
     nameEn: "Ballantines 21",
-    imgUrl: require("../assets/images/whiskey/Ballantines_Finest.png"),
+    imgUrl: require("../assets/images/whiskey/Ballantines 21.png"),
   },
   {
     nameEn: "Ballantines 30",
-    imgUrl: require("../assets/images/whiskey/Ballantines_Finest.png"),
+    imgUrl: require("../assets/images/whiskey/Ballantines 30.png"),
   },
   {
     nameEn: "Beefeater",
