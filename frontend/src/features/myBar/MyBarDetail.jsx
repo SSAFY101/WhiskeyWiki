@@ -3,6 +3,7 @@ import Modal from "../modal/Modal";
 import MyBarCheckEmpty from "./MyBarCheckEmpty";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import instance from "../auth/axiosInterceptor";
 import style from "./MyBarDetail.module.css";
 
 function MyBarDetail({ whiskeyId, whiskeyNameKr, whiskeyNameEn, isOwner }) {
@@ -25,6 +26,9 @@ function MyBarDetail({ whiskeyId, whiskeyNameKr, whiskeyNameEn, isOwner }) {
 
   // 위스키 기본정보 가져오기
   const [whiskeyDetail, setWhiskeyDetail] = useState(null);
+  // 위스키 보유 상태 확인
+  const [message, setMessage] = useState(""); // message 상태 추가
+
   useEffect(() => {
     const fetchWhiskeyDetail = async () => {
       try {
@@ -36,6 +40,28 @@ function MyBarDetail({ whiskeyId, whiskeyNameKr, whiskeyNameEn, isOwner }) {
       }
     };
     fetchWhiskeyDetail();
+
+    // 위스키 보유 상태 확인
+    // const [message, setMessage] = useState(""); // message 상태 추가
+    // GET 요청: 위스키 보유 상태 확인
+    instance({
+      method: "get",
+      url: `/api/mybar/check-status/${whiskeyId}`,
+    })
+      .then((res) => {
+        // console.log("위스키 보유 상태 확인 성공 : ", res.data.data.isEmpty);
+        const isEmpty = res.data.data.isEmpty;
+        if (isEmpty) {
+          // 보유 상태 => 빈병으로 변경
+          setMessage("빈 병 전환하기");
+        } else {
+          // 빈병 상태 => 보유 상태로 변경
+          setMessage("술병 다시 채우기");
+        }
+      })
+      .catch((err) => {
+        console.log("위스키 보유 상태 확인 ERROR :", err);
+      });
   }, []);
 
   return (
@@ -60,7 +86,7 @@ function MyBarDetail({ whiskeyId, whiskeyNameKr, whiskeyNameEn, isOwner }) {
         {/* 위스키별 빈 병 표시하기 */}
         {isOwner && ( // isOwner가 true일 때에만 버튼 렌더링
           <button className={style.button} onClick={checkWhiskeyEmpty}>
-            빈 병 전환하기
+            {message}
           </button>
         )}
       </div>

@@ -166,6 +166,24 @@ const WhiskeyImages = [
     whiskeyNameEn: "Peach_Tree",
     imgUrl: require("../../assets/images/whiskey/Peach_Tree.png"),
   },
+  {
+    whiskeyId: 27,
+    whiskeyNameKr: "발렌타인 17년산",
+    whiskeyNameEn: "Ballantines 17",
+    imgUrl: require("../../assets/images/whiskey/Ballantines 17.png"),
+  },
+  {
+    whiskeyId: 28,
+    whiskeyNameKr: "발렌타인 21년산",
+    whiskeyNameEn: "Ballantines 21",
+    imgUrl: require("../../assets/images/whiskey/Ballantines 21.png"),
+  },
+  {
+    whiskeyId: 29,
+    whiskeyNameKr: "발렌타인 30년산",
+    whiskeyNameEn: "Ballantines 30",
+    imgUrl: require("../../assets/images/whiskey/Ballantines 30.png"),
+  },
 ];
 
 export { ShelfImage, BookImage, WhiskeyImages };
