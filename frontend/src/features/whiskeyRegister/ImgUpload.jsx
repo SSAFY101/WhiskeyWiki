@@ -34,8 +34,8 @@ const ImgUpload = () => {
 
     try {
       const compressedImage = await imageCompression(input, {
-        maxSizeMB: 0.5,
-        maxWidthOrHeight: 416,
+        maxSizeMB: 10,
+        maxWidthOrHeight: 1920,
       });
       const previewUrl = URL.createObjectURL(compressedImage);
       setPreview(previewUrl);
@@ -67,6 +67,7 @@ const ImgUpload = () => {
         // 받은 배열 -> 칵테일 이름 배열 -> 리덕스
         const data = res.data;
         const whiskeyNameList = data.result;
+        console.log(whiskeyNameList);
         const others = data.others;
 
         //  const whiskeyNameList = [];
@@ -111,7 +112,7 @@ const ImgUpload = () => {
         {/* 업로드 */}
         <input
           type="file"
-          accept=".jpg, .png"
+          accept=".jpg, .jpeg, .png"
           onChange={imgInputClickHandler}
           ref={imgInput}
           style={{ display: "none" }}

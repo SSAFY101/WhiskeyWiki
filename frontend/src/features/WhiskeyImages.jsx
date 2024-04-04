@@ -24,7 +24,7 @@ const WhiskeyImages = [
     imgUrl: require("../assets/images/whiskey/Beefeater.png"),
   },
   {
-    nameEn: "Blue_Curacao",
+    nameEn: "Blue-Curacao",
     imgUrl: require("../assets/images/whiskey/Blue_Curacao.png"),
   },
   {
@@ -44,7 +44,7 @@ const WhiskeyImages = [
     imgUrl: require("../assets/images/whiskey/Havana_Club.png"),
   },
   {
-    nameEn: "Jack_Daniels",
+    nameEn: "Jack-Daniels",
     imgUrl: require("../assets/images/whiskey/Jack_Daniels_No7.png"),
   },
   {
@@ -68,15 +68,15 @@ const WhiskeyImages = [
     imgUrl: require("../assets/images/whiskey/Johnie_Walker_Black.png"),
   },
   {
-    nameEn: "Johnie-Walker Black",
+    nameEn: "Johnie-Walker black",
     imgUrl: require("../assets/images/whiskey/Johnie_Walker_Black.png"),
   },
   {
-    nameEn: "Johnie-Walker Blue",
+    nameEn: "Johnie-Walker blue",
     imgUrl: require("../assets/images/whiskey/Johnie_Walker_Blue.png"),
   },
   {
-    nameEn: "Johnie-Walker Red",
+    nameEn: "Johnie-Walker red",
     imgUrl: require("../assets/images/whiskey/Johnie_Walker_Red.png"),
   },
   {
@@ -96,7 +96,7 @@ const WhiskeyImages = [
     imgUrl: require("../assets/images/whiskey/Martini.png"),
   },
   {
-    nameEn: "Peach_Tree",
+    nameEn: "Peach-Tree",
     imgUrl: require("../assets/images/whiskey/Peach_Tree.png"),
   },
   {
@@ -112,7 +112,7 @@ const WhiskeyImages = [
     imgUrl: require("../assets/images/whiskey/Smirnoff.png"),
   },
   {
-    nameEn: "Triple_Sec",
+    nameEn: "Triple-Sec",
     imgUrl: require("../assets/images/whiskey/Triple_Sec.png"),
   },
 ];
