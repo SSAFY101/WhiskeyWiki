@@ -77,3 +77,14 @@
   margin: 5rem 0rem;
   font-size: 1.7rem;
 }
+
+.loadingBackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+
+  z-index: 10;
+}
