@@ -1,5 +1,7 @@
 # Whiskey Wiki (위스키 위키) - 위스키 입문자를 위한 서비스
 
+<br>
+
 ## 0. 목차
 
 1. 진행 기간
@@ -8,9 +10,13 @@
 4. 기술 스택
 5. 팀원 소개
 
+<br>
+
 ## 1. 진행 기간
 
 <b>2024. 02. 26. 월요일 ~ 2024. 04. 04. 목요일 (6주)</b>
+
+<br>
 
 ## 2. 서비스 소개
 
@@ -30,39 +36,29 @@
 
 #### 1. 메인 페이지
 
-.
+![](<exec/시연%20시나리오%20(관련%20파일)/1.메인페이지.gif>)
 
-#### 2. AI 인식 및 등록
+#### 2. 회원가입
 
-.
+![](<exec/시연%20시나리오%20(관련%20파일)/2.회원가입.gif>)
 
-#### 3. 마이바(My Bar)
+#### 3. 위스키 AI 인식 및 등록
 
-.
+![](<exec/시연%20시나리오%20(관련%20파일)/3.위스키AI인식.gif>)
 
-#### 4. 마이바의 위스키 상태 전환 (빈병으로)
+#### 4. 마이바(My Bar) 이동 및 마이바의 위스키 상태 전환 (빈병으로)
 
-.
+![](<exec/시연%20시나리오%20(관련%20파일)/4.마이바(MyBar).gif>)
 
-#### 5. 상세페이지
+#### 5. 위스키 목록 및 상세페이지
 
-.
+![](<exec/시연%20시나리오%20(관련%20파일)/5.위스키정보.gif>)
 
-#### 6. 위스키 목록
+#### 6. 교환을 위한 지도 (Exchange Map) 및 다른 유저의 마이바 열람
 
-.
+![](<exec/시연%20시나리오%20(관련%20파일)/6.지도&다른유저의마이바열람.gif>)
 
-#### 7. 교환을 위한 지도 (Exchange Map)
-
-.
-
-#### 8. 다른 유저의 마이바 열람
-
-.
-
-#### 9. 거래를 위한 채팅
-
-.
+<br>
 
 ## 3. 프로젝트 산출물
 
@@ -84,7 +80,11 @@
 
 ### 포팅 메뉴얼
 
-.
+- 소스 클론 이후 빌드 및 배포할 수 있도록 정리한 문서
+- DB 덤프 파일 : data.sql / schema.sql
+- 시연 시나리오 : README.md에서 소개, 폴더에는 시연 관련 파일 저장
+
+<br>
 
 ## 4. 기술 스택
 
@@ -111,6 +111,8 @@
 ### Tools
 
 ![](https://img.shields.io/badge/Gitlab-F05032?style=for-the-badge&logo=gitlab&logoColor=white) ![](https://img.shields.io/badge/JIRA-2496ED?style=for-the-badge&logo=jira&logoColor=white) ![](https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=notion&logoColor=white) ![](https://img.shields.io/badge/MatterMost-0E0F37?style=for-the-badge&logo=mattermost&logoColor=white)
+
+<br>
 
 ## 5. 팀원 소개
 
