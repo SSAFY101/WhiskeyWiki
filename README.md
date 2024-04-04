@@ -95,7 +95,7 @@
 
 ### Back-End
 
-![](https://img.shields.io/badge/JAVA17-F7DF1E?style=for-the-badge&logoColor=white) ![](<https://img.shields.io/badge/SpringBoot(3.2.3)-6DB33F?style=for-the-badge&logo=Springboot&logoColor=white>) ![](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white) ![](https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=redis&logoColor=white) ![](<https://img.shields.io/badge/JPA(3.2.3)-6DB33F?style=for-the-badge&logo=jpa&logoColor=white>)
+![](https://img.shields.io/badge/JAVA17-F7DF1E?style=for-the-badge&logoColor=white) ![](<https://img.shields.io/badge/SpringBoot(3.2.3)-6DB33F?style=for-the-badge&logo=Springboot&logoColor=white>) ![](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white) ![](https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=redis&logoColor=white) ![](<https://img.shields.io/badge/Hibernate(6.4.1)-964B00?style=for-the-badge&logo=hibernate&logoColor=white>)
 
 ### AI
 
