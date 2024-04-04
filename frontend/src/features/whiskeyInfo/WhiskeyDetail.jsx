@@ -16,6 +16,8 @@ function WhiskeyDetail() {
   const whiskeyId = params.whiskeyId;
   const imageUrl = location.state?.imageUrl;
   const reviewSubmitted = useSelector((state) => state.review.reviewSubmitted);
+  //이미지 url 확인
+  console.log("이미지 주소",imageUrl)
   //기본정보
   const [whiskeyDetail, setWhiskeyDetail] = useState(null);
   //통계정보
