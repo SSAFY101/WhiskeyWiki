@@ -2,7 +2,9 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
-import whiskeyInfoSlice, { setWhiskeys as setwhiskeyRedux } from "../../store/slices/whiskeyInfo";
+import whiskeyInfoSlice, {
+  setWhiskeys as setwhiskeyRedux,
+} from "../../store/slices/whiskeyInfo";
 import { Route, useNavigate } from "react-router-dom";
 import SearchBar from "../../widgets/Searchbar";
 import Infocard from "./InfoCard";
@@ -34,17 +36,15 @@ function WhiskeyInfo() {
   // 위스키 목록 불러오기
   const fetchWhiskeyList = async () => {
     try {
-      const response = await axios.get(
-        `/api/whiskey/list`
-      );
+      const response = await axios.get(`/api/whiskey/list`);
       console.log("위스키 목록 조회 성공", response);
-      setWhiskeys(response.data.data)
-      setDisplayedWhiskeys(response.data.data)
+      setWhiskeys(response.data.data);
+      setDisplayedWhiskeys(response.data.data);
     } catch (error) {
       console.error("에러 발생", error);
     }
   };
- 
+
   //화면에 표시될 위스키 목록 따로 추가
   const [displayedWhiskeys, setDisplayedWhiskeys] = useState([]);
 
@@ -54,8 +54,8 @@ function WhiskeyInfo() {
   }, []);
 
   useEffect(() => {
-    setDisplayedWhiskeys(whiskeys)
-  },[whiskeys])
+    setDisplayedWhiskeys(whiskeys);
+  }, [whiskeys]);
 
   const navigate = useNavigate();
   // const goToDetail = (whiskeyId, image) => {
@@ -66,14 +66,22 @@ function WhiskeyInfo() {
     switch (sortOrder) {
       // 한글
       case "name-asc-kr":
-        return [...whiskeys].sort((a, b) => a.whiskeyNameKr.localeCompare(b.whiskeyNameKr));
+        return [...whiskeys].sort((a, b) =>
+          a.whiskeyNameKr.localeCompare(b.whiskeyNameKr)
+        );
       case "name-desc-kr":
-        return [...whiskeys].sort((a, b) => b.whiskeyNameKr.localeCompare(a.whiskeyNameKr));
+        return [...whiskeys].sort((a, b) =>
+          b.whiskeyNameKr.localeCompare(a.whiskeyNameKr)
+        );
       //영어
       case "name-asc-en":
-        return [...whiskeys].sort((a, b) => a.whiskeyNameEn.localeCompare(b.whiskeyNameEn));
+        return [...whiskeys].sort((a, b) =>
+          a.whiskeyNameEn.localeCompare(b.whiskeyNameEn)
+        );
       case "name-desc-en":
-        return [...whiskeys].sort((a, b) => b.whiskeyNameEn.localeCompare(a.whiskeyNameEn));
+        return [...whiskeys].sort((a, b) =>
+          b.whiskeyNameEn.localeCompare(a.whiskeyNameEn)
+        );
       //도수
       case "abv-asc":
         return [...whiskeys].sort(
@@ -105,23 +113,28 @@ function WhiskeyInfo() {
 
   return (
     <div>
-      <SearchBar onSearch={handleSearch} />
-      <div className={style.container}>
-        <WhiskeySorter onSortChange={handleSortChange} />
+      <div className={style.container1}>
+        <SearchBar onSearch={handleSearch} />
+        <WhiskeySorter
+          className={style.whiskeySorter}
+          onSortChange={handleSortChange}
+        />
+      </div>
+      <div className={style.container2}>
         <div className={style.cardContainer}>
-          {Array.isArray(displayedWhiskeys) && displayedWhiskeys.map((item) => (
-            <Infocard
-              key={item.whiskeyNameEn}
-              whiskeyId={item.whiskeyId}
-              nameKr={item.whiskeyNameKr}
-              nameEn={item.whiskeyNameEn}
-              taste={item.whiskeyFlavor}
-              abv={item.abv}
-              price={item.price}
-              rating={item.starRating}
-            
-            />
-          ))}
+          {Array.isArray(displayedWhiskeys) &&
+            displayedWhiskeys.map((item) => (
+              <Infocard
+                key={item.whiskeyNameEn}
+                whiskeyId={item.whiskeyId}
+                nameKr={item.whiskeyNameKr}
+                nameEn={item.whiskeyNameEn}
+                taste={item.whiskeyFlavor}
+                abv={item.abv}
+                price={item.price}
+                rating={item.starRating}
+              />
+            ))}
         </div>
         {/* <div className={style.cardContainer}>
           {filteredWhiskey.length > 0
