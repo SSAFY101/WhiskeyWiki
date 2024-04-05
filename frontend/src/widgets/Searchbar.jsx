@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { ReactComponent as SearchIcon } from '../assets/icon/Search.svg';
-import style from './Searchbar.module.css'
+import { ReactComponent as SearchIcon } from "../assets/icon/Search.svg";
+import style from "./Searchbar.module.css";
 function SearchBar({ onSearch }) {
   const [query, setQuery] = useState("");
 
@@ -17,20 +17,19 @@ function SearchBar({ onSearch }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className={style.searchForm} >
+    <form onSubmit={handleSubmit} className={style.searchForm}>
       <input
         className={style.searchInput}
         type="text"
-        placeholder="검색..."
+        placeholder="위스키를 검색하세요"
         value={query}
         onChange={handleInputChange}
       />
       <button type="submit" className={style.button}>
-        <SearchIcon/>
+        <SearchIcon />
       </button>
-     
     </form>
   );
 }
 
-export default SearchBar
+export default SearchBar;

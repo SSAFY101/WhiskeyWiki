@@ -11,7 +11,6 @@ function Exchange() {
     <div className={style.container}>
       <div className={style.head}>
         <h1>
-          {/* <span className={style.highlight}>{otherbarCount}</span> 개의 마이바를 */}
           <span className={style.highlight}>{otherbarCount}</span>개의 마이바를
           찾았습니다
         </h1>

@@ -1,18 +1,18 @@
-.button{
-  border:none;
-
+.button {
+  border: none;
 }
 
-.searchInput{
+.searchInput {
   width: 40%;
-  height: 40px;
+  height: 55px;
   background-color: white;
-  color:black;
+  color: black;
   border-radius: 10px;
-  font-size: 20px;
+  font-size: 25px;
+  text-align: center;
 }
 
-.searchForm{
-  display:flex;
+.searchForm {
+  display: flex;
   justify-content: center;
 }
