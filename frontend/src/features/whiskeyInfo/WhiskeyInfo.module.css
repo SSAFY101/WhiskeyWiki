@@ -1,10 +1,19 @@
-.container {
+.container1 {
+}
+
+.whiskeySorter {
+  /* float: right; */
+  /* justify-content: flex-end; */
+}
+
+.container2 {
   display: flex;
   background: transparent;
 }
+
 .cardContainer {
   margin: 50px 30px 30px 30px;
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
 }
-
