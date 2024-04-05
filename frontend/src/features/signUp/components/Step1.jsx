@@ -29,7 +29,7 @@ const Step1 = () => {
   // 입력
   const changeUserId = (e) => {
     const value = e.target.value.replace(regex, "");
-    console.log(value);
+    // console.log(value);
     setUserId(value);
   };
   const changePassword = (e) => {
@@ -58,7 +58,7 @@ const Step1 = () => {
     if (userId.length > 3) {
       // 아이디 중복 검사
       axios
-        .get(`${process.env.REACT_APP_API_URL}/users/id/${userId}`)
+        .get(`api/users/id/${userId}`)
         .then((res) => {
           const isValid = res.data.data;
           if (!isValid) {
@@ -66,6 +66,7 @@ const Step1 = () => {
           } else {
             setCheckId(false);
           }
+          console.log("아이디 중복검사 성공", res);
         })
         .catch((err) => {
           console.log("아이디 중복 검사 실패", err);
