@@ -16,6 +16,23 @@
   cursor: pointer;
   background-color: transparent;
   font-size: 1.5rem;
+
+  justify-content: center; /* 가로 방향으로 중앙 정렬 */
+  align-items: center; /* 세로 방향으로 중앙 정렬 */
+}
+.logo * {
+  cursor: pointer;
+  text-decoration-line: none;
+  font-size: 1.3rem;
+  background-color: transparent;
+}
+.logo img {
+  width: 40px;
+  margin: 0 10px 0 10px;
+  vertical-align: middle;
+}
+.logo a {
+  vertical-align: middle;
 }
 
 .signupContainer {

@@ -1,8 +1,10 @@
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { signupAction } from "../../store/slices/signup";
 
 import style from "./css/Signup.module.css";
+import whiskeyWiki from "../../assets/icon/whiskeyWiki.svg";
 
 import Step1 from "./components/Step1";
 import Step2 from "./components/Step2";
@@ -36,9 +38,16 @@ function Signup() {
 
   return (
     <div className={`${style.container}`}>
+      {/* 로고 */}
       <div onClick={navigateBack} className={`${style.logo}`}>
-        WW
+        <Link to="/">
+          <img src={whiskeyWiki} alt="" />
+          Whiskey Wiki
+        </Link>
       </div>
+      {/* <div onClick={navigateBack} className={`${style.logo}`}>
+        Whiskey Wiki
+      </div> */}
       <div className={`${style.signupContainer}`}>
         <div className={`${style.title}`}>회원가입</div>
         {renderStep()}
