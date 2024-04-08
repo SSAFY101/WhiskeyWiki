@@ -36,27 +36,27 @@
 
 #### 1. 메인 페이지
 
-![1.메인페이지.gif](exec/시연%20시나리오/1.메인페이지.gif)
+![1. 메인 페이지.gif](exec/시연%20시나리오/1.메인페이지.gif)
 
 #### 2. 회원가입
 
-![](exec/시연%20시나리오/2.회원가입.gif)
+![2. 회원가입.gif](exec/시연%20시나리오/2.회원가입.gif)
 
 #### 3. 위스키 AI 인식 및 등록
 
-![](exec/시연%20시나리오/3.위스키AI인식.gif)
+![3. 위스키 AI 인식 및 등록.gif](exec/시연%20시나리오/3.위스키AI인식.gif)
 
 #### 4. 마이바(My Bar) 이동 및 마이바의 위스키 상태 전환 (빈병으로)
 
-![](<exec/시연%20시나리오/4.마이바(MyBar).gif>)
+![4. 마이바(My Bar) 이동 및 마이바의 위스키 상태 전환 (빈병으로).gif](<exec/시연%20시나리오/4.마이바(MyBar).gif>)
 
 #### 5. 위스키 목록 및 상세페이지
 
-![](exec/시연%20시나리오/5.위스키정보.gif)
+![5. 위스키 목록 및 상세페이지.gif](exec/시연%20시나리오/5.위스키정보.gif)
 
 #### 6. 교환을 위한 지도 (Exchange Map) 및 다른 유저의 마이바 열람
 
-![](exec/시연%20시나리오/6.지도,다른유저의마이바열람.gif)
+![6. 교환을 위한 지도 (Exchange Map) 및 다른 유저의 마이바 열람.gif](exec/시연%20시나리오/6.지도,다른유저의마이바열람.gif)
 
 <br>
 
@@ -125,5 +125,5 @@
 | 안윤철 | ![](Docs/members/안윤철.png) | - Backend : ERD 설계 / Auth(인증,인가), Users(유저 정보 관리), 채팅 관련 API 작성<br>- AI : Fast API, 커스텀 데이터셋 제작, 모델 학습 및 테스트                                                                                                                                 |
 | 임현승 | ![](Docs/members/임현승.png) | - Backend : ERD 설계 / JPA를 활용한 메인 API 작성 <br> (위스키, 마이바, 지도, 칵테일, 즐겨찾기, 리뷰 관련 API 작성)                                                                                                                                                             |
 | 장세영 | ![](Docs/members/장세영.png) | - Frontend : 개인정보 조회 및 수정, 위스키 정보 및 상세 페이지 기능 구현 및 CSS <br> - Design : 와이어 프레임 제작 / 로고 디자인 <br> - Archives : 팀 관련 미팅 기록 및 정리                                                                                                    |
-| 조담현 | ![](Docs/members/조담현.png) | - Backend : ERD 설계 <br> - Infra : Docker, DockerCompose, Nginx, Jenkins, Gitlab를 활용한 CI/CD 파이프라인 구축 (Gitlab에 코드 push 혹은 merge시 webhook을 trigger하여 jenkins에서 자동빌드 및 무중단 배포 구현) <br> - Director : 프로젝트 UCC 촬영/편집                          |
-| 조연주 | ![](Docs/members/조연주.png) | - AI : 커스텀 데이터셋 제작, 모델 학습 및 테스트 <br> - Frontend : 메인, auth(인증/인가), AI 인식, 채팅(웹소켓) 페이지 기능 구현 및 CSS / Redux, persist 설정 / axios interceptor 설정 <br> - Design : 메인, 위스키 정보, AI 위스키 등록, 교환, 채팅, 유저관련 페이지 디자인 |
+| 조담현 | ![](Docs/members/조담현.png) | - Backend : ERD 설계 <br> - Infra : Docker, DockerCompose, Nginx, Jenkins, Gitlab를 활용한 CI/CD 파이프라인 구축 / Gitlab에 코드 push 혹은 merge시 webhook을 trigger하여 jenkins에서 자동빌드 및 무중단 배포 구현 <br> - Director : 프로젝트 UCC 촬영/편집                          |
+| 조연주 | ![](Docs/members/조연주.png) | - AI : 커스텀 데이터셋 제작, 모델 학습 및 테스트 <br> - Frontend : 메인, 회원가입, auth(인증/인가), AI 인식, 채팅(웹소켓) 페이지 기능 구현 및 CSS / Redux, persist 설정 / axios interceptor 설정 <br> - Design : 메인, 위스키 정보, AI 위스키 등록, 교환, 채팅, 유저관련 페이지 디자인 |
